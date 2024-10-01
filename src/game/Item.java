@@ -25,55 +25,55 @@ public class Item {
 	// Constructor that instantiates default values
 	public Item() {
 		this.Name = "No Name";
-		this.Rarity = "Common";
+		this.SetRarity(0);
 		this.Value = 0;
 		this.Damage = 0;
-		this.DamageType = "No Damage Type";
+		this.SetDamageType(0);
 		this.Count = 1;
 		this.IsSellable = false;
 	}
 	// Constructor that instantiates all values
-	public Item(String InputName, String InputRarity, int InputValue, int InputDamage, String InputDamageType,
+	public Item(String InputName, int InputRarity, int InputValue, int InputDamage, int InputDamageType,
 			int InputCount, Boolean InputIsSellable) {
 		this.Name = InputName;
-		this.Rarity = InputRarity;
+		this.Rarity = this.SetRarity(InputRarity);
 		this.Value = InputValue;
 		this.Damage = InputDamage;
-		this.DamageType = InputDamageType;
+		this.DamageType = this.SetDamageType(InputDamageType);
 		this.Count = InputCount;
 		this.IsSellable = InputIsSellable;
 	}
 	// Constructor that instantiates Items that are not sellable
 	// Sets IsSellable to False and Value to 0
-	public Item(String InputName, String InputRarity, int InputDamage, String InputDamageType,
+	public Item(String InputName, int InputRarity, int InputDamage, int InputDamageType,
 			int InputCount) {
 		this.Name = InputName;
-		this.Rarity = InputRarity;
+		this.Rarity = this.SetRarity(InputRarity);
 		this.Value = 0;
 		this.Damage = InputDamage;
-		this.DamageType = InputDamageType;
+		this.DamageType = this.SetDamageType(InputDamageType);
 		this.Count = InputCount;
 		this.IsSellable = false;
 	}
 	// Constructor that instantiates items with no damage
 	// Sets Damage to 0 and DamageType to default No Damage Type String
-	public Item(String InputName, String InputRarity, int InputValue, int InputCount, Boolean InputIsSellable) {
+	public Item(String InputName, int InputRarity, int InputValue, int InputCount, Boolean InputIsSellable) {
 		this.Name = InputName;
-		this.Rarity = InputRarity;
+		this.Rarity = this.SetRarity(InputRarity);
 		this.Value = InputValue;
 		this.Damage = 0;
-		this.DamageType = "No Damage Type";
+		this.DamageType = this.SetDamageType(0);
 		this.Count = InputCount;
 		this.IsSellable = InputIsSellable;
 	}
 	// Constructor that instantiates non-sellable items with no damage
 	// Sets Value and Damage to 0, IsSellable to false, and DamageType to default No Damage Type string
-	public Item(String InputName, String InputRarity, int InputCount) {
+	public Item(String InputName, int InputRarity, int InputCount) {
 		this.Name = InputName;
-		this.Rarity = InputRarity;
+		this.Rarity = this.SetRarity(InputRarity);
 		this.Value = 0;
 		this.Damage = 0;
-		this.DamageType = "No Damage Type";
+		this.DamageType = this.SetDamageType(0);
 		this.Count = InputCount;
 		this.IsSellable = false;
 	}
@@ -122,8 +122,25 @@ public class Item {
 		this.Name = InputName;
 	}
 	
-	public void setRarity(String InputRarity) {
-		this.Rarity = InputRarity;
+	public String SetRarity(int numRare) {
+		
+		switch(numRare) {
+		
+		case 1:
+			return "Common";
+		case 2:
+			return "Uncommon";
+		case 3:
+			return "Rare";
+		case 4:
+			return "Epic";
+		case 5:
+			return "Legendary";
+		default:
+			return "None";
+		
+		}
+		
 	}
 	
 	public void setValue(int InputValue) {
@@ -134,8 +151,23 @@ public class Item {
 		this.Damage = InputDamage;
 	}
 	
-	public void setDamageType(String InputDamageType) {
-		this.DamageType = InputDamageType;
+	public String SetDamageType(int typeInt) {
+		
+		switch (typeInt) {
+		
+		case 1:
+			return "Melee";
+		case 2:
+			return "Magic";
+		case 3:
+			return "Projectile";
+		case 4:
+			return "Throwable";
+		default:
+			return "None";
+		
+		}
+		
 	}
 	
 	public void setCount(int InputCount) {
