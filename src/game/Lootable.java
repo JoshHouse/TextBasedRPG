@@ -46,11 +46,11 @@ public class Lootable {
 	 * 
 	 */
 	
-	public Item[] GetInventory() {
+	public Item[] getInventory() {
 		return this.Inventory;
 	}
 	
-	public String GetName() {
+	public String getName() {
 		return this.Name;
 	}
 	
@@ -60,11 +60,11 @@ public class Lootable {
 	 * 
 	 */
 	
-	public void SetInventory(Item[] InputInventory) {
+	public void setInventory(Item[] InputInventory) {
 		this.Inventory = InputInventory;
 	}
 	
-	public void SetName(String InputName) {
+	public void setName(String InputName) {
 		this.Name = InputName;
 	}
 	

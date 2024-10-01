@@ -84,31 +84,31 @@ public class Item {
 	 * 
 	 */
 	
-	public String GetName() {
+	public String getName() {
 		return this.Name;
 	}
 	
-	public String GetRarity() {
+	public String getRarity() {
 		return this.Rarity;
 	}
 	
-	public int GetValue() {
+	public int getValue() {
 		return this.Value;
 	}
 	
-	public int GetDamage() {
+	public int getDamage() {
 		return this.Damage;
 	}
 	
-	public String GetDamageType() {
+	public String getDamageType() {
 		return this.DamageType;
 	}
 	
-	public int GetCount() {
+	public int getCount() {
 		return this.Count;
 	}
 	
-	public Boolean GetIsSellable() {
+	public Boolean getIsSellable() {
 		return this.IsSellable;
 	}
 	
@@ -118,31 +118,31 @@ public class Item {
 	 * 
 	 */
 	
-	public void SetName(String InputName) {
+	public void setName(String InputName) {
 		this.Name = InputName;
 	}
 	
-	public void SetRarity(String InputRarity) {
+	public void setRarity(String InputRarity) {
 		this.Rarity = InputRarity;
 	}
 	
-	public void SetValue(int InputValue) {
+	public void setValue(int InputValue) {
 		this.Value = InputValue;
 	}
 	
-	public void SetDamage(int InputDamage) {
+	public void setDamage(int InputDamage) {
 		this.Damage = InputDamage;
 	}
 	
-	public void SetDamageType(String InputDamageType) {
+	public void setDamageType(String InputDamageType) {
 		this.DamageType = InputDamageType;
 	}
 	
-	public void SetCount(int InputCount) {
+	public void setCount(int InputCount) {
 		this.Count = InputCount;
 	}
 	
-	public void SetIsSellable(Boolean InputIsSellable) {
+	public void setIsSellable(Boolean InputIsSellable) {
 		this.IsSellable = InputIsSellable;
 	}
 	

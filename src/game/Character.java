@@ -77,35 +77,35 @@ public class Character {
 	 * 
 	 */
 	
-	public String GetName() {
+	public String getName() {
 		return this.Name;
 	}
 	
-	public int GetHealth() {
+	public int getHealth() {
 		return this.Health;
 	}
 	
-	public int GetLevel() {
+	public int getLevel() {
 		return this.Level;
 	}
 	
-	public int GetEXP() {
+	public int getEXP() {
 		return this.EXP;
 	}
 	
-	public int GetDamage() {
+	public int getDamage() {
 		return this.Damage;
 	}
 	
-	public String GetDamageType() {
+	public String getDamageType() {
 		return this.DamageType;
 	}
 	
-	public int GetCurrency() {
+	public int getCurrency() {
 		return this.Currency;
 	}
 	
-	public Item[] GetInventory() {
+	public Item[] getInventory() {
 		return this.Inventory;
 	}
 	
@@ -115,35 +115,35 @@ public class Character {
 	 * 
 	 */
 	
-	public void SetName(String InputName) {
+	public void setName(String InputName) {
 		this.Name = InputName;
 	}
 	
-	public void SetHealth(int InputHealth) {
+	public void setHealth(int InputHealth) {
 		this.Health = InputHealth;
 	}
 	
-	public void SetLevel(int InputLevel) {
+	public void setLevel(int InputLevel) {
 		this.Level = InputLevel;
 	}
 	
-	public void SetEXP(int InputEXP) {
+	public void setEXP(int InputEXP) {
 		this.EXP = InputEXP;
 	}
 	
-	public void SetDamage(int InputDamage) {
+	public void setDamage(int InputDamage) {
 		this.Damage = InputDamage;
 	}
 	
-	public void SetDamageType(String InputDamageType) {
+	public void setDamageType(String InputDamageType) {
 		this.DamageType = InputDamageType;
 	}
 	
-	public void SetCurrency(int InputCurrency) {
+	public void setCurrency(int InputCurrency) {
 		this.Currency = InputCurrency;
 	}
 	
-	public void SetInventory(Item[] InputInventory) {
+	public void setInventory(Item[] InputInventory) {
 		this.Inventory = InputInventory;
 	}
 	

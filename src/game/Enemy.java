@@ -59,11 +59,11 @@ public class Enemy extends Character{
 	 * 
 	 */
 	
-	public String GetSpecialAttack() {
+	public String getSpecialAttack() {
 		return this.SpecialAttack;
 	}
 	
-	public int GetSpecialAttackMultipler() {
+	public int getSpecialAttackMultipler() {
 		return this.SpecialAttackMultiplier;
 	}
 	
@@ -73,11 +73,11 @@ public class Enemy extends Character{
 	 * 
 	 */
 	
-	public void SetSpecialAttack(String InputSpecialAttack) {
+	public void setSpecialAttack(String InputSpecialAttack) {
 		this.SpecialAttack = InputSpecialAttack;
 	}
 	
-	public void SetSpecialAttackMultiplier(int InputSpecialAttackMultiplier) {
+	public void setSpecialAttackMultiplier(int InputSpecialAttackMultiplier) {
 		this.SpecialAttackMultiplier = InputSpecialAttackMultiplier;
 	}
 	

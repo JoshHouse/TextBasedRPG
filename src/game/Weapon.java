@@ -73,11 +73,11 @@ public class Weapon extends Item {
 	 * 
 	 */
 	
-	public int GetManaUsage() {
+	public int getManaUsage() {
 		return this.ManaUsage;
 	}
 	
-	public String GetSpecialAttack() {
+	public String getSpecialAttack() {
 		return this.SpecialAttack;
 	}
 	
@@ -87,11 +87,11 @@ public class Weapon extends Item {
 	 * 
 	 */
 	
-	public void SetManaUsage(int InputManaUsage) {
+	public void setManaUsage(int InputManaUsage) {
 		this.ManaUsage = InputManaUsage;
 	}
 	
-	public void SetSpecialAttack(String InputSpecialAttack) {
+	public void setSpecialAttack(String InputSpecialAttack) {
 		this.SpecialAttack = InputSpecialAttack;
 	}
 	
