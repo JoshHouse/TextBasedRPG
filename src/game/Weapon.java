@@ -24,7 +24,7 @@ public class Weapon extends Item {
 	}
 	
 	// Constructor that initializes all values
-	public Weapon(String InputName, String InputRarity, int InputValue, int InputDamage, String InputDamageType,
+	public Weapon(String InputName, int InputRarity, int InputValue, int InputDamage, int InputDamageType,
 			Boolean InputIsSellable, int InputManaUsage, String InputSpecialAttack) 
 	{
 		super(InputName, InputRarity, InputValue, InputDamage, InputDamageType, 1, InputIsSellable);
@@ -34,7 +34,7 @@ public class Weapon extends Item {
 	
 	// Constructor that instantiates weapons that are not sellable
 	// Sets IsSellable to False and Value to 0
-	public Weapon(String InputName, String InputRarity, int InputDamage, String InputDamageType, 
+	public Weapon(String InputName, int InputRarity, int InputDamage, int InputDamageType, 
 			int InputManaUsage, String InputSpecialAttack) {
 		super(InputName, InputRarity, InputDamage, InputDamageType, 1);
 		this.ManaUsage = InputManaUsage;
@@ -43,7 +43,7 @@ public class Weapon extends Item {
 	
 	// Constructor that instantiates weapons that are not sellable and don't use mana
 	// Sets IsSellable to False, Value to 0, and ManaUsage to 0
-	public Weapon(String InputName, String InputRarity, int InputDamage, String InputDamageType, 
+	public Weapon(String InputName, int InputRarity, int InputDamage, int InputDamageType, 
 			String InputSpecialAttack) {
 		super(InputName, InputRarity, InputDamage, InputDamageType, 1);
 		this.ManaUsage = 0;
@@ -52,7 +52,7 @@ public class Weapon extends Item {
 	
 	// Constructor that instantiates weapons that are not sellable, don't use mana, and dont have a special attack
 	// Sets IsSellable to False, Value to 0, ManaUsage to 0, and Special Attack to a default string
-	public Weapon(String InputName, String InputRarity, int InputDamage, String InputDamageType) {
+	public Weapon(String InputName, int InputRarity, int InputDamage, int InputDamageType) {
 		super(InputName, InputRarity, InputDamage, InputDamageType, 1);
 		this.ManaUsage = 0;
 		this.SpecialAttack = "No Special Attack";
@@ -60,7 +60,7 @@ public class Weapon extends Item {
 	
 	// Constructor that instantiates weapons that are not sellable and dont use a special attack
 	// Sets IsSellable to False, Value to 0, and SpecialAttack to a default string
-	public Weapon(String InputName, String InputRarity, int InputDamage, String InputDamageType, 
+	public Weapon(String InputName, int InputRarity, int InputDamage, int InputDamageType, 
 			int InputManaUsage) {
 		super(InputName, InputRarity, InputDamage, InputDamageType, 1);
 		this.ManaUsage = InputManaUsage;
