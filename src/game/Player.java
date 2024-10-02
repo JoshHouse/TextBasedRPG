@@ -158,55 +158,40 @@ public class Player extends Character {
 			// SkillPointUsed to true if a class level is upgraded
 			switch(Choice) {
 			case "1":
+			case "melee": {
 				this.Meleelvl++;
 				System.out.println("You have upgraded your melee level. Your new melee level is: " + this.Meleelvl);
 				SkillPointUsed = true;
 				break;
+			}
 			case "2":
+			case "ranged": {
 				this.Rangedlvl++;
 				System.out.println("You have upgraded your ranged level. Your new ranged level is: " + this.Rangedlvl);
 				SkillPointUsed = true;
 				break;
+			}
 			case "3":
+			case "rogue": {
 				this.Roguelvl++;
 				System.out.println("You have upgraded your rogue level. Your new rogue level is: " + this.Roguelvl);
 				SkillPointUsed = true;
 				break;
+			}
 			case "4":
+			case "mage": {
 				this.Magelvl++;
 				System.out.println("You have upgraded your mage level. Your new mage level is: " + this.Magelvl);
 				SkillPointUsed = true;
 				break;
+			}
 			case "5":
+			case "luck": {
 				this.Lucklvl++;
 				System.out.println("You have upgraded your luck level. Your new luck level is: " + this.Lucklvl);
 				SkillPointUsed = true;
 				break;
-			case "melee":
-				this.Meleelvl++;
-				System.out.println("You have upgraded your melee level. Your new melee level is: " + this.Meleelvl);
-				SkillPointUsed = true;
-				break;
-			case "ranged":
-				this.Rangedlvl++;
-				System.out.println("You have upgraded your ranged level. Your new ranged level is: " + this.Rangedlvl);
-				SkillPointUsed = true;
-				break;
-			case "rogue":
-				this.Roguelvl++;
-				System.out.println("You have upgraded your rogue level. Your new rogue level is: " + this.Roguelvl);
-				SkillPointUsed = true;
-				break;
-			case "mage":
-				this.Magelvl++;
-				System.out.println("You have upgraded your mage level. Your new mage level is: " + this.Magelvl);
-				SkillPointUsed = true;
-				break;
-			case "luck":
-				this.Lucklvl++;
-				System.out.println("You have upgraded your luck level. Your new luck level is: " + this.Lucklvl);
-				SkillPointUsed = true;
-				break;
+			}
 			default: 		// Error message for improper format. Reprints choices and takes their choice again
 				System.out.println("Your inputted choice does not match any of the options or is not in the propper format. \n"
 						+ "Your choices are: \n"
