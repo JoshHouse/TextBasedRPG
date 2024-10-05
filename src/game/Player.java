@@ -37,7 +37,7 @@ public class Player extends Character {
 	
 	// Constructor that instantiates all values
 	public Player(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			String InputDamageType, int InputCurrency, Item[] InputInventory, int InputMeleelvl,
+			int InputDamageType, int InputCurrency, Item[] InputInventory, int InputMeleelvl,
 			int InputRangedlvl, int InputRoguelvl, int InputMagelvl, int InputLucklvl, int InputMana) 
 	{
 		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency,
