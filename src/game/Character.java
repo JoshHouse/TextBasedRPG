@@ -30,32 +30,32 @@ public class Character {
 		this.Level = 1;
 		this.EXP = 0;
 		this.Damage = 0;
-		this.DamageType = "No Damage Type";
+		this.DamageType = this.SetDamageType(0);
 		this.Currency = 0;
 		this.Inventory = new Item[0];
 	}
 	// For Instantiating Characters With All Data types
 	public Character(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			String InputDamageType, int InputCurrency, Item[] InputInventory) {
+			int InputDamageType, int InputCurrency, Item[] InputInventory) {
 		this.Name = InputName;
 		this.Health = InputHealth;
 		this.Level = InputLevel;
 		this.EXP = InputEXP;
 		this.Damage = InputDamage;
-		this.DamageType = InputDamageType;
+		this.DamageType = this.SetDamageType(InputDamageType);
 		this.Currency = InputCurrency;
 		this.Inventory = InputInventory;
 	}
 	// For Instantiating EXP enemies with no inventory but that give EXP and currency
 	// Takes all data types besides the Inventory array
 	public Character(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			String InputDamageType, int InputCurrency) {
+			int InputDamageType, int InputCurrency) {
 		this.Name = InputName;
 		this.Health = InputHealth;
 		this.Level = InputLevel;
 		this.EXP = InputEXP;
 		this.Damage = InputDamage;
-		this.DamageType = InputDamageType;
+		this.DamageType = this.SetDamageType(InputDamageType);
 		this.Currency = InputCurrency;
 		this.Inventory = new Item[0];
 	}
@@ -66,7 +66,7 @@ public class Character {
 		this.Level = 1;
 		this.EXP = 0;
 		this.Damage = 0;
-		this.DamageType = "No Damage Type";
+		this.DamageType = this.SetDamageType(0);
 		this.Currency = 0;
 		this.Inventory = InputInventory;
 	}
@@ -135,8 +135,23 @@ public class Character {
 		this.Damage = InputDamage;
 	}
 	
-	public void setDamageType(String InputDamageType) {
-		this.DamageType = InputDamageType;
+	public String SetDamageType(int typeInt) {
+		
+		switch (typeInt) {
+		
+		case 1:
+			return "Melee";
+		case 2:
+			return "Magic";
+		case 3:
+			return "Projectile";
+		case 4:
+			return "Throwable";
+		default:
+			return "None";
+		
+		}
+		
 	}
 	
 	public void setCurrency(int InputCurrency) {
