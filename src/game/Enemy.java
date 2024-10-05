@@ -26,7 +26,7 @@ public class Enemy extends Character{
 	
 	// Constructor that instantiates all values
 	public Enemy(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			String InputDamageType, int InputCurrency, Item[] InputInventory, String InputSpecialAttack,
+			int InputDamageType, int InputCurrency, Item[] InputInventory, String InputSpecialAttack,
 			int InputSpecialAttackMultiplier) 
 	{
 		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency,
@@ -38,7 +38,7 @@ public class Enemy extends Character{
 	// For Instantiating EXP enemies with no inventory but that give EXP and currency and have a special attack
 	// Takes all data types besides the Inventory array
 	public Enemy(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			String InputDamageType, int InputCurrency, String InputSpecialAttack, int InputSpecialAttackMultiplier) {
+			int InputDamageType, int InputCurrency, String InputSpecialAttack, int InputSpecialAttackMultiplier) {
 		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency);
 		this.SpecialAttack = InputSpecialAttack;
 		this.SpecialAttackMultiplier = InputSpecialAttackMultiplier;
@@ -47,7 +47,7 @@ public class Enemy extends Character{
 	// For Instantiating EXP enemies with no inventory but that give EXP and currency but don't have a special attack
 	// Takes all data types besides the Inventory array, Special Attack string, and special attack multiplier
 	public Enemy(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			String InputDamageType, int InputCurrency) {
+			int InputDamageType, int InputCurrency) {
 		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency);
 		this.SpecialAttack = "No Special Attack";
 		this.SpecialAttackMultiplier = 1;
