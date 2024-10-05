@@ -7,8 +7,8 @@ public class Lootable {
 	 * 
 	 */
 	
-	Item[] Inventory;
-	String Name;
+	private Item[] Inventory;
+	private String Name;
 	
 	/**
 	 * 
