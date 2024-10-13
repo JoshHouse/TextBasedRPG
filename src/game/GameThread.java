@@ -12,6 +12,17 @@ public class GameThread {
 	 */
 	
 	public static void main(String args[]) {
+
+		Shopkeeper demoShopkeeper = new Shopkeeper("Cosmos", "Hello there! How can I help you?", "Will that be all?",
+				"Have a nice day!");
+		demoShopkeeper.addInShopMsg("How's the weather today? I think it's quite lovely.");
+		demoShopkeeper.addInShopMsg("We don't have a lot here, so feel free to take your time looking around.");
+		demoShopkeeper.addInShopMsg(
+				"I don't mean to add any pressure, but I really hope I can hit my sales quota for today.");
+		Shop demoShop = new Shop("Demo Armory Shop", demoShopkeeper);
+
+		Scanner scn = new Scanner(System.in);
+
 		Weapon Sword = new Weapon("BroadSword", "Common", 10, 25, "Melee", true, 0, "Overhead Swing!");
 		Weapon FireStaff = new Weapon("Fire Staff", "Legendary", 500, 75, "Magic", false, 20, "Fire Wall!");
 		Item[] P1Inventory = {Sword, FireStaff};
@@ -24,293 +35,397 @@ public class GameThread {
 	 * ----- Functions -----
 	 * 
 	 */
-	
-	public void Shop(Player p1, NPC n1) {
-		
 
-		Boolean DoneSaleMenu = false;
-		Boolean DoneBuyMenu = false;
-		Boolean DoneWithShop = false;
-		Scanner Keyboard = new Scanner(System.in);
-		
-		ArrayList<Item> NPCInventory = new ArrayList<Item>();
-		ArrayList<Item> PlayerInventory = new ArrayList<Item>();
-		
-		System.out.println(n1.getEnterShopDialog());
-		
-		// Creates a resizeable array to easily process buyable items
-		for(int x = 0; x < n1.getInventory().length; x++) {
-			if(n1.getInventory()[x].getName() != "No Name") {
-				NPCInventory.add(n1.getInventory()[x]);
-			}
-		}
-		// Creates a resizeable array to easily process purchase and sale of items
-		for(int x = 0; x < p1.getInventory().length; x++) {
-			if(n1.getInventory()[x].getName() != "No Name") {
-				PlayerInventory.add(p1.getInventory()[x]);
-			}
-		}
-		
+	/**
+	 * Pauses console till the user presses the enter key.
+	 */
+	public static void pause() {
 
-		// While loop to keep player in the shop until they are done
-		while (DoneWithShop != true) {
-			// Recurring Shop menu
-			System.out.println("What are you looking to do?(Simply type in the number of your menu selection)"
-					+ "1) Buy Menu \n"
-					+ "2) Sell Menu \n"
-					+ "3) Exit");
-			int ChoiceShop = Keyboard.nextInt();
-			
-			// Switch Statement to process player choice
-			switch (ChoiceShop) {
-			
-			// Buy menu case
-			case 1:
-				DoneBuyMenu = false;
-				
-				// While loop to keep player in the buy menu
-				while (DoneBuyMenu != true) 
-				{
-					// Recurring menu prompting the player to choose what they would like to buy.
-					System.out.println("What would you like to buy?");
-					
-					// For loop prints the name and price of each item with numbers beside each item
-					for (int x = 1; x <= NPCInventory.size(); x++) {
-						System.out.println(x + ") Name: " + NPCInventory.get(x-1).getName() + "\n"
-								+ "Price: " + NPCInventory.get(x-1).getValue() + "\n");
-					}
-					
-					// The last 2 options will always be to display the info of each item and to exit the buy menu
-					System.out.println((NPCInventory.size()+1) + ") Display More Info");
-					System.out.println((NPCInventory.size()+2) + ") Exit");
-					int ChoiceBuy = Keyboard.nextInt();
-					
-					// Checks to see if the choice is one of the last 2 options, and if not it processes the buy
-					if(ChoiceBuy != NPCInventory.size()+1 && ChoiceBuy != NPCInventory.size()+2) 
-					{
-						Boolean BuySuccess = Buy(p1, NPCInventory.get(ChoiceBuy - 1));
-						// If statement for if the buy was a success. Buy() function processes failed purchases
-						// in the function itself. If buy was a success, it updates the Player Inventory Array
-						// List for future menu displays. It also prints NPC sale dialog
-						if (BuySuccess) {
-							PlayerInventory.add(NPCInventory.get(ChoiceBuy - 1));
-							System.out.println(n1.getSaleDialog());
-						}
-					} 
-					// If player chooses second to last option, it prints the details of each NPC item for sale
-					else if (ChoiceBuy == NPCInventory.size()+1) 
-					{
-						String TempNInventory = "";
-						for (int x = 0; x < NPCInventory.size(); x++) {
-							TempNInventory = TempNInventory + NPCInventory.get(x) + "-------" + "\n";
-						}
-						System.out.println(TempNInventory);
-						
-						// Checks for keyboard input so the player has time to read the item details
-						System.out.println("Press Enter when you are done reviewing the NPC's shop:");
-						Keyboard.nextLine();
-					} 
-					// If player chooses last option, it breaks out of the buy menu
-					else if (ChoiceBuy == NPCInventory.size()+2) 
-					{
-						DoneBuyMenu = true;
-					}
-				}
+		System.out.println("Press \"ENTER\" to continue...");
+
+		try {
+			System.in.read(new byte[2]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Pauses console for a set number of milliseconds.
+	 * 
+	 * @param time - The number of milliseconds to sleep.
+	 */
+	public static void pause(long time) {
+
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Function allowing players to go to the available shop
+	 * 
+	 * @param player - The player
+	 * @param shop   - The available shop
+	 * @param scn    - Scanner object for user input
+	 * @throws IOException Makes use of System.in.read().
+	 */
+	public static void gotoShop(Player player, Shop shop, Scanner scn) throws IOException {
+
+		char shopMenu;
+		boolean isShopping = true; // When player finishes shopping, it will be set to false
+
+		System.out.println("-------------Entering: " + shop.getName() + "...-------------\n");
+		pause(1500);
+
+		System.out.println(shop.getShopkeeper().getEnterMsg());
+
+		do {
+
+			System.out.print("1) Buy\n" + "2) Sell\n" + "3) Leave\n" + "Your Choice: ");
+			shopMenu = scn.next().charAt(0);
+			System.out.println();
+
+			switch (shopMenu) {
+
+			case '1': // Buy
+				buy(player, shop, scn);
 				break;
-			
-			// Sell menu case
-			case 2:
-				DoneSaleMenu = false;
-				
-				// While loop to keep player in the Sale menu
-				while (DoneSaleMenu != true) 
-				{
-					// Recurring menu option to display players inventory with the name and value of each item
-					System.out.println("What would you like to sell?");
-					for (int x = 1; x <= PlayerInventory.size(); x++) {
-						System.out.println(x + ") Name: " + PlayerInventory.get(x-1).getName() + "\n"
-								+ "Value: " + PlayerInventory.get(x-1).getValue() + "\n");
-					}
-					// Last 2 options are always to display more info and exit
-					System.out.println((PlayerInventory.size()+1) + ") Display More Info");
-					System.out.println((PlayerInventory.size()+2) + ") Exit");
-					int ChoiceSale = Keyboard.nextInt();
-					
-					// Checks to see if the players choice was either of the last 2 options and if not,
-					// processes the sale
-					if(ChoiceSale != PlayerInventory.size()+1 && ChoiceSale != PlayerInventory.size()+2) 
-					{
-						// If statement for if the sale was a success. Sell() function processes failed sales
-						// in the function itself. If sale was a success, it updates the Player Inventory Array
-						// List for future menu displays. Also gives player a thank you message
-						Boolean SellSuccess = Sell(p1, PlayerInventory.get(ChoiceSale - 1));
-						if (SellSuccess) {
-							PlayerInventory.remove(ChoiceSale-1);
-							System.out.println("Thank you for your buisness!");
-						}
-					} 
-					// If player chooses second to last option, it prints the details of each item in their 
-					// inventory so they can make a more informed decision on what to sell
-					else if (ChoiceSale == PlayerInventory.size()+1) 
-					{
-						String TempPInventory = "";
-						for (int x = 0; x < PlayerInventory.size(); x++) {
-							TempPInventory = TempPInventory + PlayerInventory.get(x) + "-------" + "\n";
-						}
-						System.out.println(TempPInventory);
-						
-						// Checks for keyboard input so the player has time to read the item details
-						System.out.println("Press Enter when you are done reviewing your inventory:");
-						Keyboard.nextLine();
-					} 
-					// If player chooses last option, it breaks out of the buy menu
-					else if (ChoiceSale == PlayerInventory.size()+2) 
-					{
-						DoneSaleMenu = true;
-					}
-				}
+			case '2': // Sell
+				sell(player, shop, scn);
 				break;
-			
-			// Exit case
-			case 3:
-				// Prints the NPC's exit shop dialog and breaks out of the shop menu
-				System.out.println(n1.getExitShopDialog());
-				DoneWithShop = false;
-				break;	
-			
-			// Default case if player does not choose 1,2 or 3
-			default:
-				System.out.println("Please Enter a valid menu choice: \n");
+			case '3': // Leave
+				isShopping = false;
+				break;
+			default: // Invalid input
+				System.err.println("(Invalid choice. Please try again.)");
+				pause(200);
+				break;
+
 			}
-		}
-		Keyboard.close();		
+
+		} while (isShopping);
+
+		System.out.println(shop.getShopkeeper().getExitMsg());
+		System.out.println("-------------Leaving: " + shop.getName() + "...-------------\n");
+		pause(1000);
+
 	}
-	
-	// Buy function takes the item the player wants to buy and the player object. Returns true if buy was
-	// successful and false if buy was not successful. It prints messages for the various reasons buy could
-	// not be successful
-	public Boolean Buy(Player p1, Item i1) {
-		
-		// If statement 1 to check if player has enough currency to buy the item
-		if(p1.getCurrency() >= i1.getValue()) {
-		
-			Item[] CheckInventory = p1.getInventory();
-			
-			// For loop that looks through the players inventory to find an empty slot, subtracts the
-			// value of the item from the players currency, and fills the slot with the selected item
-			// Returns true when the purchase is made
-			for(int x = 0; x < p1.getInventory().length; x++ ) {
-			
-				// Checks the name of each item in the players inventory to see if there is an unnamed slot
-				if(CheckInventory[x].getName() == "No Name") {
-					p1.setCurrency(p1.getCurrency() - i1.getValue());
-					CheckInventory[x] = i1;
-					p1.setInventory(CheckInventory);
-					return true;
+
+	/**
+	 * Allows the player to buy items provided at a shop.
+	 * 
+	 * @param player - The player
+	 * @param shop   - The shop the player is accessing
+	 * @param scn    - Scanner for user input.
+	 */
+	public static void buy(Player player, Shop shop, Scanner scn) {
+
+		int numChoice = 0; // Select from inventory
+		char charChoice = 0; // For other options requiring user input
+		Item chosen = null; // The selected item
+		boolean isBuying = true, isPurchasing = false, purchased = false;
+
+		// Have the shopkeeper say something
+		System.out.println(shop.getShopkeeper().displayInShopMsg());
+		pause(1500);
+
+		while (isBuying) { // Loop until the player is done buying
+
+			while (numChoice < 1 || numChoice > shop.getInventory().size() + 1) { // The final listed item is always
+																					// cancel.
+
+				// Print the shop inventory using a for loop
+				System.out.println("[Select which item you would like to buy.]");
+				for (int i = 0; i < shop.getInventory().size(); i++) {
+					System.out.println((i + 1) + ") " + shop.getInventory().get(i).GetName());
 				}
-			
+				System.out.println((shop.getInventory().size() + 1) + ") Cancel\n"); // Print the cancel option
+
+				System.out.print("Your choice: ");
+
+				/*
+				 * IndexOutOfBoundsException: User enters number outside the required range.
+				 * InputMismatchException: USer enters a non-integer character.
+				 */
+				try {
+					numChoice = scn.nextInt();
+
+					if (numChoice < 1 || numChoice > shop.getInventory().size() + 1)
+						throw new IndexOutOfBoundsException();
+				} catch (InputMismatchException | IndexOutOfBoundsException e) {
+					System.err.println("(Invalid choice. Please try again.)\n");
+					scn.nextLine();
+					pause(200);
+				}
+
 			}
-			
-			// If the for loop does not return true indicating that an open slot was found in the players
-			// inventory, it prints a notification informing the player they don't have enough space for
-			// item. Then returns false
-			System.out.println("You do not have enough inventory space for this item. \n"
-					+ "Tip: Try Selling some items to make more room");
-			return false;
-		} 
-		// Else statement to If statement 1 that prints a message informing the player that they don't have 
-		// enough currency then returns false
-		else 
-		{
-			System.out.println("You do not have enough currency to purchace this item. \n");
-			return false;
+
+			if (numChoice == shop.getInventory().size() + 1) { // Exit the buy function on cancel
+				isBuying = false;
+			} else { // Proceed to purchase window
+				isPurchasing = true;
+				chosen = shop.getInventory().get(numChoice - 1); // Put selected item in chosen variable
+			}
+
+			while (isPurchasing) { // Loops till user completes or cancels a purchase
+
+				// Display info on the item, including the price.
+				System.out.println(chosen.GetName() + "\n" + chosen.getInfo() + "\nPrice: " + chosen.GetValue() + "\n");
+				System.out.println("[Is this the weapon you want?]\nY) Yes\t\tN) No");
+
+				do { // Loop until a valid choice is entered
+					System.out.print("Response: ");
+					charChoice = scn.next().charAt(0);
+					charChoice = Character.toUpperCase(charChoice);
+
+					switch (charChoice) {
+
+					case 'Y': // Buy
+						// Add item to player inventory, subtract money from player.
+						if (player.getCurrency() >= chosen.GetValue()) {
+							player.setCurrency(player.getCurrency() - chosen.GetValue());
+							player.addToInventory(chosen);
+
+							purchased = true;
+						} else { // The user has attempted to make a purchase when they don't have enough money
+							System.err.println("(You don't have enough money to buy this!)");
+							isBuying = false;
+						}
+						break;
+					case 'N': // Don't buy
+						purchased = false;
+						break;
+					default:
+						System.err.println("(Invalid choice. Please try again.)");
+						break;
+
+					}
+				} while (charChoice != 'Y' && charChoice != 'N');
+
+				isPurchasing = false;
+				charChoice = 0; // Reset the variable
+
+				if (purchased) { // Different dialogue based on whether or not a purchase was made.
+					System.out.println(shop.getShopkeeper().getSaleMsg());
+				} else {
+					System.out.println("[Continue viewing buyable items?]");
+				}
+
+				do { // Loop till valid choice is made
+
+					System.out.println("Y) Continue Buying\t\tN) Back to Shop Menu");
+					System.out.print("Response: ");
+					charChoice = scn.next().charAt(0);
+					charChoice = Character.toUpperCase(charChoice);
+
+					switch (charChoice) {
+
+					case 'Y': // Continue shopping
+						isBuying = true;
+						break;
+					case 'N': // Return to shop menu
+						isBuying = false;
+						break;
+					default:
+						System.err.println("(Invalid choice. Please try again.)");
+						pause(200);
+						break;
+
+					}
+
+				} while (charChoice != 'Y' && charChoice != 'N');
+
+			}
+
+			// Reset the variables
+			numChoice = 0;
+			charChoice = 0;
+
 		}
+
 	}
-	
-	// Sell function that takes the item the player is trying to sell and the player object. Returns true
-	// if the sell was successful and false if the sell was not successful. Prints a message for the various
-	// reasons a sell could not be successful.
-	public Boolean Sell(Player p1, Item i1) {
-		
-		Boolean NotSoftLocked = false;
-		int WeaponCount = 0;
-		Item[] CheckInventory = p1.getInventory();
-		
-		// If statement 1 that checks if the item being sold does damage (indicating they are trying to sell
-		// a weapon)
-		if (i1.getDamage() != 0) {
-			
-			// If they are trying to sell a weapon, it runs through a for loop, checking to see if they have
-			// at least 2 weapons to ensure they do not soft lock themselves. Once 2 weapons are found, 
-			// NotSoftLocked is set to true which breaks out of the for loop
-			for (int x = 0; x < p1.getInventory().length && NotSoftLocked == false; x++) {
-				// Increases weapon count when it finds named items that do damage
-				if (CheckInventory[x].getName() != "No Name" && CheckInventory[x].getDamage() != 0) {
-					WeaponCount++;
+
+	/**
+	 * Allows the player to sell items from their inventory to the shop for money.
+	 * 
+	 * @param player - The player
+	 * @param shop   - The shop the player is accessing
+	 * @param scn    - Scanner for user input.
+	 */
+	public static void sell(Player player, Shop shop, Scanner scn) {
+
+		int numChoice = 0; // Select from inventory
+		char charChoice = 0; // For other options requiring user input
+		int chosenIndex = 0;
+
+		boolean isSelling = true, startSelling = false, sold = false;
+
+		// Do not allow the player to sell if there is only 1 item in their inventory.
+		if (player.getInventory().size() <= 1) {
+			System.err.println("(You can't sell when there's only 1 item in your inventory!)");
+			isSelling = false;
+			pause(2500);
+		} else { // Have the shopkeeper say something
+			System.out.println(shop.getShopkeeper().displayInShopMsg());
+			pause(1500);
+		}
+
+		while (isSelling) { // Loop until the player is done selling
+
+			while (numChoice < 1 || numChoice > player.getInventory().size() + 1) {
+
+				// Print the player's inventory using a for loop
+				System.out.println("[Select which item you would like to sell.]");
+				for (int i = 0; i < player.getInventory().size(); i++) {
+					System.out.println((i + 1) + ") " + player.getInventory().get(i).GetName());
 				}
-				// When weapon count reaches 2, breaks out of the for loop
-				if (WeaponCount >= 2) {
-					NotSoftLocked = true;
+				System.out.println((player.getInventory().size() + 1) + ") Cancel\n"); // Print the cancel option
+
+				System.out.print("Your choice: ");
+
+				/*
+				 * IndexOutOfBoundsException: User enters number outside the required range.
+				 * InputMismatchException: USer enters a non-integer character.
+				 */
+				try {
+					numChoice = scn.nextInt();
+
+					if (numChoice < 1 || numChoice > player.getInventory().size() + 1)
+						throw new IndexOutOfBoundsException();
+				} catch (InputMismatchException | IndexOutOfBoundsException e) {
+					System.err.println("(Invalid choice. Please try again.)\n");
+					scn.nextLine();
+					pause(200);
 				}
+
 			}
-		} 
-		// If player is not trying to sell a weapon, they wont soft lock themselves so NotSoftLocked is set
-		// to true
-		else 
-		{
-			NotSoftLocked = true;
-		}
-		
-		// If statement 2 that checks to see if NotSoftLocked was never set to true, that indicates that the 
-		// item they are trying to sell is a weapon and is the last weapon in their inventory. It prints a 
-		// message informing the player they cannot sell it and returns false
-		if (NotSoftLocked = false) {
-			System.out.println("This item is the last weapon in your inventory. You cannot sell it.");
-			return false;
-		}
-		// Else statement to if statement 2 that runs the sell functionality after ensuring the player isn't
-		// soft locking themselves
-		else
-		{
-			// For loop that runs through the player's inventory looking for the item that the player is
-			// trying to sell
-			for (int x = 0; x < p1.getInventory().length; x++) {
-				
-				// If it finds the item, it adds the value of the item to the player's currency and fills the slot
-				// with an empty Item object. Sets the new inventory to the player's inventory and returns true.
-				if(CheckInventory[x].equals(i1)) {
-					p1.setCurrency(p1.getCurrency() + i1.getValue());
-					CheckInventory[x] = new Item();
-					p1.setInventory(CheckInventory);
-					return true;
-				}
-			
+
+			if (numChoice == player.getInventory().size() + 1) { // Exit the sell function on cancel
+				isSelling = false;
+			} else { // Proceed to purchase window
+				startSelling = true;
+				chosenIndex = numChoice - 1;
 			}
+
+			while (startSelling) { // Loops till user completes or cancels a purchase
+
+				// Display info on the item, including the price.
+				System.out.println(player.getInventory().get(chosenIndex).GetName() + "\n"
+						+ player.getInventory().get(chosenIndex).getInfo() + "\nPrice: "
+						+ player.getInventory().get(chosenIndex).GetValue() + "\n");
+				System.out.println("[Are you sure you want to sell this?]\nY) Yes\t\tN) No");
+
+				do { // Loop until a valid choice is entered
+					System.out.print("Response: ");
+					charChoice = scn.next().charAt(0);
+					charChoice = Character.toUpperCase(charChoice);
+
+					switch (charChoice) {
+
+					case 'Y': // Sell
+						// Remove item from player inventory, add money to player.
+						player.setCurrency(player.getCurrency() + player.getInventory().get(chosenIndex).GetValue());
+						player.getInventory().remove(chosenIndex);
+						sold = true;
+						break;
+					case 'N': // Don't sell
+						sold = false;
+						break;
+					default:
+						System.err.println("(Invalid choice. Please try again.)");
+						break;
+
+					}
+				} while (charChoice != 'Y' && charChoice != 'N');
+
+				startSelling = false;
+				charChoice = 0; // Reset the variable
+
+				if (player.getInventory().size() > 1) {
+
+					if (sold) { // Different dialogue based on whether or not a purchase was made.
+						System.out.println(shop.getShopkeeper().getSaleMsg());
+					} else {
+						System.out.println("[Continue viewing sellable items?]");
+					}
+
+					do { // Loop till valid choice is made
+
+						System.out.println("Y) Continue Selling\t\tN) Back to Shop Menu");
+						System.out.print("Response: ");
+						charChoice = scn.next().charAt(0);
+						charChoice = Character.toUpperCase(charChoice);
+
+						switch (charChoice) {
+
+						case 'Y': // Continue shopping
+							isSelling = true;
+							break;
+						case 'N': // Return to shop menu
+							isSelling = false;
+							break;
+						default:
+							System.err.println("(Invalid choice. Please try again.)");
+							pause(200);
+							break;
+
+						}
+
+					} while (charChoice != 'Y' && charChoice != 'N');
+
+				} else {
+					isSelling = false;
+				}
+
+			}
+
+			// Reset the variables
+			numChoice = 0;
+			charChoice = 0;
+
 		}
-		// If all else fails and function never returns true indicating sale of an item, function returns false.
-		return false;
+
 	}
-	
-	// Takes the player and the enemy and processes exchange of EXP and currency
-	public void EXPDefeat(Player p1, Enemy e1) {
-		
+
+	/**
+	 * Takes the player and the enemy and processes exchange of EXP and currency
+	 * 
+	 * @param p1
+	 * @param e1
+	 */
+	public static void EXPDefeat(Player p1, Enemy e1) {
+
+		System.out.println("Defeated " + e1.getName() + "! Rewards:");
+		System.out.println(e1.getEXP() + " EXP");
+		System.out.println(e1.getCurrency() + " Money");
+
 		// Calculates if the enemy's EXP will cause the player to level up
 		if (p1.getEXP() + e1.getEXP() > p1.getEXPThreshold()) {
-			// If the enemy's EXP will cause the player to level up, it calculates the amount of overflow
-			// EXP the player will get by adding the player and enemies EXP and subtracting a rounded 
-			// EXP threshold by casting it as an int (it is stored as a double). It then passes the overflow
-			// amount to the levelUp function in the player class to process the levelUp functionality.
-			int overflow = (p1.getEXP() + e1.getEXP()) - (int)Math.round(p1.getEXPThreshold());
+			// If the enemy's EXP will cause the player to level up, it calculates the
+			// amount of overflow
+			// EXP the player will get by adding the player and enemies EXP and subtracting
+			// a rounded
+			// EXP threshold by casting it as an int (it is stored as a double). It then
+			// passes the overflow
+			// amount to the levelUp function in the player class to process the levelUp
+			// functionality.
+			int overflow = (p1.getEXP() + e1.getEXP()) - (int) Math.round(p1.getEXPThreshold());
 			p1.levelUp(overflow);
-		} 
-		else 
-		{
-			// If the EXP will not cause the player to level up, it sets the player's EXP to the player EXP
+		} else {
+			// If the EXP will not cause the player to level up, it sets the player's EXP to
+			// the player EXP
 			// plus the enemy EXP
 			p1.setEXP(p1.getEXP() + e1.getEXP());
 		}
-		// After setting the EXP, it adds the current player currency and enemy currency to set that as current
+		// After setting the EXP, it adds the current player currency and enemy currency
+		// to set that as current
 		// player currency
 		p1.setCurrency(p1.getCurrency() + e1.getCurrency());
 	}
+
 }
