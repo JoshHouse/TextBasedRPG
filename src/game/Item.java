@@ -8,13 +8,14 @@ public class Item {
 	 * 
 	 */
 	
-	String Name;
-	String Rarity;
-	int Value;
-	int Damage;
-	String DamageType;
-	int Count;
-	Boolean IsSellable;
+	private String Name;
+	private String info;
+	private String Rarity;
+	private int Value;
+	private int Damage;
+	private String DamageType;
+	private int Count;
+	private Boolean IsSellable;
 	
 	/**
 	 * 
@@ -25,17 +26,19 @@ public class Item {
 	// Constructor that instantiates default values
 	public Item() {
 		this.Name = "No Name";
+		this.info = "...";
 		this.SetRarity(0);
 		this.Value = 0;
 		this.Damage = 0;
-		this.SetDamageType(0);
+		this.DamageType = "No Damage Type";
 		this.Count = 1;
 		this.IsSellable = false;
 	}
 	// Constructor that instantiates all values
-	public Item(String InputName, int InputRarity, int InputValue, int InputDamage, int InputDamageType,
+	public Item(String InputName, String info, int InputRarity, int InputValue, int InputDamage, int InputDamageType,
 			int InputCount, Boolean InputIsSellable) {
 		this.Name = InputName;
+		this.info = info;
 		this.Rarity = this.SetRarity(InputRarity);
 		this.Value = InputValue;
 		this.Damage = InputDamage;
@@ -45,9 +48,10 @@ public class Item {
 	}
 	// Constructor that instantiates Items that are not sellable
 	// Sets IsSellable to False and Value to 0
-	public Item(String InputName, int InputRarity, int InputDamage, int InputDamageType,
+	public Item(String InputName, String info, int InputRarity, int InputDamage, int InputDamageType,
 			int InputCount) {
 		this.Name = InputName;
+		this.info = info;
 		this.Rarity = this.SetRarity(InputRarity);
 		this.Value = 0;
 		this.Damage = InputDamage;
@@ -57,8 +61,9 @@ public class Item {
 	}
 	// Constructor that instantiates items with no damage
 	// Sets Damage to 0 and DamageType to default No Damage Type String
-	public Item(String InputName, int InputRarity, int InputValue, int InputCount, Boolean InputIsSellable) {
+	public Item(String InputName, String info, int InputRarity, int InputValue, int InputCount, Boolean InputIsSellable) {
 		this.Name = InputName;
+		this.info = info;
 		this.Rarity = this.SetRarity(InputRarity);
 		this.Value = InputValue;
 		this.Damage = 0;
@@ -68,12 +73,13 @@ public class Item {
 	}
 	// Constructor that instantiates non-sellable items with no damage
 	// Sets Value and Damage to 0, IsSellable to false, and DamageType to default No Damage Type string
-	public Item(String InputName, int InputRarity, int InputCount) {
+	public Item(String InputName, String info, int InputRarity, int InputCount) {
 		this.Name = InputName;
+		this.info = info;
 		this.Rarity = this.SetRarity(InputRarity);
 		this.Value = 0;
 		this.Damage = 0;
-		this.DamageType = this.SetDamageType(0);
+		this.DamageType = "No Damage Type";
 		this.Count = InputCount;
 		this.IsSellable = false;
 	}
@@ -84,31 +90,35 @@ public class Item {
 	 * 
 	 */
 	
-	public String getName() {
+	public String GetName() {
 		return this.Name;
 	}
 	
-	public String getRarity() {
+	public String getInfo() {
+		return this.info;
+	}
+	
+	public String GetRarity() {
 		return this.Rarity;
 	}
 	
-	public int getValue() {
+	public int GetValue() {
 		return this.Value;
 	}
 	
-	public int getDamage() {
+	public int GetDamage() {
 		return this.Damage;
 	}
 	
-	public String getDamageType() {
+	public String GetDamageType() {
 		return this.DamageType;
 	}
 	
-	public int getCount() {
+	public int GetCount() {
 		return this.Count;
 	}
 	
-	public Boolean getIsSellable() {
+	public Boolean GetIsSellable() {
 		return this.IsSellable;
 	}
 	
@@ -118,7 +128,7 @@ public class Item {
 	 * 
 	 */
 	
-	public void setName(String InputName) {
+	public void SetName(String InputName) {
 		this.Name = InputName;
 	}
 	
@@ -143,11 +153,15 @@ public class Item {
 		
 	}
 	
-	public void setValue(int InputValue) {
+/*	public void SetRarity(String InputRarity) {
+		this.Rarity = InputRarity;
+	}*/
+	
+	public void SetValue(int InputValue) {
 		this.Value = InputValue;
 	}
 	
-	public void setDamage(int InputDamage) {
+	public void SetDamage(int InputDamage) {
 		this.Damage = InputDamage;
 	}
 	
@@ -170,11 +184,11 @@ public class Item {
 		
 	}
 	
-	public void setCount(int InputCount) {
+	public void SetCount(int InputCount) {
 		this.Count = InputCount;
 	}
 	
-	public void setIsSellable(Boolean InputIsSellable) {
+	public void SetIsSellable(Boolean InputIsSellable) {
 		this.IsSellable = InputIsSellable;
 	}
 	
@@ -186,6 +200,7 @@ public class Item {
 	
 	public String toString() {
 		return "Name: " + this.Name + "\n" +
+				this.info + "\n" +
 				"Rarity: " + this.Rarity + "\n" +
 				"Value: " + this.Value + "\n" +
 				"Damage: " + this.Damage + "\n" +
