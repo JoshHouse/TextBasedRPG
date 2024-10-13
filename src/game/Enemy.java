@@ -1,6 +1,6 @@
 package game;
 
-public class Enemy extends Character{
+public class Enemy extends GameChar {
 	
 	/**
 	 * 
@@ -8,8 +8,8 @@ public class Enemy extends Character{
 	 * 
 	 */
 	
-	String SpecialAttack;
-	int SpecialAttackMultiplier;
+	private String SpecialAttack;
+	private int SpecialAttackMultiplier;
 	
 	/**
 	 * 
@@ -29,8 +29,7 @@ public class Enemy extends Character{
 			int InputDamageType, int InputCurrency, Item[] InputInventory, String InputSpecialAttack,
 			int InputSpecialAttackMultiplier) 
 	{
-		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency,
-				InputInventory);
+		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency);
 		this.SpecialAttack = InputSpecialAttack;
 		this.SpecialAttackMultiplier = InputSpecialAttackMultiplier;
 	}
