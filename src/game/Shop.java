@@ -66,10 +66,4 @@ public class Shop {
 		shopInventory.add(item);
 	}
 
-	public void buy(Player player) {
-	}
-
-	public void sell(Player player) {
-	}
-
 }
