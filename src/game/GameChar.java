@@ -17,7 +17,7 @@ public class GameChar {
 	private int Damage;
 	private String DamageType;
 	private int Currency;
-	private ArrayList<Item> Inventory;
+	private ArrayList<Item> Inventory = new ArrayList<Item>();
 	
 	/**
 	 * 
