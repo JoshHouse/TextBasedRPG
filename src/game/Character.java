@@ -1,6 +1,8 @@
 package game;
 
-public class Character {
+import java.util.ArrayList;
+
+public class GameChar {
 	
 	/**
 	 * 
@@ -8,14 +10,14 @@ public class Character {
 	 * 
 	 */
 	
-	String Name;
-	int Health;
-	int Level;
-	int EXP;
-	int Damage;
-	String DamageType;
-	int Currency;
-	Item[] Inventory;
+	private String Name;
+	private int Health;
+	private int Level;
+	private int EXP;
+	private int Damage;
+	private String DamageType;
+	private int Currency;
+	private ArrayList<Item> Inventory;
 	
 	/**
 	 * 
@@ -23,8 +25,10 @@ public class Character {
 	 * 
 	 */
 	
-	// Default Constructor
-	public Character() {
+	/** Default Constructor
+	 * 
+	 */
+	public GameChar() {
 		this.Name = "No Name";
 		this.Health = 1;
 		this.Level = 1;
@@ -32,23 +36,18 @@ public class Character {
 		this.Damage = 0;
 		this.DamageType = this.SetDamageType(0);
 		this.Currency = 0;
-		this.Inventory = new Item[0];
 	}
-	// For Instantiating Characters With All Data types
-	public Character(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			int InputDamageType, int InputCurrency, Item[] InputInventory) {
-		this.Name = InputName;
-		this.Health = InputHealth;
-		this.Level = InputLevel;
-		this.EXP = InputEXP;
-		this.Damage = InputDamage;
-		this.DamageType = this.SetDamageType(InputDamageType);
-		this.Currency = InputCurrency;
-		this.Inventory = InputInventory;
-	}
-	// For Instantiating EXP enemies with no inventory but that give EXP and currency
-	// Takes all data types besides the Inventory array
-	public Character(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
+	/** For Instantiating Characters With All Data types
+	 * 
+	 * @param InputName
+	 * @param InputHealth
+	 * @param InputLevel
+	 * @param InputEXP
+	 * @param InputDamage
+	 * @param InputDamageType
+	 * @param InputCurrency
+	 */
+	public GameChar(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
 			int InputDamageType, int InputCurrency) {
 		this.Name = InputName;
 		this.Health = InputHealth;
@@ -57,10 +56,13 @@ public class Character {
 		this.Damage = InputDamage;
 		this.DamageType = this.SetDamageType(InputDamageType);
 		this.Currency = InputCurrency;
-		this.Inventory = new Item[0];
 	}
-	// For Instantiating NPCs with only a name and inventory (for sale of items)
-	public Character(String InputName, Item[] InputInventory) {
+	
+	/** For Instantiating NPCs with only a name (for sale of items)
+	 * 
+	 * @param InputName
+	 */
+	public GameChar(String InputName) {
 		this.Name = InputName;
 		this.Health = 1;
 		this.Level = 1;
@@ -68,7 +70,7 @@ public class Character {
 		this.Damage = 0;
 		this.DamageType = this.SetDamageType(0);
 		this.Currency = 0;
-		this.Inventory = InputInventory;
+		this.Inventory = null;
 	}
 	
 	/**
@@ -105,7 +107,7 @@ public class Character {
 		return this.Currency;
 	}
 	
-	public Item[] getInventory() {
+	public ArrayList<Item> getInventory() {
 		return this.Inventory;
 	}
 	
@@ -158,8 +160,8 @@ public class Character {
 		this.Currency = InputCurrency;
 	}
 	
-	public void setInventory(Item[] InputInventory) {
-		this.Inventory = InputInventory;
+	public void addToInventory(Item item) {
+		this.getInventory().add(item);
 	}
 	
 	/**
@@ -172,8 +174,8 @@ public class Character {
 		
 		// For loop to convert Inventory into a string
 		String TempInventory = "";
-		for (int x = 0; x < Inventory.length; x++) {
-			TempInventory = TempInventory + Inventory[x] + "-------" + "\n";
+		for (int x = 0; x < this.getInventory().size(); x++) {
+			TempInventory = TempInventory + this.getInventory().get(x) + "-------" + "\n";
 		}
 		
 		return "Name: " + this.Name + "\n" +
