@@ -17,7 +17,7 @@ public class GameChar {
 	private int Damage;
 	private String DamageType;
 	private int Currency;
-	private ArrayList<Item> Inventory = new ArrayList<Item>();
+	private Inventory inventory;
 	
 	/**
 	 * 
@@ -107,8 +107,11 @@ public class GameChar {
 		return this.Currency;
 	}
 	
-	public ArrayList<Item> getInventory() {
-		return this.Inventory;
+	/**
+	 * @return the inventory
+	 */
+	public Inventory getInventory() {
+		return inventory;
 	}
 	
 	/**
@@ -160,8 +163,8 @@ public class GameChar {
 		this.Currency = InputCurrency;
 	}
 	
-	public void addToInventory(Item item) {
-		this.getInventory().add(item);
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 	
 	/**
