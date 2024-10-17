@@ -1,6 +1,6 @@
 package game;
 
-public class NPC extends Character {
+public class NPC extends GameChar {
 	
 	/**
 	 * 
@@ -8,10 +8,10 @@ public class NPC extends Character {
 	 * 
 	 */
 	
-	String EnterShopDialog;
-	String ExitShopDialog;
-	String SaleDialog;
-	String[] Dialog;
+	private String EnterShopDialog;
+	private String ExitShopDialog;
+	private String SaleDialog;
+	private String[] Dialog;
 	
 	/**
 	 * 
@@ -29,9 +29,9 @@ public class NPC extends Character {
 	}
 	
 	// NPC constructor that instantiates name, inventory, and all values special to the NPC class
-	NPC(String InputName, Item[] InputInventory, String InputEnterShopDialog, String InputExitShopDialog,
+	NPC(String InputName, String InputEnterShopDialog, String InputExitShopDialog,
 			String InputSaleDialog, String[] InputDialog) {
-		super(InputName, InputInventory);
+		super(InputName);
 		this.EnterShopDialog = InputEnterShopDialog;
 		this.ExitShopDialog = InputExitShopDialog;
 		this.SaleDialog = InputSaleDialog;
@@ -39,8 +39,8 @@ public class NPC extends Character {
 	}
 	
 	// NPC constructor that instantiates NPCS that don't have shops
-	NPC(String InputName, Item[] InputInventory, String[] InputDialog) {
-		super(InputName, InputInventory);
+	NPC(String InputName, String[] InputDialog) {
+		super(InputName);
 		this.EnterShopDialog = "No Dialog";
 		this.ExitShopDialog = "No Dialog";
 		this.SaleDialog = "No Dialog";
@@ -48,9 +48,9 @@ public class NPC extends Character {
 	}
 	
 	// NPC constructor that instantiates Shop NPCs with no other Dialog options
-	NPC(String InputName, Item[] InputInventory, String InputEnterShopDialog, String InputExitShopDialog,
+	NPC(String InputName, String InputEnterShopDialog, String InputExitShopDialog,
 			String InputSaleDialog) {
-		super(InputName, InputInventory);
+		super(InputName);
 		this.EnterShopDialog = InputEnterShopDialog;
 		this.ExitShopDialog = InputExitShopDialog;
 		this.SaleDialog = InputSaleDialog;
@@ -64,15 +64,15 @@ public class NPC extends Character {
 	 */
 	
 	public String getEnterShopDialog() {
-		return this.EnterShopDialog;
+		return "<" + getName() + ">\n" + this.EnterShopDialog;
 	}
 	
 	public String getExitShopDialog() {
-		return this.ExitShopDialog;
+		return "<" + getName() + ">\n" + this.ExitShopDialog;
 	}
 	
 	public String getSaleDialog() {
-		return this.SaleDialog;
+		return "<" + getName() + ">\n" + this.SaleDialog;
 	}
 	
 	public String[] getDialog() {
@@ -111,7 +111,7 @@ public class NPC extends Character {
 		// For loop to convert Inventory into a string
 		String TempDialog = "";
 		for (int x = 0; x < Dialog.length; x++) {
-			TempDialog = TempDialog + Inventory[x] + "\n";
+			TempDialog = TempDialog + this.getInventory() + "\n";
 		}
 		return super.toString() + "\n" +
 				"Enter Shop Dialog: " + this.EnterShopDialog + "\n" +
