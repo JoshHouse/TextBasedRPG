@@ -17,6 +17,7 @@ public class Player extends GameChar {
 	private int lvlLuck;
 	private int Mana;
 	private double EXPThreshold;
+	private Weapon equipped;
 
 	/**
 	 * 
@@ -34,13 +35,13 @@ public class Player extends GameChar {
 		this.lvlLuck = 1;
 		this.Mana = 0;
 		this.EXPThreshold = 100;
+		setInventory(new Inventory(false, false, false));
 	}
 
 	// Constructor that instantiates all values
-	public Player(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, int InputDamageType,
-			int InputCurrency, int InputlvlMelee, int InputlvlRanged, int InputlvlRogue,
-			int InputlvlMage, int InputlvlLuck, int InputMana) {
-		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency);
+	public Player(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputCurrency, int InputlvlMelee,
+			int InputlvlRanged, int InputlvlRogue, int InputlvlMage, int InputlvlLuck, int InputMana) {
+		super(InputName, InputHealth, InputLevel, InputEXP, InputCurrency);
 		this.lvlMelee = InputlvlMelee;
 		this.lvlRanged = InputlvlRanged;
 		this.lvlRogue = InputlvlRogue;
@@ -51,6 +52,7 @@ public class Player extends GameChar {
 		for (int x = 1; x < this.getLevel(); x++) {
 			this.EXPThreshold = EXPThreshold * 1.2;
 		}
+		setInventory(new Inventory(true, true, true));
 	}
 
 	/**
@@ -85,6 +87,10 @@ public class Player extends GameChar {
 
 	public double getEXPThreshold() {
 		return this.EXPThreshold;
+	}
+	
+	public Weapon getEquipped() {
+		return this.equipped;
 	}
 
 	/**
@@ -148,6 +154,18 @@ public class Player extends GameChar {
 		System.out.println("Melee Lv: " + lvlMelee + "\tRanged Lv: " + lvlRanged + "\t Rouge Lv: " + lvlRogue
 				+ "\tMage Lv: " + lvlMage);
 		System.out.println("----------------------------------------------------------------");
+
+	}
+
+	/**
+	 * Changes the mainhand weapon of the player, based on the weapons in their inventory.
+	 * @param index - The index of the weapon in inventory.
+	 */
+	public void setMainhandWeapon(int index) {
+
+		if (this.getInventory().getWeapons().get(index) != null) {
+			this.equipped = this.getInventory().getWeapons().get(index);
+		}
 
 	}
 
