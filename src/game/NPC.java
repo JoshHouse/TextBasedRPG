@@ -1,123 +1,86 @@
 package game;
 
+import java.util.ArrayList;
+
 public class NPC extends GameChar {
 	
-	/**
-	 * 
-	 * ----- Variables -----
-	 * 
-	 */
+	// -------------------Variables-------------------
 	
-	private String EnterShopDialog;
-	private String ExitShopDialog;
-	private String SaleDialog;
-	private String[] Dialog;
+	protected ArrayList<String> dialog;
+	
+	// -------------------Constructors-------------------
 	
 	/**
-	 * 
-	 * ----- Constructors -----
-	 * 
+	 * Default Constructor
 	 */
-	
-	// Default Constructor
 	NPC() {
 		super();
-		this.EnterShopDialog = "No Dialog";
-		this.ExitShopDialog = "No Dialog";
-		this.SaleDialog = "No Dialog";
-		this.Dialog = new String[0];
-	}
-	
-	// NPC constructor that instantiates name, inventory, and all values special to the NPC class
-	NPC(String InputName, String InputEnterShopDialog, String InputExitShopDialog,
-			String InputSaleDialog, String[] InputDialog) {
-		super(InputName);
-		this.EnterShopDialog = InputEnterShopDialog;
-		this.ExitShopDialog = InputExitShopDialog;
-		this.SaleDialog = InputSaleDialog;
-		this.Dialog = InputDialog;
-	}
-	
-	// NPC constructor that instantiates NPCS that don't have shops
-	NPC(String InputName, String[] InputDialog) {
-		super(InputName);
-		this.EnterShopDialog = "No Dialog";
-		this.ExitShopDialog = "No Dialog";
-		this.SaleDialog = "No Dialog";
-		this.Dialog = InputDialog;
-	}
-	
-	// NPC constructor that instantiates Shop NPCs with no other Dialog options
-	NPC(String InputName, String InputEnterShopDialog, String InputExitShopDialog,
-			String InputSaleDialog) {
-		super(InputName);
-		this.EnterShopDialog = InputEnterShopDialog;
-		this.ExitShopDialog = InputExitShopDialog;
-		this.SaleDialog = InputSaleDialog;
-		this.Dialog = new String[0];
+		this.dialog = new ArrayList<String>();
 	}
 	
 	/**
+	 * Instantiates an NPC with a name, inventory, and an arraylist of dialog 
 	 * 
-	 * ----- Getters -----
-	 * 
+	 * @param inputName
+	 * @param inputInventory
+	 * @param inputDialog
 	 */
-	
-	public String getEnterShopDialog() {
-		return "<" + getName() + ">\n" + this.EnterShopDialog;
+	NPC(String inputName, Inventory inputInventory, ArrayList<String> inputDialog) {
+		super(inputName, inputInventory);
+		this.dialog = inputDialog;
+		
 	}
 	
-	public String getExitShopDialog() {
-		return "<" + getName() + ">\n" + this.ExitShopDialog;
-	}
-	
-	public String getSaleDialog() {
-		return "<" + getName() + ">\n" + this.SaleDialog;
-	}
-	
-	public String[] getDialog() {
-		return this.Dialog;
-	}
-	
- 	/**
+	/**
+	 * Instantiates NPCS that don't have shops
 	 * 
-	 * ----- Setters -----
-	 * 
+	 * @param inputName
+	 * @param inputDialog
 	 */
-	
-	public void setEnterShopDialog (String InputEnterShopDialog) {
-		this.EnterShopDialog = InputEnterShopDialog;
+	NPC(String inputName, ArrayList<String> inputDialog) {
+		super(inputName);
+		this.dialog = inputDialog;
 	}
 	
-	public void setExitShopDialog (String InputExitShopDialog) {
-		this.ExitShopDialog = InputExitShopDialog;
-	}
-	
-	public void setSaleDialog (String InputSaleDialog) {
-		this.SaleDialog = InputSaleDialog;
-	}
-	
-	public void setDialog (String[] InputDialog) {
-		this.Dialog = InputDialog;
-	}
-	
- 	/**
+	/**
+	 * Constructor for shopkeepers who dont have other dialog options
+	 * only takes a name and an inventory
 	 * 
-	 * ----- To-String -----
-	 * 
+	 * @param inputName
+	 * @param inputInventory
 	 */
+	NPC(String inputName, Inventory inputInventory) {
+		super(inputName, inputInventory);
+		this.dialog = new ArrayList<String>();
+		
+	}
+	
+	// -------------------Getters-------------------
+	
+	public ArrayList<String> getDialog() {
+		return this.dialog;
+	}
+	
+	// -------------------Setters-------------------
+	
+	public void setDialog (ArrayList<String> inputDialog) {
+		this.dialog = inputDialog;
+	}
+	
+	// -------------------toString-------------------
 	
 	public String toString() {
 		// For loop to convert Inventory into a string
-		String TempDialog = "";
-		for (int x = 0; x < Dialog.length; x++) {
-			TempDialog = TempDialog + this.getInventory() + "\n";
+		String tempDialog = "";
+		
+		if (dialog.size() > 0) {
+			tempDialog = tempDialog + "-----Dialog-----\n";
 		}
-		return super.toString() + "\n" +
-				"Enter Shop Dialog: " + this.EnterShopDialog + "\n" +
-				"Exit Shop Dialog: " + this.ExitShopDialog + "\n" +
-				"Sale Dialog: " + this.SaleDialog + "\n" + 
-				"Dialog: " + "\n" +  TempDialog;
+		
+		for (int x = 0; x < dialog.size(); x++) {
+			tempDialog = tempDialog + this.dialog.get(x) + "\n";
+		}
+		return super.toString() + tempDialog;
 				
  	}
 	

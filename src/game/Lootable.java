@@ -1,88 +1,106 @@
 package game;
 
 public class Lootable {
+	
+	// -------------------Variables-------------------
+	
+	protected Inventory inventory;
+	protected String name;
+	protected int currency;
+	
+	// -------------------Constructors-------------------
+	
 	/**
-	 * 
-	 * ----- Variables -----
-	 * 
+	 * Default constructor
 	 */
-	
-	private Item[] Inventory;
-	private String Name;
-	
-	/**
-	 * 
-	 * ----- Constructors -----
-	 * 
-	 */
-	
-	// Default constructor
 	public Lootable() {
-		this.Inventory = new Item[0];
-		this.Name = "No Name";
-	}
-	
-	// Constructor that initializes inventory and name
-	public Lootable(Item[] InputInventory, String InputName) {
-		this.Inventory = InputInventory;
-		this.Name = InputName;
-	}
-	
-	// Constructor that initializes Name and makes Inventory an empty Item array
-	public Lootable(String InputName) {
-		this.Inventory = new Item[0];
-		this.Name = InputName;
-	}
-	
-	// Constructor that initializes Inventory and makes Name a default string
-	public Lootable(Item[] InputInventory) {
-		this.Inventory = InputInventory;
-		this.Name = "No Name";
+		this.name = "null";
+		this.inventory = new Inventory();
+		this.currency = 0;
 	}
 	
 	/**
+	 * Constructor that initializes inventory, name, and currency
 	 * 
-	 * ----- Getters -----
-	 * 
+	 * @param inputName
+	 * @param inputInventory
+	 * @param inputCurrency
 	 */
-	
-	public Item[] getInventory() {
-		return this.Inventory;
+	public Lootable(String inputName, Inventory inputInventory, int inputCurrency) {
+		this.name = inputName;
+		this.inventory = inputInventory;
+		this.currency = inputCurrency;
 	}
+	
+	/**
+	 * Constructor that initializes name and inventory but sets currency to 0
+	 * 
+	 * @param inputName
+	 * @param inputInventory
+	 */
+	public Lootable(String inputName, Inventory inputInventory) {
+		this.name = inputName;
+		this.inventory = inputInventory;
+		this.currency = 0;
+	}
+	
+	/**
+	 * Constructor that initializes name and currency but creates a default inventory
+	 * 
+	 * @param inputName
+	 * @param inputCurrency
+	 */
+	public Lootable(String inputName, int inputCurrency) {
+		this.name = inputName;
+		this.inventory = new Inventory();
+		this.currency = inputCurrency;
+	}
+	
+	/**
+	 * Constructor that initializes Name, but sets currency to 0 and creates a default Inventory
+	 * 
+	 * @param inputName
+	 */
+	public Lootable(String inputName) {
+		this.name = inputName;
+		this.inventory = new Inventory();
+		this.currency = 0;
+	}
+	
+	// -------------------Getters-------------------
 	
 	public String getName() {
-		return this.Name;
+		return this.name;
 	}
 	
-	/**
-	 * 
-	 * ----- Setters -----
-	 * 
-	 */
-	
-	public void setInventory(Item[] InputInventory) {
-		this.Inventory = InputInventory;
+	public Inventory getInventory() {
+		return this.inventory;
 	}
 	
-	public void setName(String InputName) {
-		this.Name = InputName;
+	public int getCurrency() {
+		return this.currency;
 	}
 	
-	/**
-	 * 
-	 * ToString method
-	 * 
-	 */
+	// -------------------Setters-------------------
+	
+	public void setName(String inputName) {
+		this.name = inputName;
+	}
+	
+	public void setInventory(Inventory inputInventory) {
+		this.inventory = inputInventory;
+	}
+	
+	public void setCurrency(int inputCurrency) {
+		this.currency = inputCurrency;
+	}
+	
+	// -------------------toString-------------------
+	
 	public String toString() {
-		
-		// For loop to convert Inventory into a string
-		String TempInventory = "";
-		for (int x = 0; x < Inventory.length; x++) {
-			TempInventory = TempInventory + Inventory[x] + "-------" + "\n";
-		}
-		
-		return "Name: " + this.Name + "\n" +
-				"Inventory: " + "\n" + "-------" + "\n" + TempInventory;
+		return "Name: " + this.name + "/n" + 
+				"Currency: " + this.currency + "/n" + 
+				"Inventory: /n" + inventory.toString();
 		
 	}
 }

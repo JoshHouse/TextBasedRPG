@@ -1,193 +1,209 @@
 package game;
 
-import java.util.ArrayList;
 
-public class GameChar {
+public class GameChar extends Lootable {
 	
-	/**
-	 * 
-	 * ----- Variables -----
-	 * 
-	 */
+	// -------------------Variables-------------------
 	
-	private String Name;
-	private int Health;
-	private int Level;
-	private int EXP;
-	private int Damage;
-	private String DamageType;
-	private int Currency;
-	private Inventory inventory;
+	protected int health;
+	protected int level;
+	protected int exp;
+	protected int damage;
+	protected String damageType;
 	
-	/**
-	 * 
-	 * ----- Constructors -----
-	 * 
-	 */
+	// -------------------Constructors-------------------
 	
-	/** Default Constructor
-	 * 
+	/** 
+	 * Default Constructor
 	 */
 	public GameChar() {
-		this.Name = "No Name";
-		this.Health = 1;
-		this.Level = 1;
-		this.EXP = 0;
-		this.Damage = 0;
-		this.DamageType = this.SetDamageType(0);
-		this.Currency = 0;
+		
+		super();
+		this.health = 1;
+		this.level = 1;
+		this.exp = 0;
+		this.damage = 0;
+		this.damageType = this.calculateDamageType(0);
 	}
-	/** For Instantiating Characters With All Data types
+	/** 
+	 * For Instantiating Characters With All Data Types
 	 * 
-	 * @param InputName
-	 * @param InputHealth
-	 * @param InputLevel
-	 * @param InputEXP
-	 * @param InputDamage
-	 * @param InputDamageType
-	 * @param InputCurrency
+	 * @param inputName
+	 * @param inputInventory
+	 * @param inputCurrency
+	 * @param inputHealth
+	 * @param inputLevel
+	 * @param inputExp
+	 * @param inputDamage
+	 * @param inputDamageType	-As an int (1-4 for "Melee", "Ranged", "Magic", "Rogue") *default is "null"*
 	 */
-	public GameChar(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			int InputDamageType, int InputCurrency) {
-		this.Name = InputName;
-		this.Health = InputHealth;
-		this.Level = InputLevel;
-		this.EXP = InputEXP;
-		this.Damage = InputDamage;
-		this.DamageType = this.SetDamageType(InputDamageType);
-		this.Currency = InputCurrency;
+	public GameChar(String inputName, Inventory inputInventory, int inputCurrency, int inputHealth, 
+			int inputLevel, int inputExp, int inputDamage, int inputDamageType) {
+		
+		super(inputName, inputInventory, inputCurrency); 
+		this.health = inputHealth;
+		this.level = inputLevel;
+		this.exp = inputExp;
+		this.damage = inputDamage;
+		this.damageType = this.calculateDamageType(inputDamageType);
 	}
 	
-	/** For Instantiating NPCs with only a name (for sale of items)
+	/** 
+	 * For Instantiating Characters with no inventory
 	 * 
-	 * @param InputName
+	 * @param inputName
+	 * @param inputCurrency
+	 * @param inputHealth
+	 * @param inputLevel
+	 * @param inputExp
+	 * @param inputDamage
+	 * @param inputDamageType	-As an int (1-4 for "Melee", "Ranged", "Magic", "Rogue") *default is "null"*
 	 */
-	public GameChar(String InputName) {
-		this.Name = InputName;
-		this.Health = 1;
-		this.Level = 1;
-		this.EXP = 0;
-		this.Damage = 0;
-		this.DamageType = this.SetDamageType(0);
-		this.Currency = 0;
-		this.Inventory = null;
+	public GameChar(String inputName, int inputCurrency, int inputHealth, 
+			int inputLevel, int inputExp, int inputDamage, int inputDamageType) {
+		
+		super(inputName, inputCurrency); 
+		this.health = inputHealth;
+		this.level = inputLevel;
+		this.exp = inputExp;
+		this.damage = inputDamage;
+		this.damageType = this.calculateDamageType(inputDamageType);
+	}
+	
+	/** 
+	 * Instantiates a character with all values except an inventory and currency
+	 * 
+	 * @param inputName
+	 * @param inputHealth
+	 * @param inputLevel
+	 * @param inputExp
+	 * @param inputDamage
+	 * @param inputDamageType	-As an int (1-4 for "Melee", "Ranged", "Magic", "Rogue") *default is "null"*
+	 */
+	public GameChar(String inputName, int inputHealth, int inputLevel, int inputExp, int inputDamage, 
+			int inputDamageType) {
+		
+		super(inputName);
+		this.health = inputHealth;
+		this.level = inputLevel;
+		this.exp = inputExp;
+		this.damage = inputDamage;
+		this.damageType = this.calculateDamageType(inputDamageType);
 	}
 	
 	/**
+	 * For instantiating characters with only a name and an invetory but the rest with default values
 	 * 
-	 * ----- Getters -----
-	 * 
+	 * @param inputName
+	 * @param inputInventory
 	 */
-	
-	public String getName() {
-		return this.Name;
+	public GameChar(String inputName, Inventory inputInventory) {
+		
+		super(inputName, inputInventory);
+		this.health = 1;
+		this.level = 1;
+		this.exp = 0;
+		this.damage = 0;
+		this.damageType = this.calculateDamageType(0);
 	}
 	
+	/**
+	 * For instantiating a default character with level 1 values that only takes a name as input
+	 * 
+	 * @param inputName
+	 */
+	public GameChar(String inputName) {
+		super(inputName);
+		this.health = 100;
+		this.level = 1;
+		this.exp = 0;
+		this.damage = 1;
+		this.damageType = this.calculateDamageType(0);
+	}
+	
+	// -------------------Getters-------------------
+	
 	public int getHealth() {
-		return this.Health;
+		return this.health;
 	}
 	
 	public int getLevel() {
-		return this.Level;
+		return this.level;
 	}
 	
-	public int getEXP() {
-		return this.EXP;
+	public int getExp() {
+		return this.exp;
 	}
 	
 	public int getDamage() {
-		return this.Damage;
+		return this.damage;
 	}
 	
 	public String getDamageType() {
-		return this.DamageType;
+		return this.damageType;
 	}
 	
-	public int getCurrency() {
-		return this.Currency;
+	// -------------------Setters-------------------
+	
+	public void setHealth(int inputHealth) {
+		this.health = inputHealth;
 	}
 	
+	public void setLevel(int inputLevel) {
+		this.level = inputLevel;
+	}
+	
+	public void setExp(int inputExp) {
+		this.exp = inputExp;
+	}
+	
+	public void setDamage(int inputDamage) {
+		this.damage = inputDamage;
+	}
+	
+	public void setDamageType(String inputDamageType) {
+		this.damageType = inputDamageType;
+	}
+	
+	public void setDamageTypeInt(int inputDamageType) {
+		this.damageType = this.calculateDamageType(inputDamageType);
+	}
+	
+	// -------------------Functions-------------------
 	/**
-	 * @return the inventory
-	 */
-	public Inventory getInventory() {
-		return inventory;
-	}
-	
-	/**
+	 * Calculates damage type based on inputted int and returns damage type string
+	 * 1: "Melee", 2: "Ranged", 3: "Magic", 4: "Rogue", Default: "null"
 	 * 
-	 * ----- Setters -----
-	 * 
+	 * @param typeInt
+	 * @return damageType string
 	 */
-	
-	public void setName(String InputName) {
-		this.Name = InputName;
-	}
-	
-	public void setHealth(int InputHealth) {
-		this.Health = InputHealth;
-	}
-	
-	public void setLevel(int InputLevel) {
-		this.Level = InputLevel;
-	}
-	
-	public void setEXP(int InputEXP) {
-		this.EXP = InputEXP;
-	}
-	
-	public void setDamage(int InputDamage) {
-		this.Damage = InputDamage;
-	}
-	
-	public String SetDamageType(int typeInt) {
+	public String calculateDamageType(int typeInt) {
 		
 		switch (typeInt) {
 		
 		case 1:
 			return "Melee";
 		case 2:
-			return "Magic";
+			return "Ranged";
 		case 3:
-			return "Projectile";
+			return "Magic";
 		case 4:
-			return "Throwable";
+			return "Rogue";
 		default:
-			return "None";
+			return "null";
 		
 		}
 		
 	}
-	
-	public void setCurrency(int InputCurrency) {
-		this.Currency = InputCurrency;
-	}
-	
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
-	}
-	
-	/**
-	 * 
-	 * ----- ToString method -----
-	 * 
-	 */
+	// -------------------toString-------------------
 	
 	public String toString() {
 		
-		// For loop to convert Inventory into a string
-		String TempInventory = "";
-		for (int x = 0; x < this.getInventory().size(); x++) {
-			TempInventory = TempInventory + this.getInventory().get(x) + "-------" + "\n";
-		}
-		
-		return "Name: " + this.Name + "\n" +
-				"Health: " + this.Health + "\n" +
-				"Level: " + this.Level + "\n" +
-				"EXP: " + this.EXP + "\n" +
-				"Damage: " + this.Damage + "\n" +
-				"Damage Type: " + this.DamageType + "\n" +
-				"Currency: " + this.Currency + "\n" +
-				"Inventory: " + "\n" + "-------" + "\n" + TempInventory;
+		return	super.toString() +
+				"Health: " + this.health + "\n" +
+				"Level: " + this.level + "\n" +
+				"Exp: " + this.exp + "\n" +
+				"Damage: " + this.damage + "\n" +
+				"Damage Type: " + this.damageType + "\n";
 	}
 }

@@ -2,93 +2,96 @@ package game;
 
 public class Enemy extends GameChar {
 	
-	/**
-	 * 
-	 * ----- Variables -----
-	 * 
-	 */
+	// -------------------Variables-------------------
 	
-	private String SpecialAttack;
-	private int SpecialAttackMultiplier;
+	protected SpecialAttack specialAttack;
+	
+	// -------------------Constructors-------------------
 	
 	/**
-	 * 
-	 * ----- Constructors -----
-	 * 
+	 * Default Constructor
 	 */
-	
-	// Default Constructor
 	public Enemy() {
 		super();
-		this.SpecialAttack = "No Special Attack";
-		this.SpecialAttackMultiplier = 1;
+		this.specialAttack = new SpecialAttack();
 	}
 	
-	// Constructor that instantiates all values
-	public Enemy(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			int InputDamageType, int InputCurrency, Item[] InputInventory, String InputSpecialAttack,
-			int InputSpecialAttackMultiplier) 
+	/**
+	 * Constructor that instantiates all values
+	 * 
+	 * @param inputName
+	 * @param inputInventory
+	 * @param inputCurrency
+	 * @param inputHealth
+	 * @param inputLevel
+	 * @param inputExp
+	 * @param inputDamage
+	 * @param inputDamageType
+	 * @param inputSpecialAttack
+	 */
+	public Enemy(String inputName, Inventory inputInventory, int inputCurrency, int inputHealth, 
+			int inputLevel, int inputExp, int inputDamage, int inputDamageType, SpecialAttack inputSpecialAttack) 
 	{
-		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency);
-		this.SpecialAttack = InputSpecialAttack;
-		this.SpecialAttackMultiplier = InputSpecialAttackMultiplier;
-	}
-	
-	// For Instantiating EXP enemies with no inventory but that give EXP and currency and have a special attack
-	// Takes all data types besides the Inventory array
-	public Enemy(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			int InputDamageType, int InputCurrency, String InputSpecialAttack, int InputSpecialAttackMultiplier) {
-		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency);
-		this.SpecialAttack = InputSpecialAttack;
-		this.SpecialAttackMultiplier = InputSpecialAttackMultiplier;
-	}
-	
-	// For Instantiating EXP enemies with no inventory but that give EXP and currency but don't have a special attack
-	// Takes all data types besides the Inventory array, Special Attack string, and special attack multiplier
-	public Enemy(String InputName, int InputHealth, int InputLevel, int InputEXP, int InputDamage, 
-			int InputDamageType, int InputCurrency) {
-		super(InputName, InputHealth, InputLevel, InputEXP, InputDamage, InputDamageType, InputCurrency);
-		this.SpecialAttack = "No Special Attack";
-		this.SpecialAttackMultiplier = 1;
+		super(inputName, inputInventory, inputCurrency, inputHealth, inputLevel, inputExp, inputDamage, 
+				inputDamageType);
+		this.specialAttack = inputSpecialAttack;
 	}
 	
 	/**
+	 * For Instantiating EXP enemies with no inventory but that give EXP and currency and have a special attack
+	 * Takes all data types besides the Inventory
 	 * 
-	 * ----- Getters ------
-	 * 
+	 * @param inputName
+	 * @param inputCurrency
+	 * @param inputHealth
+	 * @param inputLevel
+	 * @param inputExp
+	 * @param inputDamage
+	 * @param inputDamageType
+	 * @param inputSpecialAttack
 	 */
-	
-	public String getSpecialAttack() {
-		return this.SpecialAttack;
-	}
-	
-	public int getSpecialAttackMultipler() {
-		return this.SpecialAttackMultiplier;
+	public Enemy(String inputName, int inputCurrency, int inputHealth, int inputLevel, int inputExp, 
+			int inputDamage, int inputDamageType, SpecialAttack inputSpecialAttack) {
+		super(inputName, inputCurrency, inputHealth, inputLevel, inputExp, inputDamage, inputDamageType);
+		this.specialAttack = inputSpecialAttack;
 	}
 	
 	/**
+	 * For Instantiating EXP enemies with no inventory but that give EXP and currency but don't have a special attack
+	 * Takes all data types besides the Inventory and Special Attack
 	 * 
-	 * ----- Setters -----
-	 * 
+	 * @param inputName
+	 * @param inputCurrency
+	 * @param inputHealth
+	 * @param inputLevel
+	 * @param inputExp
+	 * @param inputDamage
+	 * @param inputDamageType
 	 */
-	
-	public void setSpecialAttack(String InputSpecialAttack) {
-		this.SpecialAttack = InputSpecialAttack;
+	public Enemy(String inputName, int inputCurrency, int inputHealth, int inputLevel, int inputExp, 
+			int inputDamage, int inputDamageType) {
+		super(inputName, inputCurrency, inputHealth, inputLevel, inputExp, inputDamage, inputDamageType);
+		this.specialAttack = new SpecialAttack();
 	}
 	
-	public void setSpecialAttackMultiplier(int InputSpecialAttackMultiplier) {
-		this.SpecialAttackMultiplier = InputSpecialAttackMultiplier;
+	// -------------------Getters-------------------
+	
+	public SpecialAttack getSpecialAttack() {
+		return this.specialAttack;
 	}
 	
-	/**
-	 * 
-	 * ----- ToString method -----
-	 * 
-	 */
+
+	// -------------------Setters-------------------
+	
+	public void setSpecialAttack(SpecialAttack inputSpecialAttack) {
+		this.specialAttack = inputSpecialAttack;
+	}
+	
+
+	// -------------------toString-------------------
 	
 	public String toString() {
 		return super.toString() +
-				"Special Attack: " + this.SpecialAttack + "\n" +
-				"Special Attack Multiplier: " + this.SpecialAttackMultiplier + "\n";
+				this.specialAttack.toString();
 	}
 }

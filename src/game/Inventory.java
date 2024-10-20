@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Inventory {
 
-	private ArrayList<Weapon> weapons;
-	private ArrayList<Consumable> consumables;
-	private ArrayList<KeyItem> keyItems;
+	protected ArrayList<Weapon> weapons;
+	protected ArrayList<Consumable> consumables;
+	protected ArrayList<KeyItem> keyItems;
 
 	/**
 	 * Base constructor
 	 */
 	public Inventory() {
-		weapons = null;
-		consumables = null;
-		keyItems = null;
+		this.weapons = new ArrayList<Weapon>();
+		this.consumables = new ArrayList<Consumable>();
+		this.keyItems = new ArrayList<KeyItem>();
 	}
 
 	/**
@@ -28,10 +28,24 @@ public class Inventory {
 	 */
 	public Inventory(boolean enableWeapons, boolean enableConsumables, boolean enableKeyItems) {
 
-		weapons = ((enableWeapons == true) ? new ArrayList<Weapon>() : null);
-		consumables = ((enableConsumables == true) ? new ArrayList<Consumable>() : null);
-		keyItems = ((enableKeyItems == true) ? new ArrayList<KeyItem>() : null);
+		this.weapons = ((enableWeapons == true) ? new ArrayList<Weapon>() : null);
+		this.consumables = ((enableConsumables == true) ? new ArrayList<Consumable>() : null);
+		this.keyItems = ((enableKeyItems == true) ? new ArrayList<KeyItem>() : null);
 
+	}
+	
+	/**
+	 * Allows for the creation of an inventory with items already in it
+	 * 
+	 * @param inputWeapons
+	 * @param inputConsumables
+	 * @param inputKeyItems
+	 */
+	public Inventory(ArrayList<Weapon> inputWeapons, ArrayList<Consumable> inputConsumables, 
+			ArrayList<KeyItem> inputKeyItems) {
+		this.weapons = inputWeapons;
+		this.consumables = inputConsumables;
+		this.keyItems = inputKeyItems;	
 	}
 
 	// ------------------------------Getters------------------------------
@@ -70,5 +84,23 @@ public class Inventory {
 		}
 		
 	}
-
+	
+	// ------------------------------ToString------------------------------
+	public String toString() {
+		String returnString = "";
+		returnString = returnString + "-----Weapons-----\n";
+		for (int x = 0; x < weapons.size(); x++) {
+			returnString = returnString + weapons.get(x) + "---------------\n"; 
+		}
+		returnString = returnString + "-----Consumables-----\n";
+		for (int x = 0; x < consumables.size(); x++) {
+			returnString = returnString + consumables.get(x) + "---------------\n"; 
+		}
+		returnString = returnString + "-----KeyItems-----\n";
+		for (int x = 0; x < weapons.size(); x++) {
+			returnString = returnString + keyItems.get(x) + "---------------\n"; 
+		}
+		return returnString;
+	}
+ 
 }

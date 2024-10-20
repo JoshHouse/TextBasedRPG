@@ -2,15 +2,17 @@ package game;
 
 public class SpecialAttack {
 
-	private String name;
-	private String info;
-	private double atkMultiplier;
+	// -------------------Variables-------------------
+	
+	protected String info;
+	protected double atkMultiplier;
 
+	// -------------------Constructors-------------------
+	
 	/**
 	 * Base constructor
 	 */
 	public SpecialAttack() {
-		this.name = "None";
 		this.info = "This weapon has no special attack.";
 		this.atkMultiplier = 0.0;
 	}
@@ -18,13 +20,11 @@ public class SpecialAttack {
 	/**
 	 * Initializes all values
 	 * 
-	 * @param name          - Special attack's name.
 	 * @param info          - Special attack's description.
 	 * @param atkMultiplier - The amount to multiply the character's initial attack
 	 *                      stat by.
 	 */
-	public SpecialAttack(String name, String info, double atkMultiplier) {
-		this.name = name;
+	public SpecialAttack(String info, double atkMultiplier) {
 		this.info = info;
 		this.atkMultiplier = atkMultiplier;
 	}
@@ -38,9 +38,9 @@ public class SpecialAttack {
 	void useSpAtk(int luckVal) {
 
 		if (Luck.luckEvent(luckVal)) {
-			System.out.println("Used " + getName() + "!");
+			System.out.println("You " + this.info);
 		} else {
-			System.out.println(getName() + " failed!");
+			System.out.println("You attempted to " + this.info + " but you failed!");
 		}
 
 	}
@@ -51,22 +51,30 @@ public class SpecialAttack {
 		return info;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public double getAtkMultiplier() {
 		return atkMultiplier;
+	}
+	
+	// --------------------------------Setters--------------------------------
+	
+	public void setInfo(String inputInfo) {
+		this.info = inputInfo;
+	}
+	
+	public void setAtkMultiplier(double inputAtkMultiplier) {
+		this.atkMultiplier = inputAtkMultiplier;
 	}
 
 	// ---------------------------Overridden Methods---------------------------
 
 	@Override
 	/**
-	 * Classic toString method. Prints the name and description of a special attack.
+	 * Classic toString method. Prints the description and multiplier of the special attack.
 	 */
 	public String toString() {
-		return getName() + "\n" + getInfo() + "\n";
+		return "-----Special Attack-----\n" +
+				"Description" + this.info + "\n" + 
+				"Success Damage Mutiplier: " + this.atkMultiplier + "\n";
 	}
 
 }

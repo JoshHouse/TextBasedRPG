@@ -84,7 +84,7 @@ public class Shop {
 		System.out.println("-------------Entering: " + shop.getName() + "...-------------\n");
 		Pause.pause(1500);
 
-		System.out.println(shop.getShopkeeper().getEnterMsg());
+		System.out.println(shop.getShopkeeper().getEnterShopDialog());
 
 		do {
 
@@ -136,7 +136,7 @@ public class Shop {
 
 		} while (isShopping);
 
-		System.out.println(shop.getShopkeeper().getExitMsg());
+		System.out.println(shop.getShopkeeper().getExitShopDialog());
 		System.out.println("-------------Leaving: " + shop.getName() + "...-------------\n");
 		Pause.pause(1000);
 
@@ -157,7 +157,7 @@ public class Shop {
 		boolean isBuying = true, isPurchasing = false, purchased = false;
 
 		// Have the shopkeeper say something
-		System.out.println(shop.getShopkeeper().displayInShopMsg());
+		System.out.println(shop.getShopkeeper().displayInShopDialog());
 		Pause.pause(1500);
 
 		while (isBuying) { // Loop until the player is done buying
@@ -168,7 +168,7 @@ public class Shop {
 				// Print the shop inventory using a for loop
 				System.out.println("[Select which item you would like to buy.]");
 				for (int i = 0; i < shop.getInventory().size(); i++) {
-					System.out.println((i + 1) + ") " + shop.getInventory().get(i).GetName());
+					System.out.println((i + 1) + ") " + shop.getInventory().get(i).getName());
 				}
 				System.out.println((shop.getInventory().size() + 1) + ") Cancel\n"); // Print the cancel option
 
@@ -201,7 +201,7 @@ public class Shop {
 			while (isPurchasing) { // Loops till user completes or cancels a purchase
 
 				// Display info on the item, including the price.
-				System.out.println(chosen.GetName() + "\n" + chosen.getInfo() + "\nPrice: " + chosen.GetValue() + "\n");
+				System.out.println(chosen.getName() + "\n" + chosen.getInfo() + "\nPrice: " + chosen.getValue() + "\n");
 				System.out.println("[Is this the weapon you want?]\nY) Yes\t\tN) No");
 
 				do { // Loop until a valid choice is entered
@@ -213,8 +213,8 @@ public class Shop {
 
 					case 'Y': // Buy
 						// Add item to player inventory, subtract money from player.
-						if (player.getCurrency() >= chosen.GetValue()) {
-							player.setCurrency(player.getCurrency() - chosen.GetValue());
+						if (player.getCurrency() >= chosen.getValue()) {
+							player.setCurrency(player.getCurrency() - chosen.getValue());
 
 							player.getInventory().add(chosen);
 
@@ -238,7 +238,7 @@ public class Shop {
 				charChoice = 0; // Reset the variable
 
 				if (purchased) { // Different dialogue based on whether or not a purchase was made.
-					System.out.println(shop.getShopkeeper().getSaleMsg());
+					System.out.println(shop.getShopkeeper().getSaleDialog());
 				} else {
 					System.out.println("[Continue viewing buyable items?]");
 				}
@@ -298,7 +298,7 @@ public class Shop {
 			isSelling = false;
 			Pause.pause(2500);
 		} else { // Have the shopkeeper say something
-			System.out.println(shop.getShopkeeper().displayInShopMsg());
+			System.out.println(shop.getShopkeeper().displayInShopDialog());
 			Pause.pause(1500);
 		}
 
@@ -309,7 +309,7 @@ public class Shop {
 				// Print the player's inventory using a for loop
 				System.out.println("[Select which item you would like to sell.]");
 				for (int i = 0; i < player.getInventory().getWeapons().size(); i++) {
-					System.out.println((i + 1) + ") " + player.getInventory().getWeapons().get(i).GetName());
+					System.out.println((i + 1) + ") " + player.getInventory().getWeapons().get(i).getName());
 				}
 				System.out.println((player.getInventory().getWeapons().size() + 1) + ") Cancel\n"); // Print the cancel
 																									// option
@@ -343,9 +343,9 @@ public class Shop {
 			while (startSelling) { // Loops till user completes or cancels a purchase
 
 				// Display info on the item, including the price.
-				System.out.println(player.getInventory().getWeapons().get(chosenIndex).GetName() + "\n"
+				System.out.println(player.getInventory().getWeapons().get(chosenIndex).getName() + "\n"
 						+ player.getInventory().getWeapons().get(chosenIndex).getInfo() + "\nPrice: "
-						+ player.getInventory().getWeapons().get(chosenIndex).GetValue() + "\n");
+						+ player.getInventory().getWeapons().get(chosenIndex).getValue() + "\n");
 				System.out.println("[Are you sure you want to sell this?]\nY) Yes\t\tN) No");
 
 				do { // Loop until a valid choice is entered
@@ -358,7 +358,7 @@ public class Shop {
 					case 'Y': // Sell
 						// Remove item from player inventory, add money to player.
 						player.setCurrency(
-								player.getCurrency() + player.getInventory().getWeapons().get(chosenIndex).GetValue());
+								player.getCurrency() + player.getInventory().getWeapons().get(chosenIndex).getValue());
 						player.getInventory().getWeapons().remove(chosenIndex);
 						sold = true;
 						break;
@@ -378,7 +378,7 @@ public class Shop {
 				if (player.getInventory().getWeapons().size() > 1) {
 
 					if (sold) { // Different dialogue based on whether or not a purchase was made.
-						System.out.println(shop.getShopkeeper().getSaleMsg());
+						System.out.println(shop.getShopkeeper().getSaleDialog());
 					} else {
 						System.out.println("[Continue viewing sellable items?]");
 					}

@@ -1,9 +1,10 @@
 package game;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GameThread {
+public class GameThread extends Throwable {
 	
 	/**
 	 * 
@@ -15,19 +16,13 @@ public class GameThread {
 
 		Shopkeeper demoShopkeeper = new Shopkeeper("Cosmos", "Hello there! How can I help you?", "Will that be all?",
 				"Have a nice day!");
-		demoShopkeeper.addInShopMsg("How's the weather today? I think it's quite lovely.");
-		demoShopkeeper.addInShopMsg("We don't have a lot here, so feel free to take your time looking around.");
-		demoShopkeeper.addInShopMsg(
+		demoShopkeeper.addInShopDialog("How's the weather today? I think it's quite lovely.");
+		demoShopkeeper.addInShopDialog("We don't have a lot here, so feel free to take your time looking around.");
+		demoShopkeeper.addInShopDialog(
 				"I don't mean to add any pressure, but I really hope I can hit my sales quota for today.");
 		Shop demoShop = new Shop("Demo Armory Shop", demoShopkeeper);
 
 		Scanner scn = new Scanner(System.in);
-
-		Weapon Sword = new Weapon("BroadSword", "Common", 10, 25, "Melee", true, 0, "Overhead Swing!");
-		Weapon FireStaff = new Weapon("Fire Staff", "Legendary", 500, 75, "Magic", false, 20, "Fire Wall!");
-		Item[] P1Inventory = {Sword, FireStaff};
-		Player p1 = new Player("Gandalf The Great", 100, 10, 72, 50, "Magic", 750, P1Inventory, 3, 1, 1, 12, 7, 250);
-		System.out.println(p1.toString());
 	}
 	
 	/**
@@ -82,7 +77,7 @@ public class GameThread {
 		System.out.println("-------------Entering: " + shop.getName() + "...-------------\n");
 		pause(1500);
 
-		System.out.println(shop.getShopkeeper().getEnterMsg());
+		System.out.println(shop.getShopkeeper().getEnterShopDialog());
 
 		do {
 
@@ -110,7 +105,7 @@ public class GameThread {
 
 		} while (isShopping);
 
-		System.out.println(shop.getShopkeeper().getExitMsg());
+		System.out.println(shop.getShopkeeper().getExitShopDialog());
 		System.out.println("-------------Leaving: " + shop.getName() + "...-------------\n");
 		pause(1000);
 
@@ -131,7 +126,7 @@ public class GameThread {
 		boolean isBuying = true, isPurchasing = false, purchased = false;
 
 		// Have the shopkeeper say something
-		System.out.println(shop.getShopkeeper().displayInShopMsg());
+		System.out.println(shop.getShopkeeper().displayInShopDialog());
 		pause(1500);
 
 		while (isBuying) { // Loop until the player is done buying
@@ -142,7 +137,7 @@ public class GameThread {
 				// Print the shop inventory using a for loop
 				System.out.println("[Select which item you would like to buy.]");
 				for (int i = 0; i < shop.getInventory().size(); i++) {
-					System.out.println((i + 1) + ") " + shop.getInventory().get(i).GetName());
+					System.out.println((i + 1) + ") " + shop.getInventory().get(i).getName());
 				}
 				System.out.println((shop.getInventory().size() + 1) + ") Cancel\n"); // Print the cancel option
 
@@ -175,7 +170,7 @@ public class GameThread {
 			while (isPurchasing) { // Loops till user completes or cancels a purchase
 
 				// Display info on the item, including the price.
-				System.out.println(chosen.GetName() + "\n" + chosen.getInfo() + "\nPrice: " + chosen.GetValue() + "\n");
+				System.out.println(chosen.getName() + "\n" + chosen.getInfo() + "\nPrice: " + chosen.getValue() + "\n");
 				System.out.println("[Is this the weapon you want?]\nY) Yes\t\tN) No");
 
 				do { // Loop until a valid choice is entered
@@ -187,8 +182,8 @@ public class GameThread {
 
 					case 'Y': // Buy
 						// Add item to player inventory, subtract money from player.
-						if (player.getCurrency() >= chosen.GetValue()) {
-							player.setCurrency(player.getCurrency() - chosen.GetValue());
+						if (player.getCurrency() >= chosen.getValue()) {
+							player.setCurrency(player.getCurrency() - chosen.getValue());
 							player.addToInventory(chosen);
 
 							purchased = true;
@@ -211,7 +206,7 @@ public class GameThread {
 				charChoice = 0; // Reset the variable
 
 				if (purchased) { // Different dialogue based on whether or not a purchase was made.
-					System.out.println(shop.getShopkeeper().getSaleMsg());
+					System.out.println(shop.getShopkeeper().getSaleDialog());
 				} else {
 					System.out.println("[Continue viewing buyable items?]");
 				}
@@ -271,7 +266,7 @@ public class GameThread {
 			isSelling = false;
 			pause(2500);
 		} else { // Have the shopkeeper say something
-			System.out.println(shop.getShopkeeper().displayInShopMsg());
+			System.out.println(shop.getShopkeeper().displayInShopDialog());
 			pause(1500);
 		}
 
@@ -349,7 +344,7 @@ public class GameThread {
 				if (player.getInventory().size() > 1) {
 
 					if (sold) { // Different dialogue based on whether or not a purchase was made.
-						System.out.println(shop.getShopkeeper().getSaleMsg());
+						System.out.println(shop.getShopkeeper().getSaleDialog());
 					} else {
 						System.out.println("[Continue viewing sellable items?]");
 					}
@@ -401,11 +396,11 @@ public class GameThread {
 	public static void EXPDefeat(Player p1, Enemy e1) {
 
 		System.out.println("Defeated " + e1.getName() + "! Rewards:");
-		System.out.println(e1.getEXP() + " EXP");
+		System.out.println(e1.getExp() + " EXP");
 		System.out.println(e1.getCurrency() + " Money");
 
 		// Calculates if the enemy's EXP will cause the player to level up
-		if (p1.getEXP() + e1.getEXP() > p1.getEXPThreshold()) {
+		if (p1.getExp() + e1.getExp() > p1.getExpThreshold()) {
 			// If the enemy's EXP will cause the player to level up, it calculates the
 			// amount of overflow
 			// EXP the player will get by adding the player and enemies EXP and subtracting
@@ -414,13 +409,13 @@ public class GameThread {
 			// passes the overflow
 			// amount to the levelUp function in the player class to process the levelUp
 			// functionality.
-			int overflow = (p1.getEXP() + e1.getEXP()) - (int) Math.round(p1.getEXPThreshold());
+			int overflow = (p1.getExp() + e1.getExp()) - (int) Math.round(p1.getExpThreshold());
 			p1.levelUp(overflow);
 		} else {
 			// If the EXP will not cause the player to level up, it sets the player's EXP to
 			// the player EXP
 			// plus the enemy EXP
-			p1.setEXP(p1.getEXP() + e1.getEXP());
+			p1.setExp(p1.getExp() + e1.getExp());
 		}
 		// After setting the EXP, it adds the current player currency and enemy currency
 		// to set that as current
