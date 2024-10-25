@@ -13,6 +13,8 @@ public class GameThread extends Throwable {
 	 */
 	
 	public static void main(String args[]) {
+		
+		// Player Inventory Test
 		SpecialAttack gSsA = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force", 1.5);
 		SpecialAttack fSsA = new SpecialAttack("You launch a wall of fire hurling towards your enemies", 2.7);
 		SpecialAttack lBsA = new SpecialAttack("You fire a well aimed shot, curving to hit the enemy where they would least expect it", 2.0);
@@ -31,10 +33,7 @@ public class GameThread extends Throwable {
 		Consumable homemadeExplosives = new Consumable("6666", "Home-Made Explosives", "Your enemies won't know what hit them. You might not want to stand too close though", 
 				3, 75, 200, 2, true, 1, true);
 		
-		
 		Inventory testPlayerInv = new Inventory();
-		Inventory testShopkeeperInv = new Inventory();
-		
 		testPlayerInv.add(greatSword);
 		testPlayerInv.add(fireStaff);
 		testPlayerInv.add(longBow);
@@ -43,13 +42,34 @@ public class GameThread extends Throwable {
 		testPlayerInv.add(healthPotion);
 		testPlayerInv.add(homemadeExplosives);
 		
-		testShopkeeperInv.add(greatSword);
-		testShopkeeperInv.add(fireStaff);
-		testShopkeeperInv.add(longBow);
+		// Shopkeeper Inventory Test
+		SpecialAttack gSsA1 = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force", 1.5);
+		SpecialAttack fSsA1 = new SpecialAttack("You launch a wall of fire hurling towards your enemies", 2.7);
+		SpecialAttack lBsA1 = new SpecialAttack("You fire a well aimed shot, curving to hit the enemy where they would least expect it", 2.0);
 		
-		testShopkeeperInv.add(throwingAxe);
-		testShopkeeperInv.add(healthPotion);
-		testShopkeeperInv.add(homemadeExplosives);
+		Weapon greatSword1 = new Weapon( "1111", "Great Sword",  "A Mighty Big Sword",  2,  30,  25,  1,
+				 true, 0, gSsA1);
+		Weapon fireStaff1 = new Weapon( "2222", "Fire Staff",  "Send your enemies out in a blaze of glory",  5,  1000,  500,  3,
+				 true, 75, fSsA1);
+		Weapon longBow1 = new Weapon( "3333", "Long Bow",  "Forged in the elven mountains, this bow is extremely well made",  
+				3,  250,  75,  2, true, 0, lBsA1);
+		
+		Consumable throwingAxe1 = new Consumable("4444", "Throwing Axe", "Hurl an axe at your enemies", 1, 10, 
+				20, 1, true, 1, true);
+		Consumable healthPotion1 = new Consumable("5555", "Health Potion", "Use this when you're in need of a pick-me-up", 
+				2, 20, 0, -1, true, 1, true);
+		Consumable homemadeExplosives1 = new Consumable("6666", "Home-Made Explosives", "Your enemies won't know what hit them. You might not want to stand too close though", 
+				3, 75, 200, 2, true, 1, true);
+		Inventory testShopkeeperInv = new Inventory();
+		
+		
+		testShopkeeperInv.add(greatSword1);
+		testShopkeeperInv.add(fireStaff1);
+		testShopkeeperInv.add(longBow1);
+		
+		testShopkeeperInv.add(throwingAxe1);
+		testShopkeeperInv.add(healthPotion1);
+		testShopkeeperInv.add(homemadeExplosives1);
 		
 		
 		Player testPlayer = new Player("Joshua", testPlayerInv, 600, 200, 4, 26, fireStaff, 250, 3, 2, 5, 1, 3);

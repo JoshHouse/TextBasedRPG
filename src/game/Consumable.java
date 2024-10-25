@@ -88,6 +88,19 @@ public class Consumable extends Item {
 					"--------------------\n");
 	}
 	
+	public boolean equals(Consumable inputConsumable) {
+		if (this.getKey() == inputConsumable.getKey()) {
+		if (this.getName() == inputConsumable.getName()) {
+		if (this.getInfo() == inputConsumable.getInfo()) {
+		if (this.getRarity() == inputConsumable.getRarity() ) {
+		if (this.getValue() == inputConsumable.getValue()) {
+		if (this.getDamage() == inputConsumable.getDamage()) {
+		if (this.getDamageType() == inputConsumable.getDamageType()) {
+		return true;
+		}}}}}}}
+		return false;
+	}
+	
 	// ---------------------toString---------------------
 
 	public String toString() {

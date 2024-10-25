@@ -153,13 +153,97 @@ public class Shop {
 		}
 	}
 	
-	public boolean buying(Item product) {
+	public boolean buyingWeapons(Weapon product) {
 		if (product.getValue() <= this.getPlayer().getCurrency()) {
 			this.getPlayer().setCurrency(this.getPlayer().getCurrency() - product.getValue());
 			this.getPlayer().getInventory().add(product);
 			return true;
 		} 
 		return false;
+	}
+	
+	public boolean buyingConsumables(Scanner keyboard, Consumable product, ArrayList<Consumable> playerInv) {
+		boolean matchesInv = false;
+		int matchesInvIndex = 0; 
+		int pCountChoice;
+		
+		if (product.getValue() <= this.getPlayer().getCurrency()) {
+			for (int x = 0; x < playerInv.size(); x++) {
+				if (product.equals(playerInv.get(x))) {
+					matchesInv = true;
+					matchesInvIndex = x;
+				}
+			}
+			
+			if (matchesInv) {
+				breakLine();
+				System.out.println("You have " + this.getPlayer().getInventory().getConsumables().get(matchesInvIndex).getCount() + " of these consumables and they are worth " + product.getValue() + " a piece. "
+							+ "How many would you like to buy?");
+				System.out.println("*Hint* Enter 0 if you decided against buying any");
+				pCountChoice = keyboard.nextInt();
+					
+				if (pCountChoice == 0) {
+					breakLine();
+					return false;
+				} else if (pCountChoice > 0) {
+					if (product.getValue() * pCountChoice < this.getPlayer().getCurrency()) {
+						this.getPlayer().setCurrency(this.getPlayer().getCurrency() - (product.getValue() * pCountChoice));
+						this.getPlayer().getInventory().getConsumables().get(matchesInvIndex).setCount(this.getPlayer().getInventory().getConsumables().get(matchesInvIndex).getCount() + pCountChoice);
+						breakLine();
+						System.out.println("The consumables have been added to your inventory! You now have " + this.getPlayer().getInventory().getConsumables().get(matchesInvIndex).getCount() + " of these consumables");
+						System.out.println("Your updated currency is: " + this.getPlayer().getCurrency());
+						return true;
+					} else {
+						breakLine();
+						System.out.println("You do not have enough currency to buy that many of this consumable! \n" +
+								"You have " + this.getPlayer().getCurrency() + "currency\n" +
+								"It would cost " + (product.getValue() * pCountChoice) + " currency to buy " + pCountChoice + "of these items");
+						return false;
+					}
+				} else {
+					breakLine();
+					System.err.println("(Invalid choice.)");
+					return false;
+				}
+			} else {
+				breakLine();
+				System.out.println("These consumables are worth " + product.getValue() + " a piece. How many would you like to buy?");
+				System.out.println("*Hint* Enter 0 if you decided against buying any");
+				pCountChoice = keyboard.nextInt();
+					
+				if (pCountChoice == 0) {
+					breakLine();
+					return false;
+				} else if (pCountChoice > 0) {
+					if (product.getValue() * pCountChoice < this.getPlayer().getCurrency()) {
+						this.getPlayer().setCurrency(this.getPlayer().getCurrency() - (product.getValue() * pCountChoice));
+						this.getPlayer().getInventory().getConsumables().add(product);
+						this.getPlayer().getInventory().getConsumables().get(this.getPlayer().getInventory().getConsumables().size()-1).setCount(pCountChoice);
+						breakLine();
+						System.out.println("The consumables have been added to your inventory! You now have " + pCountChoice + " of these consumables");
+						System.out.println("Your updated currency is: " + this.getPlayer().getCurrency());
+						return true;
+					} else {
+						breakLine();
+						System.out.println("You do not have enough currency to buy that many of this consumable! \n" +
+								"You have " + this.getPlayer().getCurrency() + "currency\n" +
+								"It would cost " + (product.getValue() * pCountChoice) + " currency to buy " + pCountChoice + "of these items");
+						return false;
+					}
+				} else {
+					breakLine();
+					System.err.println("(Invalid choice.)");
+					return false;
+				}
+			}
+			
+		} else {
+			breakLine();
+			System.out.println("You don't have enough currency to buy this item.\n" + 
+					"Your currency is: " + this.getPlayer().getCurrency() + "\n" +
+					"The cost of that item is: " + product.getValue() + "\n");
+			return false;
+		}
 	}
 	
 	// ----------------Weapons Buy Menu Functionality-------------------
@@ -253,7 +337,7 @@ public class Shop {
 					this.printInventoryWeaponsArray(arrayList);
 					this.printPlayerCurrency();
 				} else {
-					successfulPurchace = this.buying(arrayList.get(pItemChoice - 1));
+					successfulPurchace = this.buyingWeapons(arrayList.get(pItemChoice - 1));
 			
 					if (successfulPurchace) {
 						breakLine();
@@ -364,23 +448,14 @@ public class Shop {
 			if (pItemChoice - 1 <= arrayList.size() && pItemChoice - 1 >= 0) {
 				if (pItemChoice - 1 == arrayList.size()) {
 					isPurchacing = false;
+					breakLine();
 					this.printInventoryConsumableArray(arrayList);
 					this.printPlayerCurrency();
 				} else {
-					successfulPurchace = this.buying(arrayList.get(pItemChoice - 1));
+					successfulPurchace = this.buyingConsumables(keyboard, arrayList.get(pItemChoice - 1), this.getPlayer().getInventory().getConsumables());
 			
 					if (successfulPurchace) {
-						breakLine();
-						System.out.println("You have a new consumable in your inventory! Your updated currency: " + this.getPlayer().getCurrency());
-						System.out.println(this.getShopkeeper().getSaleDialog());
 						isPurchacing = false;
-						this.printInventoryConsumableArray(arrayList);
-						this.printPlayerCurrency();
-					} else { 
-						breakLine();
-						System.out.println("You don't have enough currency to buy this item.\n" + 
-								"Your currency is: " + this.getPlayer().getCurrency() + "\n" +
-								"The cost of that item is: " + arrayList.get(pItemChoice - 1).getValue() + "\n");
 					}
 				}
 			} 
@@ -585,6 +660,7 @@ public class Shop {
 				pItemChoice = keyboard.nextInt();
 				
 				if (pItemChoice - 1 < tempConsumablesArray.size() && pItemChoice - 1 >= 0) {
+					breakLine();
 					System.out.println("Absolutely! Here is the information about that consumable!");
 					tempConsumablesArray.get(pItemChoice - 1).displayInfo();
 					this.printInventoryConsumableArray(tempConsumablesArray);
