@@ -62,11 +62,25 @@ public class Inventory {
 		return keyItems;
 	}
 	
+	// ------------------------------Setters-------------------------------
+	
+	public void setWeapons(ArrayList<Weapon> inputWeapons) {
+		this.weapons = inputWeapons;
+	}
+	
+	public void setConsumables(ArrayList<Consumable> inputConsumables) {
+		this.consumables = inputConsumables;
+	}
+	
+	public void setKeyItems(ArrayList<KeyItem> inputKeyItems) {
+		this.keyItems = inputKeyItems;
+	}
+	
 	// ------------------------------Functions------------------------------
 	
 	public void add(Item item) {
 		
-		switch (item.getKey().charAt(0)) {
+		switch (item.getItemType()) {
 		
 		case 'w':
 			this.getWeapons().add((Weapon) item);

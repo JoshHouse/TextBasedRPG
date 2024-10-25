@@ -73,7 +73,7 @@ public class SpecialAttack {
 	 */
 	public String toString() {
 		return "-----Special Attack-----\n" +
-				"Description" + this.info + "\n" + 
+				"Description: " + this.info + "\n" + 
 				"Success Damage Mutiplier: " + this.atkMultiplier + "\n";
 	}
 

@@ -7,67 +7,61 @@ import java.util.Scanner;
 public class Shop {
 
 	private String name;
+	private Player player;
 	private Shopkeeper shopkeeper;
-	private ArrayList<Item> shopInventory = new ArrayList<Item>();
 
 	// ----------------------------------Constructors---------------------------------
 
 	/**
-	 * Base Constructor
-	 */
-	public Shop() {
-		this.setName("");
-		this.setShopkeeper(null);
-
-	}
-
-	/**
-	 * Constructor for shops that only sell weapons
+	 * Constructor that creates a shop with a player and a shopkeeper
 	 * 
-	 * @param name       - Shop name
-	 * @param shopkeeper - The shopkeeper, from the Shopkeeper class
+	 * @param inputPlayer
+	 * @param inputShopkeeper
 	 */
-	public Shop(String name, Shopkeeper shopkeeper) {
-		this.setName(name);
-		this.setShopkeeper(shopkeeper);
+	public Shop(Player inputPlayer, Shopkeeper inputShopkeeper, String inputName) {
+		this.setPlayer(inputPlayer);
+		this.setShopkeeper(inputShopkeeper);
+		this.setName(inputName);
 	}
 
 	// ----------------------------------Getters---------------------------------
 
-	public String getName() {
-		return name;
+	public Player getPlayer() {
+		return this.player;
 	}
 
 	public Shopkeeper getShopkeeper() {
-		return shopkeeper;
+		return this.shopkeeper;
 	}
 	
-	public ArrayList<Item> getInventory() {
-		return shopInventory;
+	public String getName() {
+		return this.name;
 	}
 
 	// ----------------------------------Setters---------------------------------
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPlayer(Player inputPlayer) {
+		this.player = inputPlayer;
 	}
 
-	public void setShopkeeper(Shopkeeper shopkeeper) {
-		this.shopkeeper = shopkeeper;
+	public void setShopkeeper(Shopkeeper inputShopkeeper) {
+		this.shopkeeper = inputShopkeeper;
+	}
+	
+	public void setName(String inputName) {
+		this.name = inputName;
 	}
 
 	// ----------------------------------Functions---------------------------------
 
-	/**
-	 * Adds an item to the various array lists, based on the item's type provided.
-	 * 
-	 * @param item - The item to be added. Will be casted to another Object type
-	 *             when necessary.
-	 */
-	public void addItem(Item item) {
-		shopInventory.add(item);
+	public static void breakLine() {  
+	    System.out.println("------------------------------");
+	} 
+	
+	public void printPlayerCurrency() {
+		System.out.println("Your currency: " + this.getPlayer().getCurrency());
 	}
-
+	
 	/**
 	 * Function allowing players to go to the available shop
 	 * 
@@ -76,353 +70,517 @@ public class Shop {
 	 * @param scn    - Scanner object for user input
 	 * @throws IOException Makes use of System.in.read().
 	 */
-	public static void gotoShop(Player player, Shop shop, Scanner scn) {
+	public void startShop() {
 
-		char shopMenu, sellMenu = 0;
+		int shopMenu = 0;
 		boolean isShopping = true; // When player finishes shopping, it will be set to false
 
-		System.out.println("-------------Entering: " + shop.getName() + "...-------------\n");
-		Pause.pause(1500);
+		System.out.println("-------------Entering: " + this.getName() + "-------------\n");
+		System.out.println(this.getShopkeeper().getEnterShopDialog());
+		
+		Scanner keyboard = new Scanner(System.in);
+		
 
-		System.out.println(shop.getShopkeeper().getEnterShopDialog());
-
-		do {
-
-			System.out.print("1) Buy\n" + "2) Sell\n" + "3) Leave\n" + "Your Choice: ");
-			shopMenu = scn.next().charAt(0);
+		while (isShopping) {
+			breakLine();
+			System.out.print("What would you like to do?\n" + "1) Buy\n" + "2) Sell\n" + "3) Leave\n");
+			shopMenu = keyboard.nextInt();
 			System.out.println();
 
 			switch (shopMenu) {
 
-			case '1': // Buy
-				buy(player, shop, scn);
+			case 1: // Buy
+				this.BuyMenu(keyboard);
 				break;
-			case '2': // Sell
-
-				do {
-
-					System.out.println("[What do you want to sell?]");
-					System.out.print("1) Weapons\n" + "2) Consumables\n" + "3) Cancel\n" + "Your choice: ");
-					sellMenu = scn.next().charAt(0);
-
-					switch (sellMenu) {
-
-					case '1':
-						sellWeapons(player, shop, scn);
-						break;
-					case '2':
-						sellConsumables(player, shop, scn);
-						break;
-					case '3':
-						break;
-					default:
-						System.err.println("(Invalid choice. Please try again.)");
-						Pause.pause(200);
-						break;
-
-					}
-
-				} while (sellMenu < '1' && sellMenu > '3');
+			case 2: // Sell
+				this.SellMenu(keyboard);
 				break;
-			case '3': // Leave
+			case 3: // Leave
 				isShopping = false;
 				break;
 			default: // Invalid input
 				System.err.println("(Invalid choice. Please try again.)");
-				Pause.pause(200);
 				break;
 
 			}
 
-		} while (isShopping);
+		}
 
-		System.out.println(shop.getShopkeeper().getExitShopDialog());
-		System.out.println("-------------Leaving: " + shop.getName() + "...-------------\n");
-		Pause.pause(1000);
+		System.out.println(this.getShopkeeper().getExitShopDialog());
+		System.out.println("-------------Leaving: " + this.getName() + "-------------\n");
 
 	}
 
-	/**
-	 * Allows the player to buy items provided at a shop.
+	/*
 	 * 
-	 * @param player - The player
-	 * @param shop   - The shop the player is accessing
-	 * @param scn    - Scanner for user input.
+	 * ---------------------Buy Menu Functionality-------------------------
+	 * 
 	 */
-	private static void buy(Player player, Shop shop, Scanner scn) {
 
-		int numChoice = 0; // Select from inventory
-		char charChoice = 0; // For other options requiring user input
-		Item chosen = null; // The selected item
-		boolean isBuying = true, isPurchasing = false, purchased = false;
-
-		// Have the shopkeeper say something
-		System.out.println(shop.getShopkeeper().displayInShopDialog());
-		Pause.pause(1500);
-
-		while (isBuying) { // Loop until the player is done buying
-
-			while (numChoice < 1 || numChoice > shop.getInventory().size() + 1) { // The final listed item is always
-																					// cancel.
-
-				// Print the shop inventory using a for loop
-				System.out.println("[Select which item you would like to buy.]");
-				for (int i = 0; i < shop.getInventory().size(); i++) {
-					System.out.println((i + 1) + ") " + shop.getInventory().get(i).getName());
-				}
-				System.out.println((shop.getInventory().size() + 1) + ") Cancel\n"); // Print the cancel option
-
-				System.out.print("Your choice: ");
-
-				/*
-				 * IndexOutOfBoundsException: User enters number outside the required range.
-				 * InputMismatchException: USer enters a non-integer character.
-				 */
-				try {
-					numChoice = scn.nextInt();
-
-					if (numChoice < 1 || numChoice > shop.getInventory().size() + 1)
-						throw new IndexOutOfBoundsException();
-				} catch (InputMismatchException | IndexOutOfBoundsException e) {
-					System.err.println("(Invalid choice. Please try again.)\n");
-					scn.nextLine();
-					Pause.pause(200);
-				}
-
-			}
-
-			if (numChoice == shop.getInventory().size() + 1) { // Exit the buy function on cancel
+	private void BuyMenu(Scanner keyboard) {
+		boolean isBuying = true;
+		int pMainMenuChoice = 0;
+		
+		breakLine();
+		System.out.println(this.getShopkeeper().displayInShopDialog());
+		
+		while (isBuying) {
+			System.out.println("What are you in the market for today?\n" + 
+					"1) Weapons\n" + 
+					"2) Consumables\n" + 
+					"3) Cancel");
+			pMainMenuChoice = keyboard.nextInt();
+			
+			switch (pMainMenuChoice) {
+			case 1:	// Weapons buy menu
+				this.weaponsBuyMenu(keyboard);
+				break;
+			
+			case 2: // Consumables buy menu
+				this.consumablesBuyMenu(keyboard);
+				break;
+			
+			case 3: // Back to main menu
 				isBuying = false;
-			} else { // Proceed to purchase window
-				isPurchasing = true;
-				chosen = shop.getInventory().get(numChoice - 1); // Put selected item in chosen variable
+				break;
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again.)");
+				break;
+					
 			}
-
-			while (isPurchasing) { // Loops till user completes or cancels a purchase
-
-				// Display info on the item, including the price.
-				System.out.println(chosen.getName() + "\n" + chosen.getInfo() + "\nPrice: " + chosen.getValue() + "\n");
-				System.out.println("[Is this the weapon you want?]\nY) Yes\t\tN) No");
-
-				do { // Loop until a valid choice is entered
-					System.out.print("Response: ");
-					charChoice = scn.next().charAt(0);
-					charChoice = Character.toUpperCase(charChoice);
-
-					switch (charChoice) {
-
-					case 'Y': // Buy
-						// Add item to player inventory, subtract money from player.
-						if (player.getCurrency() >= chosen.getValue()) {
-							player.setCurrency(player.getCurrency() - chosen.getValue());
-
-							player.getInventory().add(chosen);
-
-							purchased = true;
-						} else { // The user has attempted to make a purchase when they don't have enough money
-							System.err.println("(You don't have enough money to buy this!)");
-							isBuying = false;
-						}
-						break;
-					case 'N': // Don't buy
-						purchased = false;
-						break;
-					default:
-						System.err.println("(Invalid choice. Please try again.)");
-						break;
-
-					}
-				} while (charChoice != 'Y' && charChoice != 'N');
-
-				isPurchasing = false;
-				charChoice = 0; // Reset the variable
-
-				if (purchased) { // Different dialogue based on whether or not a purchase was made.
-					System.out.println(shop.getShopkeeper().getSaleDialog());
-				} else {
-					System.out.println("[Continue viewing buyable items?]");
-				}
-
-				do { // Loop till valid choice is made
-
-					System.out.println("Y) Continue Buying\t\tN) Back to Shop Menu");
-					System.out.print("Response: ");
-					charChoice = scn.next().charAt(0);
-					charChoice = Character.toUpperCase(charChoice);
-
-					switch (charChoice) {
-
-					case 'Y': // Continue shopping
-						isBuying = true;
-						break;
-					case 'N': // Return to shop menu
-						isBuying = false;
-						break;
-					default:
-						System.err.println("(Invalid choice. Please try again.)");
-						Pause.pause(200);
-						break;
-
-					}
-
-				} while (charChoice != 'Y' && charChoice != 'N');
-
-			}
-
-			// Reset the variables
-			numChoice = 0;
-			charChoice = 0;
-
+			
 		}
-
 	}
-
-	/**
-	 * Allows the player to sell weapons from their inventory to the shop for money.
-	 * 
-	 * @param player - The player
-	 * @param shop   - The shop the player is accessing
-	 * @param scn    - Scanner for user input.
-	 */
-	private static void sellWeapons(Player player, Shop shop, Scanner scn) {
-
-		int numChoice = 0; // Select from inventory
-		char charChoice = 0; // For other options requiring user input
-		int chosenIndex = 0;
-
-		boolean isSelling = true, startSelling = false, sold = false;
-
-		// Do not allow the player to sell if there is only 1 item in their inventory.
-		if (player.getInventory().getWeapons().size() <= 1) {
-			System.err.println("(You can't sell when there's only 1 weapon in your inventory!)");
-			isSelling = false;
-			Pause.pause(2500);
-		} else { // Have the shopkeeper say something
-			System.out.println(shop.getShopkeeper().displayInShopDialog());
-			Pause.pause(1500);
-		}
-
-		while (isSelling) { // Loop until the player is done selling
-
-			while (numChoice < 1 || numChoice > player.getInventory().getWeapons().size() + 1) {
-
-				// Print the player's inventory using a for loop
-				System.out.println("[Select which item you would like to sell.]");
-				for (int i = 0; i < player.getInventory().getWeapons().size(); i++) {
-					System.out.println((i + 1) + ") " + player.getInventory().getWeapons().get(i).getName());
+	
+	public boolean buying(Item product) {
+		if (product.getValue() <= this.getPlayer().getCurrency()) {
+			this.getPlayer().setCurrency(this.getPlayer().getCurrency() - product.getValue());
+			this.getPlayer().getInventory().add(product);
+			return true;
+		} 
+		return false;
+	}
+	
+	// ----------------Weapons Buy Menu Functionality-------------------
+	
+	public void weaponsBuyMenu(Scanner keyboard) {
+		ArrayList<Weapon> tempWeaponsArray = this.getShopkeeper().getInventory().getWeapons();
+		boolean isBuyingWeapons;
+		int pMenuChoice, pItemChoice = 0;
+		
+		
+		isBuyingWeapons = true;
+		breakLine();
+		System.out.println("We've got a great selection of weapons for you today. Heres what we got:");
+		
+		this.printInventoryWeaponsArray(tempWeaponsArray);
+		this.printPlayerCurrency();
+		System.out.println("Now that you have seen what we have in stock,");
+		while (isBuyingWeapons) {
+			System.out.println("What would you like to do?\n" +
+					"1) Ready to purchace!\n" +
+					"2) I want more details on an item\n" +
+					"3) I would like to look at my other options");
+			pMenuChoice = keyboard.nextInt();
+			switch (pMenuChoice) {
+			case 1: // Make a purchase
+				breakLine();
+				this.attemptWeaponPurchace(keyboard, tempWeaponsArray);
+				break;
+			
+			case 2: // More details on an item
+				breakLine();
+				this.printInventoryWeaponsArray(tempWeaponsArray);
+				System.out.println("What is the number of the item you would like to hear more about?");
+				pItemChoice = keyboard.nextInt();
+				
+				if (pItemChoice - 1 < tempWeaponsArray.size() && pItemChoice - 1 >= 0) {
+					breakLine();
+					System.out.println("Absolutely! Here is the information about that weapon!");
+					tempWeaponsArray.get(pItemChoice - 1).displayInfo();
+					this.printInventoryWeaponsArray(tempWeaponsArray);
+					this.printPlayerCurrency();
+				} else { 
+					breakLine();
+					System.err.println("(Invalid choice. Please try again.)");
+					this.printInventoryWeaponsArray(tempWeaponsArray);
+					this.printPlayerCurrency();
 				}
-				System.out.println((player.getInventory().getWeapons().size() + 1) + ") Cancel\n"); // Print the cancel
-																									// option
-
-				System.out.print("Your choice: ");
-
-				/*
-				 * IndexOutOfBoundsException: User enters number outside the required range.
-				 * InputMismatchException: USer enters a non-integer character.
-				 */
-				try {
-					numChoice = scn.nextInt();
-
-					if (numChoice < 1 || numChoice > player.getInventory().getWeapons().size() + 1)
-						throw new IndexOutOfBoundsException();
-				} catch (InputMismatchException | IndexOutOfBoundsException e) {
-					System.err.println("(Invalid choice. Please try again.)\n");
-					scn.nextLine();
-					Pause.pause(200);
-				}
-
+				break;
+			case 3: // Escape Weapons buy menu
+				breakLine();
+				System.out.println("Alright you can always look at the weapons again if you would like!");
+				isBuyingWeapons = false;
+				break;
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again.)");
+				this.printInventoryWeaponsArray(tempWeaponsArray);
+				this.printPlayerCurrency();
+				break;
 			}
+		}
+	}
+	
+	private void printInventoryWeaponsArray(ArrayList<Weapon> arrayList) {
+		for(int x = 0; x < arrayList.size(); x++) {
+			System.out.println(x+1 + ") " + arrayList.get(x).getName() + 
+					"\t Cost: " + arrayList.get(x).getValue());
+		}
+		
+	}
+	
+	public void attemptWeaponPurchace(Scanner keyboard, ArrayList<Weapon> arrayList) {
+		boolean successfulPurchace, isPurchacing;
+		int pItemChoice = 0;
+		
+		System.out.println("Good to hear!");
+		
+		isPurchacing = true;
+		
+		while (isPurchacing) {
+			this.printInventoryWeaponsArray(arrayList);
+			System.out.println(arrayList.size()+1 + ") Cancel ");
+			this.printPlayerCurrency();
+			System.out.println("What is the number of the item you would like to buy?");
+			pItemChoice = keyboard.nextInt();
+			
+			if (pItemChoice - 1 <= arrayList.size() && pItemChoice - 1 >= 0) {
+				if (pItemChoice - 1 == arrayList.size()) {
+					isPurchacing = false;
+					breakLine();
+					this.printInventoryWeaponsArray(arrayList);
+					this.printPlayerCurrency();
+				} else {
+					successfulPurchace = this.buying(arrayList.get(pItemChoice - 1));
+			
+					if (successfulPurchace) {
+						breakLine();
+						System.out.println("You have a new weapon in your inventory! Your updated currency: " + this.getPlayer().getCurrency());
+						System.out.println(this.getShopkeeper().getSaleDialog());
+						isPurchacing = false;
+						this.printInventoryWeaponsArray(arrayList);
+						this.printPlayerCurrency();
+					} else { 
+						breakLine();
+						System.out.println("You don't have enough currency to buy this item.\n" + 
+								"Your currency is: " + this.getPlayer().getCurrency() + "\n" +
+								"The cost of that item is: " + arrayList.get(pItemChoice - 1).getValue() + "\n");
+					}
+				}
+			} 
+			else 
+			{
+				breakLine();
+				System.err.println("(Invalid choice. Please try again.)");
+			}
+		}
+	}
+	
+	//-------------------------Buy Consumables Menu Functionality-------------------------
+	
+	public void consumablesBuyMenu(Scanner keyboard) {
+		ArrayList<Consumable> tempConsumablesArray = this.getShopkeeper().getInventory().getConsumables();
+		boolean isBuyingConsumables;
+		int pMenuChoice, pItemChoice = 0;
+		
+		
+		isBuyingConsumables = true;
+		
+		breakLine();
+		System.out.println("We've got a great selection of consumables for you today. Heres what we got:");
+		
+		this.printInventoryConsumableArray(tempConsumablesArray);
+		this.printPlayerCurrency();
+		System.out.println("Now that you have seen what we have in stock,");
+		while (isBuyingConsumables) {
+			System.out.println("What would you like to do?\n" +
+					"1) Ready to purchace!\n" +
+					"2) I want more details on an item\n" +
+					"3) I would like to look at my other options");
+			pMenuChoice = keyboard.nextInt();
+			
+			switch (pMenuChoice) {
+			case 1: // Make a purchase
+				breakLine();
+				this.attemptConsumablePurchace(keyboard, tempConsumablesArray);
+				break;
+			
+			case 2: // More details on an item
+				breakLine();
+				this.printInventoryConsumableArray(tempConsumablesArray);
+				System.out.println("What is the number of the item you would like to hear more about?");
+				pItemChoice = keyboard.nextInt();
+				
+				if (pItemChoice - 1 < tempConsumablesArray.size() && pItemChoice - 1 >= 0) {
+					breakLine();
+					System.out.println("Absolutely! Here is the information about that consumable!");
+					tempConsumablesArray.get(pItemChoice - 1).displayInfo();
+					this.printInventoryConsumableArray(tempConsumablesArray);
+					this.printPlayerCurrency();
+				} else { 
+					breakLine();
+					System.err.println("(Invalid choice. That is not an item on the list)");
+					this.printInventoryConsumableArray(tempConsumablesArray);
+					this.printPlayerCurrency();
+				}
+				break;
 
-			if (numChoice == player.getInventory().getWeapons().size() + 1) { // Exit the sell function on cancel
+			case 3: // Escape consumables buy menu
+				breakLine();
+				System.out.println("Alright you can always look at the consumables again if you would like!");
+				isBuyingConsumables = false;
+				break;
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again.)");
+				this.printInventoryConsumableArray(tempConsumablesArray);
+				this.printPlayerCurrency();
+			}
+		}
+	}
+	
+	private void printInventoryConsumableArray(ArrayList<Consumable> arrayList) {
+		for(int x = 0; x < arrayList.size(); x++) {
+			System.out.println(x+1 + ") " + arrayList.get(x).getName() + 
+					"\t Cost: " + arrayList.get(x).getValue());
+		}
+	}
+	
+	public void attemptConsumablePurchace(Scanner keyboard, ArrayList<Consumable> arrayList) {
+		boolean successfulPurchace, isPurchacing;
+		int pItemChoice = 0;
+		
+		System.out.println("Good to hear!");
+		
+		isPurchacing = true;
+		while (isPurchacing) {
+			this.printInventoryConsumableArray(arrayList);
+			System.out.println(arrayList.size()+1 + ") Cancel ");
+			this.printPlayerCurrency();
+			System.out.println("What is the number of the item you would like to buy?");
+			pItemChoice = keyboard.nextInt();
+			if (pItemChoice - 1 <= arrayList.size() && pItemChoice - 1 >= 0) {
+				if (pItemChoice - 1 == arrayList.size()) {
+					isPurchacing = false;
+					this.printInventoryConsumableArray(arrayList);
+					this.printPlayerCurrency();
+				} else {
+					successfulPurchace = this.buying(arrayList.get(pItemChoice - 1));
+			
+					if (successfulPurchace) {
+						breakLine();
+						System.out.println("You have a new consumable in your inventory! Your updated currency: " + this.getPlayer().getCurrency());
+						System.out.println(this.getShopkeeper().getSaleDialog());
+						isPurchacing = false;
+						this.printInventoryConsumableArray(arrayList);
+						this.printPlayerCurrency();
+					} else { 
+						breakLine();
+						System.out.println("You don't have enough currency to buy this item.\n" + 
+								"Your currency is: " + this.getPlayer().getCurrency() + "\n" +
+								"The cost of that item is: " + arrayList.get(pItemChoice - 1).getValue() + "\n");
+					}
+				}
+			} 
+			else 
+			{
+				breakLine();
+				System.err.println("(Invalid choice. Please try again.)");
+			}
+		}
+	}
+	
+	//  ----------------Sell Menu Functionality-------------------
+	
+	public void SellMenu(Scanner keyboard) {
+		boolean isSelling = true;
+		int pSellMenuChoice = 0;
+		
+		while (isSelling) {
+			System.out.println("What do you want to sell?");
+			System.out.print("1) Weapons\n" + "2) Consumables\n" + "3) Cancel\n");
+			pSellMenuChoice = keyboard.nextInt();
+
+			switch (pSellMenuChoice) {
+
+			case 1:
+				this.SellWeaponsMenu(keyboard);
+				break;
+			case 2:
+				this.SellConsumablesMenu(keyboard);
+				break;
+			case 3:
 				isSelling = false;
-			} else { // Proceed to purchase window
-				startSelling = true;
-				chosenIndex = numChoice - 1;
+				break;
+			default:
+				System.err.println("(Invalid choice. Please try again.)");
+				break;
 			}
-
-			while (startSelling) { // Loops till user completes or cancels a purchase
-
-				// Display info on the item, including the price.
-				System.out.println(player.getInventory().getWeapons().get(chosenIndex).getName() + "\n"
-						+ player.getInventory().getWeapons().get(chosenIndex).getInfo() + "\nPrice: "
-						+ player.getInventory().getWeapons().get(chosenIndex).getValue() + "\n");
-				System.out.println("[Are you sure you want to sell this?]\nY) Yes\t\tN) No");
-
-				do { // Loop until a valid choice is entered
-					System.out.print("Response: ");
-					charChoice = scn.next().charAt(0);
-					charChoice = Character.toUpperCase(charChoice);
-
-					switch (charChoice) {
-
-					case 'Y': // Sell
-						// Remove item from player inventory, add money to player.
-						player.setCurrency(
-								player.getCurrency() + player.getInventory().getWeapons().get(chosenIndex).getValue());
-						player.getInventory().getWeapons().remove(chosenIndex);
-						sold = true;
-						break;
-					case 'N': // Don't sell
-						sold = false;
-						break;
-					default:
-						System.err.println("(Invalid choice. Please try again.)");
-						break;
-
-					}
-				} while (charChoice != 'Y' && charChoice != 'N');
-
-				startSelling = false;
-				charChoice = 0; // Reset the variable
-
-				if (player.getInventory().getWeapons().size() > 1) {
-
-					if (sold) { // Different dialogue based on whether or not a purchase was made.
-						System.out.println(shop.getShopkeeper().getSaleDialog());
-					} else {
-						System.out.println("[Continue viewing sellable items?]");
-					}
-
-					do { // Loop till valid choice is made
-
-						System.out.println("Y) Continue Selling\t\tN) Back to Shop Menu");
-						System.out.print("Response: ");
-						charChoice = scn.next().charAt(0);
-						charChoice = Character.toUpperCase(charChoice);
-
-						switch (charChoice) {
-
-						case 'Y': // Continue shopping
-							isSelling = true;
-							break;
-						case 'N': // Return to shop menu
-							isSelling = false;
-							break;
-						default:
-							System.err.println("(Invalid choice. Please try again.)");
-							Pause.pause(200);
-							break;
-
-						}
-
-					} while (charChoice != 'Y' && charChoice != 'N');
-
-				} else {
-					isSelling = false;
-				}
-
-			}
-
-			// Reset the variables
-			numChoice = 0;
-			charChoice = 0;
-
+		
 		}
-
 	}
-
-	private static void sellConsumables(Player player, Shop shop, Scanner scn) {
-
+	
+	// ----------------Weapons Sell Menu Functionality-------------------
+	
+	public void SellWeaponsMenu(Scanner keyboard) {
+		ArrayList<Weapon> tempWeaponsArray = this.getPlayer().getInventory().getWeapons();
+		boolean isSellingWeapons;
+		int pMenuChoice, pItemChoice = 0;
+		
+		
+		isSellingWeapons = true;
+		
+		System.out.println("I'm always looking for some new stuff to sell. Lets see what Weapons you have:");
+		this.printInventoryWeaponsArray(tempWeaponsArray);
+		
+		System.out.println("Looks like you've got some pretty good stuff,");
+		while (isSellingWeapons) {
+			System.out.println("What would you like to do?\n" +
+					"1) I think I know what I would like to sell\n" +
+					"2) I want more details on an item before I sell it\n" +
+					"3) I would like to see what weapons I can sell again\n" +
+					"4) I would like to see what other items I could sell");
+			pMenuChoice = keyboard.nextInt();
+			
+			switch (pMenuChoice) {
+			case 1: // Sell an Item
+				this.attemptWeaponsSale(keyboard, tempWeaponsArray);
+				break;
+			
+			case 2: // More details on an item
+				System.out.println("What is the number of the item you would like to hear more about?");
+				pItemChoice = keyboard.nextInt();
+				
+				if (pItemChoice - 1 < tempWeaponsArray.size() && pItemChoice - 1 >= 0) {
+					System.out.println("Absolutely! Here is the information about that consumable!");
+					tempWeaponsArray.get(pItemChoice - 1).displayInfo();
+				} else { 
+					System.out.println("That is not a valid item on the list!");
+				}
+				break;
+			
+			case 3: // print weapon options again
+				this.printInventoryWeaponsArray(tempWeaponsArray);
+				break;
+			case 4: // Escape weapons sell menu
+				System.out.println("Alright you can always look again at the weapons you can sell "
+						+ "if you would like!");
+				isSellingWeapons = false;
+				break;
+			default:
+				System.out.println("That is not a valid choice");
+			}
+		}
+	}
+	
+	public void attemptWeaponsSale(Scanner keyboard, ArrayList<Weapon> tempWeaponsArray) {
+		boolean saleSuccessful = false;
+		int pItemChoice = 0;
+		
+		System.out.println("Great! what is the number of the item you would like to sell?");
+		pItemChoice = keyboard.nextInt();
+		
+		if (pItemChoice - 1 < tempWeaponsArray.size() && pItemChoice - 1 >= 0) {
+			saleSuccessful = sellingWeapons(this.getPlayer().getInventory().getWeapons().get(pItemChoice - 1), pItemChoice - 1);
+			
+			if (saleSuccessful) {
+			System.out.println(this.getShopkeeper().getSaleDialog());
+			} 
+			else 
+			{
+				System.out.println("You can't sell your last weapon! That would leave you defenseless!");
+			}
+		} 
+		else 
+		{ 
+			System.out.println("That isn't a choice from the list!");
+			this.printInventoryWeaponsArray(tempWeaponsArray);
+		}
+	}
+	
+	public boolean sellingWeapons(Weapon product, int invIndex) {
+		if (this.getPlayer().getInventory().getWeapons().size() > 1) {
+			this.getPlayer().getInventory().getWeapons().remove(invIndex);
+			this.getPlayer().setCurrency(this.getPlayer().getCurrency() + product.getValue());
+			return true;
+		}
+		return false;
+	}
+	
+	// ----------------Consumables Sell Menu Functionality-------------------
+	public void SellConsumablesMenu(Scanner keyboard) {
+		ArrayList<Consumable> tempConsumablesArray = this.getPlayer().getInventory().getConsumables();
+		boolean isSellingConsumables;
+		int pMenuChoice, pItemChoice = 0;
+		
+		
+		isSellingConsumables = true;
+		
+		System.out.println("I'm always looking for some new stuff to sell. Lets see what consumables you've got:");
+		this.printInventoryConsumableArray(tempConsumablesArray);
+		
+		System.out.println("Looks like you've got some pretty good stuff,");
+		while (isSellingConsumables) {
+			System.out.println("What would you like to do?\n" +
+					"1) I think I know what I would like to sell\n" +
+					"2) I want more details on an item before I sell it\n" +
+					"3) I would like to see what consumables I can sell again\n" +
+					"4) I would like to see what other items I could sell");
+			pMenuChoice = keyboard.nextInt();
+			
+			switch (pMenuChoice) {
+			case 1: // Sell an Item
+				this.attemptConsumableSale(keyboard, tempConsumablesArray);
+				break;
+			
+			case 2: // More details on an item
+				System.out.println("What is the number of the item you would like to hear more about?");
+				pItemChoice = keyboard.nextInt();
+				
+				if (pItemChoice - 1 < tempConsumablesArray.size() && pItemChoice - 1 >= 0) {
+					System.out.println("Absolutely! Here is the information about that consumable!");
+					tempConsumablesArray.get(pItemChoice - 1).displayInfo();
+				} else { 
+					System.out.println("That is not a valid item on the list!");
+				}
+				break;
+			
+			case 3: // print consumables options again
+				this.printInventoryConsumableArray(tempConsumablesArray);
+				break;
+			case 4: // Escape consumables buy menu
+				System.out.println("Alright you can always look again at the consumables you can sell "
+						+ "if you would like!");
+				isSellingConsumables = false;
+				break;
+			default:
+				System.out.println("That is not a valid choice");
+			}
+		}
+	}
+	
+	public void attemptConsumableSale(Scanner keyboard, ArrayList<Consumable> tempConsumableArray) {
+		int pItemChoice = 0;
+		
+		System.out.println("Great! what is the number of the item you would like to sell?");
+		pItemChoice = keyboard.nextInt();
+		
+		if (pItemChoice - 1 < tempConsumableArray.size() && pItemChoice - 1 >= 0) {
+			sellingConsumables(this.getPlayer().getInventory().getConsumables().get(pItemChoice - 1), pItemChoice - 1);
+			System.out.println(this.getShopkeeper().getSaleDialog());
+		} 
+		else 
+		{ 
+			System.out.println("That isn't a choice from the list!");
+			this.printInventoryConsumableArray(tempConsumableArray);
+		}
+	}
+	
+	public void sellingConsumables(Consumable product, int invIndex) {
+		this.getPlayer().getInventory().getConsumables().remove(invIndex);
+		this.getPlayer().setCurrency(this.getPlayer().getCurrency() + product.getValue());
 	}
 
 }

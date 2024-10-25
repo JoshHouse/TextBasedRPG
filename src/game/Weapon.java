@@ -113,22 +113,35 @@ public class Weapon extends Item {
 
 	// -------------------Getters-------------------
 
-	public int GetManaUsage() {
+	public int getManaUsage() {
 		return this.manaUsage;
 	}
 
-	public SpecialAttack GetSpecialAttack() {
+	public SpecialAttack getSpecialAttack() {
 		return this.specialAttack;
 	}
 
 	// -------------------Setters-------------------
 
-	public void SetManaUsage(int inputManaUsage) {
+	public void setManaUsage(int inputManaUsage) {
 		this.manaUsage = inputManaUsage;
 	}
 
-	public void SetSpecialAttack(SpecialAttack inputSpecialAttack) {
+	public void setSpecialAttack(SpecialAttack inputSpecialAttack) {
 		this.specialAttack = inputSpecialAttack;
+	}
+	
+	// -------------------Functions------------------
+	
+	public void displayInfo() {
+		System.out.println("----------" + this.getName() + "----------\n" + 
+					"Description : " + this.getInfo() + "\n" + 
+					"Rarity: " + this.getRarity() + "\n" + 
+					"Damage: " + this.getDamage() + "\n" + 
+					"Damage Type : " + this.getDamageType() + "\n" + 
+					"Mana Usage: "  + this.getManaUsage() + "\n" +
+					this.getSpecialAttack().toString() +
+					"--------------------\n");
 	}
 
 	// -------------------toString-------------------

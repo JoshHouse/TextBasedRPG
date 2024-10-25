@@ -13,16 +13,82 @@ public class GameThread extends Throwable {
 	 */
 	
 	public static void main(String args[]) {
-
-		Shopkeeper demoShopkeeper = new Shopkeeper("Cosmos", "Hello there! How can I help you?", "Will that be all?",
-				"Have a nice day!");
-		demoShopkeeper.addInShopDialog("How's the weather today? I think it's quite lovely.");
-		demoShopkeeper.addInShopDialog("We don't have a lot here, so feel free to take your time looking around.");
-		demoShopkeeper.addInShopDialog(
-				"I don't mean to add any pressure, but I really hope I can hit my sales quota for today.");
-		Shop demoShop = new Shop("Demo Armory Shop", demoShopkeeper);
-
-		Scanner scn = new Scanner(System.in);
+		SpecialAttack gSsA = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force", 1.5);
+		SpecialAttack fSsA = new SpecialAttack("You launch a wall of fire hurling towards your enemies", 2.7);
+		SpecialAttack lBsA = new SpecialAttack("You fire a well aimed shot, curving to hit the enemy where they would least expect it", 2.0);
+		
+		Weapon greatSword = new Weapon( "1111", "Great Sword",  "A Mighty Big Sword",  2,  30,  25,  1,
+				 true, 0, gSsA);
+		Weapon fireStaff = new Weapon( "2222", "Fire Staff",  "Send your enemies out in a blaze of glory",  5,  1000,  500,  3,
+				 true, 75, fSsA);
+		Weapon longBow = new Weapon( "3333", "Long Bow",  "Forged in the elven mountains, this bow is extremely well made",  
+				3,  250,  75,  2, true, 0, lBsA);
+		
+		Consumable throwingAxe = new Consumable("4444", "Throwing Axe", "Hurl an axe at your enemies", 1, 10, 
+				20, 1, true, 1, true);
+		Consumable healthPotion = new Consumable("5555", "Health Potion", "Use this when you're in need of a pick-me-up", 
+				2, 20, 0, -1, true, 1, true);
+		Consumable homemadeExplosives = new Consumable("6666", "Home-Made Explosives", "Your enemies won't know what hit them. You might not want to stand too close though", 
+				3, 75, 200, 2, true, 1, true);
+		
+		
+		Inventory testPlayerInv = new Inventory();
+		Inventory testShopkeeperInv = new Inventory();
+		
+		testPlayerInv.add(greatSword);
+		testPlayerInv.add(fireStaff);
+		testPlayerInv.add(longBow);
+		
+		testPlayerInv.add(throwingAxe);
+		testPlayerInv.add(healthPotion);
+		testPlayerInv.add(homemadeExplosives);
+		
+		testShopkeeperInv.add(greatSword);
+		testShopkeeperInv.add(fireStaff);
+		testShopkeeperInv.add(longBow);
+		
+		testShopkeeperInv.add(throwingAxe);
+		testShopkeeperInv.add(healthPotion);
+		testShopkeeperInv.add(homemadeExplosives);
+		
+		
+		Player testPlayer = new Player("Joshua", testPlayerInv, 600, 200, 4, 26, fireStaff, 250, 3, 2, 5, 1, 3);
+		
+		String enterShopDialog = "Welcome to the shop!";
+		String exitShopDialog = "See you again next time!";
+		String saleDialog = "Hope you enjoy!";
+		String inShops1 = "Hope I meet my sales quota";
+		String inShops2 = "Great to see some customers";
+		String inShops3 = "Been a slow day today";
+		String s1 = "Have you heard about the dragon on the mountain?";
+		String s2 = "People keep gossiping in town";
+		String s3 = "Man its been a long day";
+		ArrayList<String> sampleDialog = new ArrayList<String>();
+		ArrayList<String> sampleInShopDialog = new ArrayList<String>();
+		sampleDialog.add(s1);
+		sampleDialog.add(s2);
+		sampleDialog.add(s3);
+		sampleInShopDialog.add(inShops1);
+		sampleInShopDialog.add(inShops2);
+		sampleInShopDialog.add(inShops3);
+		
+		
+		Shopkeeper testShopkeeper = new Shopkeeper("Gandalf", testShopkeeperInv, sampleDialog, enterShopDialog, 
+				exitShopDialog, saleDialog, sampleInShopDialog);
+		
+		Shop YeOlShop = new Shop(testPlayer, testShopkeeper, "Ye Ol Shop");
+		
+		YeOlShop.startShop();
+		
+//		Shopkeeper demoShopkeeper = new Shopkeeper("Cosmos", "Hello there! How can I help you?", "Will that be all?",
+//				"Have a nice day!");
+//		demoShopkeeper.addInShopDialog("How's the weather today? I think it's quite lovely.");
+//		demoShopkeeper.addInShopDialog("We don't have a lot here, so feel free to take your time looking around.");
+//		demoShopkeeper.addInShopDialog(
+//				"I don't mean to add any pressure, but I really hope I can hit my sales quota for today.");
+//		Shop demoShop = new Shop("Demo Armory Shop", demoShopkeeper);
+//
+//		Scanner scn = new Scanner(System.in);
 	}
 	
 	/**
@@ -57,332 +123,6 @@ public class GameThread extends Throwable {
 			Thread.sleep(time);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * Function allowing players to go to the available shop
-	 * 
-	 * @param player - The player
-	 * @param shop   - The available shop
-	 * @param scn    - Scanner object for user input
-	 * @throws IOException Makes use of System.in.read().
-	 */
-	public static void gotoShop(Player player, Shop shop, Scanner scn) throws IOException {
-
-		char shopMenu;
-		boolean isShopping = true; // When player finishes shopping, it will be set to false
-
-		System.out.println("-------------Entering: " + shop.getName() + "...-------------\n");
-		pause(1500);
-
-		System.out.println(shop.getShopkeeper().getEnterShopDialog());
-
-		do {
-
-			System.out.print("1) Buy\n" + "2) Sell\n" + "3) Leave\n" + "Your Choice: ");
-			shopMenu = scn.next().charAt(0);
-			System.out.println();
-
-			switch (shopMenu) {
-
-			case '1': // Buy
-				buy(player, shop, scn);
-				break;
-			case '2': // Sell
-				sell(player, shop, scn);
-				break;
-			case '3': // Leave
-				isShopping = false;
-				break;
-			default: // Invalid input
-				System.err.println("(Invalid choice. Please try again.)");
-				pause(200);
-				break;
-
-			}
-
-		} while (isShopping);
-
-		System.out.println(shop.getShopkeeper().getExitShopDialog());
-		System.out.println("-------------Leaving: " + shop.getName() + "...-------------\n");
-		pause(1000);
-
-	}
-
-	/**
-	 * Allows the player to buy items provided at a shop.
-	 * 
-	 * @param player - The player
-	 * @param shop   - The shop the player is accessing
-	 * @param scn    - Scanner for user input.
-	 */
-	public static void buy(Player player, Shop shop, Scanner scn) {
-
-		int numChoice = 0; // Select from inventory
-		char charChoice = 0; // For other options requiring user input
-		Item chosen = null; // The selected item
-		boolean isBuying = true, isPurchasing = false, purchased = false;
-
-		// Have the shopkeeper say something
-		System.out.println(shop.getShopkeeper().displayInShopDialog());
-		pause(1500);
-
-		while (isBuying) { // Loop until the player is done buying
-
-			while (numChoice < 1 || numChoice > shop.getInventory().size() + 1) { // The final listed item is always
-																					// cancel.
-
-				// Print the shop inventory using a for loop
-				System.out.println("[Select which item you would like to buy.]");
-				for (int i = 0; i < shop.getInventory().size(); i++) {
-					System.out.println((i + 1) + ") " + shop.getInventory().get(i).getName());
-				}
-				System.out.println((shop.getInventory().size() + 1) + ") Cancel\n"); // Print the cancel option
-
-				System.out.print("Your choice: ");
-
-				/*
-				 * IndexOutOfBoundsException: User enters number outside the required range.
-				 * InputMismatchException: USer enters a non-integer character.
-				 */
-				try {
-					numChoice = scn.nextInt();
-
-					if (numChoice < 1 || numChoice > shop.getInventory().size() + 1)
-						throw new IndexOutOfBoundsException();
-				} catch (InputMismatchException | IndexOutOfBoundsException e) {
-					System.err.println("(Invalid choice. Please try again.)\n");
-					scn.nextLine();
-					pause(200);
-				}
-
-			}
-
-			if (numChoice == shop.getInventory().size() + 1) { // Exit the buy function on cancel
-				isBuying = false;
-			} else { // Proceed to purchase window
-				isPurchasing = true;
-				chosen = shop.getInventory().get(numChoice - 1); // Put selected item in chosen variable
-			}
-
-			while (isPurchasing) { // Loops till user completes or cancels a purchase
-
-				// Display info on the item, including the price.
-				System.out.println(chosen.getName() + "\n" + chosen.getInfo() + "\nPrice: " + chosen.getValue() + "\n");
-				System.out.println("[Is this the weapon you want?]\nY) Yes\t\tN) No");
-
-				do { // Loop until a valid choice is entered
-					System.out.print("Response: ");
-					charChoice = scn.next().charAt(0);
-					charChoice = Character.toUpperCase(charChoice);
-
-					switch (charChoice) {
-
-					case 'Y': // Buy
-						// Add item to player inventory, subtract money from player.
-						if (player.getCurrency() >= chosen.getValue()) {
-							player.setCurrency(player.getCurrency() - chosen.getValue());
-							player.addToInventory(chosen);
-
-							purchased = true;
-						} else { // The user has attempted to make a purchase when they don't have enough money
-							System.err.println("(You don't have enough money to buy this!)");
-							isBuying = false;
-						}
-						break;
-					case 'N': // Don't buy
-						purchased = false;
-						break;
-					default:
-						System.err.println("(Invalid choice. Please try again.)");
-						break;
-
-					}
-				} while (charChoice != 'Y' && charChoice != 'N');
-
-				isPurchasing = false;
-				charChoice = 0; // Reset the variable
-
-				if (purchased) { // Different dialogue based on whether or not a purchase was made.
-					System.out.println(shop.getShopkeeper().getSaleDialog());
-				} else {
-					System.out.println("[Continue viewing buyable items?]");
-				}
-
-				do { // Loop till valid choice is made
-
-					System.out.println("Y) Continue Buying\t\tN) Back to Shop Menu");
-					System.out.print("Response: ");
-					charChoice = scn.next().charAt(0);
-					charChoice = Character.toUpperCase(charChoice);
-
-					switch (charChoice) {
-
-					case 'Y': // Continue shopping
-						isBuying = true;
-						break;
-					case 'N': // Return to shop menu
-						isBuying = false;
-						break;
-					default:
-						System.err.println("(Invalid choice. Please try again.)");
-						pause(200);
-						break;
-
-					}
-
-				} while (charChoice != 'Y' && charChoice != 'N');
-
-			}
-
-			// Reset the variables
-			numChoice = 0;
-			charChoice = 0;
-
-		}
-
-	}
-
-	/**
-	 * Allows the player to sell items from their inventory to the shop for money.
-	 * 
-	 * @param player - The player
-	 * @param shop   - The shop the player is accessing
-	 * @param scn    - Scanner for user input.
-	 */
-	public static void sell(Player player, Shop shop, Scanner scn) {
-
-		int numChoice = 0; // Select from inventory
-		char charChoice = 0; // For other options requiring user input
-		int chosenIndex = 0;
-
-		boolean isSelling = true, startSelling = false, sold = false;
-
-		// Do not allow the player to sell if there is only 1 item in their inventory.
-		if (player.getInventory().size() <= 1) {
-			System.err.println("(You can't sell when there's only 1 item in your inventory!)");
-			isSelling = false;
-			pause(2500);
-		} else { // Have the shopkeeper say something
-			System.out.println(shop.getShopkeeper().displayInShopDialog());
-			pause(1500);
-		}
-
-		while (isSelling) { // Loop until the player is done selling
-
-			while (numChoice < 1 || numChoice > player.getInventory().size() + 1) {
-
-				// Print the player's inventory using a for loop
-				System.out.println("[Select which item you would like to sell.]");
-				for (int i = 0; i < player.getInventory().size(); i++) {
-					System.out.println((i + 1) + ") " + player.getInventory().get(i).GetName());
-				}
-				System.out.println((player.getInventory().size() + 1) + ") Cancel\n"); // Print the cancel option
-
-				System.out.print("Your choice: ");
-
-				/*
-				 * IndexOutOfBoundsException: User enters number outside the required range.
-				 * InputMismatchException: USer enters a non-integer character.
-				 */
-				try {
-					numChoice = scn.nextInt();
-
-					if (numChoice < 1 || numChoice > player.getInventory().size() + 1)
-						throw new IndexOutOfBoundsException();
-				} catch (InputMismatchException | IndexOutOfBoundsException e) {
-					System.err.println("(Invalid choice. Please try again.)\n");
-					scn.nextLine();
-					pause(200);
-				}
-
-			}
-
-			if (numChoice == player.getInventory().size() + 1) { // Exit the sell function on cancel
-				isSelling = false;
-			} else { // Proceed to purchase window
-				startSelling = true;
-				chosenIndex = numChoice - 1;
-			}
-
-			while (startSelling) { // Loops till user completes or cancels a purchase
-
-				// Display info on the item, including the price.
-				System.out.println(player.getInventory().get(chosenIndex).GetName() + "\n"
-						+ player.getInventory().get(chosenIndex).getInfo() + "\nPrice: "
-						+ player.getInventory().get(chosenIndex).GetValue() + "\n");
-				System.out.println("[Are you sure you want to sell this?]\nY) Yes\t\tN) No");
-
-				do { // Loop until a valid choice is entered
-					System.out.print("Response: ");
-					charChoice = scn.next().charAt(0);
-					charChoice = Character.toUpperCase(charChoice);
-
-					switch (charChoice) {
-
-					case 'Y': // Sell
-						// Remove item from player inventory, add money to player.
-						player.setCurrency(player.getCurrency() + player.getInventory().get(chosenIndex).GetValue());
-						player.getInventory().remove(chosenIndex);
-						sold = true;
-						break;
-					case 'N': // Don't sell
-						sold = false;
-						break;
-					default:
-						System.err.println("(Invalid choice. Please try again.)");
-						break;
-
-					}
-				} while (charChoice != 'Y' && charChoice != 'N');
-
-				startSelling = false;
-				charChoice = 0; // Reset the variable
-
-				if (player.getInventory().size() > 1) {
-
-					if (sold) { // Different dialogue based on whether or not a purchase was made.
-						System.out.println(shop.getShopkeeper().getSaleDialog());
-					} else {
-						System.out.println("[Continue viewing sellable items?]");
-					}
-
-					do { // Loop till valid choice is made
-
-						System.out.println("Y) Continue Selling\t\tN) Back to Shop Menu");
-						System.out.print("Response: ");
-						charChoice = scn.next().charAt(0);
-						charChoice = Character.toUpperCase(charChoice);
-
-						switch (charChoice) {
-
-						case 'Y': // Continue shopping
-							isSelling = true;
-							break;
-						case 'N': // Return to shop menu
-							isSelling = false;
-							break;
-						default:
-							System.err.println("(Invalid choice. Please try again.)");
-							pause(200);
-							break;
-
-						}
-
-					} while (charChoice != 'Y' && charChoice != 'N');
-
-				} else {
-					isSelling = false;
-				}
-
-			}
-
-			// Reset the variables
-			numChoice = 0;
-			charChoice = 0;
-
 		}
 
 	}

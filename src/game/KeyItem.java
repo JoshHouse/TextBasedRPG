@@ -1,5 +1,23 @@
 package game;
 
+
+/*
+ * 
+ * We are not sure what to do with this class yet. We are keeping it here in case we decide to use it but
+ * right now it doesn't really have any functionality
+ * 
+ * 
+ */
+
+
+
+
+
+
+
+
+
+
 public class KeyItem extends Item {
 
 	/**
@@ -17,7 +35,7 @@ public class KeyItem extends Item {
 	 * @param rarity
 	 */
 	public KeyItem(String key, String name, String info, int rarity) {
-		super(key, name, info, rarity);
+		// super(key, name, info, rarity);
 	}
 
 }

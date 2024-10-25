@@ -76,6 +76,18 @@ public class Consumable extends Item {
 		this.count = count;
 	}
 
+	// ---------------------Functions-------------------
+	
+	public void displayInfo() {
+		System.out.println("----------" + this.getName() + "----------\n" + 
+					"Description : " + this.getInfo() + "\n" + 
+					"Rarity: " + this.getRarity() + "\n" + 
+					"Damage: " + this.getDamage() + "\n" + 
+					"Damage Type : " + this.getDamageType() + "\n" + 
+					"Count: "  + this.getCount() + "\n" +
+					"--------------------\n");
+	}
+	
 	// ---------------------toString---------------------
 
 	public String toString() {

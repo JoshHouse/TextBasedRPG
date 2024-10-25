@@ -8,8 +8,7 @@ public class GameChar extends Lootable {
 	protected int health;
 	protected int level;
 	protected int exp;
-	protected int damage;
-	protected String damageType;
+
 	
 	// -------------------Constructors-------------------
 	
@@ -22,8 +21,6 @@ public class GameChar extends Lootable {
 		this.health = 1;
 		this.level = 1;
 		this.exp = 0;
-		this.damage = 0;
-		this.damageType = this.calculateDamageType(0);
 	}
 	/** 
 	 * For Instantiating Characters With All Data Types
@@ -34,18 +31,14 @@ public class GameChar extends Lootable {
 	 * @param inputHealth
 	 * @param inputLevel
 	 * @param inputExp
-	 * @param inputDamage
-	 * @param inputDamageType	-As an int (1-4 for "Melee", "Ranged", "Magic", "Rogue") *default is "null"*
 	 */
 	public GameChar(String inputName, Inventory inputInventory, int inputCurrency, int inputHealth, 
-			int inputLevel, int inputExp, int inputDamage, int inputDamageType) {
+			int inputLevel, int inputExp) {
 		
 		super(inputName, inputInventory, inputCurrency); 
 		this.health = inputHealth;
 		this.level = inputLevel;
 		this.exp = inputExp;
-		this.damage = inputDamage;
-		this.damageType = this.calculateDamageType(inputDamageType);
 	}
 	
 	/** 
@@ -56,18 +49,13 @@ public class GameChar extends Lootable {
 	 * @param inputHealth
 	 * @param inputLevel
 	 * @param inputExp
-	 * @param inputDamage
-	 * @param inputDamageType	-As an int (1-4 for "Melee", "Ranged", "Magic", "Rogue") *default is "null"*
 	 */
-	public GameChar(String inputName, int inputCurrency, int inputHealth, 
-			int inputLevel, int inputExp, int inputDamage, int inputDamageType) {
+	public GameChar(String inputName, int inputCurrency, int inputHealth, int inputLevel, int inputExp) {
 		
 		super(inputName, inputCurrency); 
 		this.health = inputHealth;
 		this.level = inputLevel;
 		this.exp = inputExp;
-		this.damage = inputDamage;
-		this.damageType = this.calculateDamageType(inputDamageType);
 	}
 	
 	/** 
@@ -76,19 +64,14 @@ public class GameChar extends Lootable {
 	 * @param inputName
 	 * @param inputHealth
 	 * @param inputLevel
-	 * @param inputExp
-	 * @param inputDamage
-	 * @param inputDamageType	-As an int (1-4 for "Melee", "Ranged", "Magic", "Rogue") *default is "null"*
+	 * @param inputExp	
 	 */
-	public GameChar(String inputName, int inputHealth, int inputLevel, int inputExp, int inputDamage, 
-			int inputDamageType) {
+	public GameChar(String inputName, int inputHealth, int inputLevel, int inputExp) {
 		
 		super(inputName);
 		this.health = inputHealth;
 		this.level = inputLevel;
 		this.exp = inputExp;
-		this.damage = inputDamage;
-		this.damageType = this.calculateDamageType(inputDamageType);
 	}
 	
 	/**
@@ -103,8 +86,6 @@ public class GameChar extends Lootable {
 		this.health = 1;
 		this.level = 1;
 		this.exp = 0;
-		this.damage = 0;
-		this.damageType = this.calculateDamageType(0);
 	}
 	
 	/**
@@ -117,8 +98,6 @@ public class GameChar extends Lootable {
 		this.health = 100;
 		this.level = 1;
 		this.exp = 0;
-		this.damage = 1;
-		this.damageType = this.calculateDamageType(0);
 	}
 	
 	// -------------------Getters-------------------
@@ -135,14 +114,6 @@ public class GameChar extends Lootable {
 		return this.exp;
 	}
 	
-	public int getDamage() {
-		return this.damage;
-	}
-	
-	public String getDamageType() {
-		return this.damageType;
-	}
-	
 	// -------------------Setters-------------------
 	
 	public void setHealth(int inputHealth) {
@@ -156,45 +127,7 @@ public class GameChar extends Lootable {
 	public void setExp(int inputExp) {
 		this.exp = inputExp;
 	}
-	
-	public void setDamage(int inputDamage) {
-		this.damage = inputDamage;
-	}
-	
-	public void setDamageType(String inputDamageType) {
-		this.damageType = inputDamageType;
-	}
-	
-	public void setDamageTypeInt(int inputDamageType) {
-		this.damageType = this.calculateDamageType(inputDamageType);
-	}
-	
-	// -------------------Functions-------------------
-	/**
-	 * Calculates damage type based on inputted int and returns damage type string
-	 * 1: "Melee", 2: "Ranged", 3: "Magic", 4: "Rogue", Default: "null"
-	 * 
-	 * @param typeInt
-	 * @return damageType string
-	 */
-	public String calculateDamageType(int typeInt) {
-		
-		switch (typeInt) {
-		
-		case 1:
-			return "Melee";
-		case 2:
-			return "Ranged";
-		case 3:
-			return "Magic";
-		case 4:
-			return "Rogue";
-		default:
-			return "null";
-		
-		}
-		
-	}
+
 	// -------------------toString-------------------
 	
 	public String toString() {
@@ -202,8 +135,6 @@ public class GameChar extends Lootable {
 		return	super.toString() +
 				"Health: " + this.health + "\n" +
 				"Level: " + this.level + "\n" +
-				"Exp: " + this.exp + "\n" +
-				"Damage: " + this.damage + "\n" +
-				"Damage Type: " + this.damageType + "\n";
+				"Exp: " + this.exp + "\n";
 	}
 }

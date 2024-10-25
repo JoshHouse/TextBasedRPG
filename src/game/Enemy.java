@@ -5,6 +5,8 @@ public class Enemy extends GameChar {
 	// -------------------Variables-------------------
 	
 	protected SpecialAttack specialAttack;
+	protected int damage;
+	protected String damageType;
 	
 	// -------------------Constructors-------------------
 	
@@ -25,16 +27,17 @@ public class Enemy extends GameChar {
 	 * @param inputHealth
 	 * @param inputLevel
 	 * @param inputExp
-	 * @param inputDamage
+	 * @param inputDamage	-As an int (1-4 for "Melee", "Ranged", "Magic", "Rogue") *default is "null"*
 	 * @param inputDamageType
 	 * @param inputSpecialAttack
 	 */
 	public Enemy(String inputName, Inventory inputInventory, int inputCurrency, int inputHealth, 
 			int inputLevel, int inputExp, int inputDamage, int inputDamageType, SpecialAttack inputSpecialAttack) 
 	{
-		super(inputName, inputInventory, inputCurrency, inputHealth, inputLevel, inputExp, inputDamage, 
-				inputDamageType);
+		super(inputName, inputInventory, inputCurrency, inputHealth, inputLevel, inputExp);
 		this.specialAttack = inputSpecialAttack;
+		this.damage = inputDamage;
+		this.damageType = this.calculateDamageType(inputDamageType);
 	}
 	
 	/**
@@ -46,14 +49,16 @@ public class Enemy extends GameChar {
 	 * @param inputHealth
 	 * @param inputLevel
 	 * @param inputExp
-	 * @param inputDamage
+	 * @param inputDamage	-As an int (1-4 for "Melee", "Ranged", "Magic", "Rogue") *default is "null"*
 	 * @param inputDamageType
 	 * @param inputSpecialAttack
 	 */
 	public Enemy(String inputName, int inputCurrency, int inputHealth, int inputLevel, int inputExp, 
 			int inputDamage, int inputDamageType, SpecialAttack inputSpecialAttack) {
-		super(inputName, inputCurrency, inputHealth, inputLevel, inputExp, inputDamage, inputDamageType);
+		super(inputName, inputCurrency, inputHealth, inputLevel, inputExp);
 		this.specialAttack = inputSpecialAttack;
+		this.damage = inputDamage;
+		this.damageType = this.calculateDamageType(inputDamageType);
 	}
 	
 	/**
@@ -65,13 +70,15 @@ public class Enemy extends GameChar {
 	 * @param inputHealth
 	 * @param inputLevel
 	 * @param inputExp
-	 * @param inputDamage
+	 * @param inputDamage	-As an int (1-4 for "Melee", "Ranged", "Magic", "Rogue") *default is "null"*
 	 * @param inputDamageType
 	 */
 	public Enemy(String inputName, int inputCurrency, int inputHealth, int inputLevel, int inputExp, 
 			int inputDamage, int inputDamageType) {
-		super(inputName, inputCurrency, inputHealth, inputLevel, inputExp, inputDamage, inputDamageType);
+		super(inputName, inputCurrency, inputHealth, inputLevel, inputExp);
 		this.specialAttack = new SpecialAttack();
+		this.damage = inputDamage;
+		this.damageType = this.calculateDamageType(inputDamageType);
 	}
 	
 	// -------------------Getters-------------------
@@ -80,6 +87,13 @@ public class Enemy extends GameChar {
 		return this.specialAttack;
 	}
 	
+	public int getDamage() {
+		return this.damage;
+	}
+	
+	public String getDamageType() {
+		return this.damageType;
+	}
 
 	// -------------------Setters-------------------
 	
@@ -87,11 +101,52 @@ public class Enemy extends GameChar {
 		this.specialAttack = inputSpecialAttack;
 	}
 	
+	public void setDamage(int inputDamage) {
+		this.damage = inputDamage;
+	}
+	
+	public void setDamageType(String inputDamageType) {
+		this.damageType = inputDamageType;
+	}
+	
+	public void setDamageTypeInt(int inputDamageType) {
+		this.damageType = this.calculateDamageType(inputDamageType);
+	}
+	
+	// -------------------Functions-------------------
+	
+	/**
+	 * Calculates damage type based on inputted int and returns damage type string
+	 * 1: "Melee", 2: "Ranged", 3: "Magic", 4: "Rogue", Default: "null"
+	 * 
+	 * @param typeInt
+	 * @return damageType string
+	 */
+	public String calculateDamageType(int typeInt) {
+		
+		switch (typeInt) {
+		
+		case 1:
+			return "Melee";
+		case 2:
+			return "Ranged";
+		case 3:
+			return "Magic";
+		case 4:
+			return "Rogue";
+		default:
+			return "null";
+		
+		}
+		
+	}
 
 	// -------------------toString-------------------
 	
 	public String toString() {
 		return super.toString() +
-				this.specialAttack.toString();
+				"Damage: " + this.damage + "\n" +
+				"Damage Type: " + this.damageType + "\n" +
+				this.specialAttack.toString() ;
 	}
 }

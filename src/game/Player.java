@@ -41,8 +41,6 @@ public class Player extends GameChar {
 	 * @param inputHealth
 	 * @param inputLevel
 	 * @param inputExp
-	 * @param inputDamage
-	 * @param inputDamageType
 	 * @param inputEquipped
 	 * @param inputMana
 	 * @param inputlvlMelee
@@ -52,11 +50,10 @@ public class Player extends GameChar {
 	 * @param inputlvlLuck
 	 */
 	public Player(String inputName, Inventory inputInventory, int inputCurrency, int inputHealth, 
-			int inputLevel, int inputExp, int inputDamage, int inputDamageType, Weapon inputEquipped, int inputMana,
-			int inputlvlMelee,int inputlvlRanged, int inputlvlMage, int inputlvlRogue, int inputlvlLuck) {
+			int inputLevel, int inputExp, Weapon inputEquipped, int inputMana, int inputlvlMelee,
+			int inputlvlRanged, int inputlvlMage, int inputlvlRogue, int inputlvlLuck) {
 		
-		super(inputName, inputInventory, inputCurrency, inputHealth, inputLevel, inputExp, inputDamage, 
-				inputDamageType);
+		super(inputName, inputInventory, inputCurrency, inputHealth, inputLevel, inputExp);
 		this.equipped = inputEquipped;
 		this.mana = inputMana;
 		this.expThreshold = 100;

@@ -2,7 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
-public class NPC extends GameChar {
+public class NPC extends Lootable {
 	
 	// -------------------Variables-------------------
 	
