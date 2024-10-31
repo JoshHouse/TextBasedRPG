@@ -4,15 +4,15 @@ public class Item {
 
 	// -------------------Variables-------------------
 
-	protected String key;
-	protected String name;
-	protected String info;
-	protected String rarity;
-	protected int value;
-	protected int damage;
-	protected String damageType;
-	protected Boolean isSellable;
-	protected char itemType;
+	private String key;
+	private String name;
+	private String info;
+	private String rarity;
+	private int value;
+	private int damage;
+	private String damageType;
+	private Boolean sellable;
+	private char itemType;
 
 	// -------------------Constructors-------------------
 
@@ -27,7 +27,7 @@ public class Item {
 		this.value = 0;
 		this.damage = 0;
 		this.damageType = "No Damage Type";
-		this.isSellable = false;
+		this.sellable = false;
 		this.itemType = 'i';
 	}
 	
@@ -44,7 +44,7 @@ public class Item {
 		this.value = 0;
 		this.damage = 0;
 		this.damageType = "No Damage Type";
-		this.isSellable = false;
+		this.sellable = false;
 		this.itemType = inputItemType;
 	}
 
@@ -58,11 +58,11 @@ public class Item {
 	 * @param inputValue
 	 * @param inputDamage
 	 * @param inputDamagetype
-	 * @param inputIsSellable
+	 * @param inputsellable
 	 * @param inputItemType
 	 */
 	public Item(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue, int inputDamage, 
-			int inputDamagetype, Boolean inputIsSellable, char inputItemType) {
+			int inputDamagetype, Boolean inputsellable, char inputItemType) {
 		this.key = inputKey;
 		this.name = inputName;
 		this.info = inputInfo;
@@ -70,13 +70,13 @@ public class Item {
 		this.value = inputValue;
 		this.damage = inputDamage;
 		this.damageType = this.calculateDamageTypeInt(inputDamagetype);
-		this.isSellable = inputIsSellable;
+		this.sellable = inputsellable;
 		this.itemType = inputItemType;
 	}
 
 	/**
 	 * Constructor that instantiates Items that are not sellable
-	 * sets IsSellable to False and Value to 0
+	 * sets sellable to False and Value to 0
 	 * 
 	 * @param inputKey
 	 * @param inputName
@@ -95,7 +95,7 @@ public class Item {
 		this.value = 0;
 		this.damage = inputDamage;
 		this.damageType = this.calculateDamageTypeInt(inputDamagetype);
-		this.isSellable = false;
+		this.sellable = false;
 		this.itemType = inputItemType;
 	}
 
@@ -108,11 +108,11 @@ public class Item {
 	 * @param inputInfo
 	 * @param inputRarity
 	 * @param inputValue
-	 * @param inputIsSellable
+	 * @param inputsellable
 	 * @param inputItemType
 	 */
 	public Item(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue,
-			Boolean inputIsSellable, char inputItemType) {
+			Boolean inputsellable, char inputItemType) {
 		this.key = inputKey;
 		this.name = inputName;
 		this.info = inputInfo;
@@ -120,14 +120,14 @@ public class Item {
 		this.value = inputValue;
 		this.damage = 0;
 		this.damageType = this.calculateDamageTypeInt(0);
-		this.isSellable = inputIsSellable;
+		this.sellable = inputsellable;
 		this.itemType = inputItemType;
 		
 	}
 
 	/**
 	 * Constructor that instantiates non-sellable items with no damage
-	 *  sets Value and Damage to 0, IsSellable to false, and Damagetype to default No 
+	 *  sets Value and Damage to 0, sellable to false, and Damagetype to default No 
 	 * Damage Type string
 	 * 
 	 * @param key
@@ -144,7 +144,7 @@ public class Item {
 		this.value = 0;
 		this.damage = 0;
 		this.damageType = "No Damage Type";
-		this.isSellable = false;
+		this.sellable = false;
 		this.itemType = inputItemType;
 	}
 
@@ -178,8 +178,8 @@ public class Item {
 		return this.damageType;
 	}
 
-	public Boolean getIsSellable() {
-		return this.isSellable;
+	public Boolean isSellable() {
+		return this.sellable;
 	}
 	
 	public char getItemType() {
@@ -224,8 +224,8 @@ public class Item {
 		this.damageType = this.calculateDamageTypeInt(inputDamageTypeInt);
 	}
 
-	public void setIsSellable(Boolean inputIsSellable) {
-		this.isSellable = inputIsSellable;
+	public void setsellable(Boolean inputsellable) {
+		this.sellable = inputsellable;
 	}
 	
 	public void setItemType(char inputItemType) {
@@ -297,6 +297,6 @@ public class Item {
 				"Value: " + this.value + "\n" + 
 				"Damage: " + this.damage + "\n" + 
 				"Damage Type: " + this.damageType + "\n" + 
-				"Is Sell-able?: "+ this.isSellable + "\n";
+				"Is Sell-able?: "+ this.sellable + "\n";
 	}
 }
