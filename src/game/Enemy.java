@@ -4,9 +4,9 @@ public class Enemy extends GameChar {
 	
 	// -------------------Variables-------------------
 	
-	protected SpecialAttack specialAttack;
-	protected int damage;
-	protected String damageType;
+	private SpecialAttack specialAttack;
+	private int damage;
+	private String damageType;
 	
 	// -------------------Constructors-------------------
 	
