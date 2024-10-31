@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class Shopkeeper extends NPC {
 
-	protected String enterShopDialog;
-	protected String exitShopDialog;
-	protected String saleDialog;
-	protected ArrayList<String> inShopDialog;
+	private String enterShopDialog;
+	private String exitShopDialog;
+	private String saleDialog;
+	private ArrayList<String> inShopDialog;
 
 	// -------------------Constructors-------------------
 
@@ -150,7 +150,7 @@ public class Shopkeeper extends NPC {
 			return ".........";
 		}
 
-		return "[" + this.name + "]\n"
+		return "[" + this.getName() + "]\n"
 				+ "\"" + inShopDialog.get(index.nextInt(inShopDialog.size())) + "\"";
 
 	}
