@@ -4,8 +4,9 @@ public class Weapon extends Item {
 	
 	// -------------------Variables-------------------
 
-	protected int manaUsage;
-	protected SpecialAttack specialAttack;
+	private int manaUsage;
+	private SpecialAttack specialAttack;
+	private PlayerClass scaling;
 
 	// -------------------Constructors-------------------
 
@@ -16,63 +17,68 @@ public class Weapon extends Item {
 		super('w');
 		this.manaUsage = 0;
 		this.specialAttack = new SpecialAttack();
+		this.scaling = PlayerClass.NONE;
 	}
 
 	/**
 	 * Constructor that initializes all value s
 	 * 
-	 * @param inputName
-	 * @param inputInfo
-	 * @param inputRarity
+	 * @param name
+	 * @param info
+	 * @param rarity
 	 * @param inputValue
-	 * @param inputDamage
-	 * @param inputDamageType
+	 * @param damage
+	 * @param dmgType
 	 * @param inputIsSellable
-	 * @param inputManaUsage
-	 * @param inputSpecialAttack
+	 * @param manaUsage
+	 * @param spAtk
 	 */
-	public Weapon(String key, String inputName, String inputInfo, int inputRarity, int inputValue, int inputDamage, int inputDamageType,
-			Boolean inputIsSellable, int inputManaUsage, SpecialAttack inputSpecialAttack) {
-		super(key, inputName, inputInfo, inputRarity, inputValue, inputDamage, inputDamageType, inputIsSellable, 'w');
-		this.manaUsage = inputManaUsage;
-		this.specialAttack = inputSpecialAttack;
+	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
+			Boolean inputIsSellable, int manaUsage, SpecialAttack spAtk, PlayerClass scaling) {
+		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
+		this.manaUsage = manaUsage;
+		this.specialAttack = spAtk;
+		this.scaling = scaling;
+		
 	}
 
 	/**
 	 * Constructor that instantiates weapons that are not sellable. Sets IsSellable
 	 * to False and Value to 0
 	 * 
-	 * @param inputName
-	 * @param inputInfo
-	 * @param inputRarity
-	 * @param inputDamage
-	 * @param inputDamageType
-	 * @param inputManaUsage
-	 * @param inputSpecialAttack
+	 * @param name
+	 * @param info
+	 * @param rarity
+	 * @param damage
+	 * @param dmgType
+	 * @param manaUsage
+	 * @param spAtk
 	 */
-	public Weapon(String key, String inputName, String inputInfo, int inputRarity, int inputDamage, int inputDamageType,
-			int inputManaUsage, SpecialAttack inputSpecialAttack) {
-		super(key, inputName, inputInfo, inputRarity, inputDamage, inputDamageType, 'w');
-		this.manaUsage = inputManaUsage;
-		this.specialAttack = inputSpecialAttack;
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType,
+			int manaUsage, SpecialAttack spAtk, PlayerClass scaling) {
+		super(key, name, info, rarity, damage, dmgType, 'w');
+		this.manaUsage = manaUsage;
+		this.specialAttack = spAtk;
+		this.scaling = scaling;
 	}
 
 	/**
 	 * Constructor that instantiates weapons that are not sellable and don't use
 	 * mana. Sets IsSellable to False, Value to 0, and ManaUsage to 0
 	 * 
-	 * @param inputName
-	 * @param inputInfo
-	 * @param inputRarity
-	 * @param inputDamage
-	 * @param inputDamageType
-	 * @param inputSpecialAttack
+	 * @param name
+	 * @param info
+	 * @param rarity
+	 * @param damage
+	 * @param dmgType
+	 * @param spAtk
 	 */
-	public Weapon(String key, String inputName, String inputInfo, int inputRarity, int inputDamage, int inputDamageType,
-			SpecialAttack inputSpecialAttack) {
-		super(key, inputName, inputInfo, inputRarity, inputDamage, inputDamageType, 'w');
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType,
+			SpecialAttack spAtk, PlayerClass scaling) {
+		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = 0;
-		this.specialAttack = inputSpecialAttack;
+		this.specialAttack = spAtk;
+		this.scaling = scaling;
 	}
 
 	/**
@@ -80,16 +86,17 @@ public class Weapon extends Item {
 	 * and dont have a special attack Sets IsSellable to False, Value to 0,
 	 * ManaUsage to 0, and Special Attack to a default string
 	 * 
-	 * @param inputName
-	 * @param inputInfo
-	 * @param inputRarity
-	 * @param inputDamage
-	 * @param inputDamageType
+	 * @param name
+	 * @param info
+	 * @param rarity
+	 * @param damage
+	 * @param dmgType
 	 */
-	public Weapon(String key, String inputName, String inputInfo, int inputRarity, int inputDamage, int inputDamageType) {
-		super(key, inputName, inputInfo, inputRarity, inputDamage, inputDamageType, 'w');
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, PlayerClass scaling) {
+		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = 0;
 		this.specialAttack = new SpecialAttack();
+		this.scaling = scaling;
 	}
 
 	/**
@@ -97,18 +104,19 @@ public class Weapon extends Item {
 	 * special attack. Sets IsSellable to False, Value to 0, and SpecialAttack to a
 	 * default string
 	 * 
-	 * @param inputName
-	 * @param inputInfo
-	 * @param inputRarity
-	 * @param inputDamage
-	 * @param inputDamageType
-	 * @param inputManaUsage
+	 * @param name
+	 * @param info
+	 * @param rarity
+	 * @param damage
+	 * @param dmgType
+	 * @param manaUsage
 	 */
-	public Weapon(String key, String inputName, String inputInfo, int inputRarity, int inputDamage, int inputDamageType,
-			int inputManaUsage) {
-		super(key, inputName, inputInfo, inputRarity, inputDamage, inputDamageType, 'w');
-		this.manaUsage = inputManaUsage;
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType,
+			int manaUsage, PlayerClass scaling) {
+		super(key, name, info, rarity, damage, dmgType, 'w');
+		this.manaUsage = manaUsage;
 		this.specialAttack = new SpecialAttack();
+		this.scaling = scaling;
 	}
 
 	// -------------------Getters-------------------
@@ -120,15 +128,23 @@ public class Weapon extends Item {
 	public SpecialAttack getSpecialAttack() {
 		return this.specialAttack;
 	}
+	
+	public PlayerClass getScaling() {
+		return scaling;
+	}
 
 	// -------------------Setters-------------------
 
-	public void setManaUsage(int inputManaUsage) {
-		this.manaUsage = inputManaUsage;
+	public void setManaUsage(int manaUsage) {
+		this.manaUsage = manaUsage;
 	}
 
-	public void setSpecialAttack(SpecialAttack inputSpecialAttack) {
-		this.specialAttack = inputSpecialAttack;
+	public void setSpecialAttack(SpecialAttack spAtk) {
+		this.specialAttack = spAtk;
+	}
+	
+	public void setScaling(PlayerClass scaling) {
+		this.scaling = scaling;
 	}
 	
 	// -------------------Functions------------------
