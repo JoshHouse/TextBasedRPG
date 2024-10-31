@@ -4,8 +4,8 @@ public class Consumable extends Item {
 
 	// -------------------Variables-------------------
 	
-	protected int count;
-	protected boolean isUsable;
+	private int count;
+	private boolean usable;
 
 	// -------------------Constructors-------------------
 	
@@ -16,7 +16,7 @@ public class Consumable extends Item {
 
 		super('c');
 		this.count = 0;
-		this.isUsable = false;
+		this.usable = false;
 
 	}
 
@@ -39,7 +39,7 @@ public class Consumable extends Item {
 
 		super(inputKey, inputName, inputInfo, inputRarity, inputValue, inputDamage, inputType, inputIsSellable, 'c');
 		this.count = inputCount;
-		this.isUsable = inputIsUsable;
+		this.usable = inputIsUsable;
 
 	}
 
@@ -60,7 +60,7 @@ public class Consumable extends Item {
 
 		super(inputKey, inputName, inputInfo, inputRarity, inputValue, inputIsSellable, 'c');
 		this.count = inputCount;
-		this.isUsable = inputIsUsable;
+		this.usable = inputIsUsable;
 
 	}
 
@@ -68,6 +68,10 @@ public class Consumable extends Item {
 
 	public int getCount() {
 		return this.count;
+	}
+	
+	public boolean isUsable() {
+		return this.usable;
 	}
 
 	// ---------------------Setters---------------------
@@ -88,14 +92,14 @@ public class Consumable extends Item {
 					"--------------------\n");
 	}
 	
-	public boolean equals(Consumable inputConsumable) {
-		if (this.getKey() == inputConsumable.getKey()) {
-		if (this.getName() == inputConsumable.getName()) {
-		if (this.getInfo() == inputConsumable.getInfo()) {
-		if (this.getRarity() == inputConsumable.getRarity() ) {
-		if (this.getValue() == inputConsumable.getValue()) {
-		if (this.getDamage() == inputConsumable.getDamage()) {
-		if (this.getDamageType() == inputConsumable.getDamageType()) {
+	public boolean equals(Consumable consumable) {
+		if (this.getKey() == consumable.getKey()) {
+		if (this.getName() == consumable.getName()) {
+		if (this.getInfo() == consumable.getInfo()) {
+		if (this.getRarity() == consumable.getRarity() ) {
+		if (this.getValue() == consumable.getValue()) {
+		if (this.getDamage() == consumable.getDamage()) {
+		if (this.getDamageType() == consumable.getDamageType()) {
 		return true;
 		}}}}}}}
 		return false;
@@ -107,7 +111,7 @@ public class Consumable extends Item {
 
 		return super.toString() +
 				"Amount: " + this.count + "\n" +
-				"Is Usable?:" + this.isSellable + "\n";
+				"Is Sellable?:" + this.isSellable() + "\n";
 
 	}
 
