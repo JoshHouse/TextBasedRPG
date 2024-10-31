@@ -3,18 +3,24 @@ package game;
 public class SpecialAttack {
 
 	// -------------------Variables-------------------
-	
-	protected String info;
-	protected double atkMultiplier;
+
+	private String name;
+	private String info;
+	private String hitTxt;
+	private String missTxt;
+	private double atkMultiplier;
 
 	// -------------------Constructors-------------------
-	
+
 	/**
 	 * Base constructor
 	 */
 	public SpecialAttack() {
+		this.name = "None";
 		this.info = "This weapon has no special attack.";
-		this.atkMultiplier = 0.0;
+		this.hitTxt = "";
+		this.missTxt = "";
+		this.atkMultiplier = 1.0;
 	}
 
 	/**
@@ -24,9 +30,9 @@ public class SpecialAttack {
 	 * @param atkMultiplier - The amount to multiply the character's initial attack
 	 *                      stat by.
 	 */
-	public SpecialAttack(String info, double atkMultiplier) {
+	public SpecialAttack(String name, String info, String hitTxt, String missTxt, double atkMult) {
 		this.info = info;
-		this.atkMultiplier = atkMultiplier;
+		this.atkMultiplier = atkMult;
 	}
 
 	/**
@@ -36,45 +42,68 @@ public class SpecialAttack {
 	 * @param luckVal - The character's initial luck value.
 	 */
 	void useSpAtk(int luckVal) {
-
+		
 		if (Luck.luckEvent(luckVal)) {
-			System.out.println("You " + this.info);
+			Dialogue.infoDialogue(hitTxt);
 		} else {
-			System.out.println("You attempted to " + this.info + " but you failed!");
+			Dialogue.infoDialogue(missTxt);
 		}
 
 	}
 
 	// --------------------------------Getters--------------------------------
 
+	public String getName() {
+		return name;
+	}
+
 	public String getInfo() {
 		return info;
+	}
+
+	public String getHitTxt() {
+		return hitTxt;
+	}
+
+	public String getMissTxt() {
+		return missTxt;
 	}
 
 	public double getAtkMultiplier() {
 		return atkMultiplier;
 	}
-	
+
 	// --------------------------------Setters--------------------------------
-	
-	public void setInfo(String inputInfo) {
-		this.info = inputInfo;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	public void setAtkMultiplier(double inputAtkMultiplier) {
-		this.atkMultiplier = inputAtkMultiplier;
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public void setHitTxt(String hitTxt) {
+		this.hitTxt = hitTxt;
+	}
+
+	public void setMissTxt(String missTxt) {
+		this.missTxt = missTxt;
+	}
+
+	public void setAtkMultiplier(double atkMultiplier) {
+		this.atkMultiplier = atkMultiplier;
 	}
 
 	// ---------------------------Overridden Methods---------------------------
 
 	@Override
 	/**
-	 * Classic toString method. Prints the description and multiplier of the special attack.
+	 * Classic toString method. Prints the name, description, and multiplier of the
+	 * special attack.
 	 */
 	public String toString() {
-		return "-----Special Attack-----\n" +
-				"Description: " + this.info + "\n" + 
-				"Success Damage Mutiplier: " + this.atkMultiplier + "\n";
+		return "-----" + this.name + "-----\n" + this.info + "\n" + "Attack Multipler: " + this.atkMultiplier + "\n";
 	}
 
 }
