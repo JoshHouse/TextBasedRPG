@@ -5,9 +5,9 @@ public class GameChar extends Lootable {
 	
 	// -------------------Variables-------------------
 	
-	protected int health;
-	protected int level;
-	protected int exp;
+	private int health;
+	private int level;
+	private int exp;
 
 	
 	// -------------------Constructors-------------------
