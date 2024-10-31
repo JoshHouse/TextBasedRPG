@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Inventory {
 
-	protected ArrayList<Weapon> weapons;
-	protected ArrayList<Consumable> consumables;
-	protected ArrayList<KeyItem> keyItems;
+	private ArrayList<Weapon> weapons;
+	private ArrayList<Consumable> consumables;
+	private ArrayList<KeyItem> keyItems;
 
 	/**
 	 * Base constructor
