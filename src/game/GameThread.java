@@ -124,6 +124,77 @@ public class GameThread extends Throwable {
 	 * 
 	 */
 
+	// --------------------General Functions--------------------
+	public static void BeginningGame(Player player, Scanner keyboard) {
+		
+	}
+	
+	// --------------------Dialog Functions--------------------
+	public static void ApproachCastle(Player player) {
+		
+	}
+	
+	public static void KingsFinalMission(Player player) {
+		
+	}
+	
+	public static boolean meleeDragonApproach(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean rangedDragonApproach(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean mageDragonApproach(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean rogueDragonApproach(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	// --------------------Mission Functions--------------------
+	public static boolean kingsMission(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean dragonFight(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean meleeChapter1(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean rangedChapter1(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean mageChapter1(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean rogueChapter1(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean meleeSpecialMission(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean rangedSpecialMission(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean mageSpecialMission(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	public static boolean rogueSpecialMission(Player player, Scanner keyboard) {
+		return true;
+	}
+	
 	/**
 	 * Pauses console till the user presses the enter key.
 	 */

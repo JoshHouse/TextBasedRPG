@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Shop {
@@ -985,7 +984,7 @@ public class Shop {
 				if (pItemChoice - 1 == tempConsumableArray.size()) {
 					isSelling = false;	// Breaks out of the consumables sale menu
 					breakLine();
-					// Prints the consumable array and [layer currency for the selling consumables array
+					// Prints the consumable array and player currency for the selling consumables array
 					this.printInventoryConsumableArray(tempConsumableArray);
 					this.printPlayerCurrency();
 					
