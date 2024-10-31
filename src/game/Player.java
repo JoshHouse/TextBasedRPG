@@ -6,7 +6,6 @@ public class Player extends GameChar {
 
 	// -------------------Variables-------------------
 
-	private Weapon equipped;
 	private int mana;
 	private double expThreshold;
 	private int lvlMelee;
@@ -15,6 +14,8 @@ public class Player extends GameChar {
 	private int lvlRogue;
 	private int lvlLuck;
 	private int sklPt = 4;
+	private PlayerClass starter;
+	private int currHP; // Current HP. Used for battles.
 
 	// -------------------Constructors-------------------
 
@@ -23,7 +24,6 @@ public class Player extends GameChar {
 	 */
 	public Player() {
 		super();
-		this.equipped = new Weapon();
 		this.mana = 0;
 		this.expThreshold = 100;
 		this.lvlMelee = 1;
@@ -31,6 +31,8 @@ public class Player extends GameChar {
 		this.lvlMage = 1;
 		this.lvlRogue = 1;
 		this.lvlLuck = 1;
+		this.starter = PlayerClass.NONE;
+		this.currHP = this.getHealth();
 	}
 
 	/**
@@ -51,21 +53,21 @@ public class Player extends GameChar {
 	 * @param inputlvlLuck
 	 */
 	public Player(String inputName, Inventory inputInventory, int inputCurrency, int inputHealth, int inputLevel,
-			int inputExp, Weapon inputEquipped, int inputMana, int inputlvlMelee, int inputlvlRanged, int inputlvlMage,
-			int inputlvlRogue, int inputlvlLuck) {
+			int inputExp, int inputMana, int inputlvlMelee, int inputlvlRanged, int inputlvlMage, int inputlvlRogue,
+			int inputlvlLuck) {
 
 		super(inputName, inputInventory, inputCurrency, inputHealth, inputLevel, inputExp);
-		this.equipped = inputEquipped;
 		this.mana = inputMana;
 		this.expThreshold = 100;
-		for (int x = 1; x < this.level; x++) {
-			this.expThreshold = expThreshold * 1.2;
+		for (int x = 1; x < this.getLevel(); x++) {
+			this.expThreshold *= 1.2;
 		}
 		this.lvlMelee = inputlvlMelee;
 		this.lvlRanged = inputlvlRanged;
 		this.lvlRogue = inputlvlRogue;
 		this.lvlMage = inputlvlMage;
 		this.lvlLuck = inputlvlLuck;
+		this.currHP = this.getHealth();
 	}
 
 	/**
@@ -75,7 +77,6 @@ public class Player extends GameChar {
 	 */
 	public Player(String inputName) {
 		super(inputName);
-		this.equipped = new Weapon();
 		this.mana = 100;
 		this.expThreshold = 100;
 		this.lvlMelee = 1;
@@ -83,14 +84,11 @@ public class Player extends GameChar {
 		this.lvlMage = 1;
 		this.lvlRogue = 1;
 		this.lvlLuck = 1;
+		this.currHP = this.getHealth();
 
 	}
 
 	// -------------------Getters-------------------
-
-	public Weapon getEquipped() {
-		return this.equipped;
-	}
 
 	public int getMana() {
 		return this.mana;
@@ -124,11 +122,15 @@ public class Player extends GameChar {
 		return this.sklPt;
 	}
 
-	// -------------------Setters-------------------
-
-	public void setEquipped(Weapon equipped) {
-		this.equipped = equipped;
+	public PlayerClass getStarter() {
+		return this.starter;
 	}
+	
+	public int getCurrHP() {
+		return this.currHP;
+	}
+
+	// -------------------Setters-------------------
 
 	public void setMana(int mana) {
 		this.mana = mana;
@@ -162,6 +164,14 @@ public class Player extends GameChar {
 		this.sklPt = sklPt;
 	}
 
+	public void setStarter(PlayerClass starter) {
+		this.starter = starter;
+	}
+	
+	public void setCurrHP(int currHP) {
+		this.currHP = currHP;
+	}
+
 	// -------------------Functions-------------------
 
 	/**
@@ -176,12 +186,13 @@ public class Player extends GameChar {
 	 */
 	public void profile() {
 
-		System.out.println("-----------------------YOUR PROFILE-----------------------------\n" + "Name: " + this.name
-				+ "\n" + "Level: " + this.level + "\n" + "EXP till next level: " + (int) (this.expThreshold - this.exp)
-				+ "\n" + "Max HP: " + this.health + "\t\t" + "Mana: " + this.mana + "\n" + "Luck: " + this.lvlLuck
-				+ "\t\t" + "Money: " + this.currency + "\n" + "\t\t\t-----Levels-----\n" + "Melee Lv: " + this.lvlMelee
-				+ "\t" + "Ranged Lv: " + this.lvlRanged + "\t" + "Rouge Lv: " + this.lvlRogue + "\t" + "Mage Lv: "
-				+ this.lvlMage + "\n" + "----------------------------------------------------------------\n");
+		System.out.println("-----------------------YOUR PROFILE-----------------------------\nName: " + this.getName()
+				+ "\nStarting Class: " + this.starter + "\nLevel: " + this.getLevel() + "\nEXP till next level: "
+				+ (int) (this.expThreshold - this.getExp()) + "\nMax HP: " + this.getHealth() + "\t\tMana: " + this.mana
+				+ "\nLuck: " + this.lvlLuck + "\t\tMoney: " + this.getCurrency() + "\n\t\t\t-----Levels-----\n"
+				+ "Melee Lv: " + this.lvlMelee + "\tRanged Lv: " + this.lvlRanged + "\tRouge Lv: " + this.lvlRogue
+				+ "\tMage Lv: " + this.lvlMage + "\nEquipped Weapon: " + this.getInventory().getWeapons().getFirst()
+				+ "----------------------------------------------------------------\n");
 
 	}
 
@@ -193,8 +204,10 @@ public class Player extends GameChar {
 	 */
 	public void selectMainhandWeapon(int index) {
 
-		if (this.inventory.getWeapons().get(index) != null) {
-			this.equipped = this.inventory.getWeapons().get(index);
+		if (this.getInventory().getWeapons().get(index) != null) {
+			Weapon temp = this.getInventory().getWeapons().get(index);
+			this.getInventory().getWeapons().set(0, temp);
+			this.getInventory().getWeapons().set(index, temp);
 		}
 
 	}
@@ -276,25 +289,27 @@ public class Player extends GameChar {
 	 */
 	public void lvlUp() {
 
-		if (this.exp < this.expThreshold) { // The player can't level up to begin with, so it exits the method
+		if (this.getExp() < this.expThreshold) { // The player can't level up to begin with, so it exits the method
 			return;
 		}
 
 		int count = 0; // Counts the number of level ups in one call of this method
 
-		while (this.exp >= this.expThreshold) { // Loops as long as their exp is above the threshold
-			this.level++; // Increments level by one
+		while (this.getExp() >= this.expThreshold) { // Loops as long as their exp is above the threshold
+			this.setLevel(this.getLevel() + 1); // Increments level by one
+			setHealth(getHealth() + (int) (getHealth() * 0.2)); // Increase health
+			mana += (int) (mana * 0.2); // Increase mana
 			this.sklPt++; // Adds a skill point on each loop.
-			this.exp -= (int) this.expThreshold; // Subtracts exp needed for current threshold
+			this.setExp(this.getExp() - (int) this.expThreshold); // Subtracts exp needed for current threshold
 			this.expThreshold *= 1.2; // Increase the threshold
 			count++;
 		}
 
 		if (count == 1) { // Only leveled up once in one sitting
-			System.out.println("Your level has increased to " + this.level + "! You've earned a skill point!");
+			System.out.println("Your level has increased to " + this.getLevel() + "! You've earned a skill point!");
 		} else { // Leveled up multiple times in one sitting
 			System.out.println(
-					"Your level has increased to " + this.level + "! You've earned " + count + " skill points!");
+					"Your level has increased to " + this.getLevel() + "! You've earned " + count + " skill points!");
 		}
 
 	}
