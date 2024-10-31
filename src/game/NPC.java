@@ -6,7 +6,7 @@ public class NPC extends Lootable {
 	
 	// -------------------Variables-------------------
 	
-	protected ArrayList<String> dialog;
+	private ArrayList<String> dialog;
 	
 	// -------------------Constructors-------------------
 	
