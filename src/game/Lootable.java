@@ -4,9 +4,9 @@ public class Lootable {
 	
 	// -------------------Variables-------------------
 	
-	protected Inventory inventory;
-	protected String name;
-	protected int currency;
+	private Inventory inventory;
+	private String name;
+	private int currency;
 	
 	// -------------------Constructors-------------------
 	
