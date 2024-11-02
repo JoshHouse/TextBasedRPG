@@ -4,59 +4,32 @@ import game.Weapon;
 
 public class WeaponList {
 
-	SpAtkList spAtk = new SpAtkList();
+	private SpAtkList spAtk = new SpAtkList();
 
 	/** Iron Sword */
-	public Weapon ironSword = new Weapon('w', "Iron Sword", "A common iron blade used by many fighters.", 1, 150, 26, 1,
-			true, 0, spAtk.none);
+	public Weapon sword1 = new Weapon("w001", "Iron Sword",
+			"A classic iron sword wielded by many fighters and warriors.", 1, 150, 19, 1, true);
 
 	/** Iron Axe */
-	public Weapon ironAxe = new Weapon('w', "Iron Axe", "A common one-handed axe used by many fighters.", 1, 150, 33, 1,
-			true, 0, spAtk.none);
+	public Weapon axe1 = new Weapon("w002", "Iron Axe", "A classic iron axe wielded by many fighters and warriors.", 1,
+			200, 24, 1, true);
+
+	/** Short Spear */
+	public Weapon spear1 = new Weapon("w003", "Short Spear",
+			"A spear whose pole is shorter than the standard length, making it easier to use.", 1, 100, 20, 1, true);
 
 	/** Scimitar */
-	public Weapon scimitar = new Weapon('w', "Scimitar",
-			"A curved sword that is favored by bandits and other criminals.", 1, 100, 26, 1, true, 0, spAtk.none);
-	/** War Hammer */
-	public Weapon warHammer = new Weapon('w', "War Hammer",
-			"A large, metal hammer that is often wielded by men of great stature.", 1, 200, 40, 1, true, 0,
-			spAtk.smash);
-
-	/** Scythe */
-	public Weapon scythe = new Weapon('w', "Scythe", "A weapon that's normally used by farmers for harvesting.", 1,
-			100, 37, 1, true, 0, spAtk.none);
+	public Weapon sword2 = new Weapon("w004", "Scimitar",
+			"A curved sword commonly favored by bandits, thieves, and pirates, it's unique shape requiring\ngreat skill to use.",
+			1, 150, 22, 1, true);
 
 	/** Spear */
-	public Weapon spear = new Weapon('w', "Spear",
-			"A polearm usually wielded by various knights and guards in the kingdom.", 1, 200, 30, 1, true, 0,
-			spAtk.thrust);
+	public Weapon spear2 = new Weapon("w005", "Spear", "A standard spear commonly wielded by soldiers of the kingdom.",
+			1, 250, 29, 1, true);
 
-	/** Pike */
-	public Weapon pike = new Weapon('w', "Pike",
-			"A polearm favored by elite warriors and knights, wielded in both hands due to it's size.", 2, 400, 48, 1,
-			true, 0, spAtk.spinSlash);
-
-	/** Greatsword */
-	public Weapon greatSword = new Weapon('w', "Greatsword", "A large sword wielded by many strong fighters.", 2, 350, 49,
-			1, true, 0, spAtk.smash);
-
-	/** Greataxe */
-	public Weapon greatAxe = new Weapon('w', "Greataxe", "A large axe that is commonly wielded by barbarians.", 2, 450,
-			55, 1, true, 0, spAtk.spinSlash);
-
-	/** Glaive */
-	public Weapon glaive = new Weapon('w', "Glaive",
-			"A polearm requiring great skill to master, and does not see much common use among warriors. Beware those that"
-					+ "\nare skilled enough to wield these weapons.",
-			2, 600, 60, 1, true, 0, spAtk.doubleSlash);
-
-	/** Rapier */
-	public Weapon rapier = new Weapon('w', "Rapier",
-			"An elegant straight sword commonly used to perform thrusting attacks.", 2, 250, 40, 1, true, 0,
-			spAtk.triThrust);
-	
-	/** Knight's Longsword */
-	public Weapon kSword = new Weapon('w', "Knight's Longsword",
-			"The standard issued weapon carried by the servants of the king.", 2, 500, 55, 1, true, 0, spAtk.none);
+	/** War Pick */
+	public Weapon axe2 = new Weapon("w006", "War Pick",
+			"A type of pick-axe designed to use in battle rather than for mining. Commonly used by horseback\nriders.",
+			1, 300, 30, 1, true);
 
 }
