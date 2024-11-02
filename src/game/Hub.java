@@ -9,12 +9,14 @@ public class Hub {
 	private String location;
 	private Shop shop;
 	private ArrayList<Enemy> enemies;
+	private String[] searchTxt;
 
-	public Hub(Player player, String location, Shop shop, ArrayList<Enemy> enemies) {
+	public Hub(Player player, String location, Shop shop, ArrayList<Enemy> enemies, String[] searchTxt) {
 		this.player = player;
 		this.location = location;
 		this.shop = shop;
 		this.enemies = enemies;
+		this.searchTxt = searchTxt;
 	}
 
 	// ----------------------------Getters----------------------------
@@ -35,6 +37,10 @@ public class Hub {
 		return this.enemies;
 	}
 
+	public String[] getSearchTxt() {
+		return this.searchTxt;
+	}
+
 	// ----------------------------Setters----------------------------
 
 	public void setPlayer(Player player) {
@@ -51,6 +57,10 @@ public class Hub {
 
 	public void setEnemies(ArrayList<Enemy> enemies) {
 		this.enemies = enemies;
+	}
+
+	public void setSearchTxt(String[] searchTxt) {
+		this.searchTxt = searchTxt;
 	}
 
 	// ---------------------------Functions---------------------------
@@ -104,17 +114,69 @@ public class Hub {
 				}
 				break;
 			case '2': // Look around for Enemies to fight
+
+				boolean searching = true;
+				boolean continuing = false;
+				boolean battling = false;
+
+				while (searching) {
+
+					continuing = false;
+
+					if (Luck.luckEvent(50)) {
+						Dialogue.infoDialogue("Enemy Found!\n\n", 4);
+						searching = false;
+						battling = true;
+					} else {
+
+						int num = Luck.getRandNum(this.searchTxt.length);
+						Dialogue.infoDialogue(this.searchTxt[num], 15);
+						Pause.pause(500);
+
+						while (!continuing) {
+							Dialogue.infoDialogue("\n\n1) Continue Searching\t\t2) Stop Searching\nYour Choice: ", 4);
+							input = scn.next().charAt(0);
+
+							switch (input) {
+
+							case '1':
+								continuing = true;
+								System.out.println();
+								break;
+							case '2':
+								continuing = true;
+								searching = false;
+								break;
+							default:
+								System.err.println("[---Invalid Option. Try Again.--]\n");
+								Pause.pause(350);
+								break;
+
+							}
+						}
+
+					}
+
+				}
+
+				if (battling) {
+					new Battle();
+				}
+
+				Pause.pause(1500);
 				break;
 			case '3': // Visit the available Shop
 				shop.startShop();
 				break;
 			case '4': // Switch your equipped weapon
+				player.selectMainhandWeapon(scn);
 				break;
 			case '5': // Progress the story
 				break;
 			case '6': // Rest and recover
 				player.setCurrency(player.getCurrency() - 100);
 				Dialogue.infoDialogue("\nYou've paid 100 gold to rest and recover your health.\n", 10);
+				Pause.pause(2000);
 				break;
 			case '7': // Save and Exit
 				inHub = false;
