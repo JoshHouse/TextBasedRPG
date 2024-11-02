@@ -32,4 +32,9 @@ public class WeaponList {
 			"A type of pick-axe designed to use in battle rather than for mining. Commonly used by horseback\nriders.",
 			1, 300, 30, 1, true);
 
+	/** Rapier */
+	public Weapon sword3 = new Weapon("w007", "Rapier",
+			"A thrusting sword. Lightweight and quick, this weapon is good for rapid attacks,\nbut has low base damage.",
+			1, 180, 14, 1, true, spAtk.x3Thrust);
+
 }
