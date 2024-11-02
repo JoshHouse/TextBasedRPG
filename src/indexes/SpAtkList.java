@@ -3,50 +3,14 @@ package indexes;
 import game.SpecialAttack;
 
 public class SpAtkList {
-	
-	/**
-	 * No special attack.
-	 */
-	SpecialAttack none = new SpecialAttack();
-	
-	/**
-	 * Smash - Slam the weapon down with all your might to do a large amount of
-	 * damage!
-	 */
-	SpecialAttack smash = new SpecialAttack("Smash",
-			"Slam the weapon down with all your might to do a large amount of damage!", 1.8);
 
-	/**
-	 * Spinning Slash - Spin your body and your weapon around and use the momentum
-	 * to dish out a large amount of damage!
-	 */
-	SpecialAttack spinSlash = new SpecialAttack("Spinning Slash",
-			"Spin your body and your weapon around and use the momentum to dish out a large amount of damage!", 1.5);
+	/** No special attack. */
+	public static SpecialAttack none = new SpecialAttack();
 
-	/**
-	 * Double Slash - Perform two attacks at once by spinning the weapon vertically
-	 * with great dexterity!
-	 */
-	SpecialAttack doubleSlash = new SpecialAttack("Double Slash",
-			"Perform two attacks at once by spinning the weapon vertically with great dexterity!", 2.0);
-
-	/**
-	 * Thrust - Thrust out your weapon forward will all your might, and deal a great
-	 * amount of damage!
-	 */
-	SpecialAttack thrust = new SpecialAttack("Thrust",
-			"Thrust out your weapon forward will all your might, and deal a great amount of damage!", 1.3);
-
-	/**
-	 * Triple Thrust - Perform three quick thrusts of your sword before your
-	 * opponent can retaliate!
-	 */
-	SpecialAttack triThrust = new SpecialAttack("Triple Thrust",
-			"Perform three quick thrusts of your sword before your opponent can retaliate!", (1.3 * 3));
-
-	/**
-	 * Crunch - Crush your opponent with your mighty jaws!
-	 */
-	SpecialAttack crunch = new SpecialAttack("Crunch", "Crush your opponent with your mighty jaws!", 1.6);
+	/** Triple Thrust. */
+	public SpecialAttack x3Thrust = new SpecialAttack("Triple Thrust",
+			"Ready your weapon and perform three consecutive thrusts in a row, dealing triple damage to your enemy!",
+			" thrusts out their blade, striking their foe thrice before they can retaliate!",
+			" thrust out their blade thrice, yet their foe was quicker, and avoided all three strikes.", 3.0);
 
 }
