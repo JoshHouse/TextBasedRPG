@@ -60,6 +60,26 @@ public class Weapon extends Item {
 	}
 
 	/**
+	 * Constructor that initializes weapons that are sellable, but use no mana and
+	 * have special attacks.
+	 * 
+	 * @param name
+	 * @param info
+	 * @param rarity
+	 * @param inputValue
+	 * @param damage
+	 * @param dmgType
+	 * @param inputIsSellable
+	 */
+	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
+			Boolean inputIsSellable, SpecialAttack spAtk) {
+		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
+		this.manaUsage = 0;
+		this.specialAttack = spAtk;
+
+	}
+
+	/**
 	 * Constructor that instantiates weapons that are not sellable. Sets IsSellable
 	 * to False and Value to 0
 	 * 
@@ -171,9 +191,7 @@ public class Weapon extends Item {
 
 		// If the weapon has a special attack, it is added on
 		if (this.getSpecialAttack().getAtkMultiplier() != 1.0) { // 1.0 = no damage multiplied
-			info = info + this.getSpecialAttack().toString();
-		} else {
-			info = info + "---No Special Attack---";
+			info = info + this.getSpecialAttack().displayInfo();
 		}
 
 		// Print the info
