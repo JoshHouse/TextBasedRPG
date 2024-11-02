@@ -83,13 +83,9 @@ public class Consumable extends Item {
 	// ---------------------Functions-------------------
 	
 	public void displayInfo() {
-		System.out.println("----------" + this.getName() + "----------\n" + 
-					"Description : " + this.getInfo() + "\n" + 
-					"Rarity: " + this.getRarity() + "\n" + 
-					"Damage: " + this.getDamage() + "\n" + 
-					"Damage Type : " + this.getDamageType() + "\n" + 
-					"Count: "  + this.getCount() + "\n" +
-					"--------------------\n");
+		System.out.println("----------" + this.getName() + "----------\n" + this.getInfo() + "\n" + 
+					"Rarity: " + this.getRarity() + "\t\tDamage: " + this.getDamage() + "\t\tType: " + this.getDamageType()
+					+ "\"Amount Held: "  + this.getCount() + "\n--------------------\n");
 	}
 	
 	public boolean equals(Consumable consumable) {
