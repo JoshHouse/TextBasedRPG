@@ -31,7 +31,10 @@ public class SpecialAttack {
 	 *                      stat by.
 	 */
 	public SpecialAttack(String name, String info, String hitTxt, String missTxt, double atkMult) {
+		this.name = name;
 		this.info = info;
+		this.hitTxt = hitTxt;
+		this.missTxt = missTxt;
 		this.atkMultiplier = atkMult;
 	}
 
@@ -44,9 +47,9 @@ public class SpecialAttack {
 	void useSpAtk(int luckVal) {
 		
 		if (Luck.luckEvent(luckVal)) {
-			Dialogue.infoDialogue(hitTxt);
+			Dialogue.infoDialogue(hitTxt, 30);
 		} else {
-			Dialogue.infoDialogue(missTxt);
+			Dialogue.infoDialogue(missTxt, 30);
 		}
 
 	}
@@ -93,6 +96,16 @@ public class SpecialAttack {
 
 	public void setAtkMultiplier(double atkMultiplier) {
 		this.atkMultiplier = atkMultiplier;
+	}
+	
+	// --------------------------------Functions--------------------------------
+
+	/**
+	 * Sends the special attack info for displaying.
+	 * @return
+	 */
+	public String displayInfo() {
+		return "\nSpecial Attack: " + this.name + "\n" + this.info + "\n";
 	}
 
 	// ---------------------------Overridden Methods---------------------------
