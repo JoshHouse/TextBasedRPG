@@ -201,10 +201,11 @@ public class Player extends GameChar {
 		String query;
 		boolean viewing = true;
 
-		switch (key) {
+		switch (key) { // Using the key, we determine with inventory to view.
 
 		case 'c':
 
+			// Leave the inventory if there are no consumables.
 			if (this.getInventory().getConsumables().isEmpty()) {
 				System.out.println("---You have no consumables.---");
 				viewing = false;
@@ -215,7 +216,9 @@ public class Player extends GameChar {
 
 			while (viewing) {
 
-				arrlen = this.getInventory().getConsumables().size();
+				arrlen = this.getInventory().getConsumables().size(); // Get the array's size
+
+				// Loop through the array and print out the names of each item.
 				for (int i = 0; i < arrlen; i++) {
 					query = (i + 1) + ") " + this.getInventory().getConsumables().get(i).getName();
 					Dialogue.infoDialogue(query, 6);
@@ -225,9 +228,10 @@ public class Player extends GameChar {
 						System.out.print("\t\t");
 					}
 				}
-				query = (arrlen + 1) + ") Cancel\nYour Choice: ";
+				query = (arrlen + 1) + ") Cancel\nYour Choice: "; // Cancel option
 				Dialogue.infoDialogue(query, 6);
 
+				// Tries user input, and catches two exceptions
 				try {
 					input = scn.nextInt();
 
@@ -241,6 +245,7 @@ public class Player extends GameChar {
 				} catch (IndexOutOfBoundsException | InputMismatchException e) {
 					System.err.println("[---Invalid Option. Try Again.--]\n");
 					Pause.pause(350);
+					scn.nextLine(); // Prevents scanner from re-reading the invalid input.
 				}
 			}
 
@@ -251,7 +256,9 @@ public class Player extends GameChar {
 
 			while (viewing) {
 
-				arrlen = this.getInventory().getWeapons().size();
+				arrlen = this.getInventory().getWeapons().size(); // Get the array's size
+
+				// Loop through the array and print out the names of each item.
 				for (int i = 0; i < arrlen; i++) {
 					query = (i + 1) + ") " + this.getInventory().getWeapons().get(i).getName();
 					Dialogue.infoDialogue(query, 6);
@@ -261,9 +268,10 @@ public class Player extends GameChar {
 						System.out.print("\t\t");
 					}
 				}
-				query = (arrlen + 1) + ") Cancel\nYour Choice: ";
+				query = (arrlen + 1) + ") Cancel\nYour Choice: "; // Cancel option
 				Dialogue.infoDialogue(query, 6);
 
+				// Tries user input, and catches two exceptions
 				try {
 					input = scn.nextInt();
 
@@ -277,7 +285,7 @@ public class Player extends GameChar {
 				} catch (IndexOutOfBoundsException | InputMismatchException e) {
 					System.err.println("[---Invalid Option. Try Again.--]\n");
 					Pause.pause(350);
-					scn.nextLine();
+					scn.nextLine(); // Prevents scanner from re-reading the invalid input.
 				}
 			}
 			break;
@@ -293,15 +301,60 @@ public class Player extends GameChar {
 	 * Changes the mainhand weapon of the player, based on the weapons in their
 	 * inventory.
 	 * 
-	 * @param index - The index of the weapon in inventory.
+	 * @param scn - Scanner object
 	 */
-	public void selectMainhandWeapon(int index) {
+	public void selectMainhandWeapon(Scanner scn) {
 
-		if (this.getInventory().getWeapons().get(index) != null) {
-			Weapon temp = this.getInventory().getWeapons().get(index);
-			this.getInventory().getWeapons().set(0, temp);
-			this.getInventory().getWeapons().set(index, temp);
+		String print;
+		int index = 0, arrlen = this.getInventory().getWeapons().size();
+		boolean selecting = true;
+		
+		Dialogue.infoDialogue("\nSelect the weapon you want to equip.\n", 10);
+
+		while (selecting) {
+
+			for (int i = 1; i < this.getInventory().getWeapons().size(); i++) {
+				print = this.getInventory().getWeapons().get(i).getName();
+				Dialogue.infoDialogue(i + ") " + print, 5);
+				if (i % 3 == 0) {
+					System.out.print("\n");
+				} else {
+					System.out.print("\t\t");
+				}
+			}
+			Dialogue.infoDialogue(arrlen + ") Cancel\nYour Choice: ", 5); // Cancel option
+
+			// Tries user input, and catches two exceptions
+			try {
+				index = scn.nextInt();
+
+				if (index == arrlen) {
+					selecting = false;
+				} else {
+
+					if (this.getInventory().getWeapons().get(index) != null) {
+
+						Weapon temp = this.getInventory().getWeapons().get(index);
+						Weapon first = this.getInventory().getWeapons().getFirst();
+						this.getInventory().getWeapons().set(0, temp);
+						this.getInventory().getWeapons().set(index, first);
+
+						Dialogue.infoDialogue(temp.getName() + " has been equipped.\n\n", 10);
+
+					}
+
+					selecting = false;
+				}
+
+			} catch (IndexOutOfBoundsException | InputMismatchException e) {
+				System.err.println("[---Invalid Option. Try Again.--]\n");
+				Pause.pause(350);
+				scn.nextLine(); // Prevents scanner from re-reading the invalid input.
+			}
+
 		}
+
+		Pause.pause();
 
 	}
 
@@ -321,6 +374,7 @@ public class Player extends GameChar {
 
 		if (this.sklPt <= 0) { // Exit the method if it is called when there's no skill points
 			System.out.println("You don't have any skill points to use.");
+			Pause.pause(500);
 			return;
 		}
 
