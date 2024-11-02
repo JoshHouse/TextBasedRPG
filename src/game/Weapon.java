@@ -1,7 +1,7 @@
 package game;
 
 public class Weapon extends Item {
-	
+
 	// -------------------Variables-------------------
 
 	private int manaUsage;
@@ -19,7 +19,7 @@ public class Weapon extends Item {
 	}
 
 	/**
-	 * Constructor that initializes all value s
+	 * Constructor that initializes all values
 	 * 
 	 * @param name
 	 * @param info
@@ -36,7 +36,27 @@ public class Weapon extends Item {
 		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = spAtk;
-		
+
+	}
+
+	/**
+	 * Constructor that initializes weapons that are sellable, but use no mana and
+	 * have no special attacks.
+	 * 
+	 * @param name
+	 * @param info
+	 * @param rarity
+	 * @param inputValue
+	 * @param damage
+	 * @param dmgType
+	 * @param inputIsSellable
+	 */
+	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
+			Boolean inputIsSellable) {
+		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
+		this.manaUsage = 0;
+		this.specialAttack = new SpecialAttack();
+
 	}
 
 	/**
@@ -51,8 +71,8 @@ public class Weapon extends Item {
 	 * @param manaUsage
 	 * @param spAtk
 	 */
-	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType,
-			int manaUsage, SpecialAttack spAtk) {
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, int manaUsage,
+			SpecialAttack spAtk) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = spAtk;
@@ -69,8 +89,7 @@ public class Weapon extends Item {
 	 * @param dmgType
 	 * @param spAtk
 	 */
-	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType,
-			SpecialAttack spAtk) {
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, SpecialAttack spAtk) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = 0;
 		this.specialAttack = spAtk;
@@ -105,8 +124,7 @@ public class Weapon extends Item {
 	 * @param dmgType
 	 * @param manaUsage
 	 */
-	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType,
-			int manaUsage) {
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, int manaUsage) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = new SpecialAttack();
@@ -122,8 +140,6 @@ public class Weapon extends Item {
 	public SpecialAttack getSpecialAttack() {
 		return this.specialAttack;
 	}
-	
-
 
 	// -------------------Setters-------------------
 
@@ -134,27 +150,41 @@ public class Weapon extends Item {
 	public void setSpecialAttack(SpecialAttack spAtk) {
 		this.specialAttack = spAtk;
 	}
-	
 
-	
 	// -------------------Functions------------------
-	
+
+	/**
+	 * Displays the basic information about a weapon, omitting some information when
+	 * it does not need to be shown.
+	 */
 	public void displayInfo() {
-		System.out.println("----------" + this.getName() + "----------\n" + 
-					"Description : " + this.getInfo() + "\n" + 
-					"Rarity: " + this.getRarity() + "\n" + 
-					"Damage: " + this.getDamage() + "\n" + 
-					"Damage Type : " + this.getDamageType() + "\n" + 
-					"Mana Usage: "  + this.getManaUsage() + "\n" +
-					this.getSpecialAttack().toString() +
-					"--------------------\n");
+
+		// Bae information
+		String info = "------------" + this.getName() + "------------\n" + this.getInfo() + "\nRarity: "
+				+ this.getRarity() + "\t\tDamage: " + this.getDamage() + "\t\tType: " + this.getDamageType()
+				+ "\nMana Usage: " + this.manaUsage + "\n";
+
+		// If the weapon is sellable, the value is added on.
+		if (this.isSellable()) {
+			info = info + "Value: " + this.getValue() + " Gold\n";
+		}
+
+		// If the weapon has a special attack, it is added on
+		if (this.getSpecialAttack().getAtkMultiplier() != 1.0) { // 1.0 = no damage multiplied
+			info = info + this.getSpecialAttack().toString();
+		} else {
+			info = info + "---No Special Attack---";
+		}
+
+		// Print the info
+		System.out.println(info + "\n--------------------\n");
+
 	}
 
 	// -------------------toString-------------------
 
+	@Override
 	public String toString() {
-		return super.toString() + 
-				this.specialAttack.toString() + 
-				"Mana Usage: " + this.manaUsage + "\n";
+		return super.toString() + this.specialAttack.toString() + "Mana Usage: " + this.manaUsage + "\n";
 	}
 }
