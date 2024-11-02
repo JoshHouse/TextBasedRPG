@@ -6,7 +6,6 @@ public class Weapon extends Item {
 
 	private int manaUsage;
 	private SpecialAttack specialAttack;
-	private PlayerClass scaling;
 
 	// -------------------Constructors-------------------
 
@@ -17,7 +16,6 @@ public class Weapon extends Item {
 		super('w');
 		this.manaUsage = 0;
 		this.specialAttack = new SpecialAttack();
-		this.scaling = PlayerClass.NONE;
 	}
 
 	/**
@@ -34,11 +32,10 @@ public class Weapon extends Item {
 	 * @param spAtk
 	 */
 	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
-			Boolean inputIsSellable, int manaUsage, SpecialAttack spAtk, PlayerClass scaling) {
+			Boolean inputIsSellable, int manaUsage, SpecialAttack spAtk) {
 		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = spAtk;
-		this.scaling = scaling;
 		
 	}
 
@@ -55,11 +52,10 @@ public class Weapon extends Item {
 	 * @param spAtk
 	 */
 	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType,
-			int manaUsage, SpecialAttack spAtk, PlayerClass scaling) {
+			int manaUsage, SpecialAttack spAtk) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = spAtk;
-		this.scaling = scaling;
 	}
 
 	/**
@@ -74,11 +70,10 @@ public class Weapon extends Item {
 	 * @param spAtk
 	 */
 	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType,
-			SpecialAttack spAtk, PlayerClass scaling) {
+			SpecialAttack spAtk) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = 0;
 		this.specialAttack = spAtk;
-		this.scaling = scaling;
 	}
 
 	/**
@@ -92,11 +87,10 @@ public class Weapon extends Item {
 	 * @param damage
 	 * @param dmgType
 	 */
-	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, PlayerClass scaling) {
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = 0;
 		this.specialAttack = new SpecialAttack();
-		this.scaling = scaling;
 	}
 
 	/**
@@ -112,11 +106,11 @@ public class Weapon extends Item {
 	 * @param manaUsage
 	 */
 	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType,
-			int manaUsage, PlayerClass scaling) {
+			int manaUsage) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = new SpecialAttack();
-		this.scaling = scaling;
+
 	}
 
 	// -------------------Getters-------------------
@@ -129,9 +123,7 @@ public class Weapon extends Item {
 		return this.specialAttack;
 	}
 	
-	public PlayerClass getScaling() {
-		return scaling;
-	}
+
 
 	// -------------------Setters-------------------
 
@@ -143,9 +135,7 @@ public class Weapon extends Item {
 		this.specialAttack = spAtk;
 	}
 	
-	public void setScaling(PlayerClass scaling) {
-		this.scaling = scaling;
-	}
+
 	
 	// -------------------Functions------------------
 	
