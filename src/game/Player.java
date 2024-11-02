@@ -1,5 +1,6 @@
 package game;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player extends GameChar {
@@ -14,7 +15,6 @@ public class Player extends GameChar {
 	private int lvlRogue;
 	private int lvlLuck;
 	private int sklPt = 4;
-	private PlayerClass starter;
 	private int currHP; // Current HP. Used for battles.
 
 	// -------------------Constructors-------------------
@@ -31,7 +31,6 @@ public class Player extends GameChar {
 		this.lvlMage = 1;
 		this.lvlRogue = 1;
 		this.lvlLuck = 1;
-		this.starter = PlayerClass.NONE;
 		this.currHP = this.getHealth();
 	}
 
@@ -122,10 +121,6 @@ public class Player extends GameChar {
 		return this.sklPt;
 	}
 
-	public PlayerClass getStarter() {
-		return this.starter;
-	}
-	
 	public int getCurrHP() {
 		return this.currHP;
 	}
@@ -164,10 +159,6 @@ public class Player extends GameChar {
 		this.sklPt = sklPt;
 	}
 
-	public void setStarter(PlayerClass starter) {
-		this.starter = starter;
-	}
-	
 	public void setCurrHP(int currHP) {
 		this.currHP = currHP;
 	}
@@ -187,12 +178,114 @@ public class Player extends GameChar {
 	public void profile() {
 
 		System.out.println("-----------------------YOUR PROFILE-----------------------------\nName: " + this.getName()
-				+ "\nStarting Class: " + this.starter + "\nLevel: " + this.getLevel() + "\nEXP till next level: "
-				+ (int) (this.expThreshold - this.getExp()) + "\nMax HP: " + this.getHealth() + "\t\tMana: " + this.mana
-				+ "\nLuck: " + this.lvlLuck + "\t\tMoney: " + this.getCurrency() + "\n\t\t\t-----Levels-----\n"
-				+ "Melee Lv: " + this.lvlMelee + "\tRanged Lv: " + this.lvlRanged + "\tRouge Lv: " + this.lvlRogue
-				+ "\tMage Lv: " + this.lvlMage + "\nEquipped Weapon: " + this.getInventory().getWeapons().getFirst()
-				+ "----------------------------------------------------------------\n");
+				+ "\nLevel: " + this.getLevel() + "\nEXP till next level: " + (int) (this.expThreshold - this.getExp())
+				+ "\nMax HP: " + this.getHealth() + "\t\tMana: " + this.mana + "\nLuck: " + this.lvlLuck
+				+ "\t\t\tMoney: " + this.getCurrency() + "\n\t\t\t-----Levels-----\n" + "Melee Lv: " + this.lvlMelee
+				+ "\tRanged Lv: " + this.lvlRanged + "\tRouge Lv: " + this.lvlRogue + "\tMage Lv: " + this.lvlMage
+				+ "\nEquipped Weapon: " + this.getInventory().getWeapons().getFirst().getName()
+				+ "\n----------------------------------------------------------------\n");
+
+	}
+
+	/**
+	 * Allows the player to view their inventories. The player will be either taken
+	 * to their inventory of weapons or consumables, and can get more information
+	 * about each item while viewing them.
+	 * 
+	 * @param key - Determines which inventory the player has decided to open.
+	 * @param scn - Scanner object
+	 */
+	public void showInventory(char key, Scanner scn) {
+
+		int arrlen, input;
+		String query;
+		boolean viewing = true;
+
+		switch (key) {
+
+		case 'c':
+
+			if (this.getInventory().getConsumables().isEmpty()) {
+				System.out.println("---You have no consumables.---");
+				viewing = false;
+				Pause.pause();
+			} else {
+				Dialogue.infoDialogue("Type the number to read more about the item, or to return to the menu.\n", 6);
+			}
+
+			while (viewing) {
+
+				arrlen = this.getInventory().getConsumables().size();
+				for (int i = 0; i < arrlen; i++) {
+					query = (i + 1) + ") " + this.getInventory().getConsumables().get(i).getName();
+					Dialogue.infoDialogue(query, 6);
+					if ((i + 1) % 3 == 0) {
+						System.out.print("\n");
+					} else {
+						System.out.print("\t\t");
+					}
+				}
+				query = (arrlen + 1) + ") Cancel\nYour Choice: ";
+				Dialogue.infoDialogue(query, 6);
+
+				try {
+					input = scn.nextInt();
+
+					if (input == arrlen + 1) {
+						viewing = false;
+					} else {
+						this.getInventory().getConsumables().get(input - 1).displayInfo();
+						Pause.pause();
+					}
+
+				} catch (IndexOutOfBoundsException | InputMismatchException e) {
+					System.err.println("[---Invalid Option. Try Again.--]\n");
+					Pause.pause(350);
+				}
+			}
+
+			break;
+		case 'w':
+
+			Dialogue.infoDialogue("Type the number to read more about the weapon, or to return to the menu.\n", 6);
+
+			while (viewing) {
+
+				arrlen = this.getInventory().getWeapons().size();
+				for (int i = 0; i < arrlen; i++) {
+					query = (i + 1) + ") " + this.getInventory().getWeapons().get(i).getName();
+					Dialogue.infoDialogue(query, 6);
+					if ((i + 1) % 3 == 0) {
+						System.out.print("\n");
+					} else {
+						System.out.print("\t\t");
+					}
+				}
+				query = (arrlen + 1) + ") Cancel\nYour Choice: ";
+				Dialogue.infoDialogue(query, 6);
+
+				try {
+					input = scn.nextInt();
+
+					if (input == arrlen + 1) {
+						viewing = false;
+					} else {
+						this.getInventory().getWeapons().get(input - 1).displayInfo();
+						Pause.pause();
+					}
+
+				} catch (IndexOutOfBoundsException | InputMismatchException e) {
+					System.err.println("[---Invalid Option. Try Again.--]\n");
+					Pause.pause(350);
+					scn.nextLine();
+				}
+			}
+			break;
+		default:
+			System.err.println("There was an error.\nThe wrong variable has been provided.");
+			return;
+
+		}
 
 	}
 
