@@ -113,11 +113,10 @@ public class Shop {
 	/**
 	 * Starts the shop functionality, handling all menus, buying, and selling functionality
 	 */
-	public void startShop() {
+	public void startShop(Scanner scn) {
 
 		int shopMenu = 0; // Handles shop menu choice
 		boolean isShopping = true; // When player finishes shopping, it will be set to false
-		Scanner keyboard = new Scanner(System.in); // Gets player inputs
 		
 		
 		// Print statements for entering the shop
@@ -133,18 +132,18 @@ public class Shop {
 						"1) Buy\n" + 
 						"2) Sell\n" + 
 						"3) Leave\n");
-			shopMenu = keyboard.nextInt();
+			shopMenu = scn.nextInt();
 			
 			// Switch statement for player menu choice
 			switch (shopMenu) {
 			
 			case 1: // Buy
-				this.BuyMenu(keyboard);	// Handles buy menu functionality. Passes keyboard scanner into the buy menu
+				this.BuyMenu(scn);	// Handles buy menu functionality. Passes scn scanner into the buy menu
 				breakLine();
 				break;
 				
 			case 2: // Sell
-				this.SellMenu(keyboard); // Handles sell menu functionality. Passes keyboard scanner into the sell menu
+				this.SellMenu(scn); // Handles sell menu functionality. Passes scn scanner into the sell menu
 				breakLine();
 				break;
 				
@@ -161,8 +160,6 @@ public class Shop {
 
 		}
 		
-		// Closes keyboard scanner and prints the leaving shop text
-		keyboard.close();
 		System.out.println(this.getShopkeeper().getExitShopDialog());
 		System.out.println("-------------Leaving: " + this.getName() + "-------------\n");
 
@@ -177,9 +174,9 @@ public class Shop {
 	/**
 	 * Handles all buy menu functionality
 	 * 
-	 * @param keyboard	- For user input
+	 * @param scn	- For user input
 	 */
-	private void BuyMenu(Scanner keyboard) {
+	private void BuyMenu(Scanner scn) {
 		boolean isBuying = true;	// Keeps user in the buy menu while buying. Is set to false based on user menu choice
 		int pMainMenuChoice = 0;	// Holds user menu choice
 		
@@ -195,17 +192,17 @@ public class Shop {
 					"1) Weapons\n" + 
 					"2) Consumables\n" + 
 					"3) Cancel");
-			pMainMenuChoice = keyboard.nextInt();
+			pMainMenuChoice = scn.nextInt();
 			
 			// Switch statement to process user choice
 			switch (pMainMenuChoice) {
 			
 			case 1:	// Weapons buy menu
-				this.weaponsBuyMenu(keyboard);	// Handles the weapons buy menu functionality
+				this.weaponsBuyMenu(scn);	// Handles the weapons buy menu functionality
 				break;
 			
 			case 2: // Consumables buy menu
-				this.consumablesBuyMenu(keyboard); // Handles the consumables buy menu functionality
+				this.consumablesBuyMenu(scn); // Handles the consumables buy menu functionality
 				break;
 			
 			case 3: // Back to main menu
@@ -228,9 +225,9 @@ public class Shop {
 	/**
 	 * Handles weapon buy menu functionality
 	 * 
-	 * @param keyboard	- For taking user input
+	 * @param scn	- For taking user input
 	 */
-	public void weaponsBuyMenu(Scanner keyboard) {
+	public void weaponsBuyMenu(Scanner scn) {
 		ArrayList<Weapon> tempWeaponsArray = this.getShopkeeper().getInventory().getWeapons(); // For storing weapon purchase options. Prevents repeating get statements
 		boolean isBuyingWeapons;	// Keeps player in buying weapons menu. Set to false based on user choice
 		int pMenuChoice, pItemChoice = 0;	// pMenuChoice processes user decision for menu. pItemChoice processes user decision for inspecting items
@@ -250,14 +247,14 @@ public class Shop {
 					"1) Ready to purchase!\n" +
 					"2) I want more details on an item\n" +
 					"3) I would like to look at my other options");
-			pMenuChoice = keyboard.nextInt();
+			pMenuChoice = scn.nextInt();
 			
 			// Switch statement for processing user's menu choice
 			switch (pMenuChoice) {
 			
 			case 1: // Make a purchase
 				breakLine();
-				this.attemptWeaponPurchase(keyboard, tempWeaponsArray);	// Processes weapons purchase functionality. Takes keyboard scanner and weapons array
+				this.attemptWeaponPurchase(scn, tempWeaponsArray);	// Processes weapons purchase functionality. Takes scn scanner and weapons array
 				break;
 			
 			case 2: // More details on an item
@@ -265,7 +262,7 @@ public class Shop {
 				breakLine();
 				this.printInventoryWeaponsArray(tempWeaponsArray);
 				System.out.println("What is the number of the item you would like to hear more about?");
-				pItemChoice = keyboard.nextInt();	// Will be one based. printInventoryWeaponsArray function prints list as one based list
+				pItemChoice = scn.nextInt();	// Will be one based. printInventoryWeaponsArray function prints list as one based list
 				
 				// If statement to ensure that player's choice is in the array. Player choice is 1 based so must be converted to 0 based in calculations
 				if (pItemChoice - 1 < tempWeaponsArray.size() && pItemChoice - 1 >= 0) {
@@ -305,10 +302,10 @@ public class Shop {
 	/**
 	 * Handles Weapons Purchase functionality
 	 * 
-	 * @param keyboard		-For handling user input
+	 * @param scn		-For handling user input
 	 * @param arrayList		-For displaying weapons options and calculations on user purchase choices
 	 */
-	public void attemptWeaponPurchase(Scanner keyboard, ArrayList<Weapon> arrayList) {
+	public void attemptWeaponPurchase(Scanner scn, ArrayList<Weapon> arrayList) {
 		boolean successfulPurchase;  	// Tracks whether the purchase was successful
 		boolean isPurchacing;			// Used to keep user in the purchasing menu
 		int pItemChoice = 0;			// Stores user item purchase choice
@@ -327,7 +324,7 @@ public class Shop {
 			// Prints player's currency, prompts the user for what item they would like to purchase, and stores user's choice.
 			this.printPlayerCurrency();
 			System.out.println("What is the number of the item you would like to buy?");
-			pItemChoice = keyboard.nextInt();
+			pItemChoice = scn.nextInt();
 			
 			// If statement to ensure players choice is on the list. pItemChoice - 1 <= arrayList.size() is to include cancel as the last option
 			if (pItemChoice - 1 <= arrayList.size() && pItemChoice - 1 >= 0) {
@@ -394,9 +391,9 @@ public class Shop {
 	/**
 	 * Handles consumables buy menu functionality
 	 * 
-	 * @param keyboard		- for processing user input
+	 * @param scn		- for processing user input
 	 */
-	public void consumablesBuyMenu(Scanner keyboard) {
+	public void consumablesBuyMenu(Scanner scn) {
 		ArrayList<Consumable> tempConsumablesArray = this.getShopkeeper().getInventory().getConsumables(); // Stores shopkeepers consumable options. Prevents repeating get calls
 		boolean isBuyingConsumables = true;	// Keeps user in the consumables buy menu. Is set to false based on user's choice
 		int pMenuChoice, pItemChoice = 0;	// pMenuChoice stores user menu choice. pItemChoice stores user's consumable choice for inspect functionality
@@ -416,14 +413,14 @@ public class Shop {
 					"1) Ready to purchase!\n" +
 					"2) I want more details on an item\n" +
 					"3) I would like to look at my other options");
-			pMenuChoice = keyboard.nextInt();
+			pMenuChoice = scn.nextInt();
 			
 			// Switch statement for processing player's menu choice
 			switch (pMenuChoice) {
 			
 			case 1: // Make a purchase
 				breakLine();
-				this.attemptConsumablePurchase(keyboard, tempConsumablesArray);	// Handles consumable purchase functionality
+				this.attemptConsumablePurchase(scn, tempConsumablesArray);	// Handles consumable purchase functionality
 				break;
 			
 			case 2: // More details on an item
@@ -432,7 +429,7 @@ public class Shop {
 				// Prints purchasable consumables array and prompts the user for what item they would like to know more about. Then stores user's choice
 				this.printInventoryConsumableArray(tempConsumablesArray);
 				System.out.println("What is the number of the item you would like to hear more about?");
-				pItemChoice = keyboard.nextInt();
+				pItemChoice = scn.nextInt();
 				
 				// If statement to ensure user's choice is in the consumables array. user's choice will always be 1 based so needs to be converted to 0 based in calculations
 				if (pItemChoice - 1 < tempConsumablesArray.size() && pItemChoice - 1 >= 0) {
@@ -471,10 +468,10 @@ public class Shop {
 	/**
 	 * Handles consumable purchase functionality
 	 * 
-	 * @param keyboard		- For processing user input
+	 * @param scn		- For processing user input
 	 * @param arrayList		- Consumable array for printing and calculations
 	 */
-	public void attemptConsumablePurchase(Scanner keyboard, ArrayList<Consumable> arrayList) {
+	public void attemptConsumablePurchase(Scanner scn, ArrayList<Consumable> arrayList) {
 		boolean successfulPurchase; 	// Variable for storing whether the purchase was successful
 		boolean isPurchacing = true;	// Variable for keeping user in the purchasing menu
 		int pItemChoice = 0;			// Variable for storing user's consumable purchase choice
@@ -492,7 +489,7 @@ public class Shop {
 			// Prints player's current currency, then prompts the user to select an item they would like to purchase. Then stores that choice in pItemChoice
 			this.printPlayerCurrency();
 			System.out.println("What is the number of the item you would like to buy?");
-			pItemChoice = keyboard.nextInt();
+			pItemChoice = scn.nextInt();
 			
 			// If statement to ensure pItemChoice is in the consumable array. pItemChoice - 1 <= arrayList.size() to account for the cancel option
 			if (pItemChoice - 1 <= arrayList.size() && pItemChoice - 1 >= 0) {
@@ -507,7 +504,7 @@ public class Shop {
 					
 				} else { // For processing user purchase when they did not decide to cancel
 					// Attempts to purchase consumable with special considerations for the count variable. returns a boolean if purchase was successful
-					successfulPurchase = this.buyingConsumables(keyboard, arrayList.get(pItemChoice - 1), this.getPlayer().getInventory().getConsumables());
+					successfulPurchase = this.buyingConsumables(scn, arrayList.get(pItemChoice - 1), this.getPlayer().getInventory().getConsumables());
 					
 					// Due to the special considerations of the count variable, error messages for why they could or could not purchase the item vary
 					// so the print statements are handled in the buyingConsumables function
@@ -527,12 +524,12 @@ public class Shop {
 	 * Handles the buying functionality of consumables with special considerations for the count variable
 	 * Handles print statements based on the various outcomes of an attempt to purchase consumables
 	 * 
-	 * @param keyboard			- For processing user input
+	 * @param scn			- For processing user input
 	 * @param product			- The consumable the user is trying to purchase
 	 * @param playerInv			- The players inventory to see if the player already has one of this item
 	 * @return true or false	- Returns a boolean for whether the purchase was successful
 	 */
-	public boolean buyingConsumables(Scanner keyboard, Consumable product, ArrayList<Consumable> playerInv) {
+	public boolean buyingConsumables(Scanner scn, Consumable product, ArrayList<Consumable> playerInv) {
 		boolean matchesInv = false;	// Boolean to track whether the item they are trying to purchase is already in the players inventory
 		int matchesInvIndex = 0; 	// Stores the index of the item if it matches an item in the player's inventory
 		int pCountChoice;			// Stores the user's choice of the amount of the consumable they would like to purchase
@@ -558,7 +555,7 @@ public class Shop {
 				System.out.println("You have " + this.getPlayer().getInventory().getConsumables().get(matchesInvIndex).getCount() + " of these consumables and they are worth " + product.getValue() + " a piece. "
 							+ "How many would you like to buy?");
 				System.out.println("*Hint* Enter 0 if you decided against buying any");
-				pCountChoice = keyboard.nextInt();
+				pCountChoice = scn.nextInt();
 					
 				// If the user's choice is 0, it returns false as the user decided not to buy any
 				if (pCountChoice == 0) {
@@ -601,7 +598,7 @@ public class Shop {
 				// enter 0 if they decided not to buy anything, then stores the player's choice
 				System.out.println("These consumables are worth " + product.getValue() + " a piece. How many would you like to buy?");
 				System.out.println("*Hint* Enter 0 if you decided against buying any");
-				pCountChoice = keyboard.nextInt();
+				pCountChoice = scn.nextInt();
 				
 				// If statement to check if the player entered 0 to cancel the purchase. if so, returns false
 				if (pCountChoice == 0) {
@@ -659,9 +656,9 @@ public class Shop {
 	/**
 	 * Handles the sell menu functionality
 	 * 
-	 * @param keyboard		-for user input
+	 * @param scn		-for user input
 	 */
-	public void SellMenu(Scanner keyboard) {
+	public void SellMenu(Scanner scn) {
 		boolean isSelling = true;	// Keeps the player in the sell menu. Is set to false based on user input
 		int pSellMenuChoice = 0;	// Stores user's menu choice
 		
@@ -674,19 +671,19 @@ public class Shop {
 			System.out.print("1) Weapons\n" + 
 					"2) Consumables\n" + 
 					"3) Cancel\n");
-			pSellMenuChoice = keyboard.nextInt();
+			pSellMenuChoice = scn.nextInt();
 			
 			// switch statement to handle user's choice
 			switch (pSellMenuChoice) {
 
 			case 1: // Weapons sell menu
 				breakLine();
-				this.SellWeaponsMenu(keyboard);
+				this.SellWeaponsMenu(scn);
 				break;
 				
 			case 2: // Consumables sell menu
 				breakLine();
-				this.SellConsumablesMenu(keyboard);
+				this.SellConsumablesMenu(scn);
 				break;
 				
 			case 3: // Escape sell menu
@@ -710,9 +707,9 @@ public class Shop {
 	/**
 	 * Handles the selling weapons menu functionality
 	 * 
-	 * @param keyboard	- For user input
+	 * @param scn	- For user input
 	 */
-	public void SellWeaponsMenu(Scanner keyboard) {
+	public void SellWeaponsMenu(Scanner scn) {
 		ArrayList<Weapon> tempWeaponsArray = this.getPlayer().getInventory().getWeapons(); // For storing the weapons array and avoiding overuse of the get methods
 		boolean isSellingWeapons = true;	// boolean to keep the player in the selling weapons menu
 		int pMenuChoice, pItemChoice = 0;	// pMenuChoice for storing user menu choice, pItemChoice for storing user weapon inspect choice
@@ -730,14 +727,14 @@ public class Shop {
 					"1) I think I know what I would like to sell\n" +
 					"2) I want more details on an item before I sell it\n" +
 					"3) I would like to see what other items I could sell");
-			pMenuChoice = keyboard.nextInt();
+			pMenuChoice = scn.nextInt();
 			
 			// Switch statement for handling user's menu choice
 			switch (pMenuChoice) {
 			
 			case 1: // Sell an Item
 				breakLine();
-				this.attemptWeaponsSale(keyboard, tempWeaponsArray); // Handles attempted sale of a weapon
+				this.attemptWeaponsSale(scn, tempWeaponsArray); // Handles attempted sale of a weapon
 				break;
 			
 			case 2: // More details on an item
@@ -745,7 +742,7 @@ public class Shop {
 				// Prints weapon options and prompts the user for what item they would like to inspect. Then stores player's choice
 				this.printInventoryWeaponsArray(tempWeaponsArray);
 				System.out.println("What is the number of the item you would like to hear more about?");
-				pItemChoice = keyboard.nextInt();
+				pItemChoice = scn.nextInt();
 				
 				// If statement to ensure the player's choice is a valid item on the list. player's choice is 1 based so needs to be converted to 0 based in calculations
 				if (pItemChoice - 1 < tempWeaponsArray.size() && pItemChoice - 1 >= 0) {
@@ -786,10 +783,10 @@ public class Shop {
 	/**
 	 * Handles the attempted sale of weapons
 	 * 
-	 * @param keyboard			- For user input
+	 * @param scn			- For user input
 	 * @param tempWeaponsArray	- For printing of the player's weapons array and calculations
 	 */
-	public void attemptWeaponsSale(Scanner keyboard, ArrayList<Weapon> tempWeaponsArray) {
+	public void attemptWeaponsSale(Scanner scn, ArrayList<Weapon> tempWeaponsArray) {
 		boolean saleSuccessful; 	// Boolean for storing if the sale was successful
 		boolean isSelling = true;	// Boolean for keeping player in the isSelling menu
 		int pItemChoice = 0;		// variable for storing user's item selling choice
@@ -806,7 +803,7 @@ public class Shop {
 			// Prints the player's current currency then prompts the user for the item they would like to sell
 			this.printPlayerCurrency();
 			System.out.println("What is the number of the item you would like to sell?");
-			pItemChoice = keyboard.nextInt();
+			pItemChoice = scn.nextInt();
 			
 			// If statement to ensure the player's choice is a valid item on the list. pItemChoice - 1 <= tempWeaponsArray.size() to account for cancel option
 			if (pItemChoice - 1 <= tempWeaponsArray.size() && pItemChoice - 1 >= 0) {
@@ -880,9 +877,9 @@ public class Shop {
 	/**
 	 * Handles the sell consumables menu functionality
 	 * 
-	 * @param keyboard		- For handling user input
+	 * @param scn		- For handling user input
 	 */
-	public void SellConsumablesMenu(Scanner keyboard) {
+	public void SellConsumablesMenu(Scanner scn) {
 		ArrayList<Consumable> tempConsumablesArray = this.getPlayer().getInventory().getConsumables(); // Stores player consumables array to avoid overuse of get methods
 		boolean isSellingConsumables = true; // To keep the user in the selling consumables menu
 		int pMenuChoice; 		// To store the user's menu choice
@@ -902,13 +899,13 @@ public class Shop {
 					"1) I think I know what I would like to sell\n" +
 					"2) I want more details on an item before I sell it\n" +
 					"3) I would like to see what other items I could sell");
-			pMenuChoice = keyboard.nextInt();
+			pMenuChoice = scn.nextInt();
 			
 			// Switch statement for processing user menu selection
 			switch (pMenuChoice) {
 			case 1: // Sell an Item
 				breakLine();
-				this.attemptConsumableSale(keyboard, tempConsumablesArray);	//Processes the attempted sale of consumables
+				this.attemptConsumableSale(scn, tempConsumablesArray);	//Processes the attempted sale of consumables
 				break;
 			
 			case 2: // More details on an item
@@ -916,7 +913,7 @@ public class Shop {
 				// Prints the consumable array and prompts the user for what item they would like to inspect. Then stores that choice
 				this.printInventoryConsumableArray(tempConsumablesArray);
 				System.out.println("What is the number of the item you would like to hear more about?");
-				pItemChoice = keyboard.nextInt();
+				pItemChoice = scn.nextInt();
 				
 				// Ensures that the users choice is a valid item on the list
 				if (pItemChoice - 1 < tempConsumablesArray.size() && pItemChoice - 1 >= 0) {
@@ -956,10 +953,10 @@ public class Shop {
 	/**
 	 * Handles the attempted sale of consumables
 	 * 
-	 * @param keyboard
+	 * @param scn
 	 * @param tempConsumableArray
 	 */
-	public void attemptConsumableSale(Scanner keyboard, ArrayList<Consumable> tempConsumableArray) {
+	public void attemptConsumableSale(Scanner scn, ArrayList<Consumable> tempConsumableArray) {
 		boolean isSelling = true;		// Boolean to keep the user in the consumables sale menu
 		boolean saleSuccessful;	// Boolean to store whether the sale was successful or not
 		int pItemChoice = 0;	// Variable to store the item choice the player would like to sell
@@ -976,7 +973,7 @@ public class Shop {
 			
 			// Prompts the user to select what consumable they would like to sell and stores that value
 			System.out.println("What is the number of the item you would like to sell?");
-			pItemChoice = keyboard.nextInt();
+			pItemChoice = scn.nextInt();
 			
 			// If statement to ensure that the user's choice is on the list. pItemChoice - 1 <= tempConsumableArray.size() to account for the cancel option
 			if (pItemChoice - 1 <= tempConsumableArray.size() && pItemChoice - 1 >= 0) {
@@ -984,13 +981,13 @@ public class Shop {
 				if (pItemChoice - 1 == tempConsumableArray.size()) {
 					isSelling = false;	// Breaks out of the consumables sale menu
 					breakLine();
-					// Prints the consumable array and player currency for the selling consumables array
+					// Prints the consumable array and [layer currency for the selling consumables array
 					this.printInventoryConsumableArray(tempConsumableArray);
 					this.printPlayerCurrency();
 					
 				} else { // If the user did not select to cancel, proceeds with the attempted sale
 					// Handles the attempted sale of the consumable. sellingConsumables method returns a boolean value which is stored in saleSuccessful
-					saleSuccessful = sellingConsumables(this.getPlayer().getInventory().getConsumables().get(pItemChoice - 1), pItemChoice - 1, keyboard);
+					saleSuccessful = sellingConsumables(this.getPlayer().getInventory().getConsumables().get(pItemChoice - 1), pItemChoice - 1, scn);
 					
 					// If statement to check if the sale was successful. Due to the varying reasons that sale of consumables could fail, a failed sale 
 					// is handled in the selling consumables method itself so it does nothing if saleSuccessful is false
@@ -1021,10 +1018,10 @@ public class Shop {
 	 * 
 	 * @param product			-the item the player would like to sell
 	 * @param invIndex			-the index of that item in the player's inventory
-	 * @param keyboard			-for processing player input
+	 * @param scn			-for processing player input
 	 * @return true or false	-Returns true if the sale was successful. non-successful sales are handled within the function and still return false
 	 */
-	public boolean sellingConsumables(Consumable product, int invIndex, Scanner keyboard) {
+	public boolean sellingConsumables(Consumable product, int invIndex, Scanner scn) {
 		int pCountChoice;	// For storing the player's choice of the amount of a consumable they would like to sell
 		
 		// Checks to see if there is more than 1 of the consumable
@@ -1035,7 +1032,7 @@ public class Shop {
 						+ "How many would you like to sell?");
 			// Informs the player that they can enter 0 if they do not wish to sell any, then stores the player's choice
 			System.out.println("*Hint* Enter 0 if you decided against selling any");
-			pCountChoice = keyboard.nextInt();
+			pCountChoice = scn.nextInt();
 				
 			// If the player chose to sell 0, it returns false and returns to the consumable sale menu
 			if (pCountChoice == 0) {
