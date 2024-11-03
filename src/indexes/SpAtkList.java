@@ -7,10 +7,18 @@ public class SpAtkList {
 	/** No special attack. */
 	public static SpecialAttack none = new SpecialAttack();
 
-	/** Triple Thrust. */
+	/** Special Attack - Triple Thrust. */
 	public SpecialAttack x3Thrust = new SpecialAttack("Triple Thrust",
 			"Ready your weapon and perform three consecutive thrusts in a row, dealing triple damage to your enemy!",
 			" thrusts out their blade, striking their foe thrice before they can retaliate!",
 			" thrust out their blade thrice, yet their foe was quicker, and avoided all three strikes.", 3.0);
+
+	/** Special Attack - Great Slash. */
+	public SpecialAttack gSlash = new SpecialAttack("Great Slash",
+			"Peform a powerful upwards slash that threatens to tear your enemy in two!",
+			" holds their blade behind them and charges forward, swinging upwards with all their might\n"
+					+ "as if aiming to split the clouds in two.",
+			" holds their blade behind them and charges forward, yet misses their foe as they swing towards the sky.",
+			1.3);
 
 }
