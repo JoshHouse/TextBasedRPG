@@ -188,6 +188,78 @@ public class Player extends GameChar {
 	}
 
 	/**
+	 * Helper method used to print out the player's inventories. If the player is
+	 * calling this function via selectMainhandWeapon(), the first item in the array
+	 * of weapons will be omitted, as that is the currently equipped weapon.
+	 * 
+	 * @param key    - Tells the method with array to print out; the consumable or
+	 *               the weapon array.
+	 * @param start  - Tells the method what position in the array to start printing
+	 *               from.
+	 * @param arrlen - Tells the method what the max length of the array it will be
+	 *               printing is.
+	 */
+	private void printInventory(char key, int start, int arrlen) {
+
+		String query; // String to be sent to the dialogue class.
+
+		switch (key) {
+
+		case 'c':
+			// Loop through the array and print out the names of each consumable.
+			for (int i = start; i < arrlen; i++) {
+				query = (i + 1) + ") " + this.getInventory().getConsumables().get(i).getName();
+				Dialogue.infoDialogue(query, 6);
+				if ((i + 1) % 3 == 0) {
+					System.out.print("\n");
+				} else {
+					System.out.print("\t\t");
+				}
+			}
+
+			query = (arrlen + 1) + ") Cancel\nYour Choice: "; // Cancel option
+			Dialogue.infoDialogue(query, 6);
+			break;
+		case 'w':
+			// Loop through the array and print out the names of each weapon.
+			for (int i = start; i < arrlen; i++) {
+				if (start == 0) { // Prints the inventory regularly.
+					query = (i + 1) + ") " + this.getInventory().getWeapons().get(i).getName();
+					Dialogue.infoDialogue(query, 6);
+					if ((i + 1) % 3 == 0) {
+						System.out.print("\n");
+					} else {
+						System.out.print("\t\t");
+					}
+				} else { // Omits the first item in the inventory. Used for selectMainhandWeapon().
+					query = i + ") " + this.getInventory().getWeapons().get(i).getName();
+					Dialogue.infoDialogue(query, 6);
+					if (i % 3 == 0) {
+						System.out.print("\n");
+					} else {
+						System.out.print("\t\t");
+					}
+				}
+
+			}
+
+			// Cancel option
+			if (start == 0) {
+				query = (arrlen + 1) + ") Cancel\nYour Choice: ";
+			} else {
+				query = arrlen + ") Cancel\nYour Choice: ";
+			}
+			Dialogue.infoDialogue(query, 6);
+			break;
+		default:
+			System.err.println("Error with displaying the array: Invalid Key.");
+			break;
+
+		}
+
+	}
+
+	/**
 	 * Allows the player to view their inventories. The player will be either taken
 	 * to their inventory of weapons or consumables, and can get more information
 	 * about each item while viewing them.
@@ -198,7 +270,6 @@ public class Player extends GameChar {
 	public void showInventory(char key, Scanner scn) {
 
 		int arrlen, input;
-		String query;
 		boolean viewing = true;
 
 		switch (key) { // Using the key, we determine with inventory to view.
@@ -217,19 +288,7 @@ public class Player extends GameChar {
 			while (viewing) {
 
 				arrlen = this.getInventory().getConsumables().size(); // Get the array's size
-
-				// Loop through the array and print out the names of each item.
-				for (int i = 0; i < arrlen; i++) {
-					query = (i + 1) + ") " + this.getInventory().getConsumables().get(i).getName();
-					Dialogue.infoDialogue(query, 6);
-					if ((i + 1) % 3 == 0) {
-						System.out.print("\n");
-					} else {
-						System.out.print("\t\t");
-					}
-				}
-				query = (arrlen + 1) + ") Cancel\nYour Choice: "; // Cancel option
-				Dialogue.infoDialogue(query, 6);
+				this.printInventory(key, 0, arrlen); // Call the helper method to display the array.
 
 				// Tries user input, and catches two exceptions
 				try {
@@ -258,18 +317,7 @@ public class Player extends GameChar {
 
 				arrlen = this.getInventory().getWeapons().size(); // Get the array's size
 
-				// Loop through the array and print out the names of each item.
-				for (int i = 0; i < arrlen; i++) {
-					query = (i + 1) + ") " + this.getInventory().getWeapons().get(i).getName();
-					Dialogue.infoDialogue(query, 6);
-					if ((i + 1) % 3 == 0) {
-						System.out.print("\n");
-					} else {
-						System.out.print("\t\t");
-					}
-				}
-				query = (arrlen + 1) + ") Cancel\nYour Choice: "; // Cancel option
-				Dialogue.infoDialogue(query, 6);
+				this.printInventory(key, 0, arrlen); // Call the helper method to display the array.
 
 				// Tries user input, and catches two exceptions
 				try {
@@ -290,7 +338,7 @@ public class Player extends GameChar {
 			}
 			break;
 		default:
-			System.err.println("There was an error.\nThe wrong variable has been provided.");
+			System.err.println("There was an error.\nThe wrong key has been provided.");
 			return;
 
 		}
@@ -305,24 +353,14 @@ public class Player extends GameChar {
 	 */
 	public void selectMainhandWeapon(Scanner scn) {
 
-		String print;
 		int index = 0, arrlen = this.getInventory().getWeapons().size();
 		boolean selecting = true;
-		
+
 		Dialogue.infoDialogue("\nSelect the weapon you want to equip.\n", 10);
 
 		while (selecting) {
 
-			for (int i = 1; i < this.getInventory().getWeapons().size(); i++) {
-				print = this.getInventory().getWeapons().get(i).getName();
-				Dialogue.infoDialogue(i + ") " + print, 5);
-				if (i % 3 == 0) {
-					System.out.print("\n");
-				} else {
-					System.out.print("\t\t");
-				}
-			}
-			Dialogue.infoDialogue(arrlen + ") Cancel\nYour Choice: ", 5); // Cancel option
+			this.printInventory('w', 1, arrlen); // Call the helper method to display the array.
 
 			// Tries user input, and catches two exceptions
 			try {
