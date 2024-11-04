@@ -124,6 +124,11 @@ public class GameThread extends Throwable {
 	 * 
 	 */
 
+	// --------------------Formatting Functions--------------------
+	public static void breakLine() {  
+	    System.out.println("------------------------------");
+	}
+	
 	// --------------------General Functions--------------------
 	public static void BeginningGame(Player player, Scanner keyboard) {
 		
@@ -172,6 +177,50 @@ public class GameThread extends Throwable {
 	}
 	
 	public static boolean mageChapter1(Player player, Scanner keyboard) {
+		boolean makingChoice = true;
+		int pChoice;
+		Weapon trainingWand = new Weapon();
+		
+		breakLine();
+		System.out.println("[Herald the Wizard] Hello " + player.getName() + "! I heard we had a newcomer in town!"
+				+ "Interested in learning how to use magic to defend yourself from the various different monsters,"
+				+ "enemies, and mythical beasts you can find around here? Well you've come to the right place! Although"
+				+ "I am no expert, I can definitely help get you started!");
+		
+		while (makingChoice) {
+			System.out.println("[Herald the Wizard] Does that sound like something you might be interested in? \n"
+					+ "1) Absolutely!\n"
+					+ "2) I'm not sure if I'm interested in magic.");
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				System.out.println("[" + player.getName() + "] Absolutely!");
+				System.out.println("[Herald the Wizard] Great to hear! It's always nice to have another mage in town!");
+				makingChoice = false;
+				break;
+				
+			case 2:
+				breakLine();
+				System.out.println("[" + player.getName() + "] I'm not sure if I'm interested in magic.");
+				System.out.println("[Herald the Wizard] That's alright! I'll be here if you change your mind!");
+				return false;
+				
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+			}
+		}
+		
+		System.out.println("[Herald the Wizard] First of all we need to get you started with a weapon that can"
+				+ "channel magic energy. I believe I have an old wand around here somewhere ... Ah here it is!"
+				+ "This was my first wand and its great for training. You can definitely find better weapons"
+				+ "around town though! I have heard rumors of some pretty strong magic weapons but those are"
+				+ "pretty dangerous to get. But no need to worry about those right now! First you need to get the"
+				+ "basics down. Here, take this wand.");
+		
+		
 		return true;
 	}
 	

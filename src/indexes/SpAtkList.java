@@ -20,5 +20,12 @@ public class SpAtkList {
 					+ "as if aiming to split the clouds in two.",
 			" holds their blade behind them and charges forward, yet misses their foe as they swing towards the sky.",
 			1.3);
+	
+	/** Special Attack - Power Beam */
+	public SpecialAttack pBeam = new SpecialAttack("Power Beam", 
+			"Shoot a deadly beam capable of putting a hole straight through your enemy!",
+			"Beams of light converge on your weapon, firing a blast of charged up energy!",
+			"Beams of light begin to converge on your weapon but quickly fizzle out! You failed to fire off the beam!",
+			1.3);
 
 }
