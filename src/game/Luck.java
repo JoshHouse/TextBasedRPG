@@ -4,10 +4,12 @@ import java.util.Random;
 
 public class Luck {
 
+	private static Random rand = new Random(); // Create a random object.
+
 	/**
-	 * Set the max value to 101 because the counting for random numbers staets at 0.
-	 * Setting it to 101 tells the random variable to get a number between 0 and
-	 * 100, which is a tital of 101 possible choices
+	 * Set the max value for luckEvent to 101 because the counting for random
+	 * numbers staets at 0. Setting it to 101 tells the random variable to get a
+	 * number between 0 and 100, which is a tital of 101 possible choices
 	 */
 	private static final int MAX = 101;
 
@@ -21,8 +23,6 @@ public class Luck {
 	 */
 	public static boolean luckEvent(int baseLuck) {
 
-		Random rand = new Random(); // Create a random object.
-
 		int luckyNumber = rand.nextInt(MAX); // Generates a random number between 0 and 100.
 
 		// Determine which is higher, baseLuck or luckyNumber.
@@ -31,6 +31,19 @@ public class Luck {
 		} else {
 			return false;
 		}
+
+	}
+
+	/**
+	 * Returns a random integer within the range provided on function call.
+	 * 
+	 * @param range - The range that an integer can be generated. The generated
+	 *              numbers will always be from 0 to range - 1.
+	 * @return
+	 */
+	public static int getRandNum(int range) {
+
+		return rand.nextInt(range);
 
 	}
 
