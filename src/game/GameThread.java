@@ -24,6 +24,30 @@ public class GameThread extends Throwable {
 
 		Scanner scn = new Scanner(System.in);
 
+		Player p1 = new Player("Nova", new Inventory(true, true, true), 1000, 180, 1, 0, 50, 4, 2, 1, 2, 9);
+		p1.getInventory().add(wList.sword1);
+		p1.getInventory().add(wList.axe2);
+		p1.getInventory().add(wList.spear2);
+		p1.getInventory().add(wList.axe1);
+		p1.getInventory().add(wList.sword3);
+		Shopkeeper keep = new Shopkeeper();
+		Shop shop = new Shop(p1, keep, "Armory");
+		ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+		String[] searchTxt = {
+				"Nothing but the fluffy clouds and beautiful buildings ahead.\nIt's quite nice to look at.",
+				"Around the corner, there's appears to be a mime entertaining a crowd.\nNothing that seems too interesting "
+						+ "to you, however.",
+				"As you walk around, you get annoyed by gnats buzzing around your ears.\nIf only they were bigger. "
+						+ "You could slay them easily...",
+				"The city streets are rather lively today.\nThough, there's no signs of trouble, thankfully." };
+
+		meleeChapter1(p1, scn);
+
+		Hub hub1 = new Hub(p1, "Central Street", shop, enemies, searchTxt);
+		hub1.start(scn);
+
+		scn.close();
+
 //		// Player Inventory Test
 //		SpecialAttack gSsA = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force",
 //				1.5);
