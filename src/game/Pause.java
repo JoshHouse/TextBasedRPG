@@ -7,7 +7,7 @@ public class Pause {
 	/**
 	 * Pauses console till the user presses the enter key.
 	 */
-	public void pause() {
+	public static void pause() {
 
 		System.out.println("Press \"ENTER\" to continue...");
 
@@ -24,7 +24,7 @@ public class Pause {
 	 * 
 	 * @param time - The number of milliseconds to sleep.
 	 */
-	public void pause(long time) {
+	public static void pause(long time) {
 
 		try {
 			Thread.sleep(time);
