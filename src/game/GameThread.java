@@ -10,6 +10,9 @@ import indexes.WeaponList;
 public class GameThread extends Throwable {
 
 	private static final long serialVersionUID = 1L;
+
+	private static WeaponList wList = new WeaponList();
+
 	
 	/**
 	 * 
