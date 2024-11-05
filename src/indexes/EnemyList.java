@@ -1,9 +1,11 @@
 package indexes;
 
 import game.Enemy;
+import game.Inventory;
+import game.SpecialAttack;
 
 public class EnemyList {
 	
-	Enemy e001 = new Enemy("Wolf", 40, 1, 35, 20);
+	public static Enemy sheep = new Enemy("Sheep", new Inventory(), 25, 50, 1, 10, 5, 1, SpAtkList.none);
 
 }

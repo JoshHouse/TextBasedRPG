@@ -8,6 +8,7 @@ public class GameChar extends Lootable {
 	private int health;
 	private int level;
 	private int exp;
+	private int currHP; // Current HP. Used for battles.
 
 	
 	// -------------------Constructors-------------------
@@ -21,6 +22,7 @@ public class GameChar extends Lootable {
 		this.health = 1;
 		this.level = 1;
 		this.exp = 0;
+		this.currHP = this.getHealth();
 	}
 	/** 
 	 * For Instantiating Characters With All Data Types
@@ -39,6 +41,7 @@ public class GameChar extends Lootable {
 		this.health = inputHealth;
 		this.level = inputLevel;
 		this.exp = inputExp;
+		this.currHP = this.getHealth();
 	}
 	
 	/** 
@@ -56,6 +59,7 @@ public class GameChar extends Lootable {
 		this.health = inputHealth;
 		this.level = inputLevel;
 		this.exp = inputExp;
+		this.currHP = this.getHealth();
 	}
 	
 	/** 
@@ -72,6 +76,7 @@ public class GameChar extends Lootable {
 		this.health = inputHealth;
 		this.level = inputLevel;
 		this.exp = inputExp;
+		this.currHP = this.getHealth();
 	}
 	
 	/**
@@ -86,6 +91,7 @@ public class GameChar extends Lootable {
 		this.health = 1;
 		this.level = 1;
 		this.exp = 0;
+		this.currHP = this.getHealth();
 	}
 	
 	/**
@@ -98,6 +104,7 @@ public class GameChar extends Lootable {
 		this.health = 100;
 		this.level = 1;
 		this.exp = 0;
+		this.currHP = this.getHealth();
 	}
 	
 	// -------------------Getters-------------------
@@ -114,6 +121,10 @@ public class GameChar extends Lootable {
 		return this.exp;
 	}
 	
+	public int getCurrHP() {
+		return this.currHP;
+	}
+	
 	// -------------------Setters-------------------
 	
 	public void setHealth(int inputHealth) {
@@ -126,6 +137,10 @@ public class GameChar extends Lootable {
 	
 	public void setExp(int inputExp) {
 		this.exp = inputExp;
+	}
+	
+	public void setCurrHP(int currHP) {
+		this.currHP = currHP;
 	}
 
 	// -------------------toString-------------------

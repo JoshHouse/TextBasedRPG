@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import indexes.EnemyList;
+import indexes.WeaponList;
+
 public class GameThread extends Throwable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * 
 	 * ----- Main -----
@@ -18,92 +21,92 @@ public class GameThread extends Throwable {
 
 		Scanner scn = new Scanner(System.in);
 
-		// Player Inventory Test
-		SpecialAttack gSsA = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force",
-				1.5);
-		SpecialAttack fSsA = new SpecialAttack("You launch a wall of fire hurling towards your enemies", 2.7);
-		SpecialAttack lBsA = new SpecialAttack(
-				"You fire a well aimed shot, curving to hit the enemy where they would least expect it", 2.0);
-
-		Weapon greatSword = new Weapon("1111", "Great Sword", "A Mighty Big Sword", 2, 30, 25, 1, true, 0, gSsA);
-		Weapon fireStaff = new Weapon("2222", "Fire Staff", "Send your enemies out in a blaze of glory", 5, 1000, 500,
-				3, true, 75, fSsA);
-		Weapon longBow = new Weapon("3333", "Long Bow",
-				"Forged in the elven mountains, this bow is extremely well made", 3, 250, 75, 2, true, 0, lBsA);
-
-		Consumable throwingAxe = new Consumable("4444", "Throwing Axe", "Hurl an axe at your enemies", 1, 10, 20, 1,
-				true, 1, true);
-		Consumable healthPotion = new Consumable("5555", "Health Potion",
-				"Use this when you're in need of a pick-me-up", 2, 20, 0, -1, true, 1, true);
-		Consumable homemadeExplosives = new Consumable("6666", "Home-Made Explosives",
-				"Your enemies won't know what hit them. You might not want to stand too close though", 3, 75, 200, 2,
-				true, 1, true);
-
-		Inventory testPlayerInv = new Inventory();
-		testPlayerInv.add(greatSword);
-		testPlayerInv.add(fireStaff);
-		testPlayerInv.add(longBow);
-
-		testPlayerInv.add(throwingAxe);
-		testPlayerInv.add(healthPotion);
-		testPlayerInv.add(homemadeExplosives);
-
-		// Shopkeeper Inventory Test
-		SpecialAttack gSsA1 = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force",
-				1.5);
-		SpecialAttack fSsA1 = new SpecialAttack("You launch a wall of fire hurling towards your enemies", 2.7);
-		SpecialAttack lBsA1 = new SpecialAttack(
-				"You fire a well aimed shot, curving to hit the enemy where they would least expect it", 2.0);
-
-		Weapon greatSword1 = new Weapon("1111", "Great Sword", "A Mighty Big Sword", 2, 30, 25, 1, true, 0, gSsA1);
-		Weapon fireStaff1 = new Weapon("2222", "Fire Staff", "Send your enemies out in a blaze of glory", 5, 1000, 500,
-				3, true, 75, fSsA1);
-		Weapon longBow1 = new Weapon("3333", "Long Bow",
-				"Forged in the elven mountains, this bow is extremely well made", 3, 250, 75, 2, true, 0, lBsA1);
-
-		Consumable throwingAxe1 = new Consumable("4444", "Throwing Axe", "Hurl an axe at your enemies", 1, 10, 20, 1,
-				true, 1, true);
-		Consumable healthPotion1 = new Consumable("5555", "Health Potion",
-				"Use this when you're in need of a pick-me-up", 2, 20, 0, -1, true, 1, true);
-		Consumable homemadeExplosives1 = new Consumable("6666", "Home-Made Explosives",
-				"Your enemies won't know what hit them. You might not want to stand too close though", 3, 75, 200, 2,
-				true, 1, true);
-		Inventory testShopkeeperInv = new Inventory();
-
-		testShopkeeperInv.add(greatSword1);
-		testShopkeeperInv.add(fireStaff1);
-		testShopkeeperInv.add(longBow1);
-
-		testShopkeeperInv.add(throwingAxe1);
-		testShopkeeperInv.add(healthPotion1);
-		testShopkeeperInv.add(homemadeExplosives1);
-
-		Player testPlayer = new Player("Joshua", testPlayerInv, 600, 200, 4, 26, fireStaff, 250, 3, 2, 5, 1, 3);
-
-		String enterShopDialog = "Welcome to the shop!";
-		String exitShopDialog = "See you again next time!";
-		String saleDialog = "Hope you enjoy!";
-		String inShops1 = "Hope I meet my sales quota";
-		String inShops2 = "Great to see some customers";
-		String inShops3 = "Been a slow day today";
-		String s1 = "Have you heard about the dragon on the mountain?";
-		String s2 = "People keep gossiping in town";
-		String s3 = "Man its been a long day";
-		ArrayList<String> sampleDialog = new ArrayList<String>();
-		ArrayList<String> sampleInShopDialog = new ArrayList<String>();
-		sampleDialog.add(s1);
-		sampleDialog.add(s2);
-		sampleDialog.add(s3);
-		sampleInShopDialog.add(inShops1);
-		sampleInShopDialog.add(inShops2);
-		sampleInShopDialog.add(inShops3);
-
-		Shopkeeper testShopkeeper = new Shopkeeper("Gandalf", testShopkeeperInv, sampleDialog, enterShopDialog,
-				exitShopDialog, saleDialog, sampleInShopDialog);
-
-		Shop YeOlShop = new Shop(testPlayer, testShopkeeper, "Ye Ol Shop");
-
-		YeOlShop.startShop();
+//		// Player Inventory Test
+//		SpecialAttack gSsA = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force",
+//				1.5);
+//		SpecialAttack fSsA = new SpecialAttack("You launch a wall of fire hurling towards your enemies", 2.7);
+//		SpecialAttack lBsA = new SpecialAttack(
+//				"You fire a well aimed shot, curving to hit the enemy where they would least expect it", 2.0);
+//
+//		Weapon greatSword = new Weapon("1111", "Great Sword", "A Mighty Big Sword", 2, 30, 25, 1, true, 0, gSsA);
+//		Weapon fireStaff = new Weapon("2222", "Fire Staff", "Send your enemies out in a blaze of glory", 5, 1000, 500,
+//				3, true, 75, fSsA);
+//		Weapon longBow = new Weapon("3333", "Long Bow",
+//				"Forged in the elven mountains, this bow is extremely well made", 3, 250, 75, 2, true, 0, lBsA);
+//
+//		Consumable throwingAxe = new Consumable("4444", "Throwing Axe", "Hurl an axe at your enemies", 1, 10, 20, 1,
+//				true, 1, true);
+//		Consumable healthPotion = new Consumable("5555", "Health Potion",
+//				"Use this when you're in need of a pick-me-up", 2, 20, 0, -1, true, 1, true);
+//		Consumable homemadeExplosives = new Consumable("6666", "Home-Made Explosives",
+//				"Your enemies won't know what hit them. You might not want to stand too close though", 3, 75, 200, 2,
+//				true, 1, true);
+//
+//		Inventory testPlayerInv = new Inventory();
+//		testPlayerInv.add(greatSword);
+//		testPlayerInv.add(fireStaff);
+//		testPlayerInv.add(longBow);
+//
+//		testPlayerInv.add(throwingAxe);
+//		testPlayerInv.add(healthPotion);
+//		testPlayerInv.add(homemadeExplosives);
+//
+//		// Shopkeeper Inventory Test
+//		SpecialAttack gSsA1 = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force",
+//				1.5);
+//		SpecialAttack fSsA1 = new SpecialAttack("You launch a wall of fire hurling towards your enemies", 2.7);
+//		SpecialAttack lBsA1 = new SpecialAttack(
+//				"You fire a well aimed shot, curving to hit the enemy where they would least expect it", 2.0);
+//
+//		Weapon greatSword1 = new Weapon("1111", "Great Sword", "A Mighty Big Sword", 2, 30, 25, 1, true, 0, gSsA1);
+//		Weapon fireStaff1 = new Weapon("2222", "Fire Staff", "Send your enemies out in a blaze of glory", 5, 1000, 500,
+//				3, true, 75, fSsA1);
+//		Weapon longBow1 = new Weapon("3333", "Long Bow",
+//				"Forged in the elven mountains, this bow is extremely well made", 3, 250, 75, 2, true, 0, lBsA1);
+//
+//		Consumable throwingAxe1 = new Consumable("4444", "Throwing Axe", "Hurl an axe at your enemies", 1, 10, 20, 1,
+//				true, 1, true);
+//		Consumable healthPotion1 = new Consumable("5555", "Health Potion",
+//				"Use this when you're in need of a pick-me-up", 2, 20, 0, -1, true, 1, true);
+//		Consumable homemadeExplosives1 = new Consumable("6666", "Home-Made Explosives",
+//				"Your enemies won't know what hit them. You might not want to stand too close though", 3, 75, 200, 2,
+//				true, 1, true);
+//		Inventory testShopkeeperInv = new Inventory();
+//
+//		testShopkeeperInv.add(greatSword1);
+//		testShopkeeperInv.add(fireStaff1);
+//		testShopkeeperInv.add(longBow1);
+//
+//		testShopkeeperInv.add(throwingAxe1);
+//		testShopkeeperInv.add(healthPotion1);
+//		testShopkeeperInv.add(homemadeExplosives1);
+//
+//		Player testPlayer = new Player("Joshua", testPlayerInv, 600, 200, 4, 26, fireStaff, 250, 3, 2, 5, 1, 3);
+//
+//		String enterShopDialog = "Welcome to the shop!";
+//		String exitShopDialog = "See you again next time!";
+//		String saleDialog = "Hope you enjoy!";
+//		String inShops1 = "Hope I meet my sales quota";
+//		String inShops2 = "Great to see some customers";
+//		String inShops3 = "Been a slow day today";
+//		String s1 = "Have you heard about the dragon on the mountain?";
+//		String s2 = "People keep gossiping in town";
+//		String s3 = "Man its been a long day";
+//		ArrayList<String> sampleDialog = new ArrayList<String>();
+//		ArrayList<String> sampleInShopDialog = new ArrayList<String>();
+//		sampleDialog.add(s1);
+//		sampleDialog.add(s2);
+//		sampleDialog.add(s3);
+//		sampleInShopDialog.add(inShops1);
+//		sampleInShopDialog.add(inShops2);
+//		sampleInShopDialog.add(inShops3);
+//
+//		Shopkeeper testShopkeeper = new Shopkeeper("Gandalf", testShopkeeperInv, sampleDialog, enterShopDialog,
+//				exitShopDialog, saleDialog, sampleInShopDialog);
+//
+//		Shop YeOlShop = new Shop(testPlayer, testShopkeeper, "Ye Ol Shop");
+//
+//		YeOlShop.startShop();
 
 //		Shopkeeper demoShopkeeper = new Shopkeeper("Cosmos", "Hello there! How can I help you?", "Will that be all?",
 //				"Have a nice day!");
@@ -179,7 +182,8 @@ public class GameThread extends Throwable {
 	public static boolean mageChapter1(Player player, Scanner keyboard) {
 		boolean makingChoice = true;
 		int pChoice;
-		Weapon trainingWand = new Weapon();
+		Battle tutorialBattle = new Battle(player, EnemyList.sheep);
+		boolean playerWon = false;
 		
 		breakLine();
 		System.out.println("[Herald the Wizard] Hello " + player.getName() + "! I heard we had a newcomer in town!"
@@ -213,14 +217,105 @@ public class GameThread extends Throwable {
 			}
 		}
 		
-		System.out.println("[Herald the Wizard] First of all we need to get you started with a weapon that can"
-				+ "channel magic energy. I believe I have an old wand around here somewhere ... Ah here it is!"
-				+ "This was my first wand and its great for training. You can definitely find better weapons"
-				+ "around town though! I have heard rumors of some pretty strong magic weapons but those are"
-				+ "pretty dangerous to get. But no need to worry about those right now! First you need to get the"
+		System.out.println("[Herald the Wizard] First of all we need to get you started with a weapon that can "
+				+ "channel magic energy. I believe I have an old wand around here somewhere ... Ah here it is! "
+				+ "This was my first wand and its great for training. You can definitely find better weapons "
+				+ "around town though! I have heard rumors of some pretty strong magic weapons but those are "
+				+ "pretty dangerous to get. But no need to worry about those right now! First you need to get the "
 				+ "basics down. Here, take this wand.");
+		player.getInventory().add(WeaponList.starterWand);
+		System.out.println("The starter wand has been added to your inventory!");
+		player.getInventory().getWeaponOnKey(WeaponList.starterWand.getKey()).displayInfo();
 		
+		makingChoice = true;
+		pChoice = 0;
 		
+		while (makingChoice) {			
+			breakLine();
+			System.out.println("[Herald the Wizard] Now that you have a weapon, I whould probably explain mana. Mana is the power inside "
+					+ "each person that can be channeled through the use of magic weapons. Magic weapons use a portion "
+					+ "of your built up mana to launch an attack! Be careful though because you can run out and your "
+					+ "weapon will no longer work. Through tough battles you can increase the effectiveness of your magic "
+					+ "and the amount of mana you can store.");
+			System.out.println("Your current mana storage is: " + player.getMana());
+			breakLine();
+			System.out.println("1) Okay I think I got it!\n"
+					+ "2) Explain that again?");
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			
+			case 1:
+				breakLine();
+				System.out.println("[" + player.getName() + "] Okay I think I got it!");
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				System.out.println("[" + player.getName() + "] Explain that again?");
+				break;
+			
+			default:
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		System.out.println("[Herald the Wizard] Great! Now that you understand the basics, why don't you test your "
+				+ "skills on this sheep! Don't worry sheep around here aren't known for their fighting abilities.");
+		
+		while (!playerWon) {
+			playerWon = tutorialBattle.startBattle();
+			if (!playerWon) {
+				player.setCurrHP(player.getHealth());
+				tutorialBattle.getEnemy().setCurrHP(tutorialBattle.getEnemy().getHealth());
+				tutorialBattle.setTurn(0);
+				System.out.println("[Herald the Wizard] Thats okay you'll get the hang of it. take another shot at "
+						+ "it!");
+			}
+		}
+		
+		breakLine();
+		System.out.println("[Herald the Wizard] Nice! It seems like you got the hang of it! That;s about all I can "
+				+ "teach you. I'm not much of the adventurous type so I really only know the basics. It comes in handy "
+				+ "though for work around town. Since you're new around here, you should probably go check out the castle. "
+				+ "Just about everything important happens around there. The King also might be interested in testing"
+				+ "your skills too if you're up for the challenge. If you can get in his good graces, you might get a "
+				+ "chance to talk to the King's wizard. He's probably the most knowledgable person you can find around "
+				+ "here when it comes to magic! If you make it big, don't forget who taught you the basics though haha! "
+				+ "And pay me a visit if you get the chance!");
+	
+		makingChoice = true;
+		pChoice = 0;
+		
+		while (makingChoice) {
+			
+			breakLine();
+			System.out.println("1) Will do! Thanks for the advice!\n"
+				+ "2) I'll definitely have to check out the castle!");
+			pChoice = keyboard.nextInt();
+		
+			switch(pChoice) {
+			
+			case 1:
+				breakLine();
+				System.out.println("[" + player.getName() + "] Will do! Thanks for the advice!");
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				System.out.println("[" + player.getName() + "] I'll definitely have to check out the castle!");
+				makingChoice = false;
+				break;
+				
+			default:
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+
 		return true;
 	}
 	

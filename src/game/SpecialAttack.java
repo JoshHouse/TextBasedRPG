@@ -22,6 +22,14 @@ public class SpecialAttack {
 		this.missTxt = "";
 		this.atkMultiplier = 1.0;
 	}
+	
+	public SpecialAttack(SpecialAttack inputSpecialAttack) {
+		this.setName(inputSpecialAttack.getName());
+		this.setInfo(inputSpecialAttack.getInfo());
+		this.setHitTxt(inputSpecialAttack.getHitTxt());
+		this.setMissTxt(inputSpecialAttack.getMissTxt());
+		this.setAtkMultiplier(inputSpecialAttack.getAtkMultiplier());
+	}
 
 	/**
 	 * Initializes all values

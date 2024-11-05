@@ -178,7 +178,7 @@ public class Item {
 		return this.damageType;
 	}
 
-	public Boolean isSellable() {
+	public Boolean getIsSellable() {
 		return this.sellable;
 	}
 	
@@ -224,7 +224,7 @@ public class Item {
 		this.damageType = this.calculateDamageTypeInt(inputDamageTypeInt);
 	}
 
-	public void setsellable(Boolean inputsellable) {
+	public void setIsSellable(Boolean inputsellable) {
 		this.sellable = inputsellable;
 	}
 	

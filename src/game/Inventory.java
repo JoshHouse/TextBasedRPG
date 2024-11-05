@@ -62,6 +62,19 @@ public class Inventory {
 		return keyItems;
 	}
 	
+	public Weapon getEquipped() {
+		return weapons.get(0);
+	}
+	
+	public Weapon getWeaponOnKey(String inputKey) {
+		for (int x = 0; x < weapons.size(); x++) {
+			if (inputKey.equals(weapons.get(x).getKey())) {
+				return weapons.get(x);
+			}
+		}
+		return null;
+	}
+	
 	// ------------------------------Setters-------------------------------
 	
 	public void setWeapons(ArrayList<Weapon> inputWeapons) {

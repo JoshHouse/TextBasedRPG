@@ -15,7 +15,6 @@ public class Player extends GameChar {
 	private int lvlRogue;
 	private int lvlLuck;
 	private int sklPt = 4;
-	private int currHP; // Current HP. Used for battles.
 
 	// -------------------Constructors-------------------
 
@@ -31,7 +30,6 @@ public class Player extends GameChar {
 		this.lvlMage = 1;
 		this.lvlRogue = 1;
 		this.lvlLuck = 1;
-		this.currHP = this.getHealth();
 	}
 
 	/**
@@ -66,7 +64,6 @@ public class Player extends GameChar {
 		this.lvlRogue = inputlvlRogue;
 		this.lvlMage = inputlvlMage;
 		this.lvlLuck = inputlvlLuck;
-		this.currHP = this.getHealth();
 	}
 
 	/**
@@ -83,7 +80,6 @@ public class Player extends GameChar {
 		this.lvlMage = 1;
 		this.lvlRogue = 1;
 		this.lvlLuck = 1;
-		this.currHP = this.getHealth();
 
 	}
 
@@ -121,10 +117,6 @@ public class Player extends GameChar {
 		return this.sklPt;
 	}
 
-	public int getCurrHP() {
-		return this.currHP;
-	}
-
 	// -------------------Setters-------------------
 
 	public void setMana(int mana) {
@@ -157,10 +149,6 @@ public class Player extends GameChar {
 
 	public void setSklPt(int sklPt) {
 		this.sklPt = sklPt;
-	}
-
-	public void setCurrHP(int currHP) {
-		this.currHP = currHP;
 	}
 
 	// -------------------Functions-------------------
