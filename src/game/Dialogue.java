@@ -1,3 +1,7 @@
+package game;
+
+public class Dialogue {
+
 	/*
 	 * Dialogue is printed using a for-loop that displays it one character at a
 	 * time, and the display time is controlled by a speed variable, given when the
