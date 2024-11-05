@@ -171,7 +171,225 @@ public class GameThread extends Throwable {
 		return true;
 	}
 	
-	public static boolean meleeChapter1(Player player, Scanner keyboard) {
+	public static boolean meleeChapter1(Player player, Scanner scn) {
+
+		int txtSpd = 25, wait = 1000;
+		boolean pResponse = true;
+		char input = ' ';
+		boolean win = false;
+		String charName = "???";
+		
+		Battle meleeTutorial = new Battle(player, EnemyList.tutor1);
+
+		System.out.println(
+				"---------------------------------------------------------------------------------------------------");
+
+		Dialogue.infoDialogue(
+				"As you arrive in the city, you decide that your first course of action should be to visit someplace\n"
+						+ "where you can acquire a proper armament. Strolling around for a bit, you stumble upon an armory "
+						+ "that\nwould suit your needs.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"Looking around, you could see that the place was... old. The shop wasn't in the best of shape. It's\n"
+						+ "likely been around for a long time. The walls and floors were filled with cracks. Even though the\n"
+						+ "interior seemed to be a mess, the weapons racks were in great condition, and all of the weapons "
+						+ "were\nin great condition, a noteworthy contrast to the armory itself.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(charName, "What? First time seeing a run down shop?\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"In the corner next to a furnace, there was an older gentlemen with gray, spiky hair and beard seated,\n"
+						+ "pounding the dents out of a blade that had just been forged in the fire. He looked over, getting a\n"
+						+ "good look at you.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(charName,
+				"Oh? For a minute, I thought you were one of the usual land hawks. Oh well, not that any of that matters \n"
+						+ "to you. You're new around these parts, aren't you?\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		while (pResponse) {
+			Dialogue.infoDialogue("1) I am. How could you tell?\n2) No. What made you think that?\nReponse: ", 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+
+		if (input == '1') {
+			Dialogue.characterDialogue(charName,
+					"When you've been around as long as I have, you meet a lot of people. There's not a single person in this\n"
+							+ "city I haven't seen before, except the tourist in front of me.\n\n",
+					txtSpd);
+		} else {
+			Dialogue.characterDialogue(charName,
+					"If you're going to lie to an old man, try to make it sound convincing. I've been around for a long time.\n"
+							+ "I'd recognize a tourist anywhere.\n\n",
+					txtSpd);
+		}
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(charName,
+				"But that doesn't really matter. If you're a paying customer, then welcome.\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"As the blade cooled down, the blacksmith finished what he was working on and walked over to you. As he got\n"
+						+ "a good look at you, his eyes seemed to light up with interest.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(charName,
+				"Hmm? Those eyes... That's the look of a warrior-to-be. So, you're someone with the heart of the fighter...\n"
+						+ "Been a while since I've met a rookie adventurer. I remember when I was in your shoes a few decades "
+						+ "ago.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		charName = "Jagatai, Retired Warrior";
+
+		Dialogue.characterDialogue(charName,
+				"My name's Jagati. I used to be a warrior when I was younger, but my adventuring days are long behind me.\n"
+						+ "If you're looking for a good place to get started with making a name for yourself, you've come"
+						+ " to the right\nplace. Though, since your a greenhorn, "
+						+ "I feel the need to ask--Are you aware of the basics of combat?\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) Yes\n2) No.\nReponse: ", 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+
+		if (input == '1') {
+			Dialogue.characterDialogue(charName, "Heh. So you've already been studying on what to expect.\n\n", txtSpd);
+		} else {
+			Dialogue.characterDialogue(charName, "If that's the case, then I won't mind giving you a crash course.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(charName,
+					"Fighters like us, we obviously specialize in being up close and personal. Swords, spears, axes, we've "
+							+ "got a\nvariety of weapons to attack with, some of them imbued with their own special attacks"
+							+ "\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(charName,
+					"Special attacks are techniques that are imbued into a weapon during their forging, allowing "
+							+ "their wielder to\ndemonstrate lethal damage by calling them forth. But, there's a catch."
+							+ "\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(charName,
+					"Not just anybody can call them out at will. You've gotta be real lucky if you want to use "
+							+ "a special attack\nsuccessfully. Bit of a \"high risk, high reward\" scenario, yeah?\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(charName,
+					"That aside, I'm sure you don't need to be told to focus on defense.\n\n", txtSpd);
+
+		}
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(charName,
+				"You've got the basics in your head, but the only way to really remember them is to put them into practice.\n"
+						+ "Here, I'll give you a little something to start your journey off with.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue("Walking over to a rack of swords, Jagatai removes one of them and hands it to you.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		player.getInventory().add(wList.sword1);
+		Dialogue.infoDialogue("[You got an Iron Sword]\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(charName,
+				"Don't get too excited over a free gift. It's just a simple blade. Nobody's imbued a special attack in\n"
+						+ "it, and it doesn't use mana for anything. Oh, by the way, you know what mana is, don't you?\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) Yes\n2) No.\nReponse: ", 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+
+		if (input == '1') {
+			Dialogue.characterDialogue(charName,
+					"So you do. Then you know it's not really something you'd be using.\n\n", txtSpd);
+		} else {
+			Dialogue.characterDialogue(charName,
+					"Mana's what mages use in their wands and weapons. It's an energy within a person's body that's expelled\n"
+							+ "to attack or defend. I don't know too much about it, magic ain't my thing.\n\n",
+					txtSpd);
+		}
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"As you take a moment to observe the blade that you had been given, Jagatai picks up a black longsword\n"
+						+ "before patting you on the shoulder, walking towards the door at the back of the armory.\n\n",
+				txtSpd);
+
+		Dialogue.characterDialogue(charName,
+				"Well, there's no point in sitting there staring at that all day. Come on. I've got an old training spot\n"
+						+ "out back. Let's see if all of that knowledge is gonna pay off when you're in combat.\n\n",
+				txtSpd);
+
+		Dialogue.infoDialogue(
+				"Sensing that a fight was coming, you steel your nerves before following the blacksmith, arriving in a\n"
+						+ "fenced in area outside. Jagatai walks a good distance away from you before turning around, "
+						+ "holding the\nsword in a middle guard stance.\n\n",
+				txtSpd);
+
+		Dialogue.characterDialogue(charName,
+				"Better not expect any weak swings just cause you're new and I'm old. A couple of swings should help you\n"
+						+ "get the feel of things, so try not to get banged up too much. Now bring it!\n\n",
+				txtSpd);
+
 		return true;
 	}
 	
