@@ -107,7 +107,7 @@ public class Consumable extends Item {
 
 		return super.toString() +
 				"Amount: " + this.count + "\n" +
-				"Is Sellable?:" + this.isSellable() + "\n";
+				"Is Sellable?:" + this.getIsSellable() + "\n";
 
 	}
 

@@ -170,7 +170,7 @@ public class Player extends GameChar {
 				+ "\nMax HP: " + this.getHealth() + "\t\tMana: " + this.mana + "\nLuck: " + this.lvlLuck
 				+ "\t\t\tMoney: " + this.getCurrency() + "\n\t\t\t-----Levels-----\n" + "Melee Lv: " + this.lvlMelee
 				+ "\tRanged Lv: " + this.lvlRanged + "\tRouge Lv: " + this.lvlRogue + "\tMage Lv: " + this.lvlMage
-				+ "\nEquipped Weapon: " + this.getInventory().getWeapons().getFirst().getName()
+				+ "\nEquipped Weapon: " + this.getInventory().getEquipped().getName()
 				+ "\n----------------------------------------------------------------\n");
 
 	}
@@ -361,7 +361,7 @@ public class Player extends GameChar {
 					if (this.getInventory().getWeapons().get(index) != null) {
 
 						Weapon temp = this.getInventory().getWeapons().get(index);
-						Weapon first = this.getInventory().getWeapons().getFirst();
+						Weapon first = this.getInventory().getEquipped();
 						this.getInventory().getWeapons().set(0, temp);
 						this.getInventory().getWeapons().set(index, first);
 
