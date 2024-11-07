@@ -7,6 +7,7 @@ public class Enemy extends GameChar {
 	private SpecialAttack specialAttack;
 	private int damage;
 	private String damageType;
+	private String regularAttack;
 	
 	// -------------------Constructors-------------------
 	
@@ -32,12 +33,14 @@ public class Enemy extends GameChar {
 	 * @param inputSpecialAttack
 	 */
 	public Enemy(String inputName, Inventory inputInventory, int inputCurrency, int inputHealth, 
-			int inputLevel, int inputExp, int inputDamage, int inputDamageType, SpecialAttack inputSpecialAttack) 
+			int inputLevel, int inputExp, int inputDamage, int inputDamageType, SpecialAttack inputSpecialAttack,
+			String inputRegularAttack) 
 	{
 		super(inputName, inputInventory, inputCurrency, inputHealth, inputLevel, inputExp);
 		this.specialAttack = inputSpecialAttack;
 		this.damage = inputDamage;
 		this.damageType = this.calculateDamageType(inputDamageType);
+		this.regularAttack = inputRegularAttack;
 	}
 	
 	/**
@@ -54,11 +57,12 @@ public class Enemy extends GameChar {
 	 * @param inputSpecialAttack
 	 */
 	public Enemy(String inputName, int inputCurrency, int inputHealth, int inputLevel, int inputExp, 
-			int inputDamage, int inputDamageType, SpecialAttack inputSpecialAttack) {
+			int inputDamage, int inputDamageType, SpecialAttack inputSpecialAttack, String inputRegularAttack) {
 		super(inputName, inputCurrency, inputHealth, inputLevel, inputExp);
 		this.specialAttack = inputSpecialAttack;
 		this.damage = inputDamage;
 		this.damageType = this.calculateDamageType(inputDamageType);
+		this.regularAttack = inputRegularAttack;
 	}
 	
 	/**
@@ -94,6 +98,10 @@ public class Enemy extends GameChar {
 	public String getDamageType() {
 		return this.damageType;
 	}
+	
+	public String getRegularAttack() {
+		return this.regularAttack;
+	}
 
 	// -------------------Setters-------------------
 	
@@ -111,6 +119,10 @@ public class Enemy extends GameChar {
 	
 	public void setDamageTypeInt(int inputDamageType) {
 		this.damageType = this.calculateDamageType(inputDamageType);
+	}
+	
+	public void setRegularAttack(String inputRegularAttack) {
+		this.regularAttack = inputRegularAttack;
 	}
 	
 	// -------------------Functions-------------------
