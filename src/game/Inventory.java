@@ -62,6 +62,10 @@ public class Inventory {
 		return keyItems;
 	}
 	
+	public Weapon getEquipped() {
+		return weapons.get(0);
+	}
+	
 	// ------------------------------Setters-------------------------------
 	
 	public void setWeapons(ArrayList<Weapon> inputWeapons) {

@@ -8,6 +8,7 @@ public class Battle {
 	private Player player;
 	private Enemy enemy;
 	private int turn;
+	private int guardedTurn;
 	
 	//----------------------------------Constructor---------------------------------
 	
@@ -15,6 +16,7 @@ public Battle(Player inputPlayer, Enemy inputEnemy) {
 	this.setPlayer(inputPlayer);
 	this.setEnemy(inputEnemy);
 	this.setTurn(0);
+	this.setguardedTurn(0);
 }
 	
 	
@@ -32,6 +34,10 @@ public int getTurn() {
 	return this.turn;
 }
 
+public int getguardedTurn() {
+	return this.guardedTurn;
+}
+
 	//----------------------------------Setters---------------------------------
 
 public void setPlayer(Player inputPlayer) {
@@ -44,6 +50,10 @@ public void setEnemy(Enemy inputEnemy) {
 
 public void setTurn(int inputTurn) {
 	this.turn = inputTurn;
+}
+
+public void setguardedTurn(int inputGTurn) {
+	this.guardedTurn = inputGTurn;
 }
 
 //----------------------------------Functions---------------------------------
@@ -62,12 +72,12 @@ public void startBattle() {
 	breakLine();
 	
 	while(inBattle) {
-		if(turn == 0)
+		if(turn == 0) {
 			this.playerTurn(keyboard);
-		
-		else
+		}
+		else {
 			this.enemyTurn();
-		
+		}
 		if (player.getHealth() <= 0) { //Check if battle continues after each turn
             System.out.println("You have been defeated!");
             inBattle = false;
@@ -120,28 +130,35 @@ public void startBattle() {
 				break;
 			}
 }
+	
+	
+	private void printInventoryConsumableArray(ArrayList<Consumable> arrayList) {
+		for(int x = 0; x < arrayList.size(); x++) {
+			System.out.println(x+1 + ") " + arrayList.get(x).getName() + 
+					"\t Value: " + arrayList.get(x).getValue());
+		}
+	}
 
+	
+	private void enemyDefeat() {
+		System.out.println("You have defeated " + enemy);
+	}
 	
 
 
 	private void useItem(Scanner keyboard) {
 		System.out.println("Choose an item to use from your inventory:");
-        player.getInventory().displayItems(); // Assuming Inventory has displayItems method
-        int itemChoice = keyboard.nextInt();
         
-        Consumable item = player.getInventory().getItem(itemChoice); // Retrieve the chosen item
-        if (item != null) {
-            player.consume(item); // Use the item, applying its effect to the player
-            System.out.println("You used " + item.getName());
-        } else {
-            System.out.println("Invalid item choice.");
-        }
+        
+        
+        
+        
 	}
 
 
 	private void guard() {
 		System.out.println("You guard yourself from the next attack./n");
-		player.setGuarding(true);
+		
 	}
 
 
@@ -163,13 +180,13 @@ public void startBattle() {
 			
 			case 1:
 				System.out.println("You chose a standard attack!/n");
-				enemy.setHealth(enemy.getHealth() - player.getEquipped().getDamage());
+				enemy.setHealth(enemy.getHealth() - player.getInventory().getEquipped().getDamage());
 				isAttacking = false;
 				break;
 				
 			case 2:
 				System.out.println("You chose a special attack!/n");
-				enemy.setHealth(enemy.getHealth() - player.getEquipped().getSpecialAttack().useSpAtk());
+				enemy.setHealth(enemy.getHealth() - player.getInventory().getEquipped().getSpecialAttack().useSpAtk());
 				isAttacking = false;
 				break;
 				
@@ -183,8 +200,6 @@ public void startBattle() {
 				break;
 			}
 		}
-		
-		
 			
 		System.out.println("Enemy health:" + this.getEnemy());
 		
@@ -195,7 +210,7 @@ public void startBattle() {
 		System.out.println("The enemy attacked you!\n");
         int damage = enemy.getDamage();
         
-        if (player.isGuarding()) { // Reduce damage if the player is guarding
+        if (player.guard(0)) { // Reduce damage if the player is guarding
             damage /= 2;
             System.out.println("You guarded against the attack, reducing the damage!");
             player.setGuarding(false);
