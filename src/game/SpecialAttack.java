@@ -52,12 +52,14 @@ public class SpecialAttack {
 	 * 
 	 * @param luckVal - The character's initial luck value.
 	 */
-	void useSpAtk(int luckVal) {
+	public boolean useSpAtk(int luckVal) {
 		
 		if (Luck.luckEvent(luckVal)) {
 			Dialogue.infoDialogue(hitTxt, 30);
+			return true;
 		} else {
 			Dialogue.infoDialogue(missTxt, 30);
+			return false;
 		}
 
 	}
