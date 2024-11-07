@@ -78,11 +78,11 @@ public boolean startBattle() {
 		else {
 			this.enemyTurn();
 		}
-		if (player.getHealth() <= 0) { //Check if battle continues after each turn
+		if (player.getCurrHP() <= 0) { //Check if battle continues after each turn
             System.out.println("You have been defeated!");
             System.out.println("Leaving the Battle Arena.");
             return false;
-        } else if (enemy.getHealth() <= 0) {
+        } else if (enemy.getCurrHP() <= 0) {
             System.out.println("You defeated the enemy!");
             return true;
         } else {
