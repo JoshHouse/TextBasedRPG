@@ -62,7 +62,7 @@ public static void breakLine() {
     System.out.println("------------------------------");
 }
 
-public void startBattle() {
+public boolean startBattle() {
 	int battleMenu = 0;
 	boolean inBattle = true;
 	Scanner keyboard = new Scanner(System.in);
@@ -80,10 +80,11 @@ public void startBattle() {
 		}
 		if (player.getHealth() <= 0) { //Check if battle continues after each turn
             System.out.println("You have been defeated!");
-            inBattle = false;
+            System.out.println("Leaving the Battle Arena.");
+            return false;
         } else if (enemy.getHealth() <= 0) {
             System.out.println("You defeated the enemy!");
-            inBattle = false;
+            return true;
         } else {
             changeTurn(); // Change turn only if battle continues
         }
@@ -91,7 +92,7 @@ public void startBattle() {
 	}
 	
 	keyboard.close();
-	System.out.println("Leaving the Battle Arena.");
+	return false;
 	
 }
 

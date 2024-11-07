@@ -22,6 +22,14 @@ public class SpecialAttack {
 		this.missTxt = "";
 		this.atkMultiplier = 1.0;
 	}
+	
+	public SpecialAttack(SpecialAttack inputSpecialAttack) {
+		this.setName(inputSpecialAttack.getName());
+		this.setInfo(inputSpecialAttack.getInfo());
+		this.setHitTxt(inputSpecialAttack.getHitTxt());
+		this.setMissTxt(inputSpecialAttack.getMissTxt());
+		this.setAtkMultiplier(inputSpecialAttack.getAtkMultiplier());
+	}
 
 	/**
 	 * Initializes all values
@@ -44,12 +52,14 @@ public class SpecialAttack {
 	 * 
 	 * @param luckVal - The character's initial luck value.
 	 */
-	void useSpAtk(int luckVal) {
+	public boolean useSpAtk(int luckVal) {
 		
 		if (Luck.luckEvent(luckVal)) {
 			Dialogue.infoDialogue(hitTxt, 30);
+			return true;
 		} else {
 			Dialogue.infoDialogue(missTxt, 30);
+			return false;
 		}
 
 	}

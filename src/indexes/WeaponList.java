@@ -1,11 +1,13 @@
 package indexes;
 
+import game.SpecialAttack;
 import game.Weapon;
 
 public class WeaponList {
 
-	private SpAtkList spAtk = new SpAtkList();
-
+	private static SpAtkList spAtk = new SpAtkList();
+	
+	// --------------------Melee Weapons--------------------
 	/** Iron Sword */
 	public Weapon sword1 = new Weapon("f001", "Iron Sword",
 			"A classic iron sword wielded by many fighters and warriors.", 1, 150, 19, 1, true);
@@ -45,5 +47,14 @@ public class WeaponList {
 	public Weapon sword4 = new Weapon("f009", "Greatsword",
 			"A massive broadsword often favored for it's heavy swings and strong attacks.", 1, 300, 35, 1, true,
 			spAtk.gSlash);
+	// --------------------Ranged Weapons--------------------
+	
+	// --------------------Magic Weapons--------------------
+	/** Training Wand*/
+	public static Weapon starterWand = new Weapon("f201", "Training Wand", 
+			"A wand favored by young mages to learn the ropes.", 1, 25, 15, 3,true, 10, SpAtkList.pBeam);
+	
+	// --------------------Rogue Weapons--------------------
+	
 
 }

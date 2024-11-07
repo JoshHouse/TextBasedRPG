@@ -15,7 +15,6 @@ public class Player extends GameChar {
 	private int lvlRogue;
 	private int lvlLuck;
 	private int sklPt = 4;
-	private int currHP; // Current HP. Used for battles.
 
 	// -------------------Constructors-------------------
 
@@ -31,7 +30,6 @@ public class Player extends GameChar {
 		this.lvlMage = 1;
 		this.lvlRogue = 1;
 		this.lvlLuck = 1;
-		this.currHP = this.getHealth();
 	}
 
 	/**
@@ -66,7 +64,6 @@ public class Player extends GameChar {
 		this.lvlRogue = inputlvlRogue;
 		this.lvlMage = inputlvlMage;
 		this.lvlLuck = inputlvlLuck;
-		this.currHP = this.getHealth();
 	}
 
 	/**
@@ -83,7 +80,6 @@ public class Player extends GameChar {
 		this.lvlMage = 1;
 		this.lvlRogue = 1;
 		this.lvlLuck = 1;
-		this.currHP = this.getHealth();
 
 	}
 
@@ -121,10 +117,6 @@ public class Player extends GameChar {
 		return this.sklPt;
 	}
 
-	public int getCurrHP() {
-		return this.currHP;
-	}
-
 	// -------------------Setters-------------------
 
 	public void setMana(int mana) {
@@ -159,10 +151,6 @@ public class Player extends GameChar {
 		this.sklPt = sklPt;
 	}
 
-	public void setCurrHP(int currHP) {
-		this.currHP = currHP;
-	}
-
 	// -------------------Functions-------------------
 
 	/**
@@ -182,7 +170,7 @@ public class Player extends GameChar {
 				+ "\nMax HP: " + this.getHealth() + "\t\tMana: " + this.mana + "\nLuck: " + this.lvlLuck
 				+ "\t\t\tMoney: " + this.getCurrency() + "\n\t\t\t-----Levels-----\n" + "Melee Lv: " + this.lvlMelee
 				+ "\tRanged Lv: " + this.lvlRanged + "\tRouge Lv: " + this.lvlRogue + "\tMage Lv: " + this.lvlMage
-				+ "\nEquipped Weapon: " + this.getInventory().getWeapons().getFirst().getName()
+				+ "\nEquipped Weapon: " + this.getInventory().getEquipped().getName()
 				+ "\n----------------------------------------------------------------\n");
 
 	}
@@ -373,7 +361,7 @@ public class Player extends GameChar {
 					if (this.getInventory().getWeapons().get(index) != null) {
 
 						Weapon temp = this.getInventory().getWeapons().get(index);
-						Weapon first = this.getInventory().getWeapons().getFirst();
+						Weapon first = this.getInventory().getEquipped();
 						this.getInventory().getWeapons().set(0, temp);
 						this.getInventory().getWeapons().set(index, first);
 

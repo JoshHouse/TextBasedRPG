@@ -1,9 +1,14 @@
 package indexes;
 
 import game.Enemy;
+import game.Inventory;
 
 public class EnemyList {
-	
-	Enemy e001 = new Enemy("Wolf", 40, 1, 35, 20);
+
+	public static Enemy sheep = new Enemy("Sheep", new Inventory(), 25, 50, 1, 10, 5, 1, SpAtkList.none);
+
+	/** Blacksmith Jagatai - Tutorial fight for melee class. */
+	public static Enemy tutor1 = new Enemy("Blacksmith Jagatai", new Inventory(), 0, 65, 1, 10, 10, 1,
+			SpAtkList.none);
 
 }

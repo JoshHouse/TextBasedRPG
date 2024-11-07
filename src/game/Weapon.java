@@ -17,6 +17,19 @@ public class Weapon extends Item {
 		this.manaUsage = 0;
 		this.specialAttack = new SpecialAttack();
 	}
+	
+	public Weapon(Weapon inputWeapon) {
+		this.setKey(inputWeapon.getKey());
+		this.setName(inputWeapon.getName());
+		this.setInfo(inputWeapon.getInfo());
+		this.setRarity(inputWeapon.getRarity());
+		this.setValue(inputWeapon.getValue());
+		this.setDamage(inputWeapon.getDamage());
+		this.setDamageType(inputWeapon.getDamageType());
+		this.setIsSellable(inputWeapon.getIsSellable());
+		this.setManaUsage(inputWeapon.getManaUsage());
+		this.setSpecialAttack(new SpecialAttack(inputWeapon.getSpecialAttack()));
+	}
 
 	/**
 	 * Constructor that initializes all values
@@ -185,7 +198,7 @@ public class Weapon extends Item {
 				+ "\nMana Usage: " + this.manaUsage + "\n";
 
 		// If the weapon is sellable, the value is added on.
-		if (this.isSellable()) {
+		if (this.getIsSellable()) {
 			info = info + "Value: " + this.getValue() + " Gold\n";
 		}
 
