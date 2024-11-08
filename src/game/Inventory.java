@@ -66,8 +66,6 @@ public class Inventory {
 		return weapons.get(0);
 	}
 	
-<<<<<<< HEAD
-=======
 	public Weapon getWeaponOnKey(String inputKey) {
 		for (int x = 0; x < weapons.size(); x++) {
 			if (inputKey.equals(weapons.get(x).getKey())) {
@@ -76,8 +74,6 @@ public class Inventory {
 		}
 		return null;
 	}
-	
->>>>>>> efdedd811bf12208204039c6b225635e3355138e
 	// ------------------------------Setters-------------------------------
 	
 	public void setWeapons(ArrayList<Weapon> inputWeapons) {
