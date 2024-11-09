@@ -9,7 +9,7 @@ public class SpAtkList {
 	
 	
 	/** No special attack. */
-	public static SpecialAttack none = new SpecialAttack();
+	public SpecialAttack none = new SpecialAttack();
 
 	// --------------------Melee Special Attacks--------------------
 	/** Special Attack - Triple Thrust. */
@@ -30,12 +30,16 @@ public class SpAtkList {
 	
 	// --------------------Magic Special Attacks--------------------
 	/** Special Attack - Power Beam */
-	public static SpecialAttack pBeam = new SpecialAttack("Power Beam", 
+	public SpecialAttack pBeam = new SpecialAttack("Power Beam", 
 			"Shoot a deadly beam capable of putting a hole straight through your enemy!",
 			"Beams of light converge on your weapon, firing a blast of charged up energy!",
 			"Beams of light begin to converge on your weapon but quickly fizzle out! You failed to fire off the beam!",
 			1.3);
 	
 	// --------------------Rogue Special Attacks--------------------
+	
+	// --------------------Enemy Special Attacks--------------------
+	
+	
 
 }
