@@ -4,6 +4,10 @@ import game.SpecialAttack;
 
 public class SpAtkList {
 
+	// Constructor for SpecialAttack Object:
+	// (String) Name, (String) Info, (String) HitText, (String) MissTxt, (double) AttackMultiplier
+	
+	
 	/** No special attack. */
 	public static SpecialAttack none = new SpecialAttack();
 

@@ -4,6 +4,12 @@ import game.SpecialAttack;
 import game.Weapon;
 
 public class WeaponList {
+	
+	// Constructor for Weapon Object:
+	// (String) Key, (String) Name, (String) Info, (int) Rarity, (int) Value, (int) Damage, (int) DamageType, 
+	// (Boolean) isSellable, (int) manaUsage, (SpecialAttack) SpecialAttack
+	
+	// *Note* DamageType:    1 = Melee   2 = Ranged   3 = Mage   4 = Rogue   5 = Null
 
 	private static SpAtkList spAtk = new SpAtkList();
 	

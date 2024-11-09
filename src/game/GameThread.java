@@ -12,6 +12,8 @@ public class GameThread extends Throwable {
 	private static final long serialVersionUID = 1L;
 
 	private static WeaponList wList = new WeaponList();
+	
+	private static EnemyList eList = new EnemyList();
 
 	
 	/**
@@ -206,7 +208,7 @@ public class GameThread extends Throwable {
 		boolean win = false;
 		String charName = "???";
 
-		Battle meleeTutorial = new Battle(player, EnemyList.tutor1);
+		Battle meleeTutorial = new Battle(player, eList.tutor1);
 
 		System.out.println(
 				"---------------------------------------------------------------------------------------------------");
@@ -500,7 +502,7 @@ public class GameThread extends Throwable {
 	public static boolean mageChapter1(Player player, Scanner keyboard) {
 		boolean makingChoice = true;
 		int pChoice;
-		Battle tutorialBattle = new Battle(player, EnemyList.sheep);
+		Battle tutorialBattle = new Battle(player, eList.sheep);
 		boolean playerWon = false;
 		
 		breakLine();
