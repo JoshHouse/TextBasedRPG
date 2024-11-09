@@ -205,7 +205,7 @@ public class GameThread extends Throwable {
 		char input = ' ';
 		boolean win = false;
 		String charName = "???";
-		
+
 		Battle meleeTutorial = new Battle(player, EnemyList.tutor1);
 
 		System.out.println(
@@ -300,7 +300,7 @@ public class GameThread extends Throwable {
 
 		pResponse = true;
 		while (pResponse) {
-			Dialogue.infoDialogue("1) Yes\n2) No.\nReponse: ", 8);
+			Dialogue.infoDialogue("1) Yes\n2) No\nReponse: ", 8);
 			input = scn.next().charAt(0);
 
 			switch (input) {
@@ -324,7 +324,7 @@ public class GameThread extends Throwable {
 
 			Dialogue.characterDialogue(charName,
 					"Fighters like us, we obviously specialize in being up close and personal. Swords, spears, axes, we've "
-							+ "got a\nvariety of weapons to attack with, some of them imbued with their own special attacks"
+							+ "got a\nvariety of weapons to attack with, some of them imbued with their own special attacks."
 							+ "\n\n",
 					txtSpd);
 			Pause.pause(wait);
@@ -400,22 +400,95 @@ public class GameThread extends Throwable {
 				"As you take a moment to observe the blade that you had been given, Jagatai picks up a black longsword\n"
 						+ "before patting you on the shoulder, walking towards the door at the back of the armory.\n\n",
 				txtSpd);
+		Pause.pause(wait);
 
 		Dialogue.characterDialogue(charName,
 				"Well, there's no point in sitting there staring at that all day. Come on. I've got an old training spot\n"
 						+ "out back. Let's see if all of that knowledge is gonna pay off when you're in combat.\n\n",
 				txtSpd);
+		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
 				"Sensing that a fight was coming, you steel your nerves before following the blacksmith, arriving in a\n"
 						+ "fenced in area outside. Jagatai walks a good distance away from you before turning around, "
 						+ "holding the\nsword in a middle guard stance.\n\n",
 				txtSpd);
+		Pause.pause(wait);
 
 		Dialogue.characterDialogue(charName,
 				"Better not expect any weak swings just cause you're new and I'm old. A couple of swings should help you\n"
 						+ "get the feel of things, so try not to get banged up too much. Now bring it!\n\n",
 				txtSpd);
+		Pause.pause(wait);
+
+		System.out.println(
+				"---------------------------------------------------------------------------------------------------");
+
+		win = meleeTutorial.startBattle();
+
+		if (win) {
+
+			Dialogue.infoDialogue(
+					"(As you battle enemies during your adventure, you will earn EXP after defeating them, the amount varying\n"
+							+ "from enemy to enemy. Once you gain enough EXP, you will level up. Your stats will increase, "
+							+ "and you will\nreceive a skill point to spend on one of the class stats, or your luck stat. You "
+							+ "can view your overall\nlevel, the level of each stat, how much EXP you need to level up again, "
+							+ "and how many skill points you\nhave available to spend all from your profile "
+							+ "after the tutorial.)\n\n",
+					txtSpd);
+			Pause.pause(wait);
+			Pause.pause();
+
+			System.out.println(
+					"---------------------------------------------------------------------------------------------------");
+
+			Dialogue.infoDialogue(
+					"The sparring session lasted barely over a minute before Jagatai found himself satisfied with you, "
+							+ "putting\naway his weapon before nodding his head in approval.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(charName,
+					"Looks like you've got a natural talent for combat too. I might not be in my prime anymore, but I "
+							+ "can still\nsee you growing into the kind of warrior that could give me a run for my money.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(charName,
+					"You'll do just fine out there as you learn and grow. Pretty soon, I'll be expecting to hear tales "
+							+ "of your\naccomplishments. So, what's the name that I should be looking "
+							+ "out for in the future?\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue("...\n\n", txtSpd + 80);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(charName, player.getName() + ", eh?\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(charName,
+					"Alright then. I'll be expecting to hear good things about the tales of " + player.getName()
+							+ " while I'm still around.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(charName, "I wish you the best of luck, young warrior.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue(
+					"With Jagatai's words of praise fresh in your mind and a new sword in your hands, "
+							+ "you exit the armory with\nyour morale high, ready to embark on your new adventure.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue("This marks the beginning of the tale of " + player.getName() + "...", txtSpd + 20);
+			Pause.pause(wait);
+
+			System.out.println("\n");
+			Pause.pause();
+
+		}
 
 		return true;
 	}
