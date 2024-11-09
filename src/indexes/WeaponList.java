@@ -56,7 +56,7 @@ public class WeaponList {
 	
 	// --------------------Magic Weapons--------------------
 	/** Training Wand*/
-	public static Weapon starterWand = new Weapon("f201", "Training Wand", 
+	public Weapon starterWand = new Weapon("f201", "Training Wand", 
 			"A wand favored by young mages to learn the ropes.", 1, 25, 15, 3,true, 10, spAtk.pBeam);
 	
 	// --------------------Rogue Weapons--------------------

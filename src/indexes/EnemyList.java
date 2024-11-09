@@ -27,10 +27,11 @@ public class EnemyList {
 	// --------------------Chapter 3 Enemies--------------------
 	
 	public Enemy fireElemental = new Enemy("Fire Elemental", new Inventory(), 500, 1000, 15, 200, 200,
-			3, spAtkList.none, "Brings its flaming fist down with murderous intent!");
+			3, spAtkList.fireWall, "Brings its flaming fist down with murderous intent!");
 	
 	public Enemy fireRockGolem = new Enemy("Fire Elemental Rock Golem", new Inventory(), 1000, 1750, 20, 500, 400,
-			3, spAtkList.none, "Throws a flaming boulder of firey rock directly at you!");
+			3, spAtkList.erruption, "Throws a flaming boulder of firey rock directly at you!");
+	
 	// --------------------Chapter 4 Enemies--------------------
 
 }

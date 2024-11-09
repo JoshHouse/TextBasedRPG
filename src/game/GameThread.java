@@ -543,9 +543,9 @@ public class GameThread extends Throwable {
 				+ "around town though! I have heard rumors of some pretty strong magic weapons but those are "
 				+ "pretty dangerous to get. But no need to worry about those right now! First you need to get the "
 				+ "basics down. Here, take this wand.");
-		player.getInventory().add(WeaponList.starterWand);
+		player.getInventory().add(wList.starterWand);
 		System.out.println("The starter wand has been added to your inventory!");
-		player.getInventory().getWeaponOnKey(WeaponList.starterWand.getKey()).displayInfo();
+		player.getInventory().getWeaponOnKey(wList.starterWand.getKey()).displayInfo();
 		
 		makingChoice = true;
 		pChoice = 0;
@@ -652,6 +652,7 @@ public class GameThread extends Throwable {
 	}
 	
 	public static boolean mageSpecialMission(Player player, Scanner keyboard) {
+		
 		return true;
 	}
 	
