@@ -644,6 +644,9 @@ public class GameThread extends Throwable {
 	}
 	
 	public static boolean meleeSpecialMission(Player player, Scanner keyboard) {
+		int txtSpd = 25, wait = 1000;
+		String pName = player.getName();
+		String wizName = "Magnus the King's Wizard";
 		return true;
 	}
 	
