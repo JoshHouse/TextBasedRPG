@@ -644,9 +644,518 @@ public class GameThread extends Throwable {
 	}
 	
 	public static boolean meleeSpecialMission(Player player, Scanner keyboard) {
-		int txtSpd = 25, wait = 1000;
+		int txtSpd = 25; 
+		int wait = 1000;
+		int pChoice;
+		boolean makingChoice = true;
 		String pName = player.getName();
 		String wizName = "Magnus the King's Wizard";
+		
+		breakLine();
+		Dialogue.characterDialogue(wizName, "I heard you defeated the Troll that has been terrorizing the "
+				+ "townspeople. That is pretty impressive! That Troll has been a pain in our side for a little "
+				+ "over a year now. I hear the King is pretty impressed with you too! Although that goes "
+				+ "without saying if he’s allowing you to take orders from me.\n",
+				txtSpd);
+		
+		while (makingChoice) {
+			Dialogue.characterDialogue( wizName, "Speaking of, did the King mention that I had something "
+					+ "I needed done that you might be able to help me out with?\n"
+					+ "1) Yes I believe he did.\n"
+					+ "2) I don’t recall. But I’d be willing to hear you out now.\n", 
+					txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				Dialogue.characterDialogue(pName, "Yes I believe he did.\n",txtSpd);
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				Dialogue.characterDialogue(pName, "I don’t recall. But I’d be willing to hear you out now.\n",
+						txtSpd);
+				makingChoice = false;
+				break;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		Dialogue.characterDialogue(wizName , "Well I have run into a bit of a roadblock in some research "
+				+ "I have been doing. I have been looking into the inner workings of Fire Magic but to further "
+				+ "my research I need a firestone. They can be found in the Fire Cave located on Mount "
+				+ "Cloudripper. I would go retrieve it myself but I am the one responsible for the protective "
+				+ "barrier around the kingdom. If I were to leave, it would put our population at risk of enemy "
+				+ "magic users. I have been searching for someone strong enough to retrieve it for me but have not "
+				+ "found much luck until now. I have sent multiple adventurers out but all of them have failed to "
+				+ "come back. If you were strong enough to defeat the Troll, you might have a chance to make it "
+				+ "back though! If you can make it to the bottom of the cave, there might be a powerful magic "
+				+ "weapon in it for you.\n",
+				txtSpd);
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.characterDialogue(wizName, "What do you think?\n"
+					+ "1) That sounds interesting. What should I expect if I were to go?\n"
+					+ "2) I’m not too sure. That sounds dangerous. I’m not sure if the magic weapon would be "
+					+ "worth it.\n", 
+					txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				Dialogue.characterDialogue(pName, "That sounds interesting. What should I expect if I were to go?\n",
+						txtSpd);
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				Dialogue.characterDialogue(pName, "I’m not too sure. That sounds dangerous. I’m not sure if the "
+						+ "magic weapon would be worth it.\n",
+						txtSpd);
+				Dialogue.characterDialogue(wizName , "That is understandable. It’s not a decision to make lightly. "
+						+ "Let me know if you change your mind!\n",
+						txtSpd);
+				return false;
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		Dialogue.characterDialogue(wizName , "If you were to attempt this journey, I will not sugar coat it. "
+				+ "It will be dangerous and you will encounter many strong enemies through the cave. As you "
+				+ "journey deeper into the cave, you will more than likely encounter Fire Elementals. They are "
+				+ "no joke and pack a serious punch. You will definitely want to stay on guard. But those are "
+				+ "not the worst of your worries. One of the strongest fire magic users used to live in that "
+				+ "cave, and right before the entrance to his home, he summoned a Fire Elemental Rock Golem as a "
+				+ "bodyguard. The wizard is long dead but that Golem still stands to protect the wizard’s "
+				+ "possessions. It can do some serious damage so if you decide to take on this challenge, the "
+				+ "Golem will be your biggest hurdle.\n",
+				txtSpd);
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.infoDialogue("How do you respond?\n"
+					+ "1) That sound’s like a very dangerous mission. What’s in it for me? You mentioned a "
+					+ "powerful magic weapon?\n"
+					+ "2) I’m not so sure that is a mission I would like to go on. Let me think about it.\n",
+					txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				Dialogue.characterDialogue(pName, "That sound’s like a very dangerous mission. What’s in it for me? "
+						+ "You mentioned a powerful magic weapon?\n",txtSpd);
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				Dialogue.characterDialogue(pName, "I’m not so sure that is a mission I would like to go on. Let "
+						+ "me think about it.\n",
+						txtSpd);
+				Dialogue.characterDialogue(wizName , "That is understandable. It’s not a decision to make lightly. "
+						+ "Let me know if you change your mind!\n",txtSpd);
+				return false;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		Dialogue.characterDialogue(wizName , "Absolutely! This is not something I would ask you to do if there "
+				+ "wasn’t anything in it for you. I have heard rumors that the wizard’s Fire Staff lies within "
+				+ "his home, along with the Fire Stones. That Fire Staff is one of the strongest magic weapons "
+				+ "you can find if you can make it through the Golem. Of course, I have only heard rumors and, "
+				+ "not having been there myself, I can’t confirm whether it’s there. But if it is, it would make "
+				+ "the trip worth it for just about any magic user.\n",
+				txtSpd);
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.characterDialogue(wizName, "With that in mind, what do you think?\n"
+					+ "1) I think I’ll give it a shot! How do I get to the cave?\n"
+					+ "2) I’m not too sure. Let me think about it.\n",txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				Dialogue.characterDialogue(pName, "I think I’ll give it a shot! How do I get to the cave?\n",txtSpd);
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				Dialogue.characterDialogue(pName, "I’m not too sure. Let me think about it.\n",txtSpd);
+				Dialogue.characterDialogue(wizName , "I completely understand. It’s not a decision to make lightly. "
+						+ "Let me know if you change your mind!\n",txtSpd);
+				return false;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		Dialogue.characterDialogue(wizName , "Great to hear! To reach the cave, head down the main road "
+				+ "out of town. Then head toward the tallest mountain on the skyline. That’s Mount Cloudripper. "
+				+ "The Fire Cave can be found on the opposite side of the mountain if you are leaving from "
+				+ "the main gate. It’s almost impossible to miss. There is a fiery glow emanating from the "
+				+ "entrance as a result of the flame infused rock that lines the walls of the cave. Deep within "
+				+ "is where you’ll find the wizard’s hideout.\n",
+				txtSpd);
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.characterDialogue(wizName, "I wish you luck on your journey and a better fate than "
+					+ "those who have attempted this journey before you!\n"
+					+ "1) Thank you! I will be on my way now!\n"
+					+ "2) Thank you! I will be back soon, stone and staff in hand!\n",txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				Dialogue.characterDialogue(pName, "Thank you! I will be on my way now!\n",txtSpd);
+				Dialogue.characterDialogue(wizName, "Of course! I hope to see you again soon!\n",txtSpd);
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				Dialogue.characterDialogue(pName, "Thank you! I will be back soon, stone and staff in hand!\n",
+						txtSpd);
+				Dialogue.characterDialogue(wizName, "Of course! I have every confidence you will!\n",txtSpd);
+				makingChoice = false;
+				break;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		Dialogue.infoDialogue("*You travel down the main road, away from the castle, mentally preparing yourself "
+				+ "for the intense journey ahead of you. As you reach the main gate, you see the sun setting on "
+				+ "the horizon, lighting the sky in an orange hue. Along the horizon, you see Mount Cloudripper "
+				+ "standing far above everything else. You walk in the direction of the mountain, reaching it as "
+				+ "night falls. You see a bright orange glow emanating from a cave entrance about half way up the "
+				+ "mountain. By torch light, you make the treacherous journey up the path scaling tight cliff "
+				+ "sides and narrowly escaping death on numerous occasions, having to be cautious of stepping on "
+				+ "loose rock along the way. You finally reach the cave’s entrance, but after your long and "
+				+ "treacherous journey, you find yourself exhausted. You decide to set up camp under an overhanging "
+				+ "boulder to rest before your trek into the cave.*\n", 
+				txtSpd);
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.infoDialogue("*You wake up and see the sun overhead. You have rested through the night. What "
+					+ "do you want to do?*\n "
+					+ "1) *Being well rested, I am ready to make my journey into the depths*\n "
+					+ "2) *I find myself still exhausted, I would like to rest some more*\n",
+					txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				Dialogue.infoDialogue("*You decide to rest some more, sleeping through another day*\n", txtSpd);
+				break;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		Dialogue.infoDialogue("*You begin your journey into the cave, noticing a dramatic rise in temperature. "
+				+ "It is almost unbearable but you journey deeper in pursuit of your goal. Despite the blazing "
+				+ "heat, you can’t help but admire the glowing formations of fire infused rock stalactites and "
+				+ "stalagmites hanging overhead and rising up from the earth. As you travel deeper, you feel a "
+				+ "sudden blast of heat and a screech that sends shivers down your spine. A large, four legged "
+				+ "beast that seems to be perpetually on fire bursts out from around a path down the cave. You "
+				+ "are now standing face to face with a Fire Elemental!*\n",
+				txtSpd);
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.infoDialogue("*Are you ready to fight?*\n"
+					+ "1) *Nothing will stand in my way! I will slay the Fire Elemental!*\n"
+					+ "2) *I can’t possibly deal with a beast this size. I must hide!*\n", txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				Dialogue.infoDialogue("*You raise your weapon, prepared for a tough battle*\n", txtSpd);
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				Dialogue.infoDialogue(" *You run to hide behind a rock formation! The beast, having caught a "
+						+ "glimpse of you, will not leave its post. The only way out is through!*\n", txtSpd);
+				makingChoice = false;
+				break;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		/*
+		 * 
+		 * Fire Elemental Fight
+		 * 
+		 */
+		
+		/*
+		 * lose:
+		 * return false;
+		 * 
+		 * win:
+		 */
+		
+		Dialogue.infoDialogue("* Having defeated the elemental, you continue through the cave with every step "
+				+ "sending echoes down the long corridors of rocky terrain. Fiery geysers shoot blasts of "
+				+ "flames from deep within the earth sending blasts of heat that are almost unbearable. Despite "
+				+ "this, you venture on in pursuit of the treasure that lies deep within the cave. As you continue "
+				+ "downward, you come across the singed body of a fallen wizard, more than likely in the pursuit "
+				+ "of the same goal you came down here for.*\n", 
+				txtSpd);
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.infoDialogue("What will you do? \n"
+					+ "1) *Loot the body*\n"
+					+ "2) *Continue onward\n", txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				/*
+				 * Loot functionality
+				 */
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				makingChoice = false;
+				break;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		Dialogue.infoDialogue("*You continue onward, on the lookout for the enemy that might have caused "
+				+ "the death of that adventurer. That is when you hear another screech, no doubt coming from "
+				+ "another Fire Elemental. You see the bright glow coming from the tunnel and in an instant "
+				+ "have come face to face with the elemental. *\n", 
+				txtSpd);
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.infoDialogue("*Are you ready to fight?*\n"
+					+ "1) *I was born ready*\n"
+					+ "2) *I need to hide!*", txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				Dialogue.infoDialogue("*Poised with your weapon ready for battle, you face the fire elemental showing no fear*\n", txtSpd);
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				Dialogue.infoDialogue("*Unfortunately you do not have time to run away. You draw your weapon and "
+						+ "ready yourself for another tough battle.*\n", txtSpd);
+				makingChoice = false;
+				break;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		/*
+		 * 
+		 * Fire Elemental Fight
+		 * 
+		 */
+		
+		/*
+		 * lose:
+		 * return false;
+		 * 
+		 * win:
+		 */
+		
+		Dialogue.infoDialogue("*Having won the battle, you move on further down the cave. That is when you "
+				+ "see it! You enter into a large open room and rush behind a boulder. Standing in the center "
+				+ "of the room, ready for a fight, is the Fire Elemental Rock Golem. It stands roughly 20 feet "
+				+ "tall, ready to take on anyone wishing to obtain the Fire Wizard’s Possessions. Lava courses "
+				+ "between the stones that make up its body and drips from every crack and joint of its stature. "
+				+ "The heat emanating from its sheer presence is enough to deter the weak willed. You have come "
+				+ "this far though and you refuse to back down.*\n", txtSpd);
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.infoDialogue("*Are you ready to fight?*\n"
+					+ "1) Yes! I will take down the beast!\n"
+					+ "2) No I would like some time to look through my bag and prepare\n", txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				Dialogue.infoDialogue("*Confident in your abilities, you appear from behind the boulder with "
+						+ "your weapon drawn, ready to take down the menacing golem that stands in your path!*\n", 
+						txtSpd);
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				/*
+				 * Inventory Management functionality
+				 */
+				Dialogue.infoDialogue("*Having prepared for the fight, you appear from behind the boulder, ready "
+						+ "for your toughest fight yet!*\n", txtSpd);
+				makingChoice = false;
+				break;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		/*
+		 * 
+		 * Fire Elemental Rock Golem Fight
+		 * 
+		 */
+		
+		/*
+		 * lose:
+		 * return false;
+		 * 
+		 * win:
+		 */
+		
+		Dialogue.infoDialogue("*As the beast falls, the ground shakes as it hits the ground. On the other "
+				+ "side of the opening, you see a door. That is no doubt the entrance to the Fire wizard’s "
+				+ "home. You enter to see, propped up on a stand, the fire staff glowing with flame energy. "
+				+ "You pick up the staff and feel the magical power coursing through the staff. On a shelf above "
+				+ "the wizard’s alchemy table, you find the Fire Stone that Magnus asked you to retrieve. You "
+				+ "grab both and notice a chest by the wizard’s bed.*\n", 
+				txtSpd);
+		// player.getInventory().add(wList.fireStaff);
+		System.out.println("The Fire Staff has been added to your Inventory!");
+		System.out.println("The Fire Stone has been added to your Inventory!");
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.infoDialogue("What do you do?\\n\n"
+					+ "1) Loot the chest\\n\n"
+					+ "2) Leave\n", txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				/*
+				 * Loot functionality
+				 */
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				makingChoice = false;
+				break;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		Dialogue.infoDialogue("*You make the trek back through the cave, having defeated all the enemies, "
+				+ "you are free to admire the beauty of the flame embedded rock that lines the cave. As you exit, "
+				+ "you feel the sun on your face and your eyes have to get adjusted to the light. You journey "
+				+ "back to the castle and talk to Magnus the Wizard*\n", 
+				txtSpd);
+		Dialogue.characterDialogue(wizName, "My god you made it back! Fire stone in hand as well! You truly "
+				+ "must be strong if you were able to contend with the likes of the Golem! Thank you for retrieving "
+				+ "the stone! This will do wonders to further my research! You will have to tell me about your "
+				+ "journey sometime! For now though, you have definitely proven yourself worthy to contend in "
+				+ "the Arena and hone your skills. Many high class merchants will also be eager to sell new "
+				+ "powerful items to someone they know can wield their power. Take a look around the castle and "
+				+ "see what new opportunities might open up! When you're ready, go talk to the King. He will "
+				+ "definitely be impressed when I tell him what you have accomplished!\n", 
+				txtSpd);
+		
+		while (makingChoice) {
+			Dialogue.infoDialogue("1) Will do thank you!\n"
+					+ "2) I will definintely have to check it out!\n", txtSpd);
+			pChoice = keyboard.nextInt();
+			
+			switch (pChoice) {
+			case 1:
+				breakLine();
+				Dialogue.characterDialogue(pName, "Will do thank you!\n", txtSpd);
+				makingChoice = false;
+				break;
+			
+			case 2:
+				breakLine();
+				Dialogue.characterDialogue(pName, "I will definintely have to check it out!\n", txtSpd);
+				makingChoice = false;
+				break;
+			
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
 		return true;
 	}
 	
