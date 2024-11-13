@@ -642,7 +642,7 @@ public class GameThread extends Throwable {
 		return true;
 	}
 	
-	public static boolean meleeSpecialMission(Player player, Scanner keyboard) {
+	public static boolean mageSpecialMission(Player player, Scanner keyboard) {
 		int txtSpd = 25; 
 		int wait = 1000;
 		int pChoice;
@@ -1162,7 +1162,7 @@ public class GameThread extends Throwable {
 		return true;
 	}
 	
-	public static boolean mageSpecialMission(Player player, Scanner keyboard) {
+	public static boolean meleeSpecialMission(Player player, Scanner keyboard) {
 		
 		return true;
 	}
