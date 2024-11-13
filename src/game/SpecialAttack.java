@@ -1,6 +1,11 @@
 package game;
 
-public class SpecialAttack {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class SpecialAttack implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 3L;
 
 	// -------------------Variables-------------------
 

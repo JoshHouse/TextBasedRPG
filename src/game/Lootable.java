@@ -1,7 +1,12 @@
 package game;
 
-public class Lootable {
-	
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Lootable implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 2L;
+
 	// -------------------Variables-------------------
 	
 	private Inventory inventory;

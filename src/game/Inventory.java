@@ -1,8 +1,12 @@
 package game;
 
 import java.util.ArrayList;
+import java.io.Serial;
+import java.io.Serializable;
 
-public class Inventory {
+public class Inventory implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 4L;
 
 	private ArrayList<Weapon> weapons;
 	private ArrayList<Consumable> consumables;

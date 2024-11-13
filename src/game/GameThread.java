@@ -1,6 +1,6 @@
 package game;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -1218,5 +1218,33 @@ public class GameThread extends Throwable {
 		p1.lvlUp(); // Attempt to level up
 		p1.setCurrency(p1.getCurrency() + e1.getCurrency()); // Add currency after displayed messages
 	}
+
+	/**
+	 * Takes and serializes GameData object and stores it in a file to be reloaded later
+	 *
+	 * @param gameData Combination of player and shop objects
+	 */
+	public static void save(GameData gameData) {
+		try (FileOutputStream fileOut = new FileOutputStream("gameSave.ser");
+			 ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+			out.writeObject(gameData);
+			System.out.println("Game saved successfully.");
+		} catch (Exception e) {e.printStackTrace();}
+	}
+
+	/**
+	 * Reads and deserializes GameData object (player and shop objects).
+	 * Deserialized GameData object is returned.
+	 */
+	public static GameData load() {
+		try (FileInputStream fileIn = new FileInputStream("gameSave.ser");
+			 ObjectInputStream in = new ObjectInputStream(fileIn)) {
+			GameData gameData = (GameData) in.readObject();
+			System.out.println("Game loaded successfully.");
+			return gameData;
+		} catch (Exception e) {e.printStackTrace();}
+		return null;
+	}
+
 
 }

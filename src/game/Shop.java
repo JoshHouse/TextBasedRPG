@@ -2,8 +2,12 @@ package game;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.Serial;
+import java.io.Serializable;
 
-public class Shop {
+public class Shop implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 5L;
 
 	private String name;
 	private Player player;
