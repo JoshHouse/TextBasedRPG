@@ -1242,7 +1242,7 @@ public class GameThread extends Throwable {
 		return null;
 	}
 
-	public static void showOpeningMenu() {
+	public static void startMenu() {
 		boolean loop = false;
 		Scanner userIn = new Scanner(System.in);
 
@@ -1262,7 +1262,7 @@ public class GameThread extends Throwable {
 					GameData loadedGame = load();
 					if (loadedGame != null) {
 						System.out.println("Game loaded successfully.");
-						playGame(loadedGame);
+						//playGame(loadedGame);
 					} else {
 						System.out.println("No saved game found or failed to load.");
 					}

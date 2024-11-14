@@ -10,9 +10,9 @@ public class GameData implements Serializable {
     private final Player player;
     private final Hub hub;
 
-    public GameData(Player player, Hub hub) {
-        this.player = player;
-        this.hub = hub;
+    public GameData(Player loadedPlayer, Hub loadedHub) {
+        this.player = loadedPlayer;
+        this.hub = loadedHub;
     }
 
     public GameData(GameData other) {
@@ -20,7 +20,7 @@ public class GameData implements Serializable {
         this.hub = other.hub;
     }
 
-    public static Player getPlayer() {return player;}
+    public Player getPlayer() {return player;}
 
-    public static Hub getHub() {return hub;}
+    public Hub getHub() {return hub;}
 }
