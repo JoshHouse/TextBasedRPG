@@ -146,12 +146,49 @@ public boolean startBattle() {
 	
 
 
-	private void useItem(Scanner keyboard) {
-		System.out.println("Choose an item to use from your inventory:");
-        
-        // show list of weapons
-		// start cases
-		// 
+	private void useItem(Scanner keyboard, ArrayList<Consumable> arrayList) {
+        System.out.println("Choose an item to use from your inventory:");
+        printInventoryConsumableArray(arrayList);
+
+        System.out.println("Enter the number of the item to use, or 0 to cancel:");
+
+        int choice;
+        try {
+            choice = Integer.parseInt(keyboard.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            return;
+        }
+
+        if (choice == 0) {
+            System.out.println("Action canceled.");
+            return;
+        }
+
+        if (choice < 1 || choice > arrayList.size()) {
+            System.out.println("Invalid choice. Please select a valid item number.");
+            return;
+        }
+
+        Consumable selectedItem = arrayList.get(choice - 1);
+// need help
+        switch (selectedItem.get()) {
+        case "Health Potion":
+            System.out.println("You used a Health Potion! Restoring health...");
+            // Add health restoration
+            break;
+        case "Mana Potion":
+            System.out.println("You used a Mana Potion! Restoring mana...");
+            // Add mana restoration
+            break;
+        case "Damage Boost Potion":
+            System.out.println("You used a Stamina Potion! Restoring stamina...");
+            // Add damage boost
+            break;
+        default:
+            System.out.println("Unknown item type. Unable to use item.");
+            break;
+    }
         
         
         
@@ -228,7 +265,7 @@ public boolean startBattle() {
         } else {
         	// Regular Attack Functionality
         	if (guardedTurn > 0) {
-        		
+        		player.setCurrHP((int) (player.getCurrHP() - enemy.getDamage()));
         	}
         }
         
