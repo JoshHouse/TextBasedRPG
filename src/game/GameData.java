@@ -15,7 +15,7 @@ public class GameData implements Serializable {
         this.hub = hub;
     }
 
-    public Player getPlayer() {return player;}
+    public static Player getPlayer() {return player;}
 
-    public Hub getHub() {return hub;}
+    public static Hub getHub() {return hub;}
 }
