@@ -145,7 +145,7 @@ public boolean startBattle() {
 	}
 	
 
-
+// add different arrow ammos
 	private void useItem(Scanner keyboard, ArrayList<Consumable> arrayList) {
         System.out.println("Choose an item to use from your inventory:");
         printInventoryConsumableArray(arrayList);
@@ -165,14 +165,14 @@ public boolean startBattle() {
             return;
         }
 
-        if (choice < 1 || choice > arrayList.size()) {
+        if ((choice - 1) < 1 || (choice - 1) > arrayList.size()) {
             System.out.println("Invalid choice. Please select a valid item number.");
             return;
         }
 
         Consumable selectedItem = arrayList.get(choice - 1);
 // need help
-        switch (selectedItem.get()) {
+        switch (selectedItem.getKey()) {
         case "Health Potion":
             System.out.println("You used a Health Potion! Restoring health...");
             // Add health restoration
@@ -239,12 +239,14 @@ public boolean startBattle() {
 				break;
 			
 			default:
-				System.out.println("Invalid input, you stood there menacignly. Try again.");
+				System.out.println("Invalid input, you stood there menacignly. Try again./n");
 				break;
 			}
 		}
 			
 		System.out.println("Enemy health:" + this.getEnemy());
+		
+		breakLine();
 		
 	}
 
@@ -271,6 +273,8 @@ public boolean startBattle() {
         
 		
         System.out.println("Your HP: " + player.getCurrHP());
+        
+        breakLine();
 	
 	}
 	
