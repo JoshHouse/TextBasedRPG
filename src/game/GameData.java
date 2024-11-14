@@ -8,14 +8,14 @@ public class GameData implements Serializable {
     private static final long serialVersionUID = 6L;
 
     private Player player;
-    private Shop shop;
+    private Hub hub;
 
-    public GameData(Player player, Shop shop) {
+    public GameData(Player player, Hub hub) {
         this.player = player;
-        this.shop = shop;
+        this.hub = hub;
     }
 
     public Player getPlayer() {return player;}
 
-    public Shop getShop() {return shop;}
+    public Hub getHub() {return hub;}
 }

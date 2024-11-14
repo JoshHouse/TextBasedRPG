@@ -1,9 +1,13 @@
 package game;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Hub {
+public class Hub implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 7L;
 
 	private Player player;
 	private String location;
