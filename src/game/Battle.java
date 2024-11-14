@@ -129,7 +129,7 @@ public boolean startBattle() {
 			case 4:
 				System.out.println("You fled the battle."); // error
 				breakLine();
-				System.exit(0); //Exits program but I want to go back to hub
+				; //Exits program but I want to go back to hub
 				break;
 			default:
 				breakLine();
@@ -154,7 +154,7 @@ public boolean startBattle() {
 
         int choice;
         try {
-            choice = Integer.parseInt(keyboard.nextLine());
+            choice = keyboard.nextInt();
         } catch (NumberFormatException e) {
             System.out.println("Invalid input. Please enter a number.");
             return;
@@ -182,9 +182,15 @@ public boolean startBattle() {
             // Add mana restoration
             break;
         case "Damage Boost Potion":
-            System.out.println("You used a Stamina Potion! Restoring stamina...");
+            System.out.println("You used a Damage Boost Potion! Boosting damage...");
             // Add damage boost
             break;
+        case "Speed Potion":
+        	System.out.println("You used a Speed Potion! You get two turns...");
+        	// Add changeturn counter
+        	break;
+        case "Poison Potion":
+        	System.out.println("You used a Poison Potion! Enemy damaged over two turns...");
         default:
             System.out.println("Unknown item type. Unable to use item.");
             break;
