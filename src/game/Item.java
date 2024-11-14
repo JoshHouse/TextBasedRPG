@@ -14,7 +14,7 @@ public class Item implements Serializable {
 	private String info;
 	private String rarity;
 	private int value;
-	private int damage;
+	private double damage;
 	private String damageType;
 	private Boolean sellable;
 	private char itemType;
@@ -175,7 +175,7 @@ public class Item implements Serializable {
 		return this.value;
 	}
 
-	public int getDamage() {
+	public double getDamage() {
 		return this.damage;
 	}
 
@@ -217,7 +217,7 @@ public class Item implements Serializable {
 		this.value = inputValue;
 	}
 
-	public void setDamage(int inputDamage) {
+	public void setDamage(double inputDamage) {
 		this.damage = inputDamage;
 	}
 

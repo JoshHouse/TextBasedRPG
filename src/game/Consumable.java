@@ -6,6 +6,7 @@ public class Consumable extends Item {
 	
 	private int count;
 	private boolean usable;
+	private char consumableType;
 
 	// -------------------Constructors-------------------
 	

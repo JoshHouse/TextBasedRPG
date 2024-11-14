@@ -5,7 +5,7 @@ public class Enemy extends GameChar {
 	// -------------------Variables-------------------
 	
 	private SpecialAttack specialAttack;
-	private int damage;
+	private double damage;
 	private String damageType;
 	private String regularAttack;
 	
@@ -91,7 +91,7 @@ public class Enemy extends GameChar {
 		return this.specialAttack;
 	}
 	
-	public int getDamage() {
+	public double getDamage() {
 		return this.damage;
 	}
 	
@@ -109,7 +109,7 @@ public class Enemy extends GameChar {
 		this.specialAttack = inputSpecialAttack;
 	}
 	
-	public void setDamage(int inputDamage) {
+	public void setDamage(double inputDamage) {
 		this.damage = inputDamage;
 	}
 	

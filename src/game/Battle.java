@@ -10,6 +10,7 @@ public class Battle {
 	private int turn;
 	private int guardedTurn;
 	
+	
 	//----------------------------------Constructor---------------------------------
 	
 public Battle(Player inputPlayer, Enemy inputEnemy) {
@@ -37,6 +38,8 @@ public int getTurn() {
 public int getguardedTurn() {
 	return this.guardedTurn;
 }
+
+
 
 	//----------------------------------Setters---------------------------------
 
@@ -74,6 +77,9 @@ public boolean startBattle() {
 	while(inBattle) {
 		if(turn == 0) {
 			this.playerTurn(keyboard);
+			if (guardedTurn > 0) {
+				guardedTurn--;
+			}
 		}
 		else {
 			this.enemyTurn();
@@ -131,18 +137,11 @@ public boolean startBattle() {
 				break;
 			}
 }
-	
-	
 	private void printInventoryConsumableArray(ArrayList<Consumable> arrayList) {
 		for(int x = 0; x < arrayList.size(); x++) {
 			System.out.println(x+1 + ") " + arrayList.get(x).getName() + 
 					"\t Value: " + arrayList.get(x).getValue());
 		}
-	}
-
-	
-	private void enemyDefeat() {
-		System.out.println("You have defeated " + enemy);
 	}
 	
 
@@ -150,7 +149,9 @@ public boolean startBattle() {
 	private void useItem(Scanner keyboard) {
 		System.out.println("Choose an item to use from your inventory:");
         
-        
+        // show list of weapons
+		// start cases
+		// 
         
         
         
@@ -158,7 +159,8 @@ public boolean startBattle() {
 
 
 	private void guard() {
-		System.out.println("You guard yourself from the next attack./n");
+		System.out.println("You guard yourself from the next three attacks./n");
+		guardedTurn = 4;
 		
 	}
 
@@ -181,19 +183,22 @@ public boolean startBattle() {
 			
 			case 1:
 				System.out.println("You chose a standard attack!/n");
-				enemy.setHealth(enemy.getHealth() - player.getInventory().getEquipped().getDamage());
+				enemy.setHealth((int) (enemy.getHealth() - player.getInventory().getEquipped().getDamage()));
 				isAttacking = false;
 				break;
 				
 			case 2:
 				System.out.println("You chose a special attack!/n");
-				enemy.setHealth(enemy.getHealth() - player.getInventory().getEquipped().getSpecialAttack().useSpAtk());
+				if(player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
+					enemy.setCurrHP((int)(enemy.getCurrHP() - (player.getInventory().getEquipped().getDamage() * player.getInventory().getEquipped().getSpecialAttack().getAtkMultiplier())));
+				}
 				isAttacking = false;
 				break;
 				
 			case 3:
 				System.out.println("You resheathed your weapon./n");
 				isAttacking = false;
+				breakLine();
 				break;
 			
 			default:
@@ -208,18 +213,27 @@ public boolean startBattle() {
 
 
 	private void enemyTurn() {
-		System.out.println("The enemy attacked you!\n");
-        int damage = enemy.getDamage();
-        
-        if (player.guard(0)) { // Reduce damage if the player is guarding
-            damage /= 2;
-            System.out.println("You guarded against the attack, reducing the damage!");
-            player.setGuarding(false);
+		
+		
+        if(Luck.luckEvent(40)) {
+        	// Special Attack Functionality
+        	if(enemy.getSpecialAttack().useSpAtk(70)) {
+            	if (guardedTurn > 0) {
+            		player.setCurrHP((int) (player.getCurrHP() - ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2)));
+            	} else {
+            		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier())));
+            	}
+        	}
+
+        } else {
+        	// Regular Attack Functionality
+        	if (guardedTurn > 0) {
+        		
+        	}
         }
         
-        int newHealth = player.getHealth();
-        player.setHealth(newHealth);
-        System.out.println("Your HP: " + newHealth);
+		
+        System.out.println("Your HP: " + player.getCurrHP());
 	
 	}
 	
