@@ -19,8 +19,12 @@ public class EnemyList {
 			"Charges forward and headbutts you!");
 
 	/** Blacksmith Jagatai - Tutorial fight for melee class. */
-	public Enemy tutor1 = new Enemy("Blacksmith Jagatai", new Inventory(), 0, 65, 1, 10, 10, 1,
-			spAtkList.none, "Swings sword with all his might!");
+	public Enemy tutor1 = new Enemy("Blacksmith Jagatai", new Inventory(), 0, 65, 1, 100, 10, 1, spAtkList.none,
+			" swings his sword with all his might.");
+
+	/** Wolf - Simple enemy to be encountered */
+	public Enemy wolf = new Enemy("Wolf", new Inventory(), 25, 50, 1, 15, 12, 1, spAtkList.none,
+			" lunges forward and swipes its claws at its foe.");
 	
 	// --------------------Chapter 2 Enemies--------------------
 	
@@ -31,6 +35,15 @@ public class EnemyList {
 	
 	public Enemy fireRockGolem = new Enemy("Fire Elemental Rock Golem", new Inventory(), 1000, 1750, 20, 500, 400,
 			3, spAtkList.erruption, "Throws a flaming boulder of firey rock directly at you!");
+
+	public Enemy goblin1 = new Enemy("Goblin Grunt", new Inventory(), 328, 460, 11, 70, 80, 1, spAtkList.none,
+			" takes a stab at you with its dagger.");
+
+	public Enemy goblin2 = new Enemy("Hobgoblin", new Inventory(), 555, 900, 15, 125, 115, 1, spAtkList.none,
+			" slashes with the sharpened bone it calls a sword.");
+
+	public Enemy goblinBoss = new Enemy("Champion Kioq", new Inventory(), 1200, 2200, 20, 800, 200, 1, spAtkList.kioqSpAtk,
+			" swings one of his axes down viciously, the ground cracking from the weapon just passing over it!");		
 	
 	// --------------------Chapter 4 Enemies--------------------
 
