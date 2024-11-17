@@ -12,12 +12,12 @@ public class SpAtkList {
 	public SpecialAttack none = new SpecialAttack();
 
 	// --------------------Melee Special Attacks--------------------
+
 	/** Special Attack - Triple Thrust. */
 	public SpecialAttack x3Thrust = new SpecialAttack("Triple Thrust",
 			"Ready your weapon and perform three consecutive thrusts in a row, dealing triple damage to your enemy!",
 			" thrusts out their blade, striking their foe thrice before they can retaliate!",
-			" thrust out their blade thrice, yet their foe was quicker, and avoided all three strikes.", 
-			3.0);
+			" thrust out their blade thrice, yet their foe was quicker, and avoided all three strikes.", 3.0);
 
 	/** Special Attack - Great Slash. */
 	public SpecialAttack gSlash = new SpecialAttack("Great Slash",
@@ -26,6 +26,40 @@ public class SpAtkList {
 					+ "as if aiming to split the clouds in two.",
 			" holds their blade behind them and charges forward, yet misses their foe as they swing towards the sky.",
 			1.3);
+
+	/** Special Attack - Dancing Blade. */
+	public SpecialAttack danceBlade = new SpecialAttack("Dancing Blade",
+			"Strike your opponent with a series of intricate strikes with your blade, almost as if you're dancing around them!",
+			" rushes forward and dances around their opponent, swinging and slashing repeatedly with blinding speed!",
+			" attempts to dance around their opponent, but instead revealed their two left feet as they nearly tripped...",
+			1.8);
+
+	/** Special Attack - Pike Square. */
+	public SpecialAttack pSquare = new SpecialAttack("Pike Square",
+			"A well-known combo favored by knights. Perform four powerful strikes with your polearm to deal devastating "
+					+ "damage to your opponents.",
+			" enters their stance and swings their weapon downward, then back, jabs their foe with the blunt end before ending "
+					+ "on a horizontal slash, finishing the Pike Square combo!",
+			" enters their stance, but their first swing misses, and the second swing is blocked. The wise response was made, "
+					+ "and they backed off on their combo.",
+			2.0);
+	
+	/** Special Attack - Floating Cloud*/
+	public SpecialAttack floatCloud = new SpecialAttack("Floating Cloud",
+			"The signature move of the \"Cloudwalker\". A flashy sword combo that involves moving one's body so light, it\n"
+			+ "appears that they are floating in the air.",
+			" moves so lightly as they swing their blade, slashing their opponent as they appear to be walking on air!",
+			" appears to attempt to fly. Unfortunately, they do not have wings.",
+			2.1);
+
+	/** Special Attack - Breath of the Phoenix*/
+	public SpecialAttack phoenix = new SpecialAttack("Breath of the Phoenix",
+			"By spinning the Phoenix Cleaver above your head, you create a tornado made from flames that are said to\n burn as"
+					+ " hot as a phoenix breathing fire.",
+			" holds the greatxe over their head and rapidly spins it around, giving birth to a mighty tornado to reduce\ntheir"
+					+ "enemies to ashes!",
+			" holds the greataxe over their head and spins it around... but the flames refused to emerge to consume their foe.",
+			3.0);
 	
 	// --------------------Ranged Special Attacks--------------------
 	
