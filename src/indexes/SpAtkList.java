@@ -88,6 +88,16 @@ public class SpAtkList {
 			"The ground begins to rumble and cracks begin to form but quickly slam shut! The erruption fails to occur!",
 			2.5);
 	
+	/** Special Attack - Rampaging Tusks. */
+	public SpecialAttack kioqSpAtk = new SpecialAttack("Rampaging Tusks",
+			"Kioq goes on a rampage! No one, friend or foe, should be around the champion when he starts swinging his axes!",
+			"Kioq roars like a wild animal before charging forth, swinging his axes back "
+					+ "and forth widly while striking everything in his path!",
+			"Kioq roars loudly as if to prepare for an attack... but he suddenly keels over to catch his breath, as if he used "
+					+ "up all of his energy in that opening roar...",
+			2.5);
+
+	
 	
 
 }
