@@ -23,7 +23,8 @@ public class WeaponList {
 
 	/** Short Spear */
 	public Weapon spear1 = new Weapon("f003", "Short Spear",
-			"A spear whose pole is shorter than the standard length, making it easier to use.", 1, 100, 20, 1, true);
+			"A spear whose pole is shorter than the standard length, making it easier to use.", 1, 100, 18, 1,
+			spAtk.x3Thrust);
 
 	/** Scimitar */
 	public Weapon sword2 = new Weapon("f004", "Scimitar",
@@ -44,14 +45,40 @@ public class WeaponList {
 			"A thrusting sword. Lightweight and quick, this weapon is good for rapid attacks,\nbut has low base damage.",
 			1, 180, 14, 1, true, spAtk.x3Thrust);
 
+	/** Cestus */
+	public Weapon fist1 = new Weapon("f008", "Cestus",
+			"A battle gauntlet made with leather and metal studs. Perfect for some wanting to punch their way to victory.",
+			1, 225, 20, 1, true);
+
 	/** Greataxe */
-	public Weapon axe3 = new Weapon("f008", "Greataxe",
-			"A massive axe wielded proficiently by only the strongest of warriors.", 1, 300, 40, 1, true);
+	public Weapon axe3 = new Weapon("f009", "Greataxe",
+			"A massive axe wielded proficiently by only the strongest of warriors.", 2, 300, 40, 1, true);
 
 	/** Greatsword */
-	public Weapon sword4 = new Weapon("f009", "Greatsword",
-			"A massive broadsword often favored for it's heavy swings and strong attacks.", 1, 300, 35, 1, true,
+	public Weapon sword4 = new Weapon("f010", "Greatsword",
+			"A massive broadsword often favored for it's heavy swings and strong attacks.", 2, 300, 35, 1, true,
 			spAtk.gSlash);
+
+	/** Kinght's Spear */
+	public Weapon spear3 = new Weapon("f011", "Knight's Spear", "A spear tailored for knights of the kingdom.", 2, 500,
+			38, 1, true, spAtk.pSquare);
+
+	/** Boneblade */
+	public Weapon sword5 = new Weapon("f012", "Boneblade",
+			"A wickedly shaped sword fashioned from a sharpened bone. Weapons like these are\n"
+					+ "primarily used by hostile creatures capable of wielding weapons, like trolls,\n or goblins.",
+			2, 100, 35, 1, spAtk.none);
+	
+	/** Cloudburst */
+	public Weapon sword6 = new Weapon("f013", "Cloudburst", "A recreation of a sword belonging to a famous swordsman callled"
+			+ " the \"Cloudwalker\", famous\nfor his flashy moves.", 3, 1200, 68, 1, true, spAtk.floatCloud);
+
+	/** Phoenix Cleaver*/
+	public Weapon axe4 = new Weapon("f014", "Phoenix Cleaver",
+			"A golden greataxe that is nearly 7 feet long. It's adorned with silver\nplating on the side of the blade,"
+			+ " resembling the body of a phoenix. This weapon was taken from the goblin champion, who\nhad taken it from"
+			+ " the father of the knight Adicai.", 4, 120, 1, spAtk.phoenix);
+
 	// --------------------Ranged Weapons--------------------
 	
 	// --------------------Magic Weapons--------------------
