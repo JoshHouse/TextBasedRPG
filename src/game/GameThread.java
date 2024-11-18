@@ -49,6 +49,7 @@ public class GameThread extends Throwable {
 		hub1.start(scn);
 
 		scn.close();
+
 //		// Player Inventory Test
 //		SpecialAttack gSsA = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force",
 //				1.5);
@@ -650,6 +651,7 @@ public class GameThread extends Throwable {
 		String pName = player.getName();
 		String wizName = "Magnus the King's Wizard";
 		
+		
 		breakLine();
 		Dialogue.characterDialogue(wizName, "I heard you defeated the Troll that has been terrorizing the "
 				+ "townspeople. That is pretty impressive! That Troll has been a pain in our side for a little "
@@ -1221,12 +1223,13 @@ public class GameThread extends Throwable {
 	/**
 	 * Takes and serializes GameData object and stores it in a file to be reloaded later
 	 *
-	 * @param gameData Combination of player and hub objects
+	 * @param gameData Combination of player and shop objects
 	 */
 	public static void save(GameData gameData) {
 		try (FileOutputStream fileOut = new FileOutputStream("gameSave.ser");
 			 ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
 			out.writeObject(gameData);
+			System.out.println("Game saved successfully.");
 		} catch (Exception e) {e.printStackTrace();}
 	}
 
@@ -1237,47 +1240,12 @@ public class GameThread extends Throwable {
 	public static GameData load() {
 		try (FileInputStream fileIn = new FileInputStream("gameSave.ser");
 			 ObjectInputStream in = new ObjectInputStream(fileIn)) {
-            return (GameData) in.readObject();
+			GameData gameData = (GameData) in.readObject();
+			System.out.println("Game loaded successfully.");
+			return gameData;
 		} catch (Exception e) {e.printStackTrace();}
 		return null;
 	}
 
-	public static void startMenu() {
-		boolean loop = false;
-		Scanner userIn = new Scanner(System.in);
-
-		while (!loop) {
-			System.out.print("=== Welcome to the Game ===\n1. New Game\n2. Load Saved Game\n3. Settings\n4. Exit\nChoose an option: ");
-
-			int choice = userIn.nextInt();
-			userIn.nextLine();  // Consume newline
-
-			switch (choice) {
-				case 1:
-					// Start a new game
-					loop = true;
-					break;
-				case 2:
-					// Load saved game
-					GameData loadedGame = load();
-					if (loadedGame != null) {
-						System.out.println("Game loaded successfully.");
-						//playGame(loadedGame);
-					} else {
-						System.out.println("No saved game found or failed to load.");
-					}
-					break;
-				case 3:
-					// Settings (placeholder)
-					break;
-				case 4:
-					// Exit
-					System.out.println("Exiting the game.");
-					System.exit(0);
-				default:
-					System.out.println("Invalid choice. Please try again.");
-			}
-		}
-	}
 
 }

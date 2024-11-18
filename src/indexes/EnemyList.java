@@ -46,5 +46,11 @@ public class EnemyList {
 			" swings one of his axes down viciously, the ground cracking from the weapon just passing over it!");		
 	
 	// --------------------Chapter 4 Enemies--------------------
+	
+	/*
+	 * 
+	 * --------------------Hub Enemies--------------------
+	 * 
+	 */
 
 }
