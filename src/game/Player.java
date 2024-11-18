@@ -8,6 +8,7 @@ public class Player extends GameChar {
 	// -------------------Variables-------------------
 
 	private int mana;
+	private int currMana;
 	private double expThreshold;
 	private int lvlMelee;
 	private int lvlRanged;
@@ -88,6 +89,10 @@ public class Player extends GameChar {
 	public int getMana() {
 		return this.mana;
 	}
+	
+	public int getCurrMana() {
+		return this.currMana;
+	}
 
 	public double getExpThreshold() {
 		return this.expThreshold;
@@ -121,6 +126,10 @@ public class Player extends GameChar {
 
 	public void setMana(int mana) {
 		this.mana = mana;
+	}
+	
+	public void setCurrMana(int inputCurrMana) {
+		this.currMana = inputCurrMana;
 	}
 
 	public void setExpThreshold(Double expThreshold) {

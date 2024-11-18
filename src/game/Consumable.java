@@ -36,11 +36,13 @@ public class Consumable extends Item {
 	 * @param inputIsUsable
 	 */
 	public Consumable(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue, 
-			int inputDamage, int inputType, boolean inputIsSellable, int inputCount, boolean inputIsUsable) {
+			int inputDamage, int inputType, boolean inputIsSellable, int inputCount, boolean inputIsUsable,
+			char inputConsumableType) {
 
 		super(inputKey, inputName, inputInfo, inputRarity, inputValue, inputDamage, inputType, inputIsSellable, 'c');
 		this.count = inputCount;
 		this.usable = inputIsUsable;
+		this.consumableType = inputConsumableType;
 
 	}
 
@@ -57,12 +59,12 @@ public class Consumable extends Item {
 	 * @param inputIsUsable
 	 */
 	public Consumable(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue, 
-			boolean inputIsSellable, int inputCount, boolean inputIsUsable) {
+			boolean inputIsSellable, int inputCount, boolean inputIsUsable, char inputConsumableType) {
 
 		super(inputKey, inputName, inputInfo, inputRarity, inputValue, inputIsSellable, 'c');
 		this.count = inputCount;
 		this.usable = inputIsUsable;
-
+		this.consumableType = inputConsumableType;
 	}
 
 	// ---------------------Getters---------------------
@@ -74,11 +76,19 @@ public class Consumable extends Item {
 	public boolean isUsable() {
 		return this.usable;
 	}
+	
+	public char getConsumableType() {
+		return this.consumableType;
+	}
 
 	// ---------------------Setters---------------------
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+	
+	public void setConsumableType(char inputConsumableType) {
+		this.consumableType = inputConsumableType;
 	}
 
 	// ---------------------Functions-------------------
