@@ -1164,9 +1164,276 @@ public class GameThread extends Throwable {
 		return true;
 	}
 	
-	public static boolean meleeSpecialMission(Player player, Scanner keyboard) {
-		
+	public static boolean meleeSpecialMission(Player player, Scanner scn) {
+
+		int txtSpd = 25, wait = 1000, battleCount = 1;
+		boolean pResponse;
+		char input = ' ';
+		boolean win = false;
+		String ally1Name = "Jagatai, Retired Warrior", ally2Name = "Knight Adicai";
+		String boss1Name = "Kioq, Goblin Champion";
+		breakLine();
+
+		Enemy e1 = eList.goblin1, e2 = eList.goblin2, eBoss = eList.goblinBoss;
+		e1.getInventory();
+
+		Battle battle1 = new Battle(player, e1), battle2 = new Battle(player, e2),
+				bossBattle = new Battle(player, eBoss);
+
+		Dialogue.infoDialogue(
+				"Under the orders of the king, you have been given the task of defeating the goblin army that has been\n"
+						+ "threatening the safety of this kingdom, working alongside of the king's generals, Adicai. "
+						+ "In order to\nhave as many allies as possible, you pay a visit to the blacksmith Jagatai, "
+						+ "in hopes of marching with a\nteam of three.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name,
+				"So you trust an old man enough to ask for his help against a horde of goblins, eh? I'm flattered. I\n"
+						+ "could use a little exercise.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name,
+				"Make sure you're ready for this. I'm ready to go at any time. But once we're out there, don't expect\n"
+						+ "to turn back until we've wiped them out. Are you ready for this?\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) Yes\n2) No.\nReponse: ", 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+
+		if (input == '1') {
+			Dialogue.characterDialogue(ally1Name, "Just like I expected from you. Let's move.\n\n", txtSpd);
+		} else {
+			Dialogue.characterDialogue(ally1Name, "Then don't keep us waiting for long.\n\n", txtSpd);
+			return false;
+		}
+		Pause.pause(wait);
+
+		breakLine();
+
+		Dialogue.infoDialogue("It was not long before your party set out to march on the goblin horde. "
+				+ "Leaving the safety of the kingdom\nand stepping out of the walls, you would soon find "
+				+ "that it would not take long to arrive at your\ndestination... or rather, your destination had moved "
+				+ "closer. Much closer. Only a few miles outside the \n"
+				+ "kingdom, the goblin horde had managed to set up their camp for a closer attack.\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name,
+				"These foul beasts have the gall to set up an encampment on the outskirts of our borders? Hmph. Kioq is an\n"
+						+ "issue that I should have dealt with long ago.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name,
+				"Looks like the goblins have gotten restless and are about ready to ransack the place. There's no getting\n"
+						+ "the jump on them when they're this ready to go. Only way we're going to deal with this problem "
+						+ "is to\ntackle it head on.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name,
+				"Ah, but that's how the famous \"Jagatai the Grey\" likes to fight, is it not?\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name, "Took the words right out of my mouth.\n\n", txtSpd);
+		Pause.pause(wait);
+
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) Are you two friends?\n2) Do you two know each other?\nReponse: ", 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+
+		if (input == '1') {
+			Dialogue.characterDialogue(ally1Name, "I wouldn't go that far. But, we have heard of each other.\n\n",
+					txtSpd);
+		} else {
+			Dialogue.characterDialogue(ally2Name,
+					"You won't find many that don't know of this man's feats in his prime.\n\n", txtSpd);
+		}
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name,
+				"Enough chatter for now. The ones on the front lines are weak. We'll tear through them with ease separately.\n"
+						+ "Whichever one is first to reach the commander- the goblin's champion, Kioq- "
+						+ "may try their hand in gaining\nthe glory of taking his head.",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name,
+				"Just cause they're weak doesn't mean you can drop your guard. Don't die out there you two.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name, "As if I'd lose a battle to lesser creatures, yet alone my life.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name, "FORWARD!!\n\n", txtSpd - 10);
+		Pause.pause(wait);
+
+		Pause.pause();
+		breakLine();
+
+		while (!win) {
+
+			if (battleCount % 3 == 0) {
+				if (battle2.startBattle()) {
+					battleCount++;
+				}
+			} else {
+				if (battle1.startBattle()) {
+					battleCount++;
+				}
+			}
+
+			if (battleCount == 6) {
+				win = true;
+			}
+
+		}
+
+		win = false;
+
+		Dialogue.infoDialogue(
+				"Battling your way through several goblins, you find yourself separated from your companions as more and\n"
+						+ "more goblins approached. Suddenly, they all stopped in place as loud footsteps "
+						+ "were stomping up behind you.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(boss1Name, "Grr... Dem first w'ves... all weaklings!\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue("Behind you was a massive, big-bellied goblin wielding a greataxe in each hand. "
+				+ "Judging by his size and presence,\n"
+				+ "it was clear to you that this was the goblin champion you were after.\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(boss1Name,
+				"I'm tired o' all dis waitin' round! How bout I beat puny human to pulp now!?\n\n", txtSpd);
+		Pause.pause(wait);
+
+		breakLine();
+
+		while (!win) {
+			win = bossBattle.startBattle();
+		}
+
+		if (win) {
+
+			Dialogue.infoDialogue("The champion of goblins now lays dead at your feet as you catch your breath. "
+					+ "Any goblins that were around you\n"
+					+ "began to back away in fear before they all ran away, abandoning their plan completely."
+					+ " As all your adversaries\n"
+					+ "were either dead or have fled, you could hear familiar footsteps as your companions "
+					+ "finally caught up with you.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(ally2Name, "Impressive... you were able to fell Kioq by yourself.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(ally1Name,
+					"Sorry about the delay. There were more of these guys than we thought. "
+							+ "But, it looks like you didn't even need us\n"
+							+ "in the first place. Adicai was right to choose you for this.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue(
+					"Adicai approached the fallen goblin champion and picked up one of the axes that he had wielded.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(ally2Name,
+					"At long last... I am able to pry this from the grips of this foul beast.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			pResponse = true;
+			while (pResponse) {
+				Dialogue.infoDialogue(
+						"1) What's special about that axe?\n2) Were you after the goblins to steal that axe?\nReponse: ",
+						8);
+				input = scn.next().charAt(0);
+
+				switch (input) {
+				case '1', '2':
+					pResponse = false;
+					System.out.println();
+					break;
+				default:
+					System.err.println("Invalid choice. Try again.\n");
+					Pause.pause(350);
+					break;
+				}
+			}
+
+			if (input == '2') {
+				Dialogue.characterDialogue(ally2Name,
+						"Indeed... I wanted to steal this from the thieves who originally stole it.\n\n", txtSpd);
+			}
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(ally2Name,
+					"This is the weapon of my father. Many years ago, he was slain in a war against the beasts of the earth, "
+							+ "and this\naxe was taken from his corpse. I was but a young lad back then, and hardly "
+							+ "with the power to "
+							+ "get it back. Now,\nI can finally rejoice knowing that the axe has been retrieved from the "
+							+ "hands of the "
+							+ "goblin champion, a fool who\ncan't even wield the weapon to its fullest potential and draw out "
+							+ "its special attack.\n\n",
+					txtSpd);
+
+			Dialogue.characterDialogue(ally2Name,
+					"However, I was not the one who retrieved this weapon. Therefore, I cannot say that I am truly "
+							+ "worthy to wield it\nin my father's place...\n\n",
+					txtSpd);
+
+			Dialogue.infoDialogue(
+					"Adicai hands over the greataxe to you, the one responsible for defeating the goblin champion.\n\n",
+					txtSpd);
+
+			Dialogue.characterDialogue(ally2Name,
+					"As the slayer of Kioq, I want you to have this. Bring out the full potential of "
+							+ "this weapon in your quests. I wish\nnothing but success for you," + player.getName()
+							+ ".\n\n",
+					txtSpd);
+
+			player.getInventory().add(wList.axe4);
+			Dialogue.infoDialogue("[You got the Phoenix Cleaver]\n\n", txtSpd);
+			Pause.pause(wait);
+
+		}
+
 		return true;
+
 	}
 	
 	public static boolean rogueSpecialMission(Player player, Scanner keyboard) {
