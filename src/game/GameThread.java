@@ -495,9 +495,132 @@ public class GameThread extends Throwable {
 		return true;
 	}
 	
-	public static boolean rangedChapter1(Player player, Scanner keyboard) {
-		return true;
+	public static boolean rangerChapter1(Player player, Scanner keyboard) {
+	    boolean makingChoice = true;
+	    int pChoice;
+	    Battle tutorialBattle = new Battle(player, eList.sheep);
+	    boolean playerWon = false;
+
+	    breakLine();
+	    System.out.println("You step into a sunlit clearing surrounded by towering trees with golden leaves swaying gently in the breeze. "
+	            + "A narrow path winds through the grass, leading to a wooden archery range. The air is fresh and filled with the soft "
+	            + "chirping of birds. At the center stands a tall, graceful elf with sharp features and emerald-green eyes. She has a "
+	            + "quiver slung across her back and a bow in hand, her stance both relaxed and ready.");
+	    System.out.println("[Elaris the Ranger] Welcome, traveler. I’ve heard whispers of a newcomer—your name is " + player.getName() + ", yes?");
+	    System.out.println("[Elaris the Ranger] My name is Elaris, and I guide those who seek to master the bow. Shall we begin your training?");
+	    
+	    while (makingChoice) {
+	        System.out.println("[Elaris the Ranger] What do you say? \n"
+	                + "1) Yes, I’m ready!\n"
+	                + "2) Hmm, I’m not sure if I want to be an archer.");
+	        pChoice = keyboard.nextInt();
+	        
+	        switch (pChoice) {
+	        case 1:
+	            breakLine();
+	            System.out.println("[" + player.getName() + "] Yes, I’m ready!");
+	            System.out.println("[Elaris the Ranger] Wonderful. The bow may seem simple, but wield it well, and it becomes the deadliest of weapons.");
+	            makingChoice = false;
+	            break;
+	            
+	        case 2:
+	            breakLine();
+	            System.out.println("[" + player.getName() + "] Hmm, I’m not sure if I want to be an archer.");
+	            System.out.println("[Elaris the Ranger] No pressure. The woods are patient, and I’ll be here if you change your mind.");
+	            return false;
+	            
+	        default:
+	            breakLine();
+	            System.err.println("(Invalid choice. Please try again)");
+	        }
+	    }
+
+	    System.out.println("[Elaris the Ranger] First, you’ll need a bow. This shortbow has served many a beginner well. Take it, and we’ll get started.");
+	    player.getInventory().add(wList.starterBow);
+	    System.out.println("The starter bow has been added to your inventory!");
+	    player.getInventory().getWeaponOnKey(wList.starterBow.getKey()).displayInfo();
+
+	    makingChoice = true;
+	    pChoice = 0;
+
+	    while (makingChoice) {            
+	        breakLine();
+	        System.out.println("[Elaris the Ranger] Let’s talk about ammunition. Regular arrows are infinite, so you’ll never run out of basic shots. "
+	                + "However, special arrows—explosive, piercing, or elemental—are rare and must be looted from enemies or chests."
+	                + " Use them wisely when the situation demands. Your current special arrow count is: " + player.getSpecialArrows() + ".");
+	        breakLine();
+	        System.out.println("1) Got it! Let’s move on.\n"
+	                + "2) Can you explain that again?");
+	        pChoice = keyboard.nextInt();
+	        
+	        switch (pChoice) {
+	        case 1:
+	            breakLine();
+	            System.out.println("[" + player.getName() + "] Got it! Let’s move on.");
+	            makingChoice = false;
+	            break;
+
+	        case 2:
+	            breakLine();
+	            System.out.println("[" + player.getName() + "] Can you explain that again?");
+	            break;
+
+	        default:
+	            System.err.println("(Invalid choice. Please try again)");
+	            break;
+	        }
+	    }
+
+	    System.out.println("[Elaris the Ranger] Time to test your aim. Let’s see how you handle a live target. Don’t worry—"
+	            + "this sheep is harmless, and we use it to train all newcomers. Draw your bow, aim for the mark, and let your arrow fly!");
+	    
+	    while (!playerWon) {
+	        playerWon = tutorialBattle.startBattle();
+	        if (!playerWon) {
+	            player.setCurrHP(player.getHealth());
+	            tutorialBattle.getEnemy().setCurrHP(tutorialBattle.getEnemy().getHealth());
+	            tutorialBattle.setTurn(0);
+	            System.out.println("[Elaris the Ranger] You’re getting there! Precision comes with practice. Try again.");
+	        }
+	    }
+
+	    breakLine();
+	    System.out.println("[Elaris the Ranger] Well done! You’re already showing promise. That’s all I can teach for now, but the true lessons "
+	            + "lie ahead. Head to the castle—the King often seeks skilled adventurers, and the journey will test your abilities.");
+	    System.out.println("[Elaris the Ranger] And remember, I’m always here should you need guidance. The woods never turn their back on a friend.");
+
+	    makingChoice = true;
+	    pChoice = 0;
+
+	    while (makingChoice) {
+	        breakLine();
+	        System.out.println("1) Thanks, Elaris! I’ll head to the castle.\n"
+	                + "2) I’ll be sure to visit again!");
+	        pChoice = keyboard.nextInt();
+	        
+	        switch (pChoice) {
+	        case 1:
+	            breakLine();
+	            System.out.println("[" + player.getName() + "] Thanks, Elaris! I’ll head to the castle.");
+	            makingChoice = false;
+	            break;
+
+	        case 2:
+	            breakLine();
+	            System.out.println("[" + player.getName() + "] I’ll be sure to visit again!");
+	            makingChoice = false;
+	            break;
+	            
+	        default:
+	            System.err.println("(Invalid choice. Please try again)");
+	            break;
+	        }
+	    }
+
+	    return true;
 	}
+
+
 	
 	public static boolean mageChapter1(Player player, Scanner keyboard) {
 		boolean makingChoice = true;
