@@ -176,6 +176,96 @@ public class GameThread extends Throwable {
 	}
 	
 	public static boolean meleeDragonApproach(Player player, Scanner keyboard) {
+
+		Battle miniBoss = new Battle(player, eList.dWar);
+		boolean win = false;
+		int txtSpd = 25, wait = 1000;
+
+		Dialogue.infoDialogue(
+				"By this point, the kingdom looks like a simple town with how far you've come. Per the king's request, you\n"
+						+ "ascended into the mountaintops to reach the dragonlord's lair. You've not even come close "
+						+ "to entering, and\n"
+						+ "the sounds of it, and the nearby dragons fill your eardrums and mind with dread.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		txtSpd += 15;
+		Dialogue.infoDialogue("Their ferocious roars. ", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("The flapping of wings. ", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("The smell of smoke. ", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("The field of bones around you. ", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("The weapons\nof those who previously challenged it. ", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("All these things fill you with both fear, and determination.\n\n", txtSpd);
+		Pause.pause(wait);
+		txtSpd -= 15;
+
+		Dialogue.infoDialogue(
+				"With your goal in mind, you push on ahead further up the mountain. By this point, it appears that the sides\n"
+						+ "are becoming too steep for you to continue climbing, and you'd likely fall to your death "
+						+ "before ever seeing\nthe dragonlord. Having a look around, you can see a flat area of the mountain, "
+						+ "with a weak spot in the side.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"Climbing up and walking to that spot, you peered through the cracks to see that the inside was hollowed, as\n"
+						+ "if a path had been carved inside of the mountain that would lead you up safely. "
+						+ "Taking out the great Phoenix\n"
+						+ "Cleaver received from Adicai, you strike the cracked wall with all your might, "
+						+ "shattering it and giving you a\nclearer view of the carved path ahead.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"You stepped into the hollowed mountain and swing the greataxe in order to cause the blade to light ablaze,\n"
+						+ "giving you a light so that you can see ahead. It appeared that you had stepped foot into a large "
+						+ "cavern with\nan empty nest in the center, and a broken spiral staircase carved out into the walls "
+						+ "leading both up and down.\nThough the stairs were burned and broken, they were stable and long "
+						+ "enough that you'd have the might to make\nit to the top.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"However, you were taken back by a loud roar as a humanoid creature descended from above, landing on the "
+						+ "ground\nhard as a crate formed beneath its scaly feet. Before you was a draconic being that was "
+						+ "only slightly taller\nthan you, standing upright and wielding a long glaive. You could feel "
+						+ "its murderous intent from miles away,\neven if it hadn't said a word. The dragonoid growled "
+						+ "as it ready its weapon, challenging you to a fight.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		breakLine();
+		win = miniBoss.startBattle();
+		breakLine();
+
+		if (win) {
+
+			Dialogue.infoDialogue(
+					"The dragonoid warrior collapsed dead at your feet as you look around, trying to see if it came alone "
+							+ "or had\nfriends lying in wait. Not seeing or hearing another living soul in the cavern, "
+							+ "you begin making your way\nup the spiral staircase.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue("The further you head up, you begin to see an opening at the top, and the "
+					+ "sight of a dragon flying around \nhigh in the sky. You make your way closer and closer"
+					+ " to the top, conserving your stamina for the fight\nto come.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue("Finally... you reach the top.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue("You mentally prepare yourself as the dragon above... the dragonlord...\n"
+					+ "sees you and descends...", txtSpd);
+			Pause.pause(wait);
+
+		}
+
 		return true;
 	}
 	
