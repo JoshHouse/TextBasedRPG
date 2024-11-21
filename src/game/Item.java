@@ -287,7 +287,7 @@ public class Item implements Serializable {
 		case 4:
 			return "Rogue";
 		default:
-			return "null";
+			return null;
 
 		}
 

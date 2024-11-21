@@ -351,14 +351,32 @@ public boolean startBattle() {
 				switch(pChoice) {
 				
 				case 1:
-					System.out.println("You chose a standard attack!/n");
-					if (dbTurn > 0) {
-						enemy.setCurrHP((int) (enemy.getCurrHP() - (player.getInventory().getEquipped().getDamage() * 1.5)));
-						System.out.println("You did " +  (player.getInventory().getEquipped().getDamage() * 1.5) + " damage!");
-					} else {
-						enemy.setCurrHP((int) (enemy.getCurrHP() - player.getInventory().getEquipped().getDamage()));
-						System.out.println("You did " + player.getInventory().getEquipped().getDamage() + " damage!");
+					switch (player.getInventory().getEquipped().getDamageType()) {
+					case "Melee":
+						this.standardAttack();
+						break;
+					case "Ranged":
+						
+						break;
+					case "Mage":
+						
+						break;
+					case "Rogue":
+						this.standardAttack();
+						break;
 					}
+					
+					
+
+					
+//					System.out.println("You chose a standard attack!/n");
+//					if (dbTurn > 0) {
+//						enemy.setCurrHP((int) (enemy.getCurrHP() - (player.getInventory().getEquipped().getDamage() * 1.5)));
+//						System.out.println("You did " +  (player.getInventory().getEquipped().getDamage() * 1.5) + " damage!");
+//					} else {
+//						enemy.setCurrHP((int) (enemy.getCurrHP() - player.getInventory().getEquipped().getDamage()));
+//						System.out.println("You did " + player.getInventory().getEquipped().getDamage() + " damage!");
+//					}
 
 					System.out.println("Enemy health:" + enemy.getCurrHP());
 					return true;
@@ -393,7 +411,25 @@ public boolean startBattle() {
 		return false;
 		
 	}
-
+	
+	private void rangedAttack() {
+		
+	}
+	
+	private void mageAttack() {
+		
+	}
+	
+	private void standardAttack() {
+		System.out.println("You chose a standard attack!/n");
+		if (dbTurn > 0) {
+			enemy.setCurrHP((int) (enemy.getCurrHP() - (player.getInventory().getEquipped().getDamage() * 1.5)));
+			System.out.println("You did " +  (player.getInventory().getEquipped().getDamage() * 1.5) + " damage!");
+		} else {
+			enemy.setCurrHP((int) (enemy.getCurrHP() - player.getInventory().getEquipped().getDamage()));
+			System.out.println("You did " + player.getInventory().getEquipped().getDamage() + " damage!");
+		}
+	}
 
 	private void enemyTurn() {
 		
