@@ -81,8 +81,11 @@ public class WeaponList {
 
 	// --------------------Ranged Weapons--------------------
 	
+	// starter bow /
 	public Weapon starterBow = new Weapon("f101", "Training Bow", 
 			"A simple wood bow for young archers.", 1, 25, 20, 2, true);
+	
+	
 	
 	// --------------------Magic Weapons--------------------
 	/** Training Wand*/

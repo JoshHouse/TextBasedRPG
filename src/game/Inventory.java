@@ -11,6 +11,8 @@ public class Inventory implements Serializable {
 	private ArrayList<Weapon> weapons;
 	private ArrayList<Consumable> consumables;
 	private ArrayList<KeyItem> keyItems;
+	private int fireArrows = 0;
+	private int iceArrows = 0;
 
 	/**
 	 * Base constructor
@@ -70,6 +72,8 @@ public class Inventory implements Serializable {
 		return weapons.get(0);
 	}
 	
+	
+	
 	public Weapon getWeaponOnKey(String inputKey) {
 		for (int x = 0; x < weapons.size(); x++) {
 			if (inputKey.equals(weapons.get(x).getKey())) {
@@ -78,11 +82,23 @@ public class Inventory implements Serializable {
 		}
 		return null;
 	}
+	
+	public int getFireArrows() {
+		return fireArrows;
+	}
+	
+	public int getIceArrows() {
+		return iceArrows;
+	}
+	
+	
 	// ------------------------------Setters-------------------------------
 	
 	public void setWeapons(ArrayList<Weapon> inputWeapons) {
 		this.weapons = inputWeapons;
 	}
+	
+	
 	
 	public void setConsumables(ArrayList<Consumable> inputConsumables) {
 		this.consumables = inputConsumables;
@@ -90,6 +106,14 @@ public class Inventory implements Serializable {
 	
 	public void setKeyItems(ArrayList<KeyItem> inputKeyItems) {
 		this.keyItems = inputKeyItems;
+	}
+	
+	public void setFireArrows(int count) {
+		this.fireArrows = Math.max(0, count);
+	}
+	
+	public void setIceArrows(int count) {
+		this.iceArrows = Math.max(0, count);
 	}
 	
 	// ------------------------------Functions------------------------------
