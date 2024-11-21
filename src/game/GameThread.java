@@ -1374,8 +1374,126 @@ public class GameThread extends Throwable {
 	}
 	
 	public static boolean rangedSpecialMission(Player player, Scanner keyboard) {
-		return true;
+	    int txtSpd = 25;
+	    int pChoice;
+	    boolean makingChoice = true;
+	    String pName = player.getName();
+	    String rangerName = "Elaris the Ranger";
+
+	    breakLine();
+	    Dialogue.characterDialogue(rangerName, "Ah, " + pName + "! I’ve been meaning to speak with you. Your skill with a bow is unmatched in these parts, and there’s a dire situation that needs addressing.", txtSpd);
+
+	    while (makingChoice) {
+	        Dialogue.characterDialogue(rangerName, "The Shadow Stalker pack has taken over an ancient territory nearby, and their alpha, Nightfang, is growing stronger by the day. We need you to stop him before the pack becomes unstoppable.\n"
+	                + "Are you willing to take on this mission?\n"
+	                + "1) Yes, I’ll take on the challenge.\n"
+	                + "2) I’m not sure. This sounds dangerous.\n", txtSpd);
+	        pChoice = keyboard.nextInt();
+
+	        switch (pChoice) {
+	        case 1:
+	            breakLine();
+	            Dialogue.characterDialogue(pName, "Yes, I’ll take on the challenge.\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        case 2:
+	            breakLine();
+	            Dialogue.characterDialogue(pName, "I’m not sure. This sounds dangerous.\n", txtSpd);
+	            Dialogue.characterDialogue(rangerName, "It is dangerous, but you’re the only one capable of stopping Nightfang. Let me know if you change your mind.\n", txtSpd);
+	            return false;
+
+	        default:
+	            breakLine();
+	            System.err.println("(Invalid choice. Please try again)");
+	            break;
+	        }
+	    }
+
+	    Dialogue.characterDialogue(rangerName, "Nightfang’s territory lies in the Heartshadow Woods. It’s a twisted place of darkness, but you’ll have an important choice to make when you arrive. "
+	            + "Nightfang prowls between two locations, and you’ll need to decide where to confront him.", txtSpd);
+
+	    Dialogue.infoDialogue("*You gather your gear and head out, the forest growing darker as you approach the Heartshadow Woods. The air is thick with mist, and the faint glow of fireflies provides the only light. "
+	            + "After some time, you reach the edge of the woods where a fork in the path offers two distinct routes.*\n", txtSpd);
+
+	    makingChoice = true;
+	    while (makingChoice) {
+	        Dialogue.infoDialogue("*Which path will you take?*\n"
+	                + "1) *The Ancient Clearing: An open field where moonlight breaks through the canopy, casting eerie shadows.*\n"
+	                + "2) *The Cursed Hollow: A narrow gorge filled with jagged rocks and an oppressive darkness.*\n", txtSpd);
+	        pChoice = keyboard.nextInt();
+
+	        switch (pChoice) {
+	        case 1:
+	            breakLine();
+	            Dialogue.infoDialogue("*You choose the path to the Ancient Clearing, where the forest opens into a large field. Moonlight filters down through the twisted branches, illuminating the clearing in a pale silver glow. "
+	                    + "The ground is covered in moss and glowing mushrooms, and the air hums with an unnatural silence. You step into the clearing cautiously, sensing movement among the shadows.*\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        case 2:
+	            breakLine();
+	            Dialogue.infoDialogue("*You choose the path to the Cursed Hollow, where the forest closes in tightly around you. The narrow gorge is suffocating, with jagged rocks jutting out like broken teeth. "
+	                    + "A faint red glow pulses from deep within, and the sound of dripping water echoes eerily. The oppressive air weighs heavily on your chest as you venture deeper, your every step crunching against loose stone.*\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        default:
+	            breakLine();
+	            System.err.println("(Invalid choice. Please try again)");
+	            break;
+	        }
+	    }
+
+	    Dialogue.infoDialogue("*You hear a guttural growl nearby, and your heart races as you realize Nightfang is near. The alpha Shadow Stalker emerges from the darkness, its glowing red eyes locked onto you. "
+	            + "The creature stands taller than any of its kin, its fur bristling with shadowy tendrils that shift and writhe as if alive. Its razor-sharp claws glint in the dim light.*\n", txtSpd);
+
+	    makingChoice = true;
+	    while (makingChoice) {
+	        Dialogue.infoDialogue("*What do you do?*\n"
+	                + "1) *Raise your bow and prepare for battle.*\n"
+	                + "2) *Try to find a better position for the fight.*\n", txtSpd);
+	        pChoice = keyboard.nextInt();
+
+	        switch (pChoice) {
+	        case 1:
+	            breakLine();
+	            Dialogue.infoDialogue("*You nock an arrow and face Nightfang head-on, your heart pounding as you prepare for a fierce battle.*\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        case 2:
+	            breakLine();
+	            Dialogue.infoDialogue("*You dart behind a nearby boulder, using the terrain to gain a tactical advantage. Nightfang circles, its glowing eyes tracking your every move.*\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        default:
+	            breakLine();
+	            System.err.println("(Invalid choice. Please try again)");
+	            break;
+	        }
+	    }
+
+	    /*
+	     * Nightfang Boss Fight
+	     * 
+	     * lose:
+	     * return false;
+	     * 
+	     * win:
+	     */
+
+	    Dialogue.infoDialogue("*As the battle concludes, Nightfang collapses with a final, ear-splitting howl. The oppressive atmosphere of the woods begins to lift, and the shadows that clung to the trees slowly recede. "
+	            + "The forest is quiet once more, save for the rustling of leaves in a gentle breeze. You take a moment to catch your breath, the adrenaline of the fight still coursing through your veins.*\n", txtSpd);
+
+	    Dialogue.infoDialogue("*You begin your journey back to Elaris, the weight of your victory etched in every step you take.*\n", txtSpd);
+
+	    Dialogue.characterDialogue(rangerName, "You’ve returned! And from the look of you, I’d say the mission was a success. The woods will remember your courage, and so will I. Thank you, " + pName + ". You’ve done more than you know.\n", txtSpd);
+
+	    return true;
 	}
+
 	
 	public static boolean meleeSpecialMission(Player player, Scanner scn) {
 
