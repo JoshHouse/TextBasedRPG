@@ -14,6 +14,7 @@ public class Hub implements Serializable {
 	private Shop shop;
 	private ArrayList<Enemy> enemies;
 	private String[] searchTxt;
+	private Enemy currEnemy;
 
 	public Hub(Player player, String location, Shop shop, ArrayList<Enemy> enemies, String[] searchTxt) {
 		this.player = player;
@@ -44,6 +45,10 @@ public class Hub implements Serializable {
 	public String[] getSearchTxt() {
 		return this.searchTxt;
 	}
+	
+	private Enemy getCurrEnemy() {
+		return this.currEnemy;
+	}
 
 	// ----------------------------Setters----------------------------
 
@@ -65,6 +70,10 @@ public class Hub implements Serializable {
 
 	public void setSearchTxt(String[] searchTxt) {
 		this.searchTxt = searchTxt;
+	}
+	
+	private void setCurrEnemy(Enemy currEnemy) {
+		this.currEnemy = currEnemy;
 	}
 
 	// ---------------------------Functions---------------------------
@@ -129,6 +138,7 @@ public class Hub implements Serializable {
 
 					if (Luck.luckEvent(50)) {
 						Dialogue.infoDialogue("Enemy Found!\n\n", 4);
+						this.setCurrEnemy(enemies.get(Luck.getRandNum(enemies.size()))); 
 						searching = false;
 						battling = true;
 					} else {
@@ -164,13 +174,14 @@ public class Hub implements Serializable {
 				}
 
 				if (battling) {
-					new Battle();
+					Battle battle = new Battle(player, this.getCurrEnemy());
+					battle.startBattle();
 				}
 
 				Pause.pause(1500);
 				break;
 			case '3': // Visit the available Shop
-				shop.startShop();
+				shop.startShop(scn);
 				break;
 			case '4': // Switch your equipped weapon
 				player.selectMainhandWeapon(scn);
@@ -197,3 +208,4 @@ public class Hub implements Serializable {
 	}
 
 }
+
