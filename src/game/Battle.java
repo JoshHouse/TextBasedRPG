@@ -22,6 +22,9 @@ public Battle(Player inputPlayer, Enemy inputEnemy) {
 	this.setEnemy(inputEnemy);
 	this.setTurn(0);
 	this.setguardedTurn(0);
+	this.setSpeedTurn(0);
+	this.setPoisonTurn(0);
+	this.setPoisonDamage(0);
 }
 	
 	
@@ -101,20 +104,37 @@ public static void breakLine() {
     System.out.println("------------------------------");
 }
 
-public boolean startBattle() {
+private void battleSetup() {
+	if (enemy.getCurrHP() != enemy.getHealth()) {
+		enemy.setCurrHP(enemy.getHealth());
+	}
+	if (player.getCurrHP() != player.getHealth()) {
+		player.setCurrHP(player.getHealth());
+	}
+	if (player.getCurrMana() != player.getMana()) {
+		player.setCurrMana(player.getMana());
+	}
+	this.setTurn(0);
+	this.setguardedTurn(0);
+	this.setSpeedTurn(0);
+	this.setPoisonTurn(0);
+	this.setPoisonDamage(0);
+}
+
+public boolean startBattle(Scanner keyboard) {
 	boolean inBattle = true;
-	Scanner keyboard = new Scanner(System.in);
 	boolean isWimp = false;
 	
+	battleSetup();
+	
 	System.out.println("Welcome to the Battle Arena!/n");
-	System.out.println("Your opponent: " + this.getEnemy());
+	System.out.println("Your opponent: " + this.getEnemy().getName());
 	breakLine();
 	
 	while(inBattle) {
 		if (speedTurn > 0) {
 			isWimp = this.playerTurn(keyboard);
 			if (isWimp) {
-				keyboard.close();
 				return false;
 			}
 			speedTurn--;
@@ -122,7 +142,6 @@ public boolean startBattle() {
 			if(turn == 0) {
 				this.playerTurn(keyboard);
 				if (isWimp) {
-					keyboard.close();
 					return false;
 				}
 				
@@ -145,11 +164,15 @@ public boolean startBattle() {
 			if (player.getCurrHP() <= 0) { //Check if battle continues after each turn
 	            System.out.println("You have been defeated!");
 	            System.out.println("Leaving the Battle Arena.");
-	            keyboard.close();
+	            player.setCurrHP(player.getHealth());
+	            enemy.setCurrHP(enemy.getHealth());
+	            player.setCurrMana(player.getMana());
 	            return false;
 	        } else if (enemy.getCurrHP() <= 0) {
 	            System.out.println("You defeated the enemy!");
-	            keyboard.close();
+	            player.setCurrHP(player.getHealth());
+	            enemy.setCurrHP(enemy.getHealth());
+	            player.setCurrMana(player.getMana());
 	            return true;
 	        } else {
 	            changeTurn(); // Change turn only if battle continues
@@ -158,7 +181,6 @@ public boolean startBattle() {
 		
 	}
 	
-	keyboard.close();
 	return false;
 	
 }
@@ -365,18 +387,6 @@ public boolean startBattle() {
 						this.standardAttack();
 						break;
 					}
-					
-					
-
-					
-//					System.out.println("You chose a standard attack!/n");
-//					if (dbTurn > 0) {
-//						enemy.setCurrHP((int) (enemy.getCurrHP() - (player.getInventory().getEquipped().getDamage() * 1.5)));
-//						System.out.println("You did " +  (player.getInventory().getEquipped().getDamage() * 1.5) + " damage!");
-//					} else {
-//						enemy.setCurrHP((int) (enemy.getCurrHP() - player.getInventory().getEquipped().getDamage()));
-//						System.out.println("You did " + player.getInventory().getEquipped().getDamage() + " damage!");
-//					}
 
 					System.out.println("Enemy health:" + enemy.getCurrHP());
 					return true;

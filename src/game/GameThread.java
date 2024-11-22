@@ -26,126 +26,45 @@ public class GameThread extends Throwable {
 
 		Scanner scn = new Scanner(System.in);
 
-		Player p1 = new Player("Nova", new Inventory(true, true, true), 1000, 180, 1, 0, 50, 4, 2, 1, 2, 9);
-		p1.getInventory().add(wList.sword1);
-		p1.getInventory().add(wList.axe2);
-		p1.getInventory().add(wList.spear2);
-		p1.getInventory().add(wList.axe1);
-		p1.getInventory().add(wList.sword3);
-		Shopkeeper keep = new Shopkeeper();
-		Shop shop = new Shop(p1, keep, "Armory");
-		ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-		String[] searchTxt = {
-				"Nothing but the fluffy clouds and beautiful buildings ahead.\nIt's quite nice to look at.",
-				"Around the corner, there's appears to be a mime entertaining a crowd.\nNothing that seems too interesting "
-						+ "to you, however.",
-				"As you walk around, you get annoyed by gnats buzzing around your ears.\nIf only they were bigger. "
-						+ "You could slay them easily...",
-				"The city streets are rather lively today.\nThough, there's no signs of trouble, thankfully." };
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//		Player p1 = new Player("Nova", new Inventory(true, true, true), 1000, 180, 1, 0, 50, 4, 2, 1, 2, 9);
+//		p1.getInventory().add(wList.sword1);
+//		p1.getInventory().add(wList.axe2);
+//		p1.getInventory().add(wList.spear2);
+//		p1.getInventory().add(wList.axe1);
+//		p1.getInventory().add(wList.sword3);
+//		Shopkeeper keep = new Shopkeeper();
+//		Shop shop = new Shop(p1, keep, "Armory");
+//		ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+//		String[] searchTxt = {
+//				"Nothing but the fluffy clouds and beautiful buildings ahead.\nIt's quite nice to look at.",
+//				"Around the corner, there's appears to be a mime entertaining a crowd.\nNothing that seems too interesting "
+//						+ "to you, however.",
+//				"As you walk around, you get annoyed by gnats buzzing around your ears.\nIf only they were bigger. "
+//						+ "You could slay them easily...",
+//				"The city streets are rather lively today.\nThough, there's no signs of trouble, thankfully." };
+//
+//		meleeChapter1(p1, scn);
+//
+//		Hub hub1 = new Hub(p1, "Central Street", shop, enemies, searchTxt);
+//		hub1.start(scn);
+//
+//		scn.close();
 
-		meleeChapter1(p1, scn);
-
-		Hub hub1 = new Hub(p1, "Central Street", shop, enemies, searchTxt);
-		hub1.start(scn);
-
-		scn.close();
-
-//		// Player Inventory Test
-//		SpecialAttack gSsA = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force",
-//				1.5);
-//		SpecialAttack fSsA = new SpecialAttack("You launch a wall of fire hurling towards your enemies", 2.7);
-//		SpecialAttack lBsA = new SpecialAttack(
-//				"You fire a well aimed shot, curving to hit the enemy where they would least expect it", 2.0);
-//
-//		Weapon greatSword = new Weapon("1111", "Great Sword", "A Mighty Big Sword", 2, 30, 25, 1, true, 0, gSsA);
-//		Weapon fireStaff = new Weapon("2222", "Fire Staff", "Send your enemies out in a blaze of glory", 5, 1000, 500,
-//				3, true, 75, fSsA);
-//		Weapon longBow = new Weapon("3333", "Long Bow",
-//				"Forged in the elven mountains, this bow is extremely well made", 3, 250, 75, 2, true, 0, lBsA);
-//
-//		Consumable throwingAxe = new Consumable("4444", "Throwing Axe", "Hurl an axe at your enemies", 1, 10, 20, 1,
-//				true, 1, true);
-//		Consumable healthPotion = new Consumable("5555", "Health Potion",
-//				"Use this when you're in need of a pick-me-up", 2, 20, 0, -1, true, 1, true);
-//		Consumable homemadeExplosives = new Consumable("6666", "Home-Made Explosives",
-//				"Your enemies won't know what hit them. You might not want to stand too close though", 3, 75, 200, 2,
-//				true, 1, true);
-//
-//		Inventory testPlayerInv = new Inventory();
-//		testPlayerInv.add(greatSword);
-//		testPlayerInv.add(fireStaff);
-//		testPlayerInv.add(longBow);
-//
-//		testPlayerInv.add(throwingAxe);
-//		testPlayerInv.add(healthPotion);
-//		testPlayerInv.add(homemadeExplosives);
-//
-//		// Shopkeeper Inventory Test
-//		SpecialAttack gSsA1 = new SpecialAttack("You Leap into the Air and bring your sword down with mighty force",
-//				1.5);
-//		SpecialAttack fSsA1 = new SpecialAttack("You launch a wall of fire hurling towards your enemies", 2.7);
-//		SpecialAttack lBsA1 = new SpecialAttack(
-//				"You fire a well aimed shot, curving to hit the enemy where they would least expect it", 2.0);
-//
-//		Weapon greatSword1 = new Weapon("1111", "Great Sword", "A Mighty Big Sword", 2, 30, 25, 1, true, 0, gSsA1);
-//		Weapon fireStaff1 = new Weapon("2222", "Fire Staff", "Send your enemies out in a blaze of glory", 5, 1000, 500,
-//				3, true, 75, fSsA1);
-//		Weapon longBow1 = new Weapon("3333", "Long Bow",
-//				"Forged in the elven mountains, this bow is extremely well made", 3, 250, 75, 2, true, 0, lBsA1);
-//
-//		Consumable throwingAxe1 = new Consumable("4444", "Throwing Axe", "Hurl an axe at your enemies", 1, 10, 20, 1,
-//				true, 1, true);
-//		Consumable healthPotion1 = new Consumable("5555", "Health Potion",
-//				"Use this when you're in need of a pick-me-up", 2, 20, 0, -1, true, 1, true);
-//		Consumable homemadeExplosives1 = new Consumable("6666", "Home-Made Explosives",
-//				"Your enemies won't know what hit them. You might not want to stand too close though", 3, 75, 200, 2,
-//				true, 1, true);
-//		Inventory testShopkeeperInv = new Inventory();
-//
-//		testShopkeeperInv.add(greatSword1);
-//		testShopkeeperInv.add(fireStaff1);
-//		testShopkeeperInv.add(longBow1);
-//
-//		testShopkeeperInv.add(throwingAxe1);
-//		testShopkeeperInv.add(healthPotion1);
-//		testShopkeeperInv.add(homemadeExplosives1);
-//
-//		Player testPlayer = new Player("Joshua", testPlayerInv, 600, 200, 4, 26, fireStaff, 250, 3, 2, 5, 1, 3);
-//
-//		String enterShopDialog = "Welcome to the shop!";
-//		String exitShopDialog = "See you again next time!";
-//		String saleDialog = "Hope you enjoy!";
-//		String inShops1 = "Hope I meet my sales quota";
-//		String inShops2 = "Great to see some customers";
-//		String inShops3 = "Been a slow day today";
-//		String s1 = "Have you heard about the dragon on the mountain?";
-//		String s2 = "People keep gossiping in town";
-//		String s3 = "Man its been a long day";
-//		ArrayList<String> sampleDialog = new ArrayList<String>();
-//		ArrayList<String> sampleInShopDialog = new ArrayList<String>();
-//		sampleDialog.add(s1);
-//		sampleDialog.add(s2);
-//		sampleDialog.add(s3);
-//		sampleInShopDialog.add(inShops1);
-//		sampleInShopDialog.add(inShops2);
-//		sampleInShopDialog.add(inShops3);
-//
-//		Shopkeeper testShopkeeper = new Shopkeeper("Gandalf", testShopkeeperInv, sampleDialog, enterShopDialog,
-//				exitShopDialog, saleDialog, sampleInShopDialog);
-//
-//		Shop YeOlShop = new Shop(testPlayer, testShopkeeper, "Ye Ol Shop");
-//
-//		YeOlShop.startShop();
-
-//		Shopkeeper demoShopkeeper = new Shopkeeper("Cosmos", "Hello there! How can I help you?", "Will that be all?",
-//				"Have a nice day!");
-//		demoShopkeeper.addInShopDialog("How's the weather today? I think it's quite lovely.");
-//		demoShopkeeper.addInShopDialog("We don't have a lot here, so feel free to take your time looking around.");
-//		demoShopkeeper.addInShopDialog(
-//				"I don't mean to add any pressure, but I really hope I can hit my sales quota for today.");
-//		Shop demoShop = new Shop("Demo Armory Shop", demoShopkeeper);
-//
-//		Scanner scn = new Scanner(System.in);
+		
 
 		scn.close();
 	}
@@ -240,7 +159,7 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 
 		breakLine();
-		win = miniBoss.startBattle();
+		win = miniBoss.startBattle(keyboard);
 		breakLine();
 
 		if (win) {
@@ -516,7 +435,7 @@ public class GameThread extends Throwable {
 		System.out.println(
 				"---------------------------------------------------------------------------------------------------");
 
-		win = meleeTutorial.startBattle();
+		win = meleeTutorial.startBattle(scn);
 
 		if (win) {
 
@@ -665,7 +584,7 @@ public class GameThread extends Throwable {
 	            + "this sheep is harmless, and we use it to train all newcomers. Draw your bow, aim for the mark, and let your arrow fly!");
 	    
 	    while (!playerWon) {
-	        playerWon = tutorialBattle.startBattle();
+	        playerWon = tutorialBattle.startBattle(keyboard);
 	        if (!playerWon) {
 	            player.setCurrHP(player.getHealth());
 	            tutorialBattle.getEnemy().setCurrHP(tutorialBattle.getEnemy().getHealth());
@@ -799,11 +718,8 @@ public class GameThread extends Throwable {
 				+ "skills on this sheep! Don't worry sheep around here aren't known for their fighting abilities.");
 		
 		while (!playerWon) {
-			playerWon = tutorialBattle.startBattle();
+			playerWon = tutorialBattle.startBattle(keyboard);
 			if (!playerWon) {
-				player.setCurrHP(player.getHealth());
-				tutorialBattle.getEnemy().setCurrHP(tutorialBattle.getEnemy().getHealth());
-				tutorialBattle.setTurn(0);
 				System.out.println("[Herald the Wizard] Thats okay you'll get the hang of it. take another shot at "
 						+ "it!");
 			}
@@ -1636,11 +1552,11 @@ public class GameThread extends Throwable {
 		while (!win) {
 
 			if (battleCount % 3 == 0) {
-				if (battle2.startBattle()) {
+				if (battle2.startBattle(scn)) {
 					battleCount++;
 				}
 			} else {
-				if (battle1.startBattle()) {
+				if (battle1.startBattle(scn)) {
 					battleCount++;
 				}
 			}
@@ -1675,7 +1591,7 @@ public class GameThread extends Throwable {
 		breakLine();
 
 		while (!win) {
-			win = bossBattle.startBattle();
+			win = bossBattle.startBattle(scn);
 		}
 
 		if (win) {
