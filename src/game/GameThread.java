@@ -645,7 +645,7 @@ public class GameThread extends Throwable {
 		breakLine();
 		Dialogue.characterDialogue(wizName, "Hello " + player.getName() + "! I heard we had a newcomer in town! "
 				+ "Interested in learning how to use magic to defend yourself from the various different monsters,"
-				+ "enemies, and mythical beasts you can find around here? Well you've come to the right place! Although"
+				+ "enemies, and mythical beasts you can find around here? Well you've come to the right place! Although "
 				+ "I am no expert, I can definitely help get you started!\n", txtSpd);
 		
 		while (makingChoice) {
@@ -735,7 +735,7 @@ public class GameThread extends Throwable {
 		Dialogue.characterDialogue(wizName, "Nice! It seems like you got the hang of it! That's about all I can "
 				+ "teach you. I'm not much of the adventurous type so I really only know the basics. It comes in handy "
 				+ "though for work around town. Since you're new around here, you should probably go check out the castle. "
-				+ "Just about everything important happens around there. The King also might be interested in testing"
+				+ "Just about everything important happens around there. The King also might be interested in testing "
 				+ "your skills too if you're up for the challenge. If you can get in his good graces, you might get a "
 				+ "chance to talk to the King's wizard. He's probably the most knowledgable person you can find around "
 				+ "here when it comes to magic! If you make it big, don't forget who taught you the basics though haha! "

@@ -423,6 +423,8 @@ public boolean startBattle(Scanner keyboard) {
 							enemy.setCurrHP((int)(enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
 							Dialogue.infoDialogue("You did " + (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) + " damage!\n", txtSpd);
 						}
+					} else {
+						Dialogue.infoDialogue("You did 0 damage!\n", txtSpd);
 					}
 					Dialogue.infoDialogue("Enemy health:" + enemy.getCurrHP() + "\n", txtSpd);
 					return true;
