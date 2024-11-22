@@ -26,7 +26,9 @@ public class GameThread extends Throwable {
 
 		Scanner scn = new Scanner(System.in);
 
+		Player player = new Player("Josh");
 		
+		mageChapter1(player, scn);
 		
 		
 		
@@ -634,33 +636,36 @@ public class GameThread extends Throwable {
 	public static boolean mageChapter1(Player player, Scanner keyboard) {
 		boolean makingChoice = true;
 		int pChoice;
+		int txtSpd = 25;
 		Battle tutorialBattle = new Battle(player, eList.sheep);
 		boolean playerWon = false;
+		String pName = player.getName();
+		String wizName = "Herald the Wizard";
 		
 		breakLine();
-		System.out.println("[Herald the Wizard] Hello " + player.getName() + "! I heard we had a newcomer in town!"
+		Dialogue.characterDialogue(wizName, "Hello " + player.getName() + "! I heard we had a newcomer in town! "
 				+ "Interested in learning how to use magic to defend yourself from the various different monsters,"
 				+ "enemies, and mythical beasts you can find around here? Well you've come to the right place! Although"
-				+ "I am no expert, I can definitely help get you started!");
+				+ "I am no expert, I can definitely help get you started!\n", txtSpd);
 		
 		while (makingChoice) {
-			System.out.println("[Herald the Wizard] Does that sound like something you might be interested in? \n"
+			Dialogue.characterDialogue(wizName, "Does that sound like something you might be interested in? \n"
 					+ "1) Absolutely!\n"
-					+ "2) I'm not sure if I'm interested in magic.");
+					+ "2) I'm not sure if I'm interested in magic.\n", txtSpd);
 			pChoice = keyboard.nextInt();
 			
 			switch (pChoice) {
 			case 1:
 				breakLine();
-				System.out.println("[" + player.getName() + "] Absolutely!");
-				System.out.println("[Herald the Wizard] Great to hear! It's always nice to have another mage in town!");
+				Dialogue.characterDialogue(pName, "Absolutely!\n", txtSpd);
+				Dialogue.characterDialogue(wizName, "Great to hear! It's always nice to have another mage in town!\n", txtSpd);
 				makingChoice = false;
 				break;
 				
 			case 2:
 				breakLine();
-				System.out.println("[" + player.getName() + "] I'm not sure if I'm interested in magic.");
-				System.out.println("[Herald the Wizard] That's alright! I'll be here if you change your mind!");
+				Dialogue.characterDialogue(pName, "I'm not sure if I'm interested in magic.\n", txtSpd);
+				Dialogue.characterDialogue(wizName, "That's alright! I'll be here if you change your mind!\n", txtSpd);
 				return false;
 				
 			default:
@@ -669,14 +674,14 @@ public class GameThread extends Throwable {
 			}
 		}
 		
-		System.out.println("[Herald the Wizard] First of all we need to get you started with a weapon that can "
+		Dialogue.characterDialogue(wizName,"First of all we need to get you started with a weapon that can "
 				+ "channel magic energy. I believe I have an old wand around here somewhere ... Ah here it is! "
 				+ "This was my first wand and its great for training. You can definitely find better weapons "
 				+ "around town though! I have heard rumors of some pretty strong magic weapons but those are "
 				+ "pretty dangerous to get. But no need to worry about those right now! First you need to get the "
-				+ "basics down. Here, take this wand.");
+				+ "basics down. Here, take this wand.\n", txtSpd);
 		player.getInventory().add(wList.starterWand);
-		System.out.println("The starter wand has been added to your inventory!");
+		Dialogue.infoDialogue("The starter wand has been added to your inventory!\n", txtSpd);
 		player.getInventory().getWeaponOnKey(wList.starterWand.getKey()).displayInfo();
 		
 		makingChoice = true;
@@ -684,28 +689,28 @@ public class GameThread extends Throwable {
 		
 		while (makingChoice) {			
 			breakLine();
-			System.out.println("[Herald the Wizard] Now that you have a weapon, I whould probably explain mana. Mana is the power inside "
+			Dialogue.characterDialogue(wizName, "Now that you have a weapon, I should probably explain mana. Mana is the power inside "
 					+ "each person that can be channeled through the use of magic weapons. Magic weapons use a portion "
 					+ "of your built up mana to launch an attack! Be careful though because you can run out and your "
 					+ "weapon will no longer work. Through tough battles you can increase the effectiveness of your magic "
-					+ "and the amount of mana you can store.");
-			System.out.println("Your current mana storage is: " + player.getMana());
+					+ "and the amount of mana you can store.\n", txtSpd);
+			Dialogue.infoDialogue("Your current mana storage is: " + player.getMana() + "\n", txtSpd);
 			breakLine();
-			System.out.println("1) Okay I think I got it!\n"
-					+ "2) Explain that again?");
+			Dialogue.infoDialogue("1) Okay I think I got it!\n"
+					+ "2) Explain that again?\n", txtSpd);
 			pChoice = keyboard.nextInt();
 			
 			switch (pChoice) {
 			
 			case 1:
 				breakLine();
-				System.out.println("[" + player.getName() + "] Okay I think I got it!");
+				Dialogue.characterDialogue(pName, "Okay I think I got it!\n", txtSpd);
 				makingChoice = false;
 				break;
 			
 			case 2:
 				breakLine();
-				System.out.println("[" + player.getName() + "] Explain that again?");
+				Dialogue.characterDialogue(pName, "Explain that again?\n", txtSpd);
 				break;
 			
 			default:
@@ -714,26 +719,27 @@ public class GameThread extends Throwable {
 			}
 		}
 		
-		System.out.println("[Herald the Wizard] Great! Now that you understand the basics, why don't you test your "
-				+ "skills on this sheep! Don't worry sheep around here aren't known for their fighting abilities.");
+		Dialogue.characterDialogue(wizName, "Great! Now that you understand the basics, why don't you test your "
+				+ "skills on this sheep! Don't worry sheep around here aren't known for their fighting abilities.\n"
+				, txtSpd);
 		
 		while (!playerWon) {
 			playerWon = tutorialBattle.startBattle(keyboard);
 			if (!playerWon) {
-				System.out.println("[Herald the Wizard] Thats okay you'll get the hang of it. take another shot at "
-						+ "it!");
+				Dialogue.characterDialogue(wizName, "Thats okay you'll get the hang of it. take another shot at "
+						+ "it!\n", txtSpd);
 			}
 		}
 		
 		breakLine();
-		System.out.println("[Herald the Wizard] Nice! It seems like you got the hang of it! That;s about all I can "
+		Dialogue.characterDialogue(wizName, "Nice! It seems like you got the hang of it! That's about all I can "
 				+ "teach you. I'm not much of the adventurous type so I really only know the basics. It comes in handy "
 				+ "though for work around town. Since you're new around here, you should probably go check out the castle. "
 				+ "Just about everything important happens around there. The King also might be interested in testing"
 				+ "your skills too if you're up for the challenge. If you can get in his good graces, you might get a "
 				+ "chance to talk to the King's wizard. He's probably the most knowledgable person you can find around "
 				+ "here when it comes to magic! If you make it big, don't forget who taught you the basics though haha! "
-				+ "And pay me a visit if you get the chance!");
+				+ "And pay me a visit if you get the chance!\n", txtSpd);
 	
 		makingChoice = true;
 		pChoice = 0;
@@ -741,21 +747,21 @@ public class GameThread extends Throwable {
 		while (makingChoice) {
 			
 			breakLine();
-			System.out.println("1) Will do! Thanks for the advice!\n"
-				+ "2) I'll definitely have to check out the castle!");
+			Dialogue.infoDialogue("1) Will do! Thanks for the advice!\n"
+					+ "2) I'll definitely have to check out the castle!\n", txtSpd);
 			pChoice = keyboard.nextInt();
 		
 			switch(pChoice) {
 			
 			case 1:
 				breakLine();
-				System.out.println("[" + player.getName() + "] Will do! Thanks for the advice!");
+				Dialogue.characterDialogue(pName, "Will do! Thanks for the advice!\n", txtSpd);
 				makingChoice = false;
 				break;
 			
 			case 2:
 				breakLine();
-				System.out.println("[" + player.getName() + "] I'll definitely have to check out the castle!");
+				Dialogue.characterDialogue(pName, "I'll definitely have to check out the castle!\n", txtSpd);
 				makingChoice = false;
 				break;
 				
@@ -774,7 +780,6 @@ public class GameThread extends Throwable {
 	
 	public static boolean mageSpecialMission(Player player, Scanner keyboard) {
 		int txtSpd = 25; 
-		int wait = 1000;
 		int pChoice;
 		boolean makingChoice = true;
 		String pName = player.getName();
