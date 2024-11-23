@@ -524,17 +524,17 @@ public class GameThread extends Throwable {
 	        System.out.println("[Elaris the Ranger] What do you say? \n"
 	                + "1) Yes, I’m ready!\n"
 	                + "2) Hmm, I’m not sure if I want to be an archer.");
-	        pChoice = keyboard.nextInt();
+	        pChoice = keyboard.next().charAt(0);
 	        
 	        switch (pChoice) {
-	        case 1:
+	        case '1':
 	            breakLine();
 	            System.out.println("[" + player.getName() + "] Yes, I’m ready!");
 	            System.out.println("[Elaris the Ranger] Wonderful. The bow may seem simple, but wield it well, and it becomes the deadliest of weapons.");
 	            makingChoice = false;
 	            break;
 	            
-	        case 2:
+	        case '2':
 	            breakLine();
 	            System.out.println("[" + player.getName() + "] Hmm, I’m not sure if I want to be an archer.");
 	            System.out.println("[Elaris the Ranger] No pressure. The woods are patient, and I’ll be here if you change your mind.");
@@ -562,16 +562,16 @@ public class GameThread extends Throwable {
 	        breakLine();
 	        System.out.println("1) Got it! Let’s move on.\n"
 	                + "2) Can you explain that again?");
-	        pChoice = keyboard.nextInt();
+	        pChoice = keyboard.next().charAt(0);
 	        
 	        switch (pChoice) {
-	        case 1:
+	        case '1':
 	            breakLine();
 	            System.out.println("[" + player.getName() + "] Got it! Let’s move on.");
 	            makingChoice = false;
 	            break;
 
-	        case 2:
+	        case '2':
 	            breakLine();
 	            System.out.println("[" + player.getName() + "] Can you explain that again?");
 	            break;
@@ -607,16 +607,16 @@ public class GameThread extends Throwable {
 	        breakLine();
 	        System.out.println("1) Thanks, Elaris! I’ll head to the castle.\n"
 	                + "2) I’ll be sure to visit again!");
-	        pChoice = keyboard.nextInt();
+	        pChoice = keyboard.next().charAt(0);
 	        
 	        switch (pChoice) {
-	        case 1:
+	        case '1':
 	            breakLine();
 	            System.out.println("[" + player.getName() + "] Thanks, Elaris! I’ll head to the castle.");
 	            makingChoice = false;
 	            break;
 
-	        case 2:
+	        case '2':
 	            breakLine();
 	            System.out.println("[" + player.getName() + "] I’ll be sure to visit again!");
 	            makingChoice = false;
@@ -642,6 +642,7 @@ public class GameThread extends Throwable {
 		String pName = player.getName();
 		String wizName = "Herald the Wizard";
 		
+		
 		breakLine();
 		Dialogue.characterDialogue(wizName, "Hello " + player.getName() + "! I heard we had a newcomer in town! "
 				+ "Interested in learning how to use magic to defend yourself from the various different monsters,"
@@ -652,26 +653,27 @@ public class GameThread extends Throwable {
 			Dialogue.characterDialogue(wizName, "Does that sound like something you might be interested in? \n"
 					+ "1) Absolutely!\n"
 					+ "2) I'm not sure if I'm interested in magic.\n", txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(pName, "Absolutely!\n", txtSpd);
+					Dialogue.characterDialogue(wizName, "Great to hear! It's always nice to have another mage in town!\n", txtSpd);
+					makingChoice = false;
+					break;
+					
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(pName, "I'm not sure if I'm interested in magic.\n", txtSpd);
+					Dialogue.characterDialogue(wizName, "That's alright! I'll be here if you change your mind!\n", txtSpd);
+					return false;
+					
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+				}
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				Dialogue.characterDialogue(pName, "Absolutely!\n", txtSpd);
-				Dialogue.characterDialogue(wizName, "Great to hear! It's always nice to have another mage in town!\n", txtSpd);
-				makingChoice = false;
-				break;
-				
-			case 2:
-				breakLine();
-				Dialogue.characterDialogue(pName, "I'm not sure if I'm interested in magic.\n", txtSpd);
-				Dialogue.characterDialogue(wizName, "That's alright! I'll be here if you change your mind!\n", txtSpd);
-				return false;
-				
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-			}
 		}
 		
 		Dialogue.characterDialogue(wizName,"First of all we need to get you started with a weapon that can "
@@ -698,25 +700,26 @@ public class GameThread extends Throwable {
 			breakLine();
 			Dialogue.infoDialogue("1) Okay I think I got it!\n"
 					+ "2) Explain that again?\n", txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(pName, "Okay I think I got it!\n", txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(pName, "Explain that again?\n", txtSpd);
+					break;
+				
+				default:
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			switch (pChoice) {
-			
-			case 1:
-				breakLine();
-				Dialogue.characterDialogue(pName, "Okay I think I got it!\n", txtSpd);
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				Dialogue.characterDialogue(pName, "Explain that again?\n", txtSpd);
-				break;
-			
-			default:
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Dialogue.characterDialogue(wizName, "Great! Now that you understand the basics, why don't you test your "
@@ -749,26 +752,27 @@ public class GameThread extends Throwable {
 			breakLine();
 			Dialogue.infoDialogue("1) Will do! Thanks for the advice!\n"
 					+ "2) I'll definitely have to check out the castle!\n", txtSpd);
-			pChoice = keyboard.nextInt();
-		
-			switch(pChoice) {
-			
-			case 1:
-				breakLine();
-				Dialogue.characterDialogue(pName, "Will do! Thanks for the advice!\n", txtSpd);
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				Dialogue.characterDialogue(pName, "I'll definitely have to check out the castle!\n", txtSpd);
-				makingChoice = false;
-				break;
+				pChoice = keyboard.next().charAt(0);
 				
-			default:
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
+				switch(pChoice) {
+				
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(pName, "Will do! Thanks for the advice!\n", txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(pName, "I'll definitely have to check out the castle!\n", txtSpd);
+					makingChoice = false;
+					break;
+					
+				default:
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
+			
 		}
 
 		return true;
@@ -799,27 +803,29 @@ public class GameThread extends Throwable {
 					+ "1) Yes I believe he did.\n"
 					+ "2) I don’t recall. But I’d be willing to hear you out now.\n", 
 					txtSpd);
-			pChoice = keyboard.nextInt();
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				Dialogue.characterDialogue(pName, "Yes I believe he did.\n",txtSpd);
-				makingChoice = false;
-				break;
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(pName, "Yes I believe he did.\n",txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(pName, "I don’t recall. But I’d be willing to hear you out now.\n",
+							txtSpd);
+					makingChoice = false;
+					break;
+				
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			case 2:
-				breakLine();
-				Dialogue.characterDialogue(pName, "I don’t recall. But I’d be willing to hear you out now.\n",
-						txtSpd);
-				makingChoice = false;
-				break;
-			
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Dialogue.characterDialogue(wizName , "Well I have run into a bit of a roadblock in some research "
@@ -841,30 +847,31 @@ public class GameThread extends Throwable {
 					+ "2) I’m not too sure. That sounds dangerous. I’m not sure if the magic weapon would be "
 					+ "worth it.\n", 
 					txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(pName, "That sounds interesting. What should I expect if I were to go?\n",
+							txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(pName, "I’m not too sure. That sounds dangerous. I’m not sure if the "
+							+ "magic weapon would be worth it.\n",
+							txtSpd);
+					Dialogue.characterDialogue(wizName , "That is understandable. It’s not a decision to make lightly. "
+							+ "Let me know if you change your mind!\n",
+							txtSpd);
+					return false;
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				Dialogue.characterDialogue(pName, "That sounds interesting. What should I expect if I were to go?\n",
-						txtSpd);
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				Dialogue.characterDialogue(pName, "I’m not too sure. That sounds dangerous. I’m not sure if the "
-						+ "magic weapon would be worth it.\n",
-						txtSpd);
-				Dialogue.characterDialogue(wizName , "That is understandable. It’s not a decision to make lightly. "
-						+ "Let me know if you change your mind!\n",
-						txtSpd);
-				return false;
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Dialogue.characterDialogue(wizName , "If you were to attempt this journey, I will not sugar coat it. "
@@ -885,30 +892,31 @@ public class GameThread extends Throwable {
 					+ "powerful magic weapon?\n"
 					+ "2) I’m not so sure that is a mission I would like to go on. Let me think about it.\n",
 					txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(pName, "That sound’s like a very dangerous mission. What’s in it for me? "
+							+ "You mentioned a powerful magic weapon?\n",txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(pName, "I’m not so sure that is a mission I would like to go on. Let "
+							+ "me think about it.\n",
+							txtSpd);
+					Dialogue.characterDialogue(wizName , "That is understandable. It’s not a decision to make lightly. "
+							+ "Let me know if you change your mind!\n",txtSpd);
+					return false;
+				
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				Dialogue.characterDialogue(pName, "That sound’s like a very dangerous mission. What’s in it for me? "
-						+ "You mentioned a powerful magic weapon?\n",txtSpd);
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				Dialogue.characterDialogue(pName, "I’m not so sure that is a mission I would like to go on. Let "
-						+ "me think about it.\n",
-						txtSpd);
-				Dialogue.characterDialogue(wizName , "That is understandable. It’s not a decision to make lightly. "
-						+ "Let me know if you change your mind!\n",txtSpd);
-				return false;
-			
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Dialogue.characterDialogue(wizName , "Absolutely! This is not something I would ask you to do if there "
@@ -924,27 +932,28 @@ public class GameThread extends Throwable {
 			Dialogue.characterDialogue(wizName, "With that in mind, what do you think?\n"
 					+ "1) I think I’ll give it a shot! How do I get to the cave?\n"
 					+ "2) I’m not too sure. Let me think about it.\n",txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(pName, "I think I’ll give it a shot! How do I get to the cave?\n",txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(pName, "I’m not too sure. Let me think about it.\n",txtSpd);
+					Dialogue.characterDialogue(wizName , "I completely understand. It’s not a decision to make lightly. "
+							+ "Let me know if you change your mind!\n",txtSpd);
+					return false;
+				
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				Dialogue.characterDialogue(pName, "I think I’ll give it a shot! How do I get to the cave?\n",txtSpd);
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				Dialogue.characterDialogue(pName, "I’m not too sure. Let me think about it.\n",txtSpd);
-				Dialogue.characterDialogue(wizName , "I completely understand. It’s not a decision to make lightly. "
-						+ "Let me know if you change your mind!\n",txtSpd);
-				return false;
-			
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Dialogue.characterDialogue(wizName , "Great to hear! To reach the cave, head down the main road "
@@ -961,29 +970,30 @@ public class GameThread extends Throwable {
 					+ "those who have attempted this journey before you!\n"
 					+ "1) Thank you! I will be on my way now!\n"
 					+ "2) Thank you! I will be back soon, stone and staff in hand!\n",txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(pName, "Thank you! I will be on my way now!\n",txtSpd);
+					Dialogue.characterDialogue(wizName, "Of course! I hope to see you again soon!\n",txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(pName, "Thank you! I will be back soon, stone and staff in hand!\n",
+							txtSpd);
+					Dialogue.characterDialogue(wizName, "Of course! I have every confidence you will!\n",txtSpd);
+					makingChoice = false;
+					break;
+				
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				Dialogue.characterDialogue(pName, "Thank you! I will be on my way now!\n",txtSpd);
-				Dialogue.characterDialogue(wizName, "Of course! I hope to see you again soon!\n",txtSpd);
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				Dialogue.characterDialogue(pName, "Thank you! I will be back soon, stone and staff in hand!\n",
-						txtSpd);
-				Dialogue.characterDialogue(wizName, "Of course! I have every confidence you will!\n",txtSpd);
-				makingChoice = false;
-				break;
-			
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Dialogue.infoDialogue("*You travel down the main road, away from the castle, mentally preparing yourself "
@@ -1005,24 +1015,25 @@ public class GameThread extends Throwable {
 					+ "1) *Being well rested, I am ready to make my journey into the depths*\n "
 					+ "2) *I find myself still exhausted, I would like to rest some more*\n",
 					txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.infoDialogue("*You decide to rest some more, sleeping through another day*\n", txtSpd);
+					break;
+				
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				Dialogue.infoDialogue("*You decide to rest some more, sleeping through another day*\n", txtSpd);
-				break;
-			
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Dialogue.infoDialogue("*You begin your journey into the cave, noticing a dramatic rise in temperature. "
@@ -1039,27 +1050,28 @@ public class GameThread extends Throwable {
 			Dialogue.infoDialogue("*Are you ready to fight?*\n"
 					+ "1) *Nothing will stand in my way! I will slay the Fire Elemental!*\n"
 					+ "2) *I can’t possibly deal with a beast this size. I must hide!*\n", txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.infoDialogue("*You raise your weapon, prepared for a tough battle*\n", txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.infoDialogue(" *You run to hide behind a rock formation! The beast, having caught a "
+							+ "glimpse of you, will not leave its post. The only way out is through!*\n", txtSpd);
+					makingChoice = false;
+					break;
+				
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				Dialogue.infoDialogue("*You raise your weapon, prepared for a tough battle*\n", txtSpd);
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				Dialogue.infoDialogue(" *You run to hide behind a rock formation! The beast, having caught a "
-						+ "glimpse of you, will not leave its post. The only way out is through!*\n", txtSpd);
-				makingChoice = false;
-				break;
-			
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Battle FireElemental = new Battle(player, eList.fireElemental);
@@ -1081,27 +1093,28 @@ public class GameThread extends Throwable {
 			Dialogue.infoDialogue("What will you do? \n"
 					+ "1) *Loot the body*\n"
 					+ "2) *Continue onward\n", txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					/*
+					 * Loot functionality
+					 */
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					makingChoice = false;
+					break;
+				
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				/*
-				 * Loot functionality
-				 */
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				makingChoice = false;
-				break;
-			
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Dialogue.infoDialogue("*You continue onward, on the lookout for the enemy that might have caused "
@@ -1115,27 +1128,28 @@ public class GameThread extends Throwable {
 			Dialogue.infoDialogue("*Are you ready to fight?*\n"
 					+ "1) *I was born ready*\n"
 					+ "2) *I need to hide!*", txtSpd);
-			pChoice = keyboard.nextInt();
-			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				Dialogue.infoDialogue("*Poised with your weapon ready for battle, you face the fire elemental showing no fear*\n", txtSpd);
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				Dialogue.infoDialogue("*Unfortunately you do not have time to run away. You draw your weapon and "
-						+ "ready yourself for another tough battle.*\n", txtSpd);
-				makingChoice = false;
-				break;
-			
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.infoDialogue("*Poised with your weapon ready for battle, you face the fire elemental showing no fear*\n", txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					Dialogue.infoDialogue("*Unfortunately you do not have time to run away. You draw your weapon and "
+							+ "ready yourself for another tough battle.*\n", txtSpd);
+					makingChoice = false;
+					break;
+				
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
+
 		}
 		
 		if (!FireElemental.startBattle(keyboard)) {
@@ -1155,32 +1169,33 @@ public class GameThread extends Throwable {
 			Dialogue.infoDialogue("*Are you ready to fight?*\n"
 					+ "1) Yes! I will take down the beast!\n"
 					+ "2) No I would like some time to look through my bag and prepare\n", txtSpd);
-			pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
+				
+				switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.infoDialogue("*Confident in your abilities, you appear from behind the boulder with "
+							+ "your weapon drawn, ready to take down the menacing golem that stands in your path!*\n", 
+							txtSpd);
+					makingChoice = false;
+					break;
+				
+				case '2':
+					breakLine();
+					/*
+					 * Inventory Management functionality
+					 */
+					Dialogue.infoDialogue("*Having prepared for the fight, you appear from behind the boulder, ready "
+							+ "for your toughest fight yet!*\n", txtSpd);
+					makingChoice = false;
+					break;
+				
+				default:
+					breakLine();
+					System.err.println("(Invalid choice. Please try again)");
+					break;
+				}
 			
-			switch (pChoice) {
-			case 1:
-				breakLine();
-				Dialogue.infoDialogue("*Confident in your abilities, you appear from behind the boulder with "
-						+ "your weapon drawn, ready to take down the menacing golem that stands in your path!*\n", 
-						txtSpd);
-				makingChoice = false;
-				break;
-			
-			case 2:
-				breakLine();
-				/*
-				 * Inventory Management functionality
-				 */
-				Dialogue.infoDialogue("*Having prepared for the fight, you appear from behind the boulder, ready "
-						+ "for your toughest fight yet!*\n", txtSpd);
-				makingChoice = false;
-				break;
-			
-			default:
-				breakLine();
-				System.err.println("(Invalid choice. Please try again)");
-				break;
-			}
 		}
 		
 		Battle fireElementalRockGolem = new Battle(player, eList.fireRockGolem);
@@ -1205,10 +1220,10 @@ public class GameThread extends Throwable {
 			Dialogue.infoDialogue("What do you do?\\n\n"
 					+ "1) Loot the chest\\n\n"
 					+ "2) Leave\n", txtSpd);
-			pChoice = keyboard.nextInt();
+			pChoice = keyboard.next().charAt(0);
 			
 			switch (pChoice) {
-			case 1:
+			case '1':
 				breakLine();
 				/*
 				 * Loot functionality
@@ -1216,7 +1231,7 @@ public class GameThread extends Throwable {
 				makingChoice = false;
 				break;
 			
-			case 2:
+			case '2':
 				breakLine();
 				makingChoice = false;
 				break;
@@ -1245,17 +1260,17 @@ public class GameThread extends Throwable {
 		
 		while (makingChoice) {
 			Dialogue.infoDialogue("1) Will do thank you!\n"
-					+ "2) I will definintely have to check it out!\n", txtSpd);
-			pChoice = keyboard.nextInt();
+					+ "2) I will definintely have to check it out!\n", txtSpd);	
+			pChoice = keyboard.next().charAt(0);
 			
 			switch (pChoice) {
-			case 1:
+			case '1':
 				breakLine();
 				Dialogue.characterDialogue(pName, "Will do thank you!\n", txtSpd);
 				makingChoice = false;
 				break;
 			
-			case 2:
+			case '2':
 				breakLine();
 				Dialogue.characterDialogue(pName, "I will definintely have to check it out!\n", txtSpd);
 				makingChoice = false;
@@ -1286,16 +1301,16 @@ public class GameThread extends Throwable {
 	                + "Are you willing to take on this mission?\n"
 	                + "1) Yes, I’ll take on the challenge.\n"
 	                + "2) I’m not sure. This sounds dangerous.\n", txtSpd);
-	        pChoice = keyboard.nextInt();
+	        pChoice = keyboard.next().charAt(0);
 
 	        switch (pChoice) {
-	        case 1:
+	        case '1':
 	            breakLine();
 	            Dialogue.characterDialogue(pName, "Yes, I’ll take on the challenge.\n", txtSpd);
 	            makingChoice = false;
 	            break;
 
-	        case 2:
+	        case '2':
 	            breakLine();
 	            Dialogue.characterDialogue(pName, "I’m not sure. This sounds dangerous.\n", txtSpd);
 	            Dialogue.characterDialogue(rangerName, "It is dangerous, but you’re the only one capable of stopping Nightfang. Let me know if you change your mind.\n", txtSpd);
@@ -1319,17 +1334,17 @@ public class GameThread extends Throwable {
 	        Dialogue.infoDialogue("*Which path will you take?*\n"
 	                + "1) *The Ancient Clearing: An open field where moonlight breaks through the canopy, casting eerie shadows.*\n"
 	                + "2) *The Cursed Hollow: A narrow gorge filled with jagged rocks and an oppressive darkness.*\n", txtSpd);
-	        pChoice = keyboard.nextInt();
+	        pChoice = keyboard.next().charAt(0);
 
 	        switch (pChoice) {
-	        case 1:
+	        case '1':
 	            breakLine();
 	            Dialogue.infoDialogue("*You choose the path to the Ancient Clearing, where the forest opens into a large field. Moonlight filters down through the twisted branches, illuminating the clearing in a pale silver glow. "
 	                    + "The ground is covered in moss and glowing mushrooms, and the air hums with an unnatural silence. You step into the clearing cautiously, sensing movement among the shadows.*\n", txtSpd);
 	            makingChoice = false;
 	            break;
 
-	        case 2:
+	        case '2':
 	            breakLine();
 	            Dialogue.infoDialogue("*You choose the path to the Cursed Hollow, where the forest closes in tightly around you. The narrow gorge is suffocating, with jagged rocks jutting out like broken teeth. "
 	                    + "A faint red glow pulses from deep within, and the sound of dripping water echoes eerily. The oppressive air weighs heavily on your chest as you venture deeper, your every step crunching against loose stone.*\n", txtSpd);
@@ -1351,16 +1366,16 @@ public class GameThread extends Throwable {
 	        Dialogue.infoDialogue("*What do you do?*\n"
 	                + "1) *Raise your bow and prepare for battle.*\n"
 	                + "2) *Try to find a better position for the fight.*\n", txtSpd);
-	        pChoice = keyboard.nextInt();
+	        pChoice = keyboard.next().charAt(0);
 
 	        switch (pChoice) {
-	        case 1:
+	        case '1':
 	            breakLine();
 	            Dialogue.infoDialogue("*You nock an arrow and face Nightfang head-on, your heart pounding as you prepare for a fierce battle.*\n", txtSpd);
 	            makingChoice = false;
 	            break;
 
-	        case 2:
+	        case '2':
 	            breakLine();
 	            Dialogue.infoDialogue("*You dart behind a nearby boulder, using the terrain to gain a tactical advantage. Nightfang circles, its glowing eyes tracking your every move.*\n", txtSpd);
 	            makingChoice = false;
