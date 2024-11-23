@@ -508,7 +508,7 @@ public class GameThread extends Throwable {
 	
 	public static boolean rangerChapter1(Player player, Scanner keyboard) {
 	    boolean makingChoice = true;
-	    int pChoice;
+	    char pChoice;
 	    Battle tutorialBattle = new Battle(player, eList.sheep);
 	    boolean playerWon = false;
 
@@ -558,7 +558,9 @@ public class GameThread extends Throwable {
 	        breakLine();
 	        System.out.println("[Elaris the Ranger] Let’s talk about ammunition. Regular arrows are infinite, so you’ll never run out of basic shots. "
 	                + "However, special arrows—explosive, piercing, or elemental—are rare and must be looted from enemies or chests."
-	                + " Use them wisely when the situation demands. Your current special arrow count is: " + player.getSpecialArrows() + ".");
+	                + " Use them wisely when the situation demands. Here are your current special arrows:\n " 
+	                + "Fire arrows: "+ player.getInventory().getFireArrows() + "\n"
+	                + "Ice arros: " + player.getInventory().getIceArrows());
 	        breakLine();
 	        System.out.println("1) Got it! Let’s move on.\n"
 	                + "2) Can you explain that again?");
@@ -635,7 +637,7 @@ public class GameThread extends Throwable {
 	
 	public static boolean mageChapter1(Player player, Scanner keyboard) {
 		boolean makingChoice = true;
-		int pChoice;
+		char pChoice;
 		int txtSpd = 25;
 		Battle tutorialBattle = new Battle(player, eList.sheep);
 		boolean playerWon = false;
@@ -687,7 +689,6 @@ public class GameThread extends Throwable {
 		player.getInventory().getWeaponOnKey(wList.starterWand.getKey()).displayInfo();
 		
 		makingChoice = true;
-		pChoice = 0;
 		
 		while (makingChoice) {			
 			breakLine();
@@ -745,7 +746,6 @@ public class GameThread extends Throwable {
 				+ "And pay me a visit if you get the chance!\n", txtSpd);
 	
 		makingChoice = true;
-		pChoice = 0;
 		
 		while (makingChoice) {
 			
@@ -784,7 +784,7 @@ public class GameThread extends Throwable {
 	
 	public static boolean mageSpecialMission(Player player, Scanner keyboard) {
 		int txtSpd = 25; 
-		int pChoice;
+		char pChoice;
 		boolean makingChoice = true;
 		String pName = player.getName();
 		String wizName = "Magnus the King's Wizard";
@@ -1288,7 +1288,7 @@ public class GameThread extends Throwable {
 	
 	public static boolean rangedSpecialMission(Player player, Scanner keyboard) {
 	    int txtSpd = 25;
-	    int pChoice;
+	    char pChoice;
 	    boolean makingChoice = true;
 	    String pName = player.getName();
 	    String rangerName = "Elaris the Ranger";

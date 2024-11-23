@@ -148,7 +148,7 @@ public boolean startBattle(Scanner keyboard) {
 	
 	battleSetup();
 	
-	Dialogue.infoDialogue("Welcome to the Battle Arena!\n", txtSpd);
+	Dialogue.infoDialogue("You have entered a battle!\n", txtSpd);
 	Dialogue.infoDialogue("Your opponent: " + this.getEnemy().getName() + "\n", txtSpd);
 	breakLine();
 	
@@ -209,7 +209,7 @@ public boolean startBattle(Scanner keyboard) {
 
 
 	private boolean playerTurn(Scanner keyboard) {
-		int pChoice;
+		char pChoice;
 		boolean isPTurn = true;
 		
 		while (isPTurn) {
@@ -218,28 +218,27 @@ public boolean startBattle(Scanner keyboard) {
 					"2) Guard\n" + 
 					"3) Use Item\n" +
 					"4) Flee\n", txtSpd);
-			try {
-				pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
 				
 				switch(pChoice) {
 			
-				case 1:
+				case '1':
 					isPTurn = !(this.playerAttack(keyboard));
 					breakLine();
 					break;
 					
-				case 2:
+				case '2':
 					this.guard();
 					isPTurn = false;
 					breakLine();
 					break;
 					
-				case 3:
+				case '3':
 					isPTurn = !(this.selectItem(keyboard));
 					breakLine();
 					break;
 					
-				case 4:
+				case '4':
 					Dialogue.infoDialogue("You fled the battle.\n", txtSpd);
 					breakLine();
 					return true; // sets isWimp boolean to true in the start battle function
@@ -249,9 +248,6 @@ public boolean startBattle(Scanner keyboard) {
 					Dialogue.infoDialogue("Invalid input! Your player looked intensely at " + this.getEnemy() + ". Try again!\n", txtSpd);
 					break;
 				}
-			} catch (NumberFormatException e) {
-				System.err.println("Invalid input. Please enter a number.");
-			}
 			
 		}
 		return false;
@@ -270,7 +266,8 @@ public boolean startBattle(Scanner keyboard) {
         ArrayList<Consumable> pInventory = player.getInventory().getConsumables();
 		boolean makingChoice = true;
 		boolean usedItem = false;
-        int choice;
+        String pChoice;
+        int selection;
         
 		while (makingChoice) {
 			Dialogue.infoDialogue("Choose an item to use from your inventory:\n", txtSpd);
@@ -278,15 +275,19 @@ public boolean startBattle(Scanner keyboard) {
 			Dialogue.infoDialogue(pInventory.size()+1 + ") Cancel\n", txtSpd);
 			Dialogue.infoDialogue("Make your choice:\n", txtSpd);
 
-
-	        try {
-	            choice = keyboard.nextInt();
-	            if (choice == pInventory.size() + 1) {
+	            pChoice = keyboard.next();
+	            if (isNumeric(pChoice)) {
+	            	selection = Integer.parseInt(pChoice);
+	            } else {
+	            	selection = -1;
+	            }
+	            
+	            if (selection == pInventory.size() + 1) {
 	    			Dialogue.infoDialogue("Action canceled.\n", txtSpd);
 		            return false;
 		            
-		        } else if (choice - 1 >= 0 && choice - 1 < pInventory.size()) {
-		            usedItem = this.useItem(pInventory, choice - 1);
+		        } else if (selection - 1 >= 0 && selection - 1 < pInventory.size()) {
+		            usedItem = this.useItem(pInventory, selection - 1);
 		            if (!usedItem) {
 		            	return false;
 		            }
@@ -295,9 +296,6 @@ public boolean startBattle(Scanner keyboard) {
 		        } else {
 					Dialogue.infoDialogue("Invalid choice. Please select a valid item number.\n", txtSpd);
 		        }    
-	        } catch (NumberFormatException e) {
-	            System.out.println("Invalid input. Please enter a number.");
-	        }
 	        
 		}
 		return false;
@@ -377,7 +375,7 @@ public boolean startBattle(Scanner keyboard) {
 
 	private boolean playerAttack(Scanner keyboard) {
 		boolean isAttacking = true;
-		int pChoice = 0;
+		char pChoice = 0;
 		
 		
 		while(isAttacking) {
@@ -386,12 +384,11 @@ public boolean startBattle(Scanner keyboard) {
 					"1) Standard Attack\n" + 
 					"2) Special Attack\n" + 
 					"3) Cancel\n", txtSpd);
-			try {
-				pChoice = keyboard.nextInt();
+				pChoice = keyboard.next().charAt(0);
 				
 				switch(pChoice) {
 				
-				case 1:
+				case '1':
 					switch (player.getInventory().getEquipped().getDamageType()) {
 					case "Melee":
 						this.standardAttack();
@@ -413,7 +410,7 @@ public boolean startBattle(Scanner keyboard) {
 					Dialogue.infoDialogue("Enemy health:" + enemy.getCurrHP() + "\n", txtSpd);
 					return true;
 					
-				case 2:
+				case '2':
 					Dialogue.infoDialogue("You chose a special attack!\n", txtSpd);
 					if(player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
 						if (dbTurn > 0) {
@@ -429,7 +426,7 @@ public boolean startBattle(Scanner keyboard) {
 					Dialogue.infoDialogue("Enemy health:" + enemy.getCurrHP() + "\n", txtSpd);
 					return true;
 					
-				case 3:
+				case '3':
 					Dialogue.infoDialogue("You resheathed your weapon.\n", txtSpd);
 					return false;
 				
@@ -437,9 +434,6 @@ public boolean startBattle(Scanner keyboard) {
 					Dialogue.infoDialogue("Invalid input, you stood there menacignly. Try again.\n", txtSpd);
 					break;
 				}
-			} catch (NumberFormatException e) {
-				System.err.println("Invalid input. Please enter a number.");
-			}
 		}
 		
 		return false;
@@ -515,5 +509,10 @@ public boolean startBattle(Scanner keyboard) {
 		else
 			this.setTurn(0);
 	}
+	
+    private static boolean isNumeric(String str) {
+        // Ensure the string only contains digits
+        return str.matches("\\d+");
+    }
 
 }
