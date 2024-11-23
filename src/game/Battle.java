@@ -212,6 +212,24 @@ public boolean startBattle(Scanner keyboard) {
 		char pChoice;
 		boolean isPTurn = true;
 		
+		if(this.getPlayer().getCurrMana() < this.getPlayer().getMana()) {
+			if (this.getPlayer().getCurrMana() + (this.getPlayer().getlvlMage() * 10) < this.getPlayer().getMana()) {
+				this.getPlayer().setCurrHP(this.getPlayer().getCurrMana() + (this.getPlayer().getlvlMage() * 10));
+				Dialogue.infoDialogue("You feel your mana regenerate partially!\n", txtSpd);
+				Dialogue.infoDialogue("Your mana has been increased by " + this.getPlayer().getlvlMage() * 10 + "\n" , txtSpd);
+				Dialogue.infoDialogue("Your current mana is now " + this.getPlayer().getCurrMana() + "\n", txtSpd);
+			} else {
+				this.getPlayer().setCurrMana(this.getPlayer().getMana());
+				Dialogue.infoDialogue("You feel your mana practically overflowing! Your mana has been increased to full!\n", txtSpd);
+				Dialogue.infoDialogue("Your current mana is now " + this.getPlayer().getCurrMana() + "\n", txtSpd);
+			}
+		} else if(this.getPlayer().getInventory().getEquipped().getDamageType() == "Mage") {
+			Dialogue.infoDialogue("You feel your mana practically overflowing! You have full mana!\n", txtSpd);
+			Dialogue.infoDialogue("Your current mana is " + this.getPlayer().getCurrMana() + "\n", txtSpd);
+		}
+		
+		
+		
 		while (isPTurn) {
 			Dialogue.infoDialogue("What would you like to do?\n" + 
 					"1) Attack\n" + 
@@ -388,46 +406,55 @@ public boolean startBattle(Scanner keyboard) {
 				
 				switch(pChoice) {
 				
-				case '1':
+				case '1': // Standard Attack
 					switch (player.getInventory().getEquipped().getDamageType()) {
 					case "Melee":
-						this.standardAttack();
+						this.defaultStandardAttack();
 						break;
 					case "Ranged":
-						this.standardAttack();
+						this.defaultStandardAttack();
 						break;
 					case "Mage":
-						this.standardAttack();
+						if (!this.mageStandardAttack()) {
+							return false;
+						}
 						break;
 					case "Rogue":
-						this.standardAttack();
+						this.defaultStandardAttack();
 						break;
 					default:
-						this.standardAttack();
+						this.defaultStandardAttack();
 						break;
 					}
 					
 					Dialogue.infoDialogue("Enemy health:" + enemy.getCurrHP() + "\n", txtSpd);
 					return true;
 					
-				case '2':
-					Dialogue.infoDialogue("You chose a special attack!\n", txtSpd);
-					if(player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
-						if (dbTurn > 0) {
-							enemy.setCurrHP((int)(enemy.getCurrHP() - ((this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) * 1.5)));
-							Dialogue.infoDialogue("You did " + ((this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) * 1.5) + " damage!\n", txtSpd);
-						} else {
-							enemy.setCurrHP((int)(enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
-							Dialogue.infoDialogue("You did " + (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) + " damage!\n", txtSpd);
+				case '2': // Special Attack
+					switch (player.getInventory().getEquipped().getDamageType()) {
+					case "Melee":
+						this.defaultSpecialAttack();
+						break;
+					case "Ranged":
+						this.defaultSpecialAttack();
+						break;
+					case "Mage":
+						if (!this.mageSpecialAttack()) {
+							return false;
 						}
-					} else {
-						Dialogue.infoDialogue("You did 0 damage!\n", txtSpd);
+						break;
+					case "Rogue":
+						this.defaultSpecialAttack();
+						break;
+					default:
+						this.defaultSpecialAttack();
+						break;
 					}
 					Dialogue.infoDialogue("Enemy health:" + enemy.getCurrHP() + "\n", txtSpd);
 					return true;
 					
 				case '3':
-					Dialogue.infoDialogue("You resheathed your weapon.\n", txtSpd);
+					Dialogue.infoDialogue("You lowered your weapon.\n", txtSpd);
 					return false;
 				
 				default:
@@ -440,15 +467,107 @@ public boolean startBattle(Scanner keyboard) {
 		
 	}
 	
-	private void rangedAttack() {
+	private void meleeStandardAttack() {
 		
 	}
 	
-	private void mageAttack() {
+	private void meleeSpecialAttack() {
 		
 	}
 	
-	private void standardAttack() {
+	private void rangedStandardAttack() {
+		
+	}
+	
+	private void rangedSpecialAttack() {
+		
+	}
+	
+	private boolean mageStandardAttack() {
+		double lvlDamageBoost = 1;
+		for (int x = 1; x < player.getlvlMage(); x++) {
+			lvlDamageBoost = lvlDamageBoost + 0.2;
+		}
+		
+		Dialogue.infoDialogue("You chose a standard attack!\n", txtSpd);
+		
+		if (player.getCurrMana() > player.getInventory().getEquipped().getManaUsage()) {
+			if (dbTurn > 0) {
+				enemy.setCurrHP((int) (enemy.getCurrHP() - ((this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5)));
+				player.setCurrMana(player.getCurrMana() - player.getInventory().getEquipped().getManaUsage());
+				Dialogue.infoDialogue("You expended " + player.getInventory().getEquipped().getManaUsage() + "mana!\n"
+						+ "You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
+				Dialogue.infoDialogue("You did " +  (int) ((this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5) + " damage!\n", txtSpd);
+				return true;
+			} else {
+				enemy.setCurrHP((int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * lvlDamageBoost)));
+				player.setCurrMana(player.getCurrMana() - player.getInventory().getEquipped().getManaUsage());
+				Dialogue.infoDialogue("You expended " + player.getInventory().getEquipped().getManaUsage() + "mana!\n"
+						+ "You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
+				Dialogue.infoDialogue("You did " + (int) (this.getPlayerWeaponDamage() * lvlDamageBoost) + " damage!\n", txtSpd);
+				return true;
+			}
+		} else {
+			Dialogue.infoDialogue("You find yourself exhausted. Your mana is depleted! You don't have enough "
+					+ "mana to charge an attack! You will either need to defend yourself until you have enough time "
+					+ "to regenerate your mana or drink a mana potion!\n", txtSpd);
+			Dialogue.infoDialogue("You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
+			return false;
+		}
+		
+	}
+	
+	private boolean mageSpecialAttack() {
+		double lvlDamageBoost = 1;
+		for (int x = 1; x < player.getlvlMage(); x++) {
+			lvlDamageBoost = lvlDamageBoost + 0.2;
+		}
+		
+		Dialogue.infoDialogue("You chose a special attack!\n", txtSpd);
+		
+		if (player.getCurrMana() > player.getInventory().getEquipped().getManaUsage() * 1.2) {
+			if(player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
+				if (dbTurn > 0) {
+					enemy.setCurrHP((int)(enemy.getCurrHP() - (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5)));
+					player.setCurrMana((int) (player.getCurrMana() - (player.getInventory().getEquipped().getManaUsage() * 1.2)));
+					Dialogue.infoDialogue("You expended " + (int) (player.getInventory().getEquipped().getManaUsage() * lvlDamageBoost) + "mana!\n"
+							+ "You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
+					Dialogue.infoDialogue("You did " + (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5) + " damage!\n", txtSpd);
+					return true;
+				} else {
+					enemy.setCurrHP((int)(enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
+					player.setCurrMana((int) (player.getCurrMana() - (player.getInventory().getEquipped().getManaUsage() * 1.2)));
+					Dialogue.infoDialogue("You expended " + (int) (player.getInventory().getEquipped().getManaUsage() * lvlDamageBoost) + "mana!\n"
+							+ "You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
+					Dialogue.infoDialogue("You did " + ((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) + " damage!\n", txtSpd);
+					return true;
+				}
+			} else {
+				Dialogue.infoDialogue("You did 0 damage!\n", txtSpd);
+				Dialogue.infoDialogue("You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
+				return true;
+			} 
+		} else {
+			Dialogue.infoDialogue("You find yourself exhausted. Your mana is depleted! You don't have enough "
+					+ "mana to charge a Special Attack! You will either need to defend yourself until you have enough time "
+					+ "to regenerate your mana or drink a mana potion!\n", txtSpd);
+			Dialogue.infoDialogue("You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
+			Dialogue.infoDialogue("Your weapon uses " + player.getInventory().getEquipped().getManaUsage() + "mana to "
+					+ "fire off a standard attack and " + (int) (player.getInventory().getEquipped().getManaUsage() * 1.2)
+					+ " mana to fire off a special attack!", txtSpd);
+			return false;
+		}
+	}
+	
+	private void rogueStandardAttack() {
+		
+	}
+	
+	private void rogueSpecialAttack() {
+		
+	}
+	
+	private void defaultStandardAttack() {
 		Dialogue.infoDialogue("You chose a standard attack!\n", txtSpd);
 		if (dbTurn > 0) {
 			enemy.setCurrHP((int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * 1.5)));
@@ -456,6 +575,21 @@ public boolean startBattle(Scanner keyboard) {
 		} else {
 			enemy.setCurrHP((int) (enemy.getCurrHP() - this.getPlayerWeaponDamage()));
 			Dialogue.infoDialogue("You did " + this.getPlayerWeaponDamage() + " damage!\n", txtSpd);
+		}
+	}
+	
+	private void defaultSpecialAttack() {
+		Dialogue.infoDialogue("You chose a special attack!\n", txtSpd);
+		if(player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
+			if (dbTurn > 0) {
+				enemy.setCurrHP((int)(enemy.getCurrHP() - ((this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) * 1.5)));
+				Dialogue.infoDialogue("You did " + ((this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) * 1.5) + " damage!\n", txtSpd);
+			} else {
+				enemy.setCurrHP((int)(enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
+				Dialogue.infoDialogue("You did " + (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) + " damage!\n", txtSpd);
+			}
+		} else {
+			Dialogue.infoDialogue("You did 0 damage!\n", txtSpd);
 		}
 	}
 

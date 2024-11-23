@@ -6,6 +6,7 @@ public class Weapon extends Item {
 
 	private int manaUsage;
 	private SpecialAttack specialAttack;
+	private String manaElement;
 
 	// -------------------Constructors-------------------
 
@@ -43,14 +44,62 @@ public class Weapon extends Item {
 	 * @param inputIsSellable
 	 * @param manaUsage
 	 * @param spAtk
+	 * @param inputManaElement
+	 */
+	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
+			Boolean inputIsSellable, int manaUsage, SpecialAttack spAtk, char inputManaElement) {
+		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
+		this.manaUsage = manaUsage;
+		this.specialAttack = spAtk;
+		this.setManaElementChar(inputManaElement);
+
+	}
+	
+	/**
+	 * Constructor that initializes all values except manaElement so other constructors dont need to be
+	 * changed
+	 * 
+	 * @param name
+	 * @param info
+	 * @param rarity
+	 * @param inputValue
+	 * @param damage
+	 * @param dmgType
+	 * @param inputIsSellable
+	 * @param manaUsage
+	 * @param spAtk
 	 */
 	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
 			Boolean inputIsSellable, int manaUsage, SpecialAttack spAtk) {
 		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = spAtk;
+		this.setManaElementChar('b');
 
 	}
+	
+	/**
+	 * Constructor that initializes all values except manaElement so other constructors dont need to be
+	 * changed
+	 * 
+	 * @param name
+	 * @param info
+	 * @param rarity
+	 * @param inputValue
+	 * @param damage
+	 * @param dmgType
+	 * @param inputIsSellable
+	 * @param spAtk
+	 */
+	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
+			Boolean inputIsSellable, SpecialAttack spAtk) {
+		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
+		this.manaUsage = 0;
+		this.specialAttack = spAtk;
+		this.setManaElementChar('b');
+
+	}
+
 
 	/**
 	 * Constructor that initializes weapons that are sellable, but use no mana and
@@ -83,12 +132,14 @@ public class Weapon extends Item {
 	 * @param damage
 	 * @param dmgType
 	 * @param inputIsSellable
+	 * @param inputManaElement
 	 */
 	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
-			Boolean inputIsSellable, SpecialAttack spAtk) {
+			Boolean inputIsSellable, SpecialAttack spAtk, char inputManaElement) {
 		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
 		this.manaUsage = 0;
 		this.specialAttack = spAtk;
+		this.setManaElementChar(inputManaElement);
 
 	}
 
@@ -103,12 +154,14 @@ public class Weapon extends Item {
 	 * @param dmgType
 	 * @param manaUsage
 	 * @param spAtk
+	 * @param inputManaElement
 	 */
 	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, int manaUsage,
-			SpecialAttack spAtk) {
+			SpecialAttack spAtk, char inputManaElement) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = spAtk;
+		this.setManaElementChar(inputManaElement);
 	}
 
 	/**
@@ -156,11 +209,14 @@ public class Weapon extends Item {
 	 * @param damage
 	 * @param dmgType
 	 * @param manaUsage
+	 * @param inputManaElement
 	 */
-	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, int manaUsage) {
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, int manaUsage, 
+			char inputManaElement) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = new SpecialAttack();
+		this.setManaElementChar(inputManaElement);
 
 	}
 
@@ -173,6 +229,10 @@ public class Weapon extends Item {
 	public SpecialAttack getSpecialAttack() {
 		return this.specialAttack;
 	}
+	
+	public String getManaElement() {
+		return this.manaElement;
+	}
 
 	// -------------------Setters-------------------
 
@@ -182,6 +242,14 @@ public class Weapon extends Item {
 
 	public void setSpecialAttack(SpecialAttack spAtk) {
 		this.specialAttack = spAtk;
+	}
+	
+	public void setManaElement(String inputManaElement) {
+		this.manaElement = inputManaElement;
+	}
+	
+	public void setManaElementChar(char inputManaElement) {
+		this.manaElement = this.calculateManaElementOnChar(inputManaElement);
 	}
 
 	// -------------------Functions------------------
@@ -210,6 +278,24 @@ public class Weapon extends Item {
 		// Print the info
 		System.out.println(info + "\n--------------------\n");
 
+	}
+	
+	public String calculateManaElementOnChar(char inputManaElement) {
+		switch (inputManaElement) {
+		case 'b':
+			return "Basic";
+		case 'f':
+			return "Fire";
+		case 'i':
+			return "Ice";
+		case 'l':
+			return "Lightning";
+		case 'e':
+			return "Earth";
+			default:
+				return "Basic";
+			
+		}
 	}
 
 	// -------------------toString-------------------

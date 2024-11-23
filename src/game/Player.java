@@ -447,6 +447,7 @@ public class Player extends GameChar {
 				break;
 			case "4", "mage":
 				this.lvlMage++;
+				this.setMana(this.getMana() + 30);
 				this.sklPt--;
 				break;
 			case "5", "luck":
@@ -460,6 +461,7 @@ public class Player extends GameChar {
 				break;
 
 			}
+			this.setHealth(this.getHealth() + 50);
 		}
 
 	}

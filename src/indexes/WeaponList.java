@@ -1,5 +1,6 @@
 package indexes;
 
+import game.SpecialAttack;
 import game.Weapon;
 
 public class WeaponList {
@@ -21,9 +22,11 @@ public class WeaponList {
 	public Weapon axe1 = new Weapon("f002", "Iron Axe", "A classic iron axe wielded by many fighters and warriors.", 1,
 			200, 24, 1, true);
 
+	// String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
+	// Boolean inputIsSellable, int manaUsage, SpecialAttack spAtk
 	/** Short Spear */
 	public Weapon spear1 = new Weapon("f003", "Short Spear",
-			"A spear whose pole is shorter than the standard length, making it easier to use.", 1, 100, 18, 1,
+			"A spear whose pole is shorter than the standard length, making it easier to use.", 1, 100, 18, 1,true,
 			spAtk.x3Thrust);
 
 	/** Scimitar */
@@ -67,7 +70,7 @@ public class WeaponList {
 	public Weapon sword5 = new Weapon("f012", "Boneblade",
 			"A wickedly shaped sword fashioned from a sharpened bone. Weapons like these are\n"
 					+ "primarily used by hostile creatures capable of wielding weapons, like trolls,\n or goblins.",
-			2, 100, 35, 1, spAtk.none);
+			2, 100, 35, 1, true, spAtk.none);
 	
 	/** Cloudburst */
 	public Weapon sword6 = new Weapon("f013", "Cloudburst", "A recreation of a sword belonging to a famous swordsman callled"
