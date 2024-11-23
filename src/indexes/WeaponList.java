@@ -92,6 +92,10 @@ public class WeaponList {
 	public Weapon starterWand = new Weapon("f201", "Training Wand", 
 			"A wand favored by young mages to learn the ropes.", 1, 25, 15, 3,true, 10, spAtk.pBeam);
 	
+	public Weapon fireStaff = new Weapon("f250", "Fire Staff", 
+			"A powerful magic weapon forged by the Great Fire Mage with the power to take down "
+			+ "castle walls in one blow!", 5, 1000, 500, 3, true, 75, spAtk.fireWall);
+	
 	// --------------------Rogue Weapons--------------------
 	
 	

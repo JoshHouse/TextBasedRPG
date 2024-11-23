@@ -27,7 +27,7 @@ public class GameThread extends Throwable {
 		Scanner scn = new Scanner(System.in);
 
 		Player player = new Player("Josh");
-		
+
 		mageChapter1(player, scn);
 		
 		
@@ -1062,18 +1062,11 @@ public class GameThread extends Throwable {
 			}
 		}
 		
-		/*
-		 * 
-		 * Fire Elemental Fight
-		 * 
-		 */
+		Battle FireElemental = new Battle(player, eList.fireElemental);
 		
-		/*
-		 * lose:
-		 * return false;
-		 * 
-		 * win:
-		 */
+		if (!FireElemental.startBattle(keyboard)) {
+			return false;
+		}
 		
 		Dialogue.infoDialogue("* Having defeated the elemental, you continue through the cave with every step "
 				+ "sending echoes down the long corridors of rocky terrain. Fiery geysers shoot blasts of "
@@ -1145,18 +1138,9 @@ public class GameThread extends Throwable {
 			}
 		}
 		
-		/*
-		 * 
-		 * Fire Elemental Fight
-		 * 
-		 */
-		
-		/*
-		 * lose:
-		 * return false;
-		 * 
-		 * win:
-		 */
+		if (!FireElemental.startBattle(keyboard)) {
+			return false;
+		}
 		
 		Dialogue.infoDialogue("*Having won the battle, you move on further down the cave. That is when you "
 				+ "see it! You enter into a large open room and rush behind a boulder. Standing in the center "
@@ -1199,18 +1183,11 @@ public class GameThread extends Throwable {
 			}
 		}
 		
-		/*
-		 * 
-		 * Fire Elemental Rock Golem Fight
-		 * 
-		 */
+		Battle fireElementalRockGolem = new Battle(player, eList.fireRockGolem);
 		
-		/*
-		 * lose:
-		 * return false;
-		 * 
-		 * win:
-		 */
+		if(!fireElementalRockGolem.startBattle(keyboard)) {
+			return false;
+		}
 		
 		Dialogue.infoDialogue("*As the beast falls, the ground shakes as it hits the ground. On the other "
 				+ "side of the opening, you see a door. That is no doubt the entrance to the Fire wizard’s "
@@ -1219,7 +1196,7 @@ public class GameThread extends Throwable {
 				+ "the wizard’s alchemy table, you find the Fire Stone that Magnus asked you to retrieve. You "
 				+ "grab both and notice a chest by the wizard’s bed.*\n", 
 				txtSpd);
-		// player.getInventory().add(wList.fireStaff);
+		player.getInventory().add(wList.fireStaff);
 		System.out.println("The Fire Staff has been added to your Inventory!");
 		System.out.println("The Fire Stone has been added to your Inventory!");
 		

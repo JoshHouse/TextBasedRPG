@@ -78,7 +78,7 @@ public class Hub implements Serializable {
 
 	// ---------------------------Functions---------------------------
 
-	public void start(Scanner scn) {
+	public boolean start(Scanner scn) {
 
 		char input = '\0';
 		boolean inHub = true;
@@ -187,15 +187,14 @@ public class Hub implements Serializable {
 				player.selectMainhandWeapon(scn);
 				break;
 			case '5': // Progress the story
-				break;
+				return true;
 			case '6': // Rest and recover
 				player.setCurrency(player.getCurrency() - 100);
 				Dialogue.infoDialogue("\nYou've paid 100 gold to rest and recover your health.\n", 10);
 				Pause.pause(2000);
 				break;
 			case '7': // Save and Exit
-				inHub = false;
-				break;
+				return false;
 			default:
 				System.err.println("[---Invalid Option. Try Again.--]\n");
 				Pause.pause(350);
@@ -204,7 +203,7 @@ public class Hub implements Serializable {
 			}
 
 		}
-
+		return true;
 	}
 
 }
