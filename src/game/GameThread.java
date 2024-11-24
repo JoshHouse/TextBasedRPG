@@ -249,6 +249,7 @@ public class GameThread extends Throwable {
 		if (true) {
 			Hub chapter4Hub = instantiateHub(player, "Castle Hero's Sector");
 			boolean finalChant = true;
+			Battle dragonFight = new Battle(player, eList.gilgemeshTheDragon, eList.gilgemeshsChildren);
 			
 			chapterCompleted = false;
 			inChapter = true;
@@ -280,23 +281,19 @@ public class GameThread extends Throwable {
 					switch (pChoice) {
 					case '1':
 						meleeDragonApproach(player, keyboard);
-						// DragonFight function will be called when created
-						chapterCompleted =  true;
+						chapterCompleted =  dragonFight.dragonFight(keyboard);
 						break;
 					case '2':
 						rangedDragonApproach(player, keyboard);
-						// DragonFight function will be called when created
-						chapterCompleted =  true;
+						chapterCompleted =  dragonFight.dragonFight(keyboard);
 						break;
 					case '3':
 						mageDragonApproach(player, keyboard);
-						// DragonFight function will be called when created
-						chapterCompleted =  true;
+						chapterCompleted =  dragonFight.dragonFight(keyboard);
 						break;
 					case '4':
 						rogueDragonApproach(player, keyboard);
-						// DragonFight function will be called when created
-						chapterCompleted =  true;
+						chapterCompleted =  dragonFight.dragonFight(keyboard);
 						break;
 					default:
 						System.err.println("(Invalid input. Please try again.)");
@@ -304,7 +301,7 @@ public class GameThread extends Throwable {
 					}
 					if (chapterCompleted) {
 						inChapter = false;
-						Dialogue.infoDialogue("As the dragon falls and releases one final, mighty roar, you know "
+						Dialogue.infoDialogue("As the Gilgemesh falls and releases one final, mighty roar, you know "
 								+ "the battle is over. You have done it! With your skills in battle and all you learned "
 								+ "from the people that helped you along the way, you have become the hero of the kingdom!"
 								+ " You have done what no other in the realm could do and have freed the kingdom from the "
@@ -473,7 +470,7 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 
 		breakLine();
-		win = miniBoss.startBattle(keyboard);
+		win = miniBoss.startBattle(keyboard, true);
 		breakLine();
 
 		if (win) {
@@ -742,7 +739,7 @@ public class GameThread extends Throwable {
 		System.out.println(
 				"---------------------------------------------------------------------------------------------------");
 
-		win = meleeTutorial.startBattle(scn);
+		win = meleeTutorial.startBattle(scn, true);
 
 		if (win) {
 
@@ -905,7 +902,7 @@ public class GameThread extends Throwable {
 	    while (!playerWon) {
 	        System.out.println(
 	                "---------------------------------------------------------------------------------------------------");
-	        playerWon = tutorialBattle.startBattle(keyboard);
+	        playerWon = tutorialBattle.startBattle(keyboard, true);
 	        if (!playerWon) {
 	            player.setCurrHP(player.getHealth());
 	            tutorialBattle.getEnemy().setCurrHP(tutorialBattle.getEnemy().getHealth());
@@ -1055,7 +1052,7 @@ public class GameThread extends Throwable {
 				, txtSpd);
 		
 		while (!playerWon) {
-			playerWon = tutorialBattle.startBattle(keyboard);
+			playerWon = tutorialBattle.startBattle(keyboard, true);
 			if (!playerWon) {
 				Dialogue.characterDialogue(wizName, "Thats okay you'll get the hang of it. take another shot at "
 						+ "it!\n", txtSpd);
@@ -1403,7 +1400,7 @@ public class GameThread extends Throwable {
 		
 		Battle FireElemental = new Battle(player, eList.fireElemental);
 		
-		if (!FireElemental.startBattle(keyboard)) {
+		if (!FireElemental.startBattle(keyboard, true)) {
 			return false;
 		}
 		
@@ -1479,7 +1476,7 @@ public class GameThread extends Throwable {
 
 		}
 		
-		if (!FireElemental.startBattle(keyboard)) {
+		if (!FireElemental.startBattle(keyboard, true)) {
 			return false;
 		}
 		
@@ -1527,7 +1524,7 @@ public class GameThread extends Throwable {
 		
 		Battle fireElementalRockGolem = new Battle(player, eList.fireRockGolem);
 		
-		if(!fireElementalRockGolem.startBattle(keyboard)) {
+		if(!fireElementalRockGolem.startBattle(keyboard, true)) {
 			return false;
 		}
 		
@@ -1876,11 +1873,11 @@ public class GameThread extends Throwable {
 		while (!win) {
 
 			if (battleCount % 3 == 0) {
-				if (battle2.startBattle(scn)) {
+				if (battle2.startBattle(scn, true)) {
 					battleCount++;
 				}
 			} else {
-				if (battle1.startBattle(scn)) {
+				if (battle1.startBattle(scn, true)) {
 					battleCount++;
 				}
 			}
@@ -1915,7 +1912,7 @@ public class GameThread extends Throwable {
 		breakLine();
 
 		while (!win) {
-			win = bossBattle.startBattle(scn);
+			win = bossBattle.startBattle(scn, true);
 		}
 
 		if (win) {

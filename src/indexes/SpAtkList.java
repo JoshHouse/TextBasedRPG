@@ -96,7 +96,22 @@ public class SpAtkList {
 			"Kioq roars loudly as if to prepare for an attack... but he suddenly keels over to catch his breath, as if he used "
 					+ "up all of his energy in that opening roar...",
 			2.5);
-
+	
+	// --------------------Dragon Special Attacks--------------------
+	public SpecialAttack flameBreath = new SpecialAttack("Flame Breath", 
+			"The dragon conjures the flames from deep within its throat and in one powerful blast covers a large area with rampaging flames!", 
+			"The dragon opens its mouth, and deep from within its throat, flames begin to glow, as if being summoned from the gates of hell! "
+			+ "Before you have time to react, you are surrounded in scorching flames!",  
+			"The dragon opens its mouth, and deep from within its throat, flames begin to glow, but then the dragon seems to get stunned from the heat "
+			+ "it attempted to conjure! The dragon failed to fire its flames!", 2.0);
+	
+	public SpecialAttack hellFire = new SpecialAttack("Hell Fire", 
+			"The dragon flies into the air makeing laps of the area and covering everything in site with scorching flames!", 
+			"The dragon dashes into the sky with the sheer power of the wind from its wings capable of knocking you over! As "
+			+ "the beast soars overhead, it rain's fire down upon you, scorching everything in sight!",
+			"The dragon dashes into the sky with the sheer power of the wind from its wings capable of knocking you over! Whatever "
+			+ "is coming, you know it can't be good! You spot a boulder, and in a split second decision, you run for cover as the "
+			+ "beast rains fire on the area. Your act of quick thinking saved you from the scorching flames!", 2.5);
 	
 	
 

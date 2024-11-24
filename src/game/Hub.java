@@ -175,7 +175,7 @@ public class Hub implements Serializable {
 
 				if (battling) {
 					Battle battle = new Battle(player, this.getCurrEnemy());
-					battle.startBattle(scn);
+					battle.startBattle(scn, true);
 				}
 
 				Pause.pause(1500);
