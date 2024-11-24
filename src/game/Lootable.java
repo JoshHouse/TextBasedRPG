@@ -2,6 +2,8 @@ package game;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Lootable implements Serializable {
 	@Serial

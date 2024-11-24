@@ -214,7 +214,7 @@ public boolean startBattle(Scanner keyboard) {
 		
 		if(this.getPlayer().getCurrMana() < this.getPlayer().getMana()) {
 			if (this.getPlayer().getCurrMana() + (this.getPlayer().getlvlMage() * 10) < this.getPlayer().getMana()) {
-				this.getPlayer().setCurrHP(this.getPlayer().getCurrMana() + (this.getPlayer().getlvlMage() * 10));
+				this.getPlayer().setCurrMana(this.getPlayer().getCurrMana() + (this.getPlayer().getlvlMage() * 10));
 				Dialogue.infoDialogue("You feel your mana regenerate partially!\n", txtSpd);
 				Dialogue.infoDialogue("Your mana has been increased by " + this.getPlayer().getlvlMage() * 10 + "\n" , txtSpd);
 				Dialogue.infoDialogue("Your current mana is now " + this.getPlayer().getCurrMana() + "\n", txtSpd);
@@ -414,7 +414,7 @@ public boolean startBattle(Scanner keyboard) {
 					case "Ranged":
 						this.defaultStandardAttack();
 						break;
-					case "Mage":
+					case "Magic":
 						if (!this.mageStandardAttack()) {
 							return false;
 						}
@@ -438,7 +438,7 @@ public boolean startBattle(Scanner keyboard) {
 					case "Ranged":
 						this.defaultSpecialAttack();
 						break;
-					case "Mage":
+					case "Magic":
 						if (!this.mageSpecialAttack()) {
 							return false;
 						}
