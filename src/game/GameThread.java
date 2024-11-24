@@ -816,122 +816,144 @@ public class GameThread extends Throwable {
 	    char pChoice;
 	    Battle tutorialBattle = new Battle(player, eList.sheep);
 	    boolean playerWon = false;
+	    int txtSpd = 25, wait = 1000; 
 
 	    breakLine();
-	    System.out.println("You step into a sunlit clearing surrounded by towering trees with golden leaves swaying gently in the breeze. "
-	            + "A narrow path winds through the grass, leading to a wooden archery range. The air is fresh and filled with the soft "
-	            + "chirping of birds. At the center stands a tall, graceful elf with sharp features and emerald-green eyes. She has a "
-	            + "quiver slung across her back and a bow in hand, her stance both relaxed and ready.");
-	    System.out.println("[Elaris the Ranger] Welcome, traveler. I’ve heard whispers of a newcomer—your name is " + player.getName() + ", yes?");
-	    System.out.println("[Elaris the Ranger] My name is Elaris, and I guide those who seek to master the bow. Shall we begin your training?");
-	    
+	    Dialogue.infoDialogue(
+	            "You step into a sunlit clearing surrounded by towering trees with golden leaves swaying gently in the breeze. "
+	                    + "A narrow path winds through the grass, leading to a wooden archery range. The air is fresh and filled with the soft "
+	                    + "chirping of birds. At the center stands a tall, graceful elf with sharp features and emerald-green eyes. She has a "
+	                    + "quiver slung across her back and a bow in hand, her stance both relaxed and ready.\n",
+	            txtSpd);
+	    Pause.pause(wait);
+	    Dialogue.characterDialogue("Elaris the Ranger", "Welcome, traveler. I’ve heard whispers of a newcomer—your name is " + player.getName() + ", yes?", txtSpd);
+	    Pause.pause(wait);
+	    Dialogue.characterDialogue("Elaris the Ranger", "My name is Elaris, and I guide those who seek to master the bow. Shall we begin your training?", txtSpd);
+
 	    while (makingChoice) {
-	        System.out.println("[Elaris the Ranger] What do you say? \n"
+	        Dialogue.characterDialogue("Elaris the Ranger", "What do you say?\n"
 	                + "1) Yes, I’m ready!\n"
-	                + "2) Hmm, I’m not sure if I want to be an archer.");
+	                + "2) Hmm, I’m not sure if I want to be an archer.", txtSpd);
 	        pChoice = keyboard.next().charAt(0);
-	        
+
 	        switch (pChoice) {
-	        case '1':
-	            breakLine();
-	            System.out.println("[" + player.getName() + "] Yes, I’m ready!");
-	            System.out.println("[Elaris the Ranger] Wonderful. The bow may seem simple, but wield it well, and it becomes the deadliest of weapons.");
-	            makingChoice = false;
-	            break;
-	            
-	        case '2':
-	            breakLine();
-	            System.out.println("[" + player.getName() + "] Hmm, I’m not sure if I want to be an archer.");
-	            System.out.println("[Elaris the Ranger] No pressure. The woods are patient, and I’ll be here if you change your mind.");
-	            return false;
-	            
-	        default:
-	            breakLine();
-	            System.err.println("(Invalid choice. Please try again)");
+	            case '1':
+	                breakLine();
+	                Dialogue.characterDialogue(player.getName(), "Yes, I’m ready!", txtSpd);
+	                Pause.pause(wait);
+	                Dialogue.characterDialogue("Elaris the Ranger", "Wonderful. The bow may seem simple, but wield it well, and it becomes the deadliest of weapons.", txtSpd);
+	                makingChoice = false;
+	                break;
+
+	            case '2':
+	                breakLine();
+	                Dialogue.characterDialogue(player.getName(), "Hmm, I’m not sure if I want to be an archer.", txtSpd);
+	                Pause.pause(wait);
+	                Dialogue.characterDialogue("Elaris the Ranger", "No pressure. The woods are patient, and I’ll be here if you change your mind.", txtSpd);
+	                return false;
+
+	            default:
+	                breakLine();
+	                Dialogue.infoDialogue("(Invalid choice. Please try again)\n", txtSpd);
 	        }
 	    }
 
-	    System.out.println("[Elaris the Ranger] First, you’ll need a bow. This shortbow has served many a beginner well. Take it, and we’ll get started.");
+	    Dialogue.characterDialogue("Elaris the Ranger", "First, you’ll need a bow. This shortbow has served many a beginner well. Take it, and we’ll get started.", txtSpd);
 	    player.getInventory().add(wList.starterBow);
-	    System.out.println("The starter bow has been added to your inventory!");
+	    Pause.pause(wait);
+	    Dialogue.infoDialogue("The starter bow has been added to your inventory!\n", txtSpd);
 	    player.getInventory().getWeaponOnKey(wList.starterBow.getKey()).displayInfo();
 
 	    makingChoice = true;
-	    pChoice = 0;
 
-	    while (makingChoice) {            
+	    while (makingChoice) {
 	        breakLine();
-	        System.out.println("[Elaris the Ranger] Let’s talk about ammunition. Regular arrows are infinite, so you’ll never run out of basic shots. "
-	                + "However, special arrows—explosive, piercing, or elemental—are rare and must be looted from enemies or chests."
-	                + " Use them wisely when the situation demands. Here are your current special arrows:\n " 
-	                + "Fire arrows: "+ player.getInventory().getFireArrows() + "\n"
-	                + "Ice arros: " + player.getInventory().getIceArrows());
-	        breakLine();
-	        System.out.println("1) Got it! Let’s move on.\n"
-	                + "2) Can you explain that again?");
+	        Dialogue.characterDialogue("Elaris the Ranger", "Let’s talk about ammunition. Regular arrows are infinite, so you’ll never run out of basic shots. "
+	                + "However, special arrows—fire and ice—are rare and must be looted from enemies or chests. "
+	                + "Use them wisely when the situation demands.\n"
+	                + "Here are your current special arrows:\n" 
+	                + "Fire arrows: " + player.getInventory().getFireArrows() + "\n"
+	                + "Ice arrows: " + player.getInventory().getIceArrows(), txtSpd);
+	        Pause.pause(wait);
+	        Dialogue.characterDialogue("Elaris the Ranger", "1) Got it! Let’s move on.\n"
+	                + "2) Can you explain that again?", txtSpd);
 	        pChoice = keyboard.next().charAt(0);
-	        
+
 	        switch (pChoice) {
-	        case '1':
-	            breakLine();
-	            System.out.println("[" + player.getName() + "] Got it! Let’s move on.");
-	            makingChoice = false;
-	            break;
+	            case '1':
+	                breakLine();
+	                Dialogue.characterDialogue(player.getName(), "Got it! Let’s move on.", txtSpd);
+	                Pause.pause(wait);
+	                makingChoice = false;
+	                break;
 
-	        case '2':
-	            breakLine();
-	            System.out.println("[" + player.getName() + "] Can you explain that again?");
-	            break;
+	            case '2':
+	                breakLine();
+	                Dialogue.characterDialogue(player.getName(), "Can you explain that again?", txtSpd);
+	                Pause.pause(wait);
+	                break;
 
-	        default:
-	            System.err.println("(Invalid choice. Please try again)");
-	            break;
+	            default:
+	                Dialogue.infoDialogue("(Invalid choice. Please try again)\n", txtSpd);
+	                break;
 	        }
 	    }
 
-	    System.out.println("[Elaris the Ranger] Time to test your aim. Let’s see how you handle a live target. Don’t worry—"
-	            + "this sheep is harmless, and we use it to train all newcomers. Draw your bow, aim for the mark, and let your arrow fly!");
-	    
+	    Dialogue.characterDialogue("Elaris the Ranger", "Time to test your aim. Let’s see how you handle a live target. Don’t worry—"
+	            + "this sheep is harmless, and we use it to train all newcomers. Draw your bow, aim for the mark, and let your arrow fly!", txtSpd);
+
 	    while (!playerWon) {
+	        System.out.println(
+	                "---------------------------------------------------------------------------------------------------");
 	        playerWon = tutorialBattle.startBattle(keyboard);
 	        if (!playerWon) {
 	            player.setCurrHP(player.getHealth());
 	            tutorialBattle.getEnemy().setCurrHP(tutorialBattle.getEnemy().getHealth());
 	            tutorialBattle.setTurn(0);
-	            System.out.println("[Elaris the Ranger] You’re getting there! Precision comes with practice. Try again.");
+	            Dialogue.characterDialogue("Elaris the Ranger", "You’re getting there! Precision comes with practice. Try again.", txtSpd);
 	        }
 	    }
 
 	    breakLine();
-	    System.out.println("[Elaris the Ranger] Well done! You’re already showing promise. That’s all I can teach for now, but the true lessons "
-	            + "lie ahead. Head to the castle—the King often seeks skilled adventurers, and the journey will test your abilities.");
-	    System.out.println("[Elaris the Ranger] And remember, I’m always here should you need guidance. The woods never turn their back on a friend.");
+	    Dialogue.characterDialogue("Elaris the Ranger", "Well done! You’re already showing promise. That’s all I can teach for now, but the true lessons "
+	            + "lie ahead. Head to the castle—the King often seeks skilled adventurers, and the journey will test your abilities.", txtSpd);
+	    Pause.pause(wait);
+	    Dialogue.characterDialogue("Elaris the Ranger", "And remember, I’m always here should you need guidance. The woods never turn their back on a friend.", txtSpd);
+
+	    Dialogue.infoDialogue(
+	            "(As you battle enemies during your adventure, you will earn EXP after defeating them, the amount varying\n"
+	                    + "from enemy to enemy. Once you gain enough EXP, you will level up. Your stats will increase, "
+	                    + "and you will\nreceive a skill point to spend on one of the class stats, or your luck stat. You "
+	                    + "can view your overall\nlevel, the level of each stat, how much EXP you need to level up again, "
+	                    + "and how many skill points you\nhave available to spend all from your profile after the tutorial.)\n\n",
+	            txtSpd);
 
 	    makingChoice = true;
-	    pChoice = 0;
 
 	    while (makingChoice) {
 	        breakLine();
-	        System.out.println("1) Thanks, Elaris! I’ll head to the castle.\n"
-	                + "2) I’ll be sure to visit again!");
+	        Dialogue.characterDialogue("Elaris the Ranger", "1) Thanks, Elaris! I’ll head to the castle.\n"
+	                + "2) I’ll be sure to visit again!", txtSpd);
 	        pChoice = keyboard.next().charAt(0);
-	        
-	        switch (pChoice) {
-	        case '1':
-	            breakLine();
-	            System.out.println("[" + player.getName() + "] Thanks, Elaris! I’ll head to the castle.");
-	            makingChoice = false;
-	            break;
 
-	        case '2':
-	            breakLine();
-	            System.out.println("[" + player.getName() + "] I’ll be sure to visit again!");
-	            makingChoice = false;
-	            break;
-	            
-	        default:
-	            System.err.println("(Invalid choice. Please try again)");
-	            break;
+	        switch (pChoice) {
+	            case '1':
+	                breakLine();
+	                Dialogue.characterDialogue(player.getName(), "Thanks, Elaris! I’ll head to the castle.", txtSpd);
+	                Pause.pause(wait);
+	                makingChoice = false;
+	                break;
+
+	            case '2':
+	                breakLine();
+	                Dialogue.characterDialogue(player.getName(), "I’ll be sure to visit again!", txtSpd);
+	                Pause.pause(wait);
+	                makingChoice = false;
+	                break;
+
+	            default:
+	                Dialogue.infoDialogue("(Invalid choice. Please try again)\n", txtSpd);
+	                break;
 	        }
 	    }
 

@@ -412,7 +412,7 @@ public boolean startBattle(Scanner keyboard) {
 						this.defaultStandardAttack();
 						break;
 					case "Ranged":
-						this.defaultStandardAttack();
+						this.rangedStandardAttack();
 						break;
 					case "Magic":
 						if (!this.mageStandardAttack()) {
@@ -436,7 +436,7 @@ public boolean startBattle(Scanner keyboard) {
 						this.defaultSpecialAttack();
 						break;
 					case "Ranged":
-						this.defaultSpecialAttack();
+						this.rangedSpecialAttack();
 						break;
 					case "Magic":
 						if (!this.mageSpecialAttack()) {
@@ -476,8 +476,25 @@ public boolean startBattle(Scanner keyboard) {
 	}
 	
 	private void rangedStandardAttack() {
-		
+	    Dialogue.infoDialogue("You nock a regular arrow and take aim...\n", txtSpd);
+
+	    // Regular arrows have infinite ammo; calculate damage
+	    int damage = (int) player.getInventory().getEquipped().getDamage();
+
+	    // Double damage turn (e.g., a buff or special condition)
+	    if (dbTurn > 0) {
+	        damage *= 1.5; // 50% extra damage
+	        Dialogue.infoDialogue("Critical precision! Your attack is enhanced.\n", txtSpd);
+	    }
+
+	    // Apply damage to the enemy
+	    enemy.setCurrHP(enemy.getCurrHP() - damage);
+	    Dialogue.infoDialogue("Your arrow hits the target, dealing " + damage + " damage!\n", txtSpd);
+
+	    // Display enemy health after the attack
+	    Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
 	}
+
 	
 	private void rangedSpecialAttack() {
 		
