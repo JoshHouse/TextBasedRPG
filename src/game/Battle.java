@@ -495,14 +495,14 @@ public boolean startBattle(Scanner keyboard) {
 			if (dbTurn > 0) {
 				enemy.setCurrHP((int) (enemy.getCurrHP() - ((this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5)));
 				player.setCurrMana(player.getCurrMana() - player.getInventory().getEquipped().getManaUsage());
-				Dialogue.infoDialogue("You expended " + player.getInventory().getEquipped().getManaUsage() + "mana!\n"
+				Dialogue.infoDialogue("You expended " + player.getInventory().getEquipped().getManaUsage() + " mana!\n"
 						+ "You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
 				Dialogue.infoDialogue("You did " +  (int) ((this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5) + " damage!\n", txtSpd);
 				return true;
 			} else {
 				enemy.setCurrHP((int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * lvlDamageBoost)));
 				player.setCurrMana(player.getCurrMana() - player.getInventory().getEquipped().getManaUsage());
-				Dialogue.infoDialogue("You expended " + player.getInventory().getEquipped().getManaUsage() + "mana!\n"
+				Dialogue.infoDialogue("You expended " + player.getInventory().getEquipped().getManaUsage() + " mana!\n"
 						+ "You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
 				Dialogue.infoDialogue("You did " + (int) (this.getPlayerWeaponDamage() * lvlDamageBoost) + " damage!\n", txtSpd);
 				return true;
@@ -530,14 +530,14 @@ public boolean startBattle(Scanner keyboard) {
 				if (dbTurn > 0) {
 					enemy.setCurrHP((int)(enemy.getCurrHP() - (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5)));
 					player.setCurrMana((int) (player.getCurrMana() - (player.getInventory().getEquipped().getManaUsage() * 1.2)));
-					Dialogue.infoDialogue("You expended " + (int) (player.getInventory().getEquipped().getManaUsage() * lvlDamageBoost) + "mana!\n"
+					Dialogue.infoDialogue("You expended " + (int) (player.getInventory().getEquipped().getManaUsage() * 1.2) + " mana!\n"
 							+ "You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
 					Dialogue.infoDialogue("You did " + (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5) + " damage!\n", txtSpd);
 					return true;
 				} else {
 					enemy.setCurrHP((int)(enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
 					player.setCurrMana((int) (player.getCurrMana() - (player.getInventory().getEquipped().getManaUsage() * 1.2)));
-					Dialogue.infoDialogue("You expended " + (int) (player.getInventory().getEquipped().getManaUsage() * lvlDamageBoost) + "mana!\n"
+					Dialogue.infoDialogue("You expended " + (int) (player.getInventory().getEquipped().getManaUsage() * 1.2) + " mana!\n"
 							+ "You have " + player.getCurrMana() + " mana remaining! \n", txtSpd);
 					Dialogue.infoDialogue("You did " + ((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) + " damage!\n", txtSpd);
 					return true;
