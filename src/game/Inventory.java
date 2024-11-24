@@ -118,10 +118,15 @@ public class Inventory implements Serializable {
 	
 	// ------------------------------Functions------------------------------
 	
+	/**
+	 * Adds a single item to the correct inventory based on the item's type.
+	 * 
+	 * @param item - The item to add.
+	 */
 	public void add(Item item) {
-		
+
 		switch (item.getItemType()) {
-		
+
 		case 'w':
 			this.getWeapons().add((Weapon) item);
 			break;
@@ -134,25 +139,41 @@ public class Inventory implements Serializable {
 		default:
 			System.err.println("Error: Item is corrupted. Cannot be added.");
 			break;
-		
+
 		}
-		
+
 	}
-	
+
+	/**
+	 * Takes an array of items and adds them to the inventory through the add
+	 * function.
+	 * 
+	 * @param items - The array of items
+	 */
+	public void addMulti(Item[] items) {
+
+		for (int i = 0; i < items.length; i++) {
+			this.add(items[i]);
+		}
+
+	}
+
 	// ------------------------------ToString------------------------------
+
+	@Override
 	public String toString() {
 		String returnString = "";
 		returnString = returnString + "-----Weapons-----\n";
 		for (int x = 0; x < weapons.size(); x++) {
-			returnString = returnString + weapons.get(x) + "---------------\n"; 
+			returnString = returnString + weapons.get(x) + "---------------\n";
 		}
 		returnString = returnString + "-----Consumables-----\n";
 		for (int x = 0; x < consumables.size(); x++) {
-			returnString = returnString + consumables.get(x) + "---------------\n"; 
+			returnString = returnString + consumables.get(x) + "---------------\n";
 		}
 		returnString = returnString + "-----KeyItems-----\n";
 		for (int x = 0; x < weapons.size(); x++) {
-			returnString = returnString + keyItems.get(x) + "---------------\n"; 
+			returnString = returnString + keyItems.get(x) + "---------------\n";
 		}
 		return returnString;
 	}
