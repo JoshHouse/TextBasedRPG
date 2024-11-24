@@ -78,8 +78,12 @@ public class GameThread extends Throwable {
 	 */
 	// --------------------GameThread function--------------------
 	
-	public static void GameThread(Player player, Scanner keyboard) {
-		Boolean inChapter = false;
+	public static void GameChapters(Player player, Scanner keyboard) {
+		boolean inChapter = false;
+		boolean willProgress = false;
+		boolean chapterCompleted = false;
+		int txtSpd = 25;
+		char pChoice;
 		
 		/*
 		 * 
@@ -87,10 +91,57 @@ public class GameThread extends Throwable {
 		 * 
 		 */
 		if (true) {
+			Hub chapter1Hub = instantiateHub(player, "Town");
 			
+			chapterCompleted = false;
 			inChapter = true;
 			while (inChapter) {
 				
+				willProgress = chapter1Hub.start(keyboard);
+				// Save functionality
+				if(!willProgress) {
+					GameData saving = new GameData(player, chapter1Hub);
+					save(saving);
+					try {
+						System.exit(0);
+					} catch (SecurityException e) {
+						System.err.println("(Error when exiting)");
+					}
+				// Progressing with the main story
+				} else {
+					breakLine();
+					Dialogue.infoDialogue("You find yourself at a crossroads. Where do you decide to go?\n"
+							+ "1) Armory (Melee) \n"
+							+ "2) Archery Range (Ranger) \n"
+							+ "3) Wizard's tower (Mage) \n"
+							+ "4) (Rogue) \n", txtSpd);
+					pChoice = keyboard.next().charAt(0);
+					switch (pChoice) {
+					case '1':
+						chapterCompleted = meleeChapter1(player, keyboard);
+						break;
+					case '2':
+						chapterCompleted = meleeChapter1(player, keyboard);
+						break;
+					case '3':
+						chapterCompleted = meleeChapter1(player, keyboard);
+						break;
+					case '4':
+						chapterCompleted = meleeChapter1(player, keyboard);
+						break;
+					default:
+						System.err.println("(Invalid input. Please try again.)");
+						break;
+					}
+					if (chapterCompleted) {
+						inChapter = false;
+						/*
+						 * Increment player's chapter counter
+						 */
+						ApproachCastle(player);
+					}
+					
+				}
 			}
 		}
 		
@@ -100,9 +151,35 @@ public class GameThread extends Throwable {
 		 * 
 		 */
 		if (true) {
+			Hub chapter2Hub = instantiateHub(player, "Castle Common Grounds");
+			
+			chapterCompleted = false;
 			inChapter = true;
 			while (inChapter) {
 				
+				willProgress = chapter2Hub.start(keyboard);
+				// Save functionality
+				if(!willProgress) {
+					GameData saving = new GameData(player, chapter2Hub);
+					save(saving);
+					try {
+						System.exit(0);
+					} catch (SecurityException e) {
+						System.err.println("(Error when exiting)");
+					}
+				// Progressing with the main story
+				} else {
+					breakLine();
+					
+					chapterCompleted = kingsMission(player, keyboard);
+					
+					if (chapterCompleted) {
+						inChapter = false;
+						/*
+						 * Increment player's chapter counter
+						 */
+					}
+				}
 			}
 		}
 		
@@ -112,9 +189,55 @@ public class GameThread extends Throwable {
 		 * 
 		 */
 		if (true) {
+			Hub chapter3Hub = instantiateHub(player, "Castle Upper-Class Lobby");
+			
+			chapterCompleted = false;
 			inChapter = true;
 			while (inChapter) {
 				
+				willProgress = chapter3Hub.start(keyboard);
+				// Save functionality
+				if(!willProgress) {
+					GameData saving = new GameData(player, chapter3Hub);
+					save(saving);
+					try {
+						System.exit(0);
+					} catch (SecurityException e) {
+						System.err.println("(Error when exiting)");
+					}
+				// Progressing with the main story
+				} else {
+					breakLine();
+					Dialogue.infoDialogue("Which of the king's high council would you like to speak to?\n"
+							+ "1) (Melee) \n"
+							+ "2) Elaris the Ranger (Ranger) \n"
+							+ "3) Magnus the King's wizard (Mage) \n"
+							+ "4) (Rogue) \n", txtSpd);
+					pChoice = keyboard.next().charAt(0);
+					switch (pChoice) {
+					case '1':
+						chapterCompleted = meleeSpecialMission(player, keyboard);
+						break;
+					case '2':
+						chapterCompleted = rangedSpecialMission(player, keyboard);
+						break;
+					case '3':
+						chapterCompleted = mageSpecialMission(player, keyboard);
+						break;
+					case '4':
+						chapterCompleted = rogueSpecialMission(player, keyboard);
+						break;
+					default:
+						System.err.println("(Invalid input. Please try again.)");
+						break;
+					}
+					if (chapterCompleted) {
+						inChapter = false;
+						/*
+						 * Increment player's chapter counter
+						 */
+					}
+				}
 			}
 		}
 		
@@ -124,9 +247,88 @@ public class GameThread extends Throwable {
 		 * 
 		 */
 		if (true) {
+			Hub chapter4Hub = instantiateHub(player, "Castle Hero's Sector");
+			boolean finalChant = true;
+			
+			chapterCompleted = false;
 			inChapter = true;
 			while (inChapter) {
 				
+				willProgress = chapter4Hub.start(keyboard);
+				// Save Functionality
+				if(!willProgress) {
+					GameData saving = new GameData(player, chapter4Hub);
+					save(saving);
+					try {
+						System.exit(0);
+					} catch (SecurityException e) {
+						System.err.println("(Error when exiting)");
+					}
+				// Progressing with main story
+				} else {
+					breakLine();
+					
+					KingsFinalMission(player);
+					breakLine();
+					Dialogue.infoDialogue("Which of the king's high council would you like to speak to for advice "
+							+ "about the dangerous path you are about to walk?\n"
+							+ "1) (Melee) \n"
+							+ "2) Elaris the Ranger (Ranger) \n"
+							+ "3) Magnus the King's wizard (Mage) \n"
+							+ "4) (Rogue) \n", txtSpd);
+					pChoice = keyboard.next().charAt(0);
+					switch (pChoice) {
+					case '1':
+						meleeDragonApproach(player, keyboard);
+						// DragonFight function will be called when created
+						chapterCompleted =  true;
+						break;
+					case '2':
+						rangedDragonApproach(player, keyboard);
+						// DragonFight function will be called when created
+						chapterCompleted =  true;
+						break;
+					case '3':
+						mageDragonApproach(player, keyboard);
+						// DragonFight function will be called when created
+						chapterCompleted =  true;
+						break;
+					case '4':
+						rogueDragonApproach(player, keyboard);
+						// DragonFight function will be called when created
+						chapterCompleted =  true;
+						break;
+					default:
+						System.err.println("(Invalid input. Please try again.)");
+						break;
+					}
+					if (chapterCompleted) {
+						inChapter = false;
+						Dialogue.infoDialogue("As the dragon falls and releases one final, mighty roar, you know "
+								+ "the battle is over. You have done it! With your skills in battle and all you learned "
+								+ "from the people that helped you along the way, you have become the hero of the kingdom!"
+								+ " You have done what no other in the realm could do and have freed the kingdom from the "
+								+ "fear that has gripped them for decades! Congratulations " + player.getName() + "! You are "
+								+ "truly a great adventurer the likes of which none have seen before. \n", txtSpd);
+						while (finalChant) {
+							breakLine();
+							Dialogue.infoDialogue("*Release a mighty shout from the mountain top!* \n"
+									+ "(enter 1)\n", txtSpd);
+							pChoice = keyboard.next().charAt(0);
+							switch (pChoice) {
+							case '1':
+								Dialogue.characterDialogue(player.getName(), "Hooooorah!", txtSpd);
+								Pause.pause(15000);
+								try {
+									System.exit(0);
+								} catch (SecurityException e) {
+									System.err.println("(Error when exiting)");
+								}
+							}
+						}
+					}
+					
+				}
 			}
 		}
 	}
@@ -333,13 +535,6 @@ public class GameThread extends Throwable {
 
 		System.out.println(
 				"---------------------------------------------------------------------------------------------------");
-
-		Dialogue.infoDialogue(
-				"As you arrive in the city, you decide that your first course of action should be to visit someplace\n"
-						+ "where you can acquire a proper armament. Strolling around for a bit, you stumble upon an armory "
-						+ "that\nwould suit your needs.\n\n",
-				txtSpd);
-		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
 				"Looking around, you could see that the place was... old. The shop wasn't in the best of shape. It's\n"
