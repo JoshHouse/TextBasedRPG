@@ -900,8 +900,6 @@ public class GameThread extends Throwable {
 	            + "this sheep is harmless, and we use it to train all newcomers. Draw your bow, aim for the mark, and let your arrow fly!", txtSpd);
 
 	    while (!playerWon) {
-	        System.out.println(
-	                "---------------------------------------------------------------------------------------------------");
 	        playerWon = tutorialBattle.startBattle(keyboard, true);
 	        if (!playerWon) {
 	            player.setCurrHP(player.getHealth());
