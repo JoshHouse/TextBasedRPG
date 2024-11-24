@@ -76,7 +76,60 @@ public class GameThread extends Throwable {
 	 * ----- Functions -----
 	 * 
 	 */
-
+	// --------------------GameThread function--------------------
+	
+	public static void GameThread(Player player, Scanner keyboard) {
+		Boolean inChapter = false;
+		
+		/*
+		 * 
+		 * --------------------Chapter 1--------------------
+		 * 
+		 */
+		if (true) {
+			
+			inChapter = true;
+			while (inChapter) {
+				
+			}
+		}
+		
+		/*
+		 * 
+		 * --------------------Chapter 2--------------------
+		 * 
+		 */
+		if (true) {
+			inChapter = true;
+			while (inChapter) {
+				
+			}
+		}
+		
+		/*
+		 * 
+		 * --------------------Chapter 3--------------------
+		 * 
+		 */
+		if (true) {
+			inChapter = true;
+			while (inChapter) {
+				
+			}
+		}
+		
+		/*
+		 * 
+		 * --------------------Chapter 4--------------------
+		 * 
+		 */
+		if (true) {
+			inChapter = true;
+			while (inChapter) {
+				
+			}
+		}
+	}
 	// --------------------Formatting Functions--------------------
 	public static void breakLine() {  
 	    System.out.println("------------------------------");
@@ -85,6 +138,63 @@ public class GameThread extends Throwable {
 	// --------------------General Functions--------------------
 	public static void BeginningGame(Player player, Scanner keyboard) {
 		
+	}
+	
+	@SuppressWarnings("unused")
+	public static Hub instantiateHub(Player player, String location) {
+		// Chapter 1
+		if (true) {
+			Shopkeeper shopkeeperCh1 = new Shopkeeper();
+			String shopNameCh1 = "";
+			Shop ch1Shop = new Shop(player, shopkeeperCh1, shopNameCh1);
+			
+			ArrayList<Enemy> ch1Enemies = new ArrayList<Enemy>();
+			String[] ch1SearchTxt = new String[0];
+			
+			Hub chapter1Hub = new Hub(player, location, ch1Shop, ch1Enemies, ch1SearchTxt);
+			
+			return chapter1Hub;
+		}
+		// Chapter 2
+		if (true) {
+			Shopkeeper shopkeeperCh2 = new Shopkeeper();
+			String shopNameCh2 = "";
+			Shop ch2Shop = new Shop(player, shopkeeperCh2, shopNameCh2);
+			
+			ArrayList<Enemy> ch2Enemies = new ArrayList<Enemy>();
+			String[] ch2SearchTxt = new String[0];
+			
+			Hub chapter2Hub = new Hub(player, location, ch2Shop, ch2Enemies, ch2SearchTxt);
+			
+			return chapter2Hub;
+		}
+		// Chapter 3
+		if (true) {
+			Shopkeeper shopkeeperCh3 = new Shopkeeper();
+			String shopNameCh3 = "";
+			Shop ch3Shop = new Shop(player, shopkeeperCh3, shopNameCh3);
+			
+			ArrayList<Enemy> ch3Enemies = new ArrayList<Enemy>();
+			String[] ch3SearchTxt = new String[0];
+			
+			Hub chapter3Hub = new Hub(player, location, ch3Shop, ch3Enemies, ch3SearchTxt);
+			
+			return chapter3Hub;
+		}
+		// Chapter 4
+		if (true) {
+			Shopkeeper shopkeeperCh4 = new Shopkeeper();
+			String shopNameCh4 = "";
+			Shop ch4Shop = new Shop(player, shopkeeperCh4, shopNameCh4);
+			
+			ArrayList<Enemy> ch4Enemies = new ArrayList<Enemy>();
+			String[] ch4SearchTxt = new String[0];
+			
+			Hub chapter4Hub = new Hub(player, location, ch4Shop, ch4Enemies, ch4SearchTxt);
+			
+			return chapter4Hub;
+		}
+		return null;
 	}
 	
 	// --------------------Dialog Functions--------------------
