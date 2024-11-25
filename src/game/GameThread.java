@@ -402,7 +402,6 @@ public class GameThread extends Throwable {
 	}
 	
 	public static void KingsFinalMission(Player player) {
-		
 	}
 	
 	public static boolean meleeDragonApproach(Player player, Scanner keyboard) {
@@ -513,6 +512,11 @@ public class GameThread extends Throwable {
 	
 	// --------------------Mission Functions--------------------
 	public static boolean kingsMission(Player player, Scanner keyboard) {
+		// king sends you on mission
+		// travel
+		
+		
+		// fight troll
 		return true;
 	}
 	

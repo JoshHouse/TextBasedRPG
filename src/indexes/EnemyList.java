@@ -55,7 +55,7 @@ public class EnemyList {
 	// --------------------Dragon Fight--------------------
 	
 	public Enemy gilgemeshTheDragon = new Enemy("Gilgemesh the Dragon", new Inventory(), 5000, 5000, 30, 5000, 300, 5, spAtkList.hellFire, 
-			"With blazing speed and ferocity, Gilgemesh flap's his wings and sores toward you, and stabs you with his razor-sharp claws!");
+			"With blazing speed and ferocity, Gilgemesh flap's his wings and soares toward you, and stabs you with his razor-sharp claws!");
 	
 	public Enemy gilgemeshsChildren = new Enemy("Juvenile Dragon", new Inventory(), 2000, 2000, 20, 1500, 150, 5, spAtkList.flameBreath, 
 			"With its biteforce rivaling the crushing power of a castle stone, the Juvenile Dragon clamps onto your arm, leaving serious damage in its wake!");

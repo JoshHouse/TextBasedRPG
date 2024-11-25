@@ -589,6 +589,9 @@ public boolean startBattle(Scanner keyboard, boolean shouldRegen) {
 			return true;
 	    }
 	}
+	
+	// change standard attack to take a special arrow or regular arrow case 
+	// special arrow + 1.5x
 
 	
 	private boolean rangedSpecialAttack() {
@@ -598,24 +601,24 @@ public boolean startBattle(Scanner keyboard, boolean shouldRegen) {
 		}
 		
 		Dialogue.infoDialogue("You chose a Special Attack!\n", txtSpd);
-		if(player.getCurrArrows() > player.getInventory().getSpecialArrows()) {
+		if(player.getInventory().getSpecialArrows() > 0) {
 			if(player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
 				enemy.setCurrHP((int)(enemy.getCurrHP() - (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5)));
 				Dialogue.infoDialogue("You did " + (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5) + " damage!\n", txtSpd);
-				player.setCurrArrows(player.getCurrArrows() - 1);
-				Dialogue.infoDialogue("You have " + player.getCurrArrows() + " Special Arrows!\n", txtSpd);
+				player.getInventory().setSpecialArrows(player.getInventory().getSpecialArrows() - 1);
+				Dialogue.infoDialogue("You have " + player.getInventory().getSpecialArrows() + " Special Arrows!\n", txtSpd);
 				Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
 				return true;
 	    }  else {
 	    	enemy.setCurrHP((int)(enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
 	    	Dialogue.infoDialogue("You did " + (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5) + " damage!\n", txtSpd);
-	    	player.setCurrArrows(player.getCurrArrows() - 1);
-			Dialogue.infoDialogue("You have " + player.getCurrArrows() + " Special Arrows!\n", txtSpd);
+	    	player.getInventory().setSpecialArrows(player.getInventory().getSpecialArrows() - 1);
+	    	Dialogue.infoDialogue("You have " + player.getInventory().getSpecialArrows() + " Special Arrows!\n", txtSpd);
 			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
 			return true;
 			}
 		}  else {
-			Dialogue.infoDialogue("You don't have enough arrows to use a Special Attack!", txtSpd);
+			Dialogue.infoDialogue("You don't have enough arrows to use a Special Attack!\n", txtSpd);
 				return false;
 			}
 			

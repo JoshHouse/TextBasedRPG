@@ -194,10 +194,11 @@ public class Shop implements Serializable {
 		while (isBuying) {
 			
 			// Print statement for menu options and obtains user menu choice
-			Dialogue.infoDialogue("What are you in the market for today?\n" + 
+			Dialogue.characterDialogue(this.getShopkeeper().getName(), "What are you in the market for today?\n" + 
 					"1) Weapons\n" + 
 					"2) Consumables\n" + 
-					"3) Cancel" + "\n", txtSpd);
+					"3) Special Arrows\n " +
+					"4) Cancel" + "\n", txtSpd);
 			pMainMenuChoice = scn.next().charAt(0);
 			
 			// Switch statement to process user choice
@@ -210,8 +211,14 @@ public class Shop implements Serializable {
 			case '2': // Consumables buy menu
 				this.consumablesBuyMenu(scn); // Handles the consumables buy menu functionality
 				break;
+				
+			case '3': //Special Arrows buy menu
+				
+				this.buySpArrows(scn);
+				
+				break;
 			
-			case '3': // Back to main menu
+			case '4': // Back to main menu
 				isBuying = false;	// exits the buy menu
 				break;
 			default: // Handles invalid choice
@@ -712,6 +719,46 @@ public class Shop implements Serializable {
 					"The cost of that item is: " + product.getValue() + "\n", txtSpd);
 			return false;
 		}
+	}
+	
+	/**
+	 * Handles buying special arrows functionality
+	 */
+	
+	public void buySpArrows(Scanner scn) {
+		boolean buyingSpecialArrows;
+		String spArrowCount;
+		int selection;
+		
+		buyingSpecialArrows = true;
+		while (buyingSpecialArrows) {
+			breakLine();
+			Dialogue.characterDialogue(this.getShopkeeper().getName(), "How many Special Arrows would you like to buy? They "
+					+ "are worth 10 currency a piece. \n", txtSpd);
+			Dialogue.infoDialogue("You currently have " + player.getCurrency() + " currency.\n", txtSpd);
+			spArrowCount = scn.next();
+			if (isNumeric(spArrowCount)) {
+				selection = Integer.parseInt(spArrowCount);
+			} else {
+				selection = -1;
+			}
+			
+			if (selection > 0) {
+				if (player.getCurrency() > selection * 10) {
+					player.getInventory().setSpecialArrows(player.getInventory().getSpecialArrows() + selection);
+					player.setCurrency(player.getCurrency() - (selection * 10));
+					Dialogue.characterDialogue(this.getShopkeeper().getName(), "Enjoy your arrows\n!", txtSpd);
+					Dialogue.infoDialogue("Your updated Special Arrow Count is: " + player.getInventory().getSpecialArrows() + "\n", txtSpd);
+					Dialogue.infoDialogue("Your updated Currency is: " + player.getCurrency() + "\n", txtSpd);
+					buyingSpecialArrows = false;
+				} else {
+					Dialogue.characterDialogue(this.getShopkeeper().getName(), "You don't have enough currency to buy that many arrows!", txtSpd);
+					Dialogue.infoDialogue("Your Currency is: " + player.getCurrency() + "\n", txtSpd);
+					Dialogue.infoDialogue("It would cost " + (selection * 10) + " currency to buy that many arrows.\n", txtSpd);
+				}
+			}
+		}
+		
 	}
 	
 	/*

@@ -135,7 +135,7 @@ public class Lootable implements Serializable {
 
 			// Choose what sub-menu to access
 			Dialogue.infoDialogue("Choose what to take from " + enemy.getName() + "\n", speed);
-			Dialogue.infoDialogue("1) Weapons\n2) Consumables\n3) Take All\n4) Finish\nSelect: ", speed);
+			Dialogue.infoDialogue("1) Weapons\n2) Consumables\n3) Special Arrows\n4) Take All\n5) FinishSelect: ", speed);
 			menuInput = scn.next().charAt(0);
 			System.out.println();
 
@@ -147,10 +147,18 @@ public class Lootable implements Serializable {
 			case '2': // Loot consumables
 				lootConsumables = true;
 				break;
-			case '3': // Loot everything
+			case '3': // Loot Special arrows
+				if (enemy.getInventory().getSpecialArrows() > 0) {
+					this.getInventory().setSpecialArrows(this.getInventory().getSpecialArrows() + enemy.getInventory().getSpecialArrows());
+					Dialogue.infoDialogue("You looted " + enemy.getInventory().getSpecialArrows() + " Special Arrows!\n", speed);
+					enemy.getInventory().setSpecialArrows(0);
+					Dialogue.infoDialogue("Your new Special Arrow count is: " + this.getInventory().getSpecialArrows() + "\n", speed);
+				}
+				break;
+			case '4': // Loot everything
 				lootAll = true;
 				break;
-			case '4': // Leave loot function
+			case '5': // Leave loot function
 				isLooting = false;
 				break;
 			default: // Invalid input
@@ -338,7 +346,11 @@ public class Lootable implements Serializable {
 					this.getInventory().addMulti(consumables); // add all the consumables to your inventory
 
 				}
-
+				
+				if (enemy.getInventory().getSpecialArrows() > 0) {
+					this.getInventory().setSpecialArrows(this.getInventory().getSpecialArrows() + enemy.getInventory().getSpecialArrows());
+					enemy.getInventory().setSpecialArrows(0);
+				}
 				// There's no more items left to take, so these are set to false to exit the
 				// loot function
 				lootAll = false;
