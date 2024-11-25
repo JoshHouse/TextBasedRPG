@@ -62,6 +62,56 @@ public class SpAtkList {
 			3.0);
 	
 	// --------------------Ranged Special Attacks--------------------
+
+	/** Special Attack - Piercing Shot. */
+	public SpecialAttack piercingShot = new SpecialAttack("Piercing Shot",
+	        "Take careful aim and fire an arrow that pierces through multiple enemies, dealing increased damage to all targets in a line.",
+	        " carefully takes aim, releasing an arrow that cuts through the air with precision, striking multiple foes in its path!",
+	        " carefully takes aim, but their arrow misses its mark, vanishing into the distance.",
+	        2.0);
+
+	/** Special Attack - Explosive Arrow. */
+	public SpecialAttack explosiveArrow = new SpecialAttack("Explosive Arrow",
+	        "Fire an arrow tipped with an explosive charge that detonates on impact, dealing splash damage to all nearby enemies.",
+	        " fires an explosive arrow that streaks through the air before detonating in a fiery explosion, engulfing enemies in flames!",
+	        " fires an explosive arrow, but it fizzles out and harmlessly hits the ground.",
+	        2.5);
+
+	/** Special Attack - Frostbite Arrow. */
+	public SpecialAttack frostbiteArrow = new SpecialAttack("Frostbite Arrow",
+	        "Unleash an ice-tipped arrow that chills the target to the bone, slowing their movements and dealing damage over time.",
+	        " fires an icy arrow that strikes their foe, encasing their limbs in frost and sapping their strength with freezing cold!",
+	        " fires an icy arrow, but their opponent dodges it, leaving the air around them cold but harmless.",
+	        1.8);
+
+	/** Special Attack - Rain of Arrows. */
+	public SpecialAttack rainOfArrows = new SpecialAttack("Rain of Arrows",
+	        "Leap into the air and unleash a volley of arrows that rain down on enemies in a wide area, dealing significant damage.",
+	        " leaps into the air, firing a flurry of arrows that rain down upon their foes, leaving devastation in their wake!",
+	        " leaps into the air, but the arrows scatter harmlessly, leaving their opponents unscathed.",
+	        2.2);
+
+	/** Special Attack - Flaming Volley. */
+	public SpecialAttack flamingVolley = new SpecialAttack("Flaming Volley",
+	        "Launch a volley of fire arrows that explode upon impact, creating a fiery inferno to burn enemies over time.",
+	        " releases a blazing volley of fire arrows, igniting the battlefield in an inferno that scorches everything in its path!",
+	        " fires a blazing volley, but the arrows fail to ignite, leaving their enemies unharmed.",
+	        2.8);
+
+	/** Special Attack - Phantom Arrow. */
+	public SpecialAttack phantomArrow = new SpecialAttack("Phantom Arrow",
+	        "Summon a magical arrow of pure energy that seeks out the target with unerring accuracy, bypassing defenses.",
+	        " conjures a glowing arrow of energy that streaks unerringly towards its target, bypassing all defenses to strike true!",
+	        " summons a glowing arrow of energy, but it fizzles out before reaching its target.",
+	        3.0);
+
+	/** Special Attack - Gale Shot. */
+	public SpecialAttack galeShot = new SpecialAttack("Gale Shot",
+	        "Fire an arrow infused with wind magic that generates a powerful gale, pushing back enemies and dealing area damage.",
+	        " fires a wind-infused arrow that creates a howling gale, knocking enemies back and causing them to stumble!",
+	        " fires a wind-infused arrow, but the gust is too weak to affect their enemies.",
+	        2.0);
+
 	
 	// --------------------Magic Special Attacks--------------------
 	/** Special Attack - Power Beam */

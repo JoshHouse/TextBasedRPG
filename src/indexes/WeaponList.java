@@ -84,10 +84,56 @@ public class WeaponList {
 
 	// --------------------Ranged Weapons--------------------
 	
-	// starter bow /
-	public Weapon starterBow = new Weapon("f101", "Training Bow", 
-			"A simple wood bow for young archers.", 1, 25, 20, 2, true);
-	
+	/** Starter Bow */
+	public Weapon bow1 = new Weapon("r001", "Starter Bow", 
+	        "A simple wooden bow, often used by beginners. It's not the most powerful, but it's reliable for training.", 
+	        1, 50, 10, 1, true);
+
+	/** Shortbow */
+	public Weapon bow2 = new Weapon("r002", "Shortbow", 
+	        "A compact bow with a shorter range, favored by those who value speed over power.", 
+	        1, 100, 15, 1, true, spAtk.piercingShot);
+
+	/** Longbow */
+	public Weapon bow3 = new Weapon("r003", "Longbow", 
+	        "A tall bow with a long range, capable of dealing significant damage at a distance.", 
+	        2, 300, 25, 1, true, spAtk.explosiveArrow);
+
+	/** Frostbow */
+	public Weapon bow4 = new Weapon("r004", "Frostbow", 
+	        "A magical bow infused with the essence of ice. Each arrow fired chills the target to the bone.", 
+	        2, 400, 22, 1, true, spAtk.frostbiteArrow);
+
+	/** Composite Bow */
+	public Weapon bow5 = new Weapon("r005", "Composite Bow", 
+	        "An advanced bow crafted from multiple materials, offering a balance of speed and power.", 
+	        2, 500, 30, 1, true, spAtk.rainOfArrows);
+
+	/** Emberstring */
+	public Weapon bow6 = new Weapon("r006", "Emberstring", 
+	        "A bow with a string that glows with fiery energy, igniting arrows as they are fired.", 
+	        3, 800, 40, 1, true, spAtk.flamingVolley);
+
+	/** Phantom Bow */
+	public Weapon bow7 = new Weapon("r007", "Phantom Bow", 
+	        "A mystical bow crafted from ethereal materials. Its arrows are said to never miss their target.", 
+	        3, 1000, 50, 1, true, spAtk.phantomArrow);
+
+	/** Gale Bow */
+	public Weapon bow8 = new Weapon("r008", "Gale Bow", 
+	        "A bow imbued with the power of wind. Each arrow fired creates a powerful gust, pushing enemies back.", 
+	        3, 900, 45, 1, true, spAtk.galeShot);
+
+	/** Bow of the Phoenix */
+	public Weapon bow9 = new Weapon("r009", "Bow of the Phoenix", 
+	        "A legendary bow forged in phoenix fire. Each arrow ignites the battlefield in flames, burning enemies over time.", 
+	        4, 1200, 60, 1, true, spAtk.flamingVolley);
+
+	/** Starlight Bow */
+	public Weapon bow10 = new Weapon("r010", "Starlight Bow", 
+	        "A bow that glimmers with celestial light. It is said to be blessed by the stars themselves, striking true with every shot.", 
+	        4, 1500, 70, 1, true, spAtk.phantomArrow);
+
 	
 	
 	// --------------------Magic Weapons--------------------

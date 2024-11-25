@@ -859,10 +859,10 @@ public class GameThread extends Throwable {
 	    }
 
 	    Dialogue.characterDialogue("Elaris the Ranger", "First, you’ll need a bow. This shortbow has served many a beginner well. Take it, and we’ll get started.", txtSpd);
-	    player.getInventory().add(wList.starterBow);
+	    player.getInventory().add(wList.bow1);
 	    Pause.pause(wait);
 	    Dialogue.infoDialogue("The starter bow has been added to your inventory!\n", txtSpd);
-	    player.getInventory().getWeaponOnKey(wList.starterBow.getKey()).displayInfo();
+	    player.getInventory().getWeaponOnKey(wList.bow1.getKey()).displayInfo();
 
 	    makingChoice = true;
 
@@ -872,8 +872,7 @@ public class GameThread extends Throwable {
 	                + "However, special arrows—fire and ice—are rare and must be looted from enemies or chests. "
 	                + "Use them wisely when the situation demands.\n"
 	                + "Here are your current special arrows:\n" 
-	                + "Fire arrows: " + player.getInventory().getFireArrows() + "\n"
-	                + "Ice arrows: " + player.getInventory().getIceArrows(), txtSpd);
+	                + "Special arrows: " + player.getInventory().getSpecialArrows(), txtSpd);
 	        Pause.pause(wait);
 	        Dialogue.characterDialogue("Elaris the Ranger", "1) Got it! Let’s move on.\n"
 	                + "2) Can you explain that again?", txtSpd);

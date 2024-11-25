@@ -475,30 +475,60 @@ public boolean startBattle(Scanner keyboard) {
 		
 	}
 	
-	private void rangedStandardAttack() {
+	private boolean rangedStandardAttack() {
+		double lvlDamageBoost = 1;
+		for (int x = 1; x < player.getlvlRanged(); x++) {
+			lvlDamageBoost = lvlDamageBoost + 0.2;
+		}
 	    Dialogue.infoDialogue("You nock a regular arrow and take aim...\n", txtSpd);
-
-	    // Regular arrows have infinite ammo; calculate damage
-	    int damage = (int) player.getInventory().getEquipped().getDamage();
 
 	    // Double damage turn (e.g., a buff or special condition)
 	    if (dbTurn > 0) {
-	        damage *= 1.5; // 50% extra damage
+	        enemy.setCurrHP((int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5));
 	        Dialogue.infoDialogue("Critical precision! Your attack is enhanced.\n", txtSpd);
+	        Dialogue.infoDialogue("You did " +  (int) ((this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5) + " damage!\n", txtSpd);
+		    Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+				return true;
+	    }  else {
+	    	enemy.setCurrHP((int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * lvlDamageBoost)));
+	    	Dialogue.infoDialogue("You did " + (int) (this.getPlayerWeaponDamage() * lvlDamageBoost) + " damage!\n", txtSpd);
+		    Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+			return true;
 	    }
-
-	    // Apply damage to the enemy
-	    enemy.setCurrHP(enemy.getCurrHP() - damage);
-	    Dialogue.infoDialogue("Your arrow hits the target, dealing " + damage + " damage!\n", txtSpd);
-
-	    // Display enemy health after the attack
-	    Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
 	}
 
 	
-	private void rangedSpecialAttack() {
+	private boolean rangedSpecialAttack() {
+		double lvlDamageBoost = 1;
+		for (int x = 1; x < player.getlvlRanged(); x++) {
+			lvlDamageBoost = lvlDamageBoost + 0.2;
+		}
 		
+		Dialogue.infoDialogue("You chose a Special Attack!\n", txtSpd);
+		if(player.getCurrArrows() > player.getInventory().getSpecialArrows()) {
+			if(player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
+				enemy.setCurrHP((int)(enemy.getCurrHP() - (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5)));
+				Dialogue.infoDialogue("You did " + (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5) + " damage!\n", txtSpd);
+				player.setCurrArrows(player.getCurrArrows() - 1);
+				Dialogue.infoDialogue("You have " + player.getCurrArrows() + " Special Arrows!\n", txtSpd);
+				Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+				return true;
+	    }  else {
+	    	enemy.setCurrHP((int)(enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
+	    	Dialogue.infoDialogue("You did " + (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5) + " damage!\n", txtSpd);
+	    	player.setCurrArrows(player.getCurrArrows() - 1);
+			Dialogue.infoDialogue("You have " + player.getCurrArrows() + " Special Arrows!\n", txtSpd);
+			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+			return true;
+			}
+		}  else {
+			Dialogue.infoDialogue("You don't have enough arrows to use a Special Attack!", txtSpd);
+				return false;
+			}
+			
 	}
+				
+	
 	
 	private boolean mageStandardAttack() {
 		double lvlDamageBoost = 1;

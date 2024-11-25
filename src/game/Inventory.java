@@ -11,8 +11,7 @@ public class Inventory implements Serializable {
 	private ArrayList<Weapon> weapons;
 	private ArrayList<Consumable> consumables;
 	private ArrayList<KeyItem> keyItems;
-	private int fireArrows = 0;
-	private int iceArrows = 0;
+	private int specialArrows = 0;
 
 	/**
 	 * Base constructor
@@ -83,13 +82,10 @@ public class Inventory implements Serializable {
 		return null;
 	}
 	
-	public int getFireArrows() {
-		return fireArrows;
+	public int getSpecialArrows() {
+		return specialArrows;
 	}
 	
-	public int getIceArrows() {
-		return iceArrows;
-	}
 	
 	
 	// ------------------------------Setters-------------------------------
@@ -108,13 +104,10 @@ public class Inventory implements Serializable {
 		this.keyItems = inputKeyItems;
 	}
 	
-	public void setFireArrows(int count) {
-		this.fireArrows = Math.max(0, count);
+	public void setSpecialArrows(int count) {
+		this.specialArrows = Math.max(0, count);
 	}
 	
-	public void setIceArrows(int count) {
-		this.iceArrows = Math.max(0, count);
-	}
 	
 	// ------------------------------Functions------------------------------
 	
