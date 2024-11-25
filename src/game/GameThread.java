@@ -121,13 +121,13 @@ public class GameThread extends Throwable {
 						chapterCompleted = meleeChapter1(player, keyboard);
 						break;
 					case '2':
-						chapterCompleted = meleeChapter1(player, keyboard);
+						chapterCompleted = rangerChapter1(player, keyboard);
 						break;
 					case '3':
-						chapterCompleted = meleeChapter1(player, keyboard);
+						chapterCompleted = mageChapter1(player, keyboard);
 						break;
 					case '4':
-						chapterCompleted = meleeChapter1(player, keyboard);
+						chapterCompleted = rogueChapter1(player, keyboard);
 						break;
 					default:
 						System.err.println("(Invalid input. Please try again.)");
