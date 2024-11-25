@@ -7,6 +7,7 @@ public class Battle {
 	
 	private Player player;
 	private Enemy enemy;
+	private Enemy minion;
 	private int turn;
 	private int guardedTurn;
 	private int dbTurn;
@@ -29,6 +30,16 @@ public Battle(Player inputPlayer, Enemy inputEnemy) {
 	this.setPoisonTurn(0);
 	this.setPoisonDamage(0);
 }
+
+public Battle(Player inputPlayer, Enemy inputEnemy, Enemy inputMinion) {
+	this.setPlayer(inputPlayer);
+	this.setEnemy(inputEnemy);
+	this.setTurn(0);
+	this.setguardedTurn(0);
+	this.setSpeedTurn(0);
+	this.setPoisonTurn(0);
+	this.setPoisonDamage(0);
+}
 	
 	
 	// ----------------------------------Getters---------------------------------
@@ -39,6 +50,10 @@ public Player getPlayer() {
 
 public Enemy getEnemy() {
 	return this.enemy;
+}
+
+public Enemy getMinion() {
+	return this.minion;
 }
 
 public int getTurn() {
@@ -85,6 +100,10 @@ public void setEnemy(Enemy inputEnemy) {
 	this.enemy = inputEnemy;
 }
 
+public void setMinion(Enemy inputMinion) {
+	this.minion = inputMinion;
+}
+
 public void setTurn(int inputTurn) {
 	this.turn = inputTurn;
 }
@@ -123,14 +142,14 @@ public static void breakLine() {
     System.out.println("------------------------------");
 }
 
-private void battleSetup() {
+private void battleSetup(boolean shouldRegen) {
 	if (enemy.getCurrHP() != enemy.getHealth()) {
 		enemy.setCurrHP(enemy.getHealth());
 	}
-	if (player.getCurrHP() != player.getHealth()) {
+	if (player.getCurrHP() != player.getHealth() && shouldRegen) {
 		player.setCurrHP(player.getHealth());
 	}
-	if (player.getCurrMana() != player.getMana()) {
+	if (player.getCurrMana() != player.getMana() && shouldRegen) {
 		player.setCurrMana(player.getMana());
 	}
 	this.setTurn(0);
@@ -141,12 +160,16 @@ private void battleSetup() {
 	this.setPlayerWeaponDamage((int) this.getPlayer().getInventory().getEquipped().getDamage());
 	this.setPlayerSpAtkMulti(this.getPlayer().getInventory().getEquipped().getSpecialAttack().getAtkMultiplier());
 }
-
-public boolean startBattle(Scanner keyboard) {
+/*
+ * 
+ * --------------------Default Battles--------------------
+ * 
+ */
+public boolean startBattle(Scanner keyboard, boolean shouldRegen) {
 	boolean inBattle = true;
 	boolean isWimp = false;
-	
-	battleSetup();
+
+	battleSetup(shouldRegen);
 	
 	Dialogue.infoDialogue("You have entered a battle!\n", txtSpd);
 	Dialogue.infoDialogue("Your opponent: " + this.getEnemy().getName() + "\n", txtSpd);
@@ -206,6 +229,76 @@ public boolean startBattle(Scanner keyboard) {
 	
 }
 
+/*
+ * 
+ * --------------------Dragon Fight--------------------
+ * 
+ */
+	public boolean dragonFight(Scanner keyboard) {
+		if (this.getMinion() == null) {
+			System.err.println("Error: Attempted call on dragonFight when minion object was not initialized");
+			return false;
+		} else {
+			boolean inBattle = true;
+			boolean isWimp = false;
+			
+			battleSetup(true);
+			
+			Dialogue.infoDialogue("The Battle has Begun! Be prepared for a fight to the death!\n", txtSpd);
+			
+			while(inBattle) {
+				if (speedTurn > 0) {
+					isWimp = this.playerTurn(keyboard);
+					if (isWimp) {
+						return false;
+					}
+					speedTurn--;
+				} else {
+					if(turn == 0) {
+						isWimp = this.playerTurn(keyboard);
+						if (isWimp) {
+							return false;
+						}
+						
+						if (guardedTurn > 0) {
+							guardedTurn--;
+						}
+						if (dbTurn > 0) {
+							dbTurn--;
+						}
+					}
+					else {
+						if (!this.dragonTurn(keyboard)) {
+							return false;
+						}
+						if (poisonTurn > 0) {
+							poisonTurn--;
+							if (poisonTurn == 0) {
+								this.setPoisonDamage(0);
+							}
+						}
+					}
+					if (player.getCurrHP() <= 0) { //Check if battle continues after each turn
+						Dialogue.infoDialogue("You have been defeated!\n", txtSpd);
+						Dialogue.infoDialogue("Returning to the castle...\n", txtSpd);
+			            player.setCurrHP(player.getHealth());
+			            enemy.setCurrHP(enemy.getHealth());
+			            player.setCurrMana(player.getMana());
+			            return false;
+			        } else if (enemy.getCurrHP() <= 0) {
+						Dialogue.infoDialogue("The Gilgemesh has been vanquished!\n", txtSpd);
+			            player.setCurrHP(player.getHealth());
+			            enemy.setCurrHP(enemy.getHealth());
+			            player.setCurrMana(player.getMana());
+			            return true;
+			        } else {
+			            changeTurn(); // Change turn only if battle continues
+			        }
+				}
+			}
+		}
+		return false;
+	}
 
 
 	private boolean playerTurn(Scanner keyboard) {
@@ -639,7 +732,57 @@ public boolean startBattle(Scanner keyboard) {
 			Dialogue.infoDialogue("You did 0 damage!\n", txtSpd);
 		}
 	}
+	
+	private boolean dragonTurn(Scanner keyboard) {
+		
+		if (poisonTurn > 0) {
+			enemy.setCurrHP(enemy.getCurrHP() - poisonDamage);
+			Dialogue.infoDialogue("The Beast took " + this.getPoisonDamage() + " damage from the poison potion!\n", txtSpd);
+			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+		}
+		
+		if (Luck.luckEvent(20)) {
+			Battle minionBattle = new Battle(this.getPlayer(), this.getMinion());
+			Dialogue.infoDialogue("One of Gilgemesh's children rushes into the battle aiming to protect it's father!", txtSpd);
+			if (!minionBattle.startBattle(keyboard, false)) {
+				return false;
+			}
+		} else if(enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(30)) {
+        	// Special Attack Functionality
+        	if(enemy.getSpecialAttack().useSpAtk(70)) {
+            	if (guardedTurn > 0) {
+            		player.setCurrHP((int) (player.getCurrHP() - ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2)));
+        			Dialogue.infoDialogue("You took half damage because you had your guard up! The dragon did " + ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2) + " damage!\n", txtSpd);
+            	} else {
+            		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier())));
+        			Dialogue.infoDialogue("The dragon did " + (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) + " damage!\n", txtSpd);
+            	}
+        	} else {
+        		Dialogue.infoDialogue("The dragon did 0 damage!", txtSpd);
+        	}
 
+        } else {
+        	// Regular Attack Functionality
+        	if (guardedTurn > 0) {
+        		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() / 2)));
+    			Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
+    			Dialogue.infoDialogue("You took half damage because you had your guard up! The dragon did " + (enemy.getDamage() / 2) + " damage!\n", txtSpd);
+        	} else {
+        		player.setCurrHP((int) (player.getCurrHP() - enemy.getDamage()));
+    			Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
+    			Dialogue.infoDialogue("The dragon did " + enemy.getDamage() + " damage!\n", txtSpd);
+        	}
+        }
+        
+		
+		Dialogue.infoDialogue("Your HP: " + player.getCurrHP() + "\n", txtSpd);
+        
+        breakLine();
+        return true;
+	}
+	
+	
+	
 	private void enemyTurn() {
 		
 		if (poisonTurn > 0) {
@@ -695,5 +838,6 @@ public boolean startBattle(Scanner keyboard) {
         // Ensure the string only contains digits
         return str.matches("\\d+");
     }
-
+    
+    
 }
