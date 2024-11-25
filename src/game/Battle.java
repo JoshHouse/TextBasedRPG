@@ -356,7 +356,7 @@ public boolean startBattle(Scanner keyboard, boolean shouldRegen) {
 					
 				default:
 					breakLine();
-					Dialogue.infoDialogue("Invalid input! Your player looked intensely at " + this.getEnemy() + ". Try again!\n", txtSpd);
+					Dialogue.infoDialogue("Invalid input! Your player looked intensely at " + this.getEnemy().getName() + ". Try again!\n", txtSpd);
 					break;
 				}
 			
