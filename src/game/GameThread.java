@@ -90,7 +90,7 @@ public class GameThread extends Throwable {
 		 * --------------------Chapter 1--------------------
 		 * 
 		 */
-		if (true) {
+		if (player.getChapter() == 1) {
 			Hub chapter1Hub = instantiateHub(player, "Town");
 			
 			chapterCompleted = false;
@@ -100,8 +100,7 @@ public class GameThread extends Throwable {
 				willProgress = chapter1Hub.start(keyboard);
 				// Save functionality
 				if(!willProgress) {
-					GameData saving = new GameData(player, chapter1Hub);
-					save(saving);
+					save(player);
 					try {
 						System.exit(0);
 					} catch (SecurityException e) {
@@ -135,9 +134,7 @@ public class GameThread extends Throwable {
 					}
 					if (chapterCompleted) {
 						inChapter = false;
-						/*
-						 * Increment player's chapter counter
-						 */
+						player.setChapter(player.getChapter() + 1);
 						ApproachCastle(player);
 					}
 					
@@ -150,7 +147,7 @@ public class GameThread extends Throwable {
 		 * --------------------Chapter 2--------------------
 		 * 
 		 */
-		if (true) {
+		if (player.getChapter() == 2) {
 			Hub chapter2Hub = instantiateHub(player, "Castle Common Grounds");
 			
 			chapterCompleted = false;
@@ -160,8 +157,7 @@ public class GameThread extends Throwable {
 				willProgress = chapter2Hub.start(keyboard);
 				// Save functionality
 				if(!willProgress) {
-					GameData saving = new GameData(player, chapter2Hub);
-					save(saving);
+					save(player);
 					try {
 						System.exit(0);
 					} catch (SecurityException e) {
@@ -175,9 +171,7 @@ public class GameThread extends Throwable {
 					
 					if (chapterCompleted) {
 						inChapter = false;
-						/*
-						 * Increment player's chapter counter
-						 */
+						player.setChapter(player.getChapter() + 1);
 					}
 				}
 			}
@@ -188,7 +182,7 @@ public class GameThread extends Throwable {
 		 * --------------------Chapter 3--------------------
 		 * 
 		 */
-		if (true) {
+		if (player.getChapter() == 3) {
 			Hub chapter3Hub = instantiateHub(player, "Castle Upper-Class Lobby");
 			
 			chapterCompleted = false;
@@ -198,8 +192,7 @@ public class GameThread extends Throwable {
 				willProgress = chapter3Hub.start(keyboard);
 				// Save functionality
 				if(!willProgress) {
-					GameData saving = new GameData(player, chapter3Hub);
-					save(saving);
+					save(player);
 					try {
 						System.exit(0);
 					} catch (SecurityException e) {
@@ -233,9 +226,7 @@ public class GameThread extends Throwable {
 					}
 					if (chapterCompleted) {
 						inChapter = false;
-						/*
-						 * Increment player's chapter counter
-						 */
+						player.setChapter(player.getChapter() + 1);
 					}
 				}
 			}
@@ -246,7 +237,7 @@ public class GameThread extends Throwable {
 		 * --------------------Chapter 4--------------------
 		 * 
 		 */
-		if (true) {
+		if (player.getChapter() == 4) {
 			Hub chapter4Hub = instantiateHub(player, "Castle Hero's Sector");
 			boolean finalChant = true;
 			Battle dragonFight = new Battle(player, eList.gilgemeshTheDragon, eList.gilgemeshsChildren);
@@ -258,8 +249,7 @@ public class GameThread extends Throwable {
 				willProgress = chapter4Hub.start(keyboard);
 				// Save Functionality
 				if(!willProgress) {
-					GameData saving = new GameData(player, chapter4Hub);
-					save(saving);
+					save(player);
 					try {
 						System.exit(0);
 					} catch (SecurityException e) {
@@ -339,10 +329,9 @@ public class GameThread extends Throwable {
 		
 	}
 	
-	@SuppressWarnings("unused")
 	public static Hub instantiateHub(Player player, String location) {
 		// Chapter 1
-		if (true) {
+		if (player.getChapter() == 1) {
 			Shopkeeper shopkeeperCh1 = new Shopkeeper();
 			String shopNameCh1 = "";
 			Shop ch1Shop = new Shop(player, shopkeeperCh1, shopNameCh1);
@@ -355,7 +344,7 @@ public class GameThread extends Throwable {
 			return chapter1Hub;
 		}
 		// Chapter 2
-		if (true) {
+		if (player.getChapter() == 2) {
 			Shopkeeper shopkeeperCh2 = new Shopkeeper();
 			String shopNameCh2 = "";
 			Shop ch2Shop = new Shop(player, shopkeeperCh2, shopNameCh2);
@@ -368,7 +357,7 @@ public class GameThread extends Throwable {
 			return chapter2Hub;
 		}
 		// Chapter 3
-		if (true) {
+		if (player.getChapter() == 3) {
 			Shopkeeper shopkeeperCh3 = new Shopkeeper();
 			String shopNameCh3 = "";
 			Shop ch3Shop = new Shop(player, shopkeeperCh3, shopNameCh3);
@@ -381,7 +370,7 @@ public class GameThread extends Throwable {
 			return chapter3Hub;
 		}
 		// Chapter 4
-		if (true) {
+		if (player.getChapter() == 4) {
 			Shopkeeper shopkeeperCh4 = new Shopkeeper();
 			String shopNameCh4 = "";
 			Shop ch4Shop = new Shop(player, shopkeeperCh4, shopNameCh4);
@@ -614,7 +603,7 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 
 		breakLine();
-		win = miniBoss.startBattle(scn);
+		win = miniBoss.startBattle(scn, true);
 		breakLine();
 
 		if (win) {
@@ -892,7 +881,7 @@ public class GameThread extends Throwable {
 
 		breakLine();
 
-		win = meleeTutorial.startBattle(scn);
+		win = meleeTutorial.startBattle(scn, true);
 
 		if (win) {
 
@@ -2117,11 +2106,11 @@ public class GameThread extends Throwable {
 		while (!win) {
 
 			if (battleCount % 3 == 0) {
-				if (battle2.startBattle(scn)) {
+				if (battle2.startBattle(scn, true)) {
 					battleCount++;
 				}
 			} else {
-				if (battle1.startBattle(scn)) {
+				if (battle1.startBattle(scn, true)) {
 					battleCount++;
 				}
 			}
@@ -2156,7 +2145,7 @@ public class GameThread extends Throwable {
 		breakLine();
 
 		while (!win) {
-			win = bossBattle.startBattle(scn);
+			win = bossBattle.startBattle(scn, true);
 		}
 
 		if (win) {
