@@ -2081,7 +2081,7 @@ public class GameThread extends Throwable {
 				Pause.pause(350);
 				break;
 			}
-		}
+ 		}
 
 		if (input == '1') {
 			Dialogue.characterDialogue(ally1Name, "I wouldn't go that far. But, we have heard of each other.\n\n",

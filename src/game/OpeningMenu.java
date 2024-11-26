@@ -2,7 +2,7 @@ package game;
 
 import java.util.Scanner;
 
-public class openingMenu {
+public class OpeningMenu {
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -10,25 +10,25 @@ public class openingMenu {
     public static Player showOpeningMenu() {
 
         while (true) {
-            System.out.println("=== Welcome to the Game ===\n1. New Game\n2. Load Saved Game\n3. Exit\nChoose an option: ");
+            System.out.println("=== Welcome to the Game ===\n1. New Game\n2. Load Saved Game\n3. Settings\n4. Exit\nChoose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    // Start a new game
+                    // New game
                     System.out.println("Starting New Game...");
                     return new Player();
                 case 2:
-                    // Load saved game
+                    // Saved game
                     GameData gameData = GameThread.load();
                     if (gameData != null) {
                         System.out.println("Game loaded successfully.");
                         return gameData.getPlayer();
                     } else {
                         System.out.println("No saved game found or failed to load.");
+                        break;
                     }
-                    break;
                 case 3:
                     // Settings (placeholder)
                     System.out.println("=== Settings ===\nSettings placeholder...");
