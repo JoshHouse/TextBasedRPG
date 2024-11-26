@@ -2300,28 +2300,28 @@ public class GameThread extends Throwable {
 	}
 
 	/**
-	 * Takes and serializes GameData object and stores it in a file to be reloaded later
+	 * Takes and serializes Player object and stores it in a file to be reloaded later.
 	 *
-	 * @param gameData Combination of player and shop objects
+	 * @param player saved player
 	 */
-	public static void save(GameData gameData) {
+	public static void save(Player player) {
 		try (FileOutputStream fileOut = new FileOutputStream("gameSave.ser");
 			 ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-			out.writeObject(gameData);
+			out.writeObject(player);
 			System.out.println("Game saved successfully.");
 		} catch (Exception e) {e.printStackTrace();}
 	}
 
 	/**
-	 * Reads and deserializes GameData object (player and shop objects).
-	 * Deserialized GameData object is returned.
+	 * Reads and deserializes Player object.
+	 * Deserialized Player object is returned.
 	 */
-	public static GameData load() {
+	public static Player load() {
 		try (FileInputStream fileIn = new FileInputStream("gameSave.ser");
 			 ObjectInputStream in = new ObjectInputStream(fileIn)) {
-			GameData gameData = (GameData) in.readObject();
+			Player player = (Player) in.readObject();
 			System.out.println("Game loaded successfully.");
-			return gameData;
+			return player;
 		} catch (Exception e) {e.printStackTrace();}
 		return null;
 	}

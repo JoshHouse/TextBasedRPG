@@ -22,10 +22,10 @@ public class OpeningMenu {
                     return new Player(name);
                 case 2:
                     // Saved game
-                    GameData gameData = GameThread.load();
-                    if (gameData != null) {
+                    Player player = GameThread.load();
+                    if (player != null) {
                         System.out.println("Game loaded successfully.");
-                        return gameData.getPlayer();
+                        return player;
                     } else {
                         System.out.println("No saved game found or failed to load.");
                         break;
