@@ -185,7 +185,7 @@ public class Player extends GameChar {
 	public void profile() {
 
 		System.out.println("-----------------------YOUR PROFILE-----------------------------\nName: " + this.getName()
-				+ "\nLevel: " + this.getLevel() + "\nEXP till next level: " + (int) (this.expThreshold - this.getExp())
+				+ "\nChapter: " + this.getChapter() + "\nLevel: " + this.getLevel() + "\nEXP till next level: " + (int) (this.expThreshold - this.getExp())
 				+ "\nMax HP: " + this.getHealth() + "\t\tMana: " + this.mana + "\nLuck: " + this.lvlLuck
 				+ "\t\t\tMoney: " + this.getCurrency() + "\n\t\t\t-----Levels-----\n" + "Melee Lv: " + this.lvlMelee
 				+ "\tRanged Lv: " + this.lvlRanged + "\tRouge Lv: " + this.lvlRogue + "\tMage Lv: " + this.lvlMage
