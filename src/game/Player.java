@@ -7,6 +7,7 @@ public class Player extends GameChar {
 
 	// -------------------Variables-------------------
 
+	private int chapter;
 	private int mana;
 	private int currMana;
 	private double expThreshold;
@@ -24,6 +25,7 @@ public class Player extends GameChar {
 	 */
 	public Player() {
 		super();
+		this.chapter = 1;
 		this.mana = 0;
 		this.expThreshold = 100;
 		this.lvlMelee = 1;
@@ -43,6 +45,7 @@ public class Player extends GameChar {
 	 * @param inputLevel
 	 * @param inputExp
 	 * @param inputEquipped
+	 * @param chapter
 	 * @param inputMana
 	 * @param inputlvlMelee
 	 * @param inputlvlRanged
@@ -51,10 +54,11 @@ public class Player extends GameChar {
 	 * @param inputlvlLuck
 	 */
 	public Player(String inputName, Inventory inputInventory, int inputCurrency, int inputHealth, int inputLevel,
-			int inputExp, int inputMana, int inputlvlMelee, int inputlvlRanged, int inputlvlMage, int inputlvlRogue,
+			int inputExp, int chapter, int inputMana, int inputlvlMelee, int inputlvlRanged, int inputlvlMage, int inputlvlRogue,
 			int inputlvlLuck) {
 
 		super(inputName, inputInventory, inputCurrency, inputHealth, inputLevel, inputExp);
+		this.chapter = chapter;
 		this.mana = inputMana;
 		this.expThreshold = 100;
 		for (int x = 1; x < this.getLevel(); x++) {
@@ -74,6 +78,7 @@ public class Player extends GameChar {
 	 */
 	public Player(String inputName) {
 		super(inputName);
+		this.chapter = 1;
 		this.mana = 100;
 		this.expThreshold = 100;
 		this.lvlMelee = 1;
@@ -85,6 +90,10 @@ public class Player extends GameChar {
 	}
 
 	// -------------------Getters-------------------
+
+	public int getChapter() {
+		return this.chapter;
+	}
 
 	public int getMana() {
 		return this.mana;
@@ -124,9 +133,9 @@ public class Player extends GameChar {
 
 	// -------------------Setters-------------------
 
-	public void setMana(int mana) {
-		this.mana = mana;
-	}
+	public void setChapter(int chapter) { this.chapter = chapter; }
+
+	public void setMana(int mana) { this.mana = mana; }
 	
 	public void setCurrMana(int inputCurrMana) {
 		this.currMana = inputCurrMana;

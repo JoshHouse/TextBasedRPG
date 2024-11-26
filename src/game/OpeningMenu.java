@@ -18,8 +18,7 @@ public class OpeningMenu {
                 case 1:
                     // New game
                     System.out.println("Starting New Game...\n\nYou wake up confused and unsure of your surroundings...\nYou try to remember your own name..? ");
-                    String name = scanner.nextLine();
-                    return new Player(name);
+                    return new Player(scanner.nextLine());
                 case 2:
                     // Saved game
                     Player player = GameThread.load();
