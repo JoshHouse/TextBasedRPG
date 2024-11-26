@@ -45,7 +45,7 @@ public class Hub implements Serializable {
 	public String[] getSearchTxt() {
 		return this.searchTxt;
 	}
-	
+
 	private Enemy getCurrEnemy() {
 		return this.currEnemy;
 	}
@@ -71,7 +71,7 @@ public class Hub implements Serializable {
 	public void setSearchTxt(String[] searchTxt) {
 		this.searchTxt = searchTxt;
 	}
-	
+
 	private void setCurrEnemy(Enemy currEnemy) {
 		this.currEnemy = currEnemy;
 	}
@@ -90,7 +90,8 @@ public class Hub implements Serializable {
 					+ "1) View Character\t" + "2) Search Around\n" + "3) Go Shopping\t\t"
 					+ "4) Change Equipped Weapon\n" + "5) Progress Story\t" + "6) Rest\n" + "7) Save & Exit\n"
 					+ "-----------------------------------------\n\nSelect what you would like to do: ";
-			String charMenu = "\n1) Your Profile\n2) Your Weapons\n3) Your Consumables\n4) Cancel\nChoice: ";
+			String charMenu = "\n1) Your Profile\n2) Your Weapons\n3) Your Consumables\n4) Use skill points\n"
+					+ "5) Cancel\nChoice: ";
 			Dialogue.infoDialogue(mainMenu, 10);
 			input = scn.next().charAt(0);
 
@@ -115,7 +116,10 @@ public class Hub implements Serializable {
 					case '3': // View Player's Consumables
 						player.showInventory('c', scn);
 						break;
-					case '4': // Cancel and return to Main Menu
+					case '4': // Use Skill Points
+						player.increaseStats(scn);
+						break;
+					case '5': // Cancel and return to Main Menu
 						opt1 = false;
 						break;
 					default:
@@ -138,7 +142,7 @@ public class Hub implements Serializable {
 
 					if (Luck.luckEvent(50)) {
 						Dialogue.infoDialogue("Enemy Found!\n\n", 4);
-						this.setCurrEnemy(enemies.get(Luck.getRandNum(enemies.size()))); 
+						this.setCurrEnemy(enemies.get(Luck.getRandNum(enemies.size())));
 						searching = false;
 						battling = true;
 					} else {
@@ -207,4 +211,3 @@ public class Hub implements Serializable {
 	}
 
 }
-
