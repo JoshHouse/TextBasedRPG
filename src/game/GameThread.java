@@ -391,6 +391,17 @@ public class GameThread extends Throwable {
 	}
 	
 	public static void KingsFinalMission(Player player) {
+		int txtSpd = 25;
+		Dialogue.characterDialogue("King Mightus", "It is very impressive that you have managed to satisfy one of "
+				+ "my council members. They are not easy to please! I have recieved high praise from them that you "
+				+ "are someone that can be relied on. If you are as good as they say, I have a mission that I believe "
+				+ "you might find intriguing, although it would be your greatest challenge yet. There is a dragon at "
+				+ "the top of Mount Doom named Gilgemesh that has terrorized our kingdom for decades. There has not been a "
+				+ "single soldier nor adventurer that has been able to topple the Dragon. Since you have arived here, you "
+				+ "have taken on every challenge that has been presented to you so I have an inclination you might find "
+				+ "this proposal appealing. If you managed to conquer this dragon, you would free our kingdom from its rain "
+				+ "of tyrany and we would forever be indebted to you. Based on how you would like to approach this battle, "
+				+ "speak to one of my council members for advice, as their specialty in certain areas will be of more aid to you.", txtSpd);
 	}
 	
 	public static boolean meleeDragonApproach(Player player, Scanner scn) {
