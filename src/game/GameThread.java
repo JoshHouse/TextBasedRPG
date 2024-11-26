@@ -331,7 +331,7 @@ public class GameThread extends Throwable {
 	}
 	// --------------------Formatting Functions--------------------
 	public static void breakLine() {  
-	    System.out.println("------------------------------");
+	    System.out.println("------------------------------------------------------------------------------------------");
 	}
 	
 	// --------------------General Functions--------------------
@@ -404,16 +404,161 @@ public class GameThread extends Throwable {
 	public static void KingsFinalMission(Player player) {
 	}
 	
-	public static boolean meleeDragonApproach(Player player, Scanner keyboard) {
+	public static boolean meleeDragonApproach(Player player, Scanner scn) {
 
+		String kingKnight = "Paris, King's Left Hand";
 		Battle miniBoss = new Battle(player, eList.dWar);
 		boolean win = false;
 		int txtSpd = 25, wait = 1000;
+		boolean pResponse;
+		char input = 0;
+		
+		breakLine();
+		
+		Dialogue.infoDialogue("Once again, you find yourself in the company of Paris, having been called out by the king's "
+				+ "knight in regards to another mission. This time, the condescending look on his face was gone by the time "
+				+ "you arrived.\n\n"
+				, txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Well, look what the cat finally dragged in.\n\n", txtSpd);
+		Pause.pause(wait + 500);
+		
+		Dialogue.infoDialogue("...ONLY the look wasn't present.\n\n", txtSpd + 10);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Adicai's been singing nothing but praises for you for a while, and I have to "
+				+ "admit, even I am impressed to hear that the goblin champion fell by your hands and your hands alone. You "
+				+ "aren't the same wannabe hero that you were when we first met. You might actually be the perfect fit for a "
+				+ "task such as this.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) And that task would be...?\n2) You? Praising me? What a surprise!\nReponse: "
+					, 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+		
+		if (input == '1') {
+			Dialogue.characterDialogue(kingKnight, "How hard is it to wait til I finish talking? I was getting to that.\n\n",
+					txtSpd);
+		} else {
+			Dialogue.characterDialogue(kingKnight, "Yes, yes. As surprising as it may seem, you actually earned it.\n\n", 
+					txtSpd);
+		}
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Now then, this is something that I myself along with the other key advisors "
+				+ "to the king have been focusing on. This kingdom has always been in grave jeopardy at the hands of a "
+				+ "powerful dragonlord. Sitting on top of the tallest mountain you can see from the castle gates is where its"
+				+ " nest is positioned. Naturally, you would think that we would have dealt with this by now what with all "
+				+ "the information we have. However, there's a slight issue.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "It's... impossible for even us to reach that peak. Although most of the lesser"
+				+ " dragons around the mountaintop have been dealt with, a handful remain. Furthermore, too many men have died"
+				+ " making the climb up the mountain. We've had no luck finding a better path. A warrior such as yourself was"
+				+ " capable of besting an entire army by yourself, so this may be doable for you.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "I need you to scout around the mountain without going past the midpoint. If "
+				+ "you can find a passageway up to the peak where the dragonlord resides, then I swear that a hefty reward "
+				+ "will be waiting for you the moment you find it and we confirm that you've done so.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) ...What would the reward be if I were to defeat the dragonlord while I'm there?\n"
+					+ "Reponse: "
+					, 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+		
+		Dialogue.characterDialogue(kingKnight, "What?! Have you gone mad?! To take on the dragonlord single-handedly, that's "
+				+ "a fool's task! It's impossible! Suicide! You'd never survive!\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "The king's elite will lead a force strong enough to handle the dragonlord. We "
+				+ "don't need you to attempt to play hero by yourself.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) But that would lead to lots of casualties\n2) I don't care if you think I can handle it."
+					+ "\nReponse: "
+					, 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+		
+		if (input == '1') {
+			Dialogue.characterDialogue(kingKnight, "Well, yes... that is true, I...\n\n", txtSpd);
+		} else {
+			Dialogue.characterDialogue(kingKnight, "Are you that desperate to prove something here...?\n\n", txtSpd);
+		}
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Paris let out a loud sigh.\n\n", txtSpd);
+		Pause.pause(wait * 2);
+		
+		Dialogue.characterDialogue(kingKnight, "Hypothetically speaking... We're you capable of defeating a dragonlord without"
+				+ " any form of aid, we would allow you to name your price in terms of payment. I can't think of any other way"
+				+ " that it'd be fair for your efforts. Hoever, this is merely a hypothetical situation. Only a fool would go "
+				+ "out there and attempt to play hero over it.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Regardless, I've given you your ACTUAL mission already. Head to the mountain "
+				+ "and find a path for our army to march up to the dragonlord. You will be paid handsomely upon your return."
+				+ "\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Despite Paris' warning, your mind was already made up. You had every intention of putting your "
+				+ "strength to the test against this dragonlord. Of course, you still had to find your own way up. With your "
+				+ "weapons ready to go, you set off towards the mountains, ready to climb towards your destination.\n\n"
+				+ "", txtSpd);
+		Pause.pause(wait);
+		
+		Pause.pause();
+		
+		breakLine();
 
 		Dialogue.infoDialogue(
-				"By this point, the kingdom looks like a simple town with how far you've come. Per the king's request, you\n"
+				"By this point, the kingdom looks like a simple town with how far you've come. Per the king's request, you "
 						+ "ascended into the mountaintops to reach the dragonlord's lair. You've not even come close "
-						+ "to entering, and\n"
+						+ "to entering, and "
 						+ "the sounds of it, and the nearby dragons fill your eardrums and mind with dread.\n\n",
 				txtSpd);
 		Pause.pause(wait);
@@ -427,69 +572,69 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 		Dialogue.infoDialogue("The field of bones around you. ", txtSpd);
 		Pause.pause(wait);
-		Dialogue.infoDialogue("The weapons\nof those who previously challenged it. ", txtSpd);
+		Dialogue.infoDialogue("The weapons of those who previously challenged it.\n", txtSpd);
 		Pause.pause(wait);
 		Dialogue.infoDialogue("All these things fill you with both fear, and determination.\n\n", txtSpd);
 		Pause.pause(wait);
 		txtSpd -= 15;
 
 		Dialogue.infoDialogue(
-				"With your goal in mind, you push on ahead further up the mountain. By this point, it appears that the sides\n"
+				"With your goal in mind, you push on ahead further up the mountain. By this point, it appears that the sides "
 						+ "are becoming too steep for you to continue climbing, and you'd likely fall to your death "
-						+ "before ever seeing\nthe dragonlord. Having a look around, you can see a flat area of the mountain, "
+						+ "before ever seeing the dragonlord. Having a look around, you can see a flat area of the mountain, "
 						+ "with a weak spot in the side.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
-				"Climbing up and walking to that spot, you peered through the cracks to see that the inside was hollowed, as\n"
+				"Climbing up and walking to that spot, you peered through the cracks to see that the inside was hollowed, as "
 						+ "if a path had been carved inside of the mountain that would lead you up safely. "
-						+ "Taking out the great Phoenix\n"
+						+ "Taking out the great Phoenix "
 						+ "Cleaver received from Adicai, you strike the cracked wall with all your might, "
-						+ "shattering it and giving you a\nclearer view of the carved path ahead.\n\n",
+						+ "shattering it and giving you a clearer view of the carved path ahead.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
-				"You stepped into the hollowed mountain and swing the greataxe in order to cause the blade to light ablaze,\n"
+				"You stepped into the hollowed mountain and swing the greataxe in order to cause the blade to light ablaze, "
 						+ "giving you a light so that you can see ahead. It appeared that you had stepped foot into a large "
-						+ "cavern with\nan empty nest in the center, and a broken spiral staircase carved out into the walls "
-						+ "leading both up and down.\nThough the stairs were burned and broken, they were stable and long "
-						+ "enough that you'd have the might to make\nit to the top.\n\n",
+						+ "cavern with an empty nest in the center, and a broken spiral staircase carved out into the walls "
+						+ "leading both up and down. Though the stairs were burned and broken, they were stable and long "
+						+ "enough that you'd have the might to make it to the top.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
 				"However, you were taken back by a loud roar as a humanoid creature descended from above, landing on the "
-						+ "ground\nhard as a crate formed beneath its scaly feet. Before you was a draconic being that was "
-						+ "only slightly taller\nthan you, standing upright and wielding a long glaive. You could feel "
-						+ "its murderous intent from miles away,\neven if it hadn't said a word. The dragonoid growled "
+						+ "ground hard as a crate formed beneath its scaly feet. Before you was a draconic being that was "
+						+ "only slightly taller than you, standing upright and wielding a long glaive. You could feel "
+						+ "its murderous intent from miles away, even if it hadn't said a word. The dragonoid growled "
 						+ "as it ready its weapon, challenging you to a fight.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		breakLine();
-		win = miniBoss.startBattle(keyboard, true);
+		win = miniBoss.startBattle(scn);
 		breakLine();
 
 		if (win) {
 
 			Dialogue.infoDialogue(
 					"The dragonoid warrior collapsed dead at your feet as you look around, trying to see if it came alone "
-							+ "or had\nfriends lying in wait. Not seeing or hearing another living soul in the cavern, "
-							+ "you begin making your way\nup the spiral staircase.\n\n",
+							+ "or had friends lying in wait. Not seeing or hearing another living soul in the cavern, "
+							+ "you begin making your way up the spiral staircase.\n\n",
 					txtSpd);
 			Pause.pause(wait);
 
 			Dialogue.infoDialogue("The further you head up, you begin to see an opening at the top, and the "
-					+ "sight of a dragon flying around \nhigh in the sky. You make your way closer and closer"
+					+ "sight of a dragon flying around high in the sky. You make your way closer and closer"
 					+ " to the top, conserving your stamina for the fight\nto come.\n\n", txtSpd);
 			Pause.pause(wait);
 
 			Dialogue.infoDialogue("Finally... you reach the top.\n\n", txtSpd);
 			Pause.pause(wait);
 
-			Dialogue.infoDialogue("You mentally prepare yourself as the dragon above... the dragonlord...\n"
+			Dialogue.infoDialogue("You mentally prepare yourself as the dragon above... the dragonlord... "
 					+ "sees you and descends...", txtSpd);
 			Pause.pause(wait);
 
@@ -531,17 +676,22 @@ public class GameThread extends Throwable {
 		char input = ' ';
 		boolean win = false;
 		String charName = "???";
-
 		Battle meleeTutorial = new Battle(player, eList.tutor1);
 
-		System.out.println(
-				"---------------------------------------------------------------------------------------------------");
+		breakLine();
 
 		Dialogue.infoDialogue(
-				"Looking around, you could see that the place was... old. The shop wasn't in the best of shape. It's\n"
-						+ "likely been around for a long time. The walls and floors were filled with cracks. Even though the\n"
+				"As you arrive in the city, you decide that your first course of action should be to visit someplace "
+						+ "where you can acquire a proper armament. Strolling around for a bit, you stumble upon an armory "
+						+ "that would suit your needs.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"Looking around, you could see that the place was... old. The shop wasn't in the best of shape. It's "
+						+ "likely been around for a long time. The walls and floors were filled with cracks. Even though the "
 						+ "interior seemed to be a mess, the weapons racks were in great condition, and all of the weapons "
-						+ "were\nin great condition, a noteworthy contrast to the armory itself.\n\n",
+						+ "were in great condition, a noteworthy contrast to the armory itself.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
@@ -549,14 +699,14 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
-				"In the corner next to a furnace, there was an older gentlemen with gray, spiky hair and beard seated,\n"
-						+ "pounding the dents out of a blade that had just been forged in the fire. He looked over, getting a\n"
-						+ "good look at you.\n\n",
+				"In the corner next to a furnace, there was an older gentlemen with gray, spiky hair and beard seated, "
+						+ "pounding the dents out of a blade that had just been forged in the fire. He looked over, getting a"
+						+ " good look at you.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(charName,
-				"Oh? For a minute, I thought you were one of the usual land hawks. Oh well, not that any of that matters \n"
+				"Oh? For a minute, I thought you were one of the usual land hawks. Oh well, not that any of that matters "
 						+ "to you. You're new around these parts, aren't you?\n\n",
 				txtSpd);
 		Pause.pause(wait);
@@ -579,12 +729,12 @@ public class GameThread extends Throwable {
 
 		if (input == '1') {
 			Dialogue.characterDialogue(charName,
-					"When you've been around as long as I have, you meet a lot of people. There's not a single person in this\n"
+					"When you've been around as long as I have, you meet a lot of people. There's not a single person in this "
 							+ "city I haven't seen before, except the tourist in front of me.\n\n",
 					txtSpd);
 		} else {
 			Dialogue.characterDialogue(charName,
-					"If you're going to lie to an old man, try to make it sound convincing. I've been around for a long time.\n"
+					"If you're going to lie to an old man, try to make it sound convincing. I've been around for a long time. "
 							+ "I'd recognize a tourist anywhere.\n\n",
 					txtSpd);
 		}
@@ -595,13 +745,13 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
-				"As the blade cooled down, the blacksmith finished what he was working on and walked over to you. As he got\n"
+				"As the blade cooled down, the blacksmith finished what he was working on and walked over to you. As he got "
 						+ "a good look at you, his eyes seemed to light up with interest.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(charName,
-				"Hmm? Those eyes... That's the look of a warrior-to-be. So, you're someone with the heart of the fighter...\n"
+				"Hmm? Those eyes... That's the look of a warrior-to-be. So, you're someone with the heart of the fighter... "
 						+ "Been a while since I've met a rookie adventurer. I remember when I was in your shoes a few decades "
 						+ "ago.\n\n",
 				txtSpd);
@@ -610,9 +760,9 @@ public class GameThread extends Throwable {
 		charName = "Jagatai, Retired Warrior";
 
 		Dialogue.characterDialogue(charName,
-				"My name's Jagati. I used to be a warrior when I was younger, but my adventuring days are long behind me.\n"
+				"My name's Jagati. I used to be a warrior when I was younger, but my adventuring days are long behind me. "
 						+ "If you're looking for a good place to get started with making a name for yourself, you've come"
-						+ " to the right\nplace. Though, since your a greenhorn, "
+						+ " to the right place. Though, since your a greenhorn, "
 						+ "I feel the need to ask--Are you aware of the basics of combat?\n\n",
 				txtSpd);
 		Pause.pause(wait);
@@ -643,21 +793,21 @@ public class GameThread extends Throwable {
 
 			Dialogue.characterDialogue(charName,
 					"Fighters like us, we obviously specialize in being up close and personal. Swords, spears, axes, we've "
-							+ "got a\nvariety of weapons to attack with, some of them imbued with their own special attacks."
+							+ "got a variety of weapons to attack with, some of them imbued with their own special attacks."
 							+ "\n\n",
 					txtSpd);
 			Pause.pause(wait);
 
 			Dialogue.characterDialogue(charName,
 					"Special attacks are techniques that are imbued into a weapon during their forging, allowing "
-							+ "their wielder to\ndemonstrate lethal damage by calling them forth. But, there's a catch."
+							+ "their wielder to demonstrate lethal damage by calling them forth. But, there's a catch."
 							+ "\n\n",
 					txtSpd);
 			Pause.pause(wait);
 
 			Dialogue.characterDialogue(charName,
 					"Not just anybody can call them out at will. You've gotta be real lucky if you want to use "
-							+ "a special attack\nsuccessfully. Bit of a \"high risk, high reward\" scenario, yeah?\n\n",
+							+ "a special attack successfully. Bit of a \"high risk, high reward\" scenario, yeah?\n\n",
 					txtSpd);
 			Pause.pause(wait);
 
@@ -668,7 +818,7 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(charName,
-				"You've got the basics in your head, but the only way to really remember them is to put them into practice.\n"
+				"You've got the basics in your head, but the only way to really remember them is to put them into practice. "
 						+ "Here, I'll give you a little something to start your journey off with.\n\n",
 				txtSpd);
 		Pause.pause(wait);
@@ -682,7 +832,7 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(charName,
-				"Don't get too excited over a free gift. It's just a simple blade. Nobody's imbued a special attack in\n"
+				"Don't get too excited over a free gift. It's just a simple blade. Nobody's imbued a special attack in "
 						+ "it, and it doesn't use mana for anything. Oh, by the way, you know what mana is, don't you?\n\n",
 				txtSpd);
 		Pause.pause(wait);
@@ -709,50 +859,49 @@ public class GameThread extends Throwable {
 					"So you do. Then you know it's not really something you'd be using.\n\n", txtSpd);
 		} else {
 			Dialogue.characterDialogue(charName,
-					"Mana's what mages use in their wands and weapons. It's an energy within a person's body that's expelled\n"
+					"Mana's what mages use in their wands and weapons. It's an energy within a person's body that's expelled "
 							+ "to attack or defend. I don't know too much about it, magic ain't my thing.\n\n",
 					txtSpd);
 		}
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
-				"As you take a moment to observe the blade that you had been given, Jagatai picks up a black longsword\n"
+				"As you take a moment to observe the blade that you had been given, Jagatai picks up a black longsword "
 						+ "before patting you on the shoulder, walking towards the door at the back of the armory.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(charName,
-				"Well, there's no point in sitting there staring at that all day. Come on. I've got an old training spot\n"
+				"Well, there's no point in sitting there staring at that all day. Come on. I've got an old training spot "
 						+ "out back. Let's see if all of that knowledge is gonna pay off when you're in combat.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
-				"Sensing that a fight was coming, you steel your nerves before following the blacksmith, arriving in a\n"
+				"Sensing that a fight was coming, you steel your nerves before following the blacksmith, arriving in a "
 						+ "fenced in area outside. Jagatai walks a good distance away from you before turning around, "
 						+ "holding the\nsword in a middle guard stance.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(charName,
-				"Better not expect any weak swings just cause you're new and I'm old. A couple of swings should help you\n"
+				"Better not expect any weak swings just cause you're new and I'm old. A couple of swings should help you "
 						+ "get the feel of things, so try not to get banged up too much. Now bring it!\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
-		System.out.println(
-				"---------------------------------------------------------------------------------------------------");
+		breakLine();
 
-		win = meleeTutorial.startBattle(scn, true);
+		win = meleeTutorial.startBattle(scn);
 
 		if (win) {
 
 			Dialogue.infoDialogue(
-					"(As you battle enemies during your adventure, you will earn EXP after defeating them, the amount varying\n"
+					"(As you battle enemies during your adventure, you will earn EXP after defeating them, the amount varying "
 							+ "from enemy to enemy. Once you gain enough EXP, you will level up. Your stats will increase, "
-							+ "and you will\nreceive a skill point to spend on one of the class stats, or your luck stat. You "
-							+ "can view your overall\nlevel, the level of each stat, how much EXP you need to level up again, "
-							+ "and how many skill points you\nhave available to spend all from your profile "
+							+ "and you will receive a skill point to spend on one of the class stats, or your luck stat. You "
+							+ "can view your overall level, the level of each stat, how much EXP you need to level up again, "
+							+ "and how many skill points you have available to spend all from your profile "
 							+ "after the tutorial.)\n\n",
 					txtSpd);
 			Pause.pause(wait);
@@ -763,19 +912,19 @@ public class GameThread extends Throwable {
 
 			Dialogue.infoDialogue(
 					"The sparring session lasted barely over a minute before Jagatai found himself satisfied with you, "
-							+ "putting\naway his weapon before nodding his head in approval.\n\n",
+							+ "putting away his weapon before nodding his head in approval.\n\n",
 					txtSpd);
 			Pause.pause(wait);
 
 			Dialogue.characterDialogue(charName,
 					"Looks like you've got a natural talent for combat too. I might not be in my prime anymore, but I "
-							+ "can still\nsee you growing into the kind of warrior that could give me a run for my money.\n\n",
+							+ "can still see you growing into the kind of warrior that could give me a run for my money.\n\n",
 					txtSpd);
 			Pause.pause(wait);
 
 			Dialogue.characterDialogue(charName,
 					"You'll do just fine out there as you learn and grow. Pretty soon, I'll be expecting to hear tales "
-							+ "of your\naccomplishments. So, what's the name that I should be looking "
+							+ "of your accomplishments. So, what's the name that I should be looking "
 							+ "out for in the future?\n\n",
 					txtSpd);
 			Pause.pause(wait);
@@ -797,7 +946,7 @@ public class GameThread extends Throwable {
 
 			Dialogue.infoDialogue(
 					"With Jagatai's words of praise fresh in your mind and a new sword in your hands, "
-							+ "you exit the armory with\nyour morale high, ready to embark on your new adventure.\n\n",
+							+ "you exit the armory with your morale high, ready to embark on your new adventure.\n\n",
 					txtSpd);
 			Pause.pause(wait);
 
@@ -1739,6 +1888,7 @@ public class GameThread extends Throwable {
 		boolean pResponse;
 		char input = ' ';
 		boolean win = false;
+		String kingKnight = "Paris, King's Left Hand";
 		String ally1Name = "Jagatai, Retired Warrior", ally2Name = "Knight Adicai";
 		String boss1Name = "Kioq, Goblin Champion";
 		breakLine();
@@ -1748,23 +1898,116 @@ public class GameThread extends Throwable {
 
 		Battle battle1 = new Battle(player, e1), battle2 = new Battle(player, e2),
 				bossBattle = new Battle(player, eBoss);
+		
+		Dialogue.infoDialogue("You approach the king's chamber after receiving a summons concerning a new task for"
+				+ " you. However, you were quickly stopped as the chamber doors opened, and stepping out was one of the king's"
+				+ " loyal commanders, looking at you with a condescending expression.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "You've been quite busy I see. Trying to rack up a good reputation with the "
+				+ "royal court now by pleasing the king, are we? Quite ambitious for a rookie. But that's enough discussion. "
+				+ "I'm the one that sent that summons. I have a task for somebody that's unable to keep still. Someone like"
+				+ " you.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Though his attitude got annoying to you quickly, you knew that it'd be in your best interest "
+				+ "to listen to Paris' request.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Color me surprised to hear that a large band of goblins- yes those creatures-"
+				+ " have begun to organize themselves into a unit that threatens the safety of this kingdom. While it would "
+				+ "be extremely easy for me to deploy a platoon to deal with them and be on my way, I'd rather not waste "
+				+ "many of my own soldiers like this.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "So! What better way to solve the issue than to delegate it the new hotshot "
+				+ "adventurer that's the talk of the town? I want you to deal with the kingdom's goblin problem. I don't "
+				+ "intend to take no for an answer, so don't bother.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) I wasn't going to say no, so I'll be going now.\n2) Are you finished yet?\nReponse: "
+					, 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+		
+		if (input == '1') {
+			Dialogue.characterDialogue(kingKnight, "I do love how we're on the same page, but I would love it even more if you"
+					+ " didn't interrupt me. I wasn't finished talking.\n\n", txtSpd);
+		} else {
+			Dialogue.characterDialogue(kingKnight, "I'd be finished a lot sooner if you wouldn't interrupt me. Now, as I was "
+					+ "about to say...\n\n", txtSpd);
+		}
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("You begin to consider how bad walking away now would hurt your reputation, thinking just long "
+				+ "enough for Paris to say something interesting.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "General Adicai is insistent on heading out personally to defeat these goblins "
+				+ "alongside you. There's something about the appearance of a goblin champion that's made him restless, so "
+				+ "get along well with him.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "I suggest that you keep in mind that Adicai is far more important to this "
+				+ "kingdom that you'll ever be. Your most important duty will be to ensure that he returns safe and sound.\n\n"
+				, txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(ally2Name, "I am more than capable of taking care of myself, sir Paris.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Suddenly the general in question, Adicai, appraoches both you and Paris, having overheard the "
+				+ "conversation. After his initial statement, he turned to you as his tone softened.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(ally2Name, "You must be the new adventurer I've heard about. My name is Adicai. You needn't"
+				+ " worry about me on the battlefield. Our main goal will be to ensure that as many goblins are wiped out as "
+				+ "possible, and defeating the ringleader behind their organization. You can use whatever you see fit for "
+				+ "this operation. I'll be waiting for you to prepare.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "...Regardless of Adicai's concerns, keep in mind what I said. That is all."
+				+ " I'll leave you two to take care of this.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Paris headed back for the king's chamber. Adicai saluted you before he left. All that was left"
+				+ " to do was prepare yourself for the battle with the goblins... and you had an idea on how to do so.\n\n"
+				, txtSpd);
+		Pause.pause(wait);
+		
+		Pause.pause();
+		
+		breakLine();
 
 		Dialogue.infoDialogue(
-				"Under the orders of the king, you have been given the task of defeating the goblin army that has been\n"
-						+ "threatening the safety of this kingdom, working alongside of the king's generals, Adicai. "
-						+ "In order to\nhave as many allies as possible, you pay a visit to the blacksmith Jagatai, "
-						+ "in hopes of marching with a\nteam of three.\n\n",
+				"Under the orders of the king's knight, you have been given the task of defeating the goblin army that has "
+				+ "been threatening the safety of this kingdom, working alongside of the king's generals, Adicai. "
+						+ "In order to have as many allies as possible, you pay a visit to the blacksmith Jagatai, "
+						+ "in hopes of marching with a team of three.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(ally1Name,
-				"So you trust an old man enough to ask for his help against a horde of goblins, eh? I'm flattered. I\n"
+				"So you trust an old man enough to ask for his help against a horde of goblins, eh? I'm flattered. I "
 						+ "could use a little exercise.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(ally1Name,
-				"Make sure you're ready for this. I'm ready to go at any time. But once we're out there, don't expect\n"
+				"Make sure you're ready for this. I'm ready to go at any time. But once we're out there, don't expect "
 						+ "to turn back until we've wiped them out. Are you ready for this?\n\n",
 				txtSpd);
 		Pause.pause(wait);
@@ -1797,20 +2040,20 @@ public class GameThread extends Throwable {
 		breakLine();
 
 		Dialogue.infoDialogue("It was not long before your party set out to march on the goblin horde. "
-				+ "Leaving the safety of the kingdom\nand stepping out of the walls, you would soon find "
-				+ "that it would not take long to arrive at your\ndestination... or rather, your destination had moved "
-				+ "closer. Much closer. Only a few miles outside the \n"
+				+ "Leaving the safety of the kingdom and stepping out of the walls, you would soon find "
+				+ "that it would not take long to arrive at your destination... or rather, your destination had moved "
+				+ "closer. Much closer. Only a few miles outside the "
 				+ "kingdom, the goblin horde had managed to set up their camp for a closer attack.\n\n", txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(ally2Name,
-				"These foul beasts have the gall to set up an encampment on the outskirts of our borders? Hmph. Kioq is an\n"
+				"These foul beasts have the gall to set up an encampment on the outskirts of our borders? Hmph. Kioq is an "
 						+ "issue that I should have dealt with long ago.\n\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(ally1Name,
-				"Looks like the goblins have gotten restless and are about ready to ransack the place. There's no getting\n"
+				"Looks like the goblins have gotten restless and are about ready to ransack the place. There's no getting "
 						+ "the jump on them when they're this ready to go. Only way we're going to deal with this problem "
 						+ "is to\ntackle it head on.\n\n",
 				txtSpd);
@@ -1850,9 +2093,9 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue(ally2Name,
-				"Enough chatter for now. The ones on the front lines are weak. We'll tear through them with ease separately.\n"
+				"Enough chatter for now. The ones on the front lines are weak. We'll tear through them with ease separately. "
 						+ "Whichever one is first to reach the commander- the goblin's champion, Kioq- "
-						+ "may try their hand in gaining\nthe glory of taking his head.",
+						+ "may try their hand in gaining the glory of taking his head.",
 				txtSpd);
 		Pause.pause(wait);
 
@@ -1874,11 +2117,11 @@ public class GameThread extends Throwable {
 		while (!win) {
 
 			if (battleCount % 3 == 0) {
-				if (battle2.startBattle(scn, true)) {
+				if (battle2.startBattle(scn)) {
 					battleCount++;
 				}
 			} else {
-				if (battle1.startBattle(scn, true)) {
+				if (battle1.startBattle(scn)) {
 					battleCount++;
 				}
 			}
@@ -1892,7 +2135,7 @@ public class GameThread extends Throwable {
 		win = false;
 
 		Dialogue.infoDialogue(
-				"Battling your way through several goblins, you find yourself separated from your companions as more and\n"
+				"Battling your way through several goblins, you find yourself separated from your companions as more and "
 						+ "more goblins approached. Suddenly, they all stopped in place as loud footsteps "
 						+ "were stomping up behind you.\n\n",
 				txtSpd);
@@ -1902,7 +2145,7 @@ public class GameThread extends Throwable {
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue("Behind you was a massive, big-bellied goblin wielding a greataxe in each hand. "
-				+ "Judging by his size and presence,\n"
+				+ "Judging by his size and presence, "
 				+ "it was clear to you that this was the goblin champion you were after.\n\n", txtSpd);
 		Pause.pause(wait);
 
@@ -1913,15 +2156,15 @@ public class GameThread extends Throwable {
 		breakLine();
 
 		while (!win) {
-			win = bossBattle.startBattle(scn, true);
+			win = bossBattle.startBattle(scn);
 		}
 
 		if (win) {
 
 			Dialogue.infoDialogue("The champion of goblins now lays dead at your feet as you catch your breath. "
-					+ "Any goblins that were around you\n"
+					+ "Any goblins that were around you "
 					+ "began to back away in fear before they all ran away, abandoning their plan completely."
-					+ " As all your adversaries\n"
+					+ " As all your adversaries "
 					+ "were either dead or have fled, you could hear familiar footsteps as your companions "
 					+ "finally caught up with you.\n\n", txtSpd);
 			Pause.pause(wait);
@@ -1931,7 +2174,7 @@ public class GameThread extends Throwable {
 
 			Dialogue.characterDialogue(ally1Name,
 					"Sorry about the delay. There were more of these guys than we thought. "
-							+ "But, it looks like you didn't even need us\n"
+							+ "But, it looks like you didn't even need us "
 							+ "in the first place. Adicai was right to choose you for this.\n\n",
 					txtSpd);
 			Pause.pause(wait);
@@ -1972,11 +2215,11 @@ public class GameThread extends Throwable {
 
 			Dialogue.characterDialogue(ally2Name,
 					"This is the weapon of my father. Many years ago, he was slain in a war against the beasts of the earth, "
-							+ "and this\naxe was taken from his corpse. I was but a young lad back then, and hardly "
+							+ "and this axe was taken from his corpse. I was but a young lad back then, and hardly "
 							+ "with the power to "
-							+ "get it back. Now,\nI can finally rejoice knowing that the axe has been retrieved from the "
+							+ "get it back. Now, I can finally rejoice knowing that the axe has been retrieved from the "
 							+ "hands of the "
-							+ "goblin champion, a fool who\ncan't even wield the weapon to its fullest potential and draw out "
+							+ "goblin champion, a fool who can't even wield the weapon to its fullest potential and draw out "
 							+ "its special attack.\n\n",
 					txtSpd);
 
@@ -1991,7 +2234,7 @@ public class GameThread extends Throwable {
 
 			Dialogue.characterDialogue(ally2Name,
 					"As the slayer of Kioq, I want you to have this. Bring out the full potential of "
-							+ "this weapon in your quests. I wish\nnothing but success for you," + player.getName()
+							+ "this weapon in your quests. I wish nothing but success for you," + player.getName()
 							+ ".\n\n",
 					txtSpd);
 
