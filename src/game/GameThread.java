@@ -26,9 +26,9 @@ public class GameThread extends Throwable {
 
 		Scanner scn = new Scanner(System.in);
 
-		Player player = new Player("Josh");
-
-		mageChapter1(player, scn);
+		Player player = OpeningMenu.showOpeningMenu();
+		
+		GameChapters(player, scn);
 		
 		
 		
