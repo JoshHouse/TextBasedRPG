@@ -113,13 +113,180 @@ public class SpAtkList {
 	        2.0);
 
 	
-	// --------------------Magic Special Attacks--------------------
+	/*
+	 * 
+	 * --------------------Magic Special Attacks--------------------
+	 * 
+	 */
+	
+	// --------------------Chapter 1--------------------
+	
 	/** Special Attack - Power Beam */
 	public SpecialAttack pBeam = new SpecialAttack("Power Beam", 
-			"Shoots a deadly beam capable of putting a hole straight through whatever its pointed at!",
-			"Beams of light converge on the weapon, firing a blast of charged up energy!",
-			"Beams of light begin to converge on the weapon but quickly fizzle out! The power beam failed to fire!",
-			1.3);
+			"Shoots a deadly beam of charged up mana capable of putting a hole straight through whatever it's pointed at",
+			"Beams of light converge on your weapon, firing a blast of charged up energy",
+			"Beams of light converge on the weapon but quickly fizzle out. The power beam failed to fire!",
+			1.5);
+	
+	public SpecialAttack naturesGift = new SpecialAttack("Nature's Gift",
+			"Summons roots from the ground to encarcerate and impale your enemies!",
+			"Roots erupt from the ground, surrounding the enemy and dig into their body!",
+			"Roots begin to grow from the ground but then quickly sink back into the earth! Nature's gift failed to emerge!",
+			1.5);
+	
+	public SpecialAttack multiStrike = new SpecialAttack("Multi-Strike",
+			"Summons rapid fire electric streaks of lighting, hitting your enemy multiple times!",
+			"Streaks of lightning errupt from your wand with devistating speed, hitting your enemy multiple times",
+			"Streaks of lightning errupt from your wand but you lose focus, causing them to be erratic. Multi-Strike failed to land!",
+			1.5);
+	
+	public SpecialAttack fireBall = new SpecialAttack("Fire Ball",
+			"Creates a large orb of burning flames, firing it at the enemy!",
+			"A burning orb appears at the tip of your wand, growing larger, and larger, until it is too large to control, then it is sent flying at your enemy, incinerting everything in its path!",
+			"Flames begin to converge at the tip of your wand but quickly disipate! Fire Ball failed to fire!",
+			1.5);
+	
+	public SpecialAttack crushingWave = new SpecialAttack("Crushing Wave",
+			"Creates a large wave of water, smashing into your enemy and doing devistating damage!",
+			"Water bursts from the ground forming a death wall of raging currents before being cast upon the enemy!",
+			"Water bursts from the ground but fails to organize in a meaningful way. Crushing Wave failed to land!",
+			1.5);
+	
+	public SpecialAttack windSlash = new SpecialAttack("Wind Slash",
+			"Summons a thin line of condenced air sharper than any blade that is sent at your enemy!",
+			"A shreek of powerful wind being pressed against powerful wind is heard as a wind blade forms, being sent flying towards the enemy!",
+			"You lose focus as you attempt to summon the wind currents necissary to materialize the wind slash! Wind Slash failed to fire!",
+			1.5);
+	
+	public SpecialAttack massiveBoulder = new SpecialAttack("Massive Boulder",
+			"Raises a massive bolder above the enemy, crushing them under its weight!",
+			"The ground trembles as a boulder is raised from the earth above your enemy, being dropped with devistating force!",
+			"The ground trembles as a boulder begins to be raised, but quickly falls back to the ground. Massive boulder failed to fire!",
+			1.5);
+	
+	// --------------------Chapter 2--------------------
+	
+	public SpecialAttack bladeRain = new SpecialAttack("Blade Rain",
+			"Thousands of sharp metal blades are summoned above the battle field, raining upon the enemy!",
+			"The sky begins to glisten as thousands of reflective blades materialize, before showering the enemy with slashes!",
+			"The sky begins to glisten as thousands of blades begin to materialize before falling without serious intent! Blade rain failed to do any significant damage!",
+			2.0);
+	
+	public SpecialAttack heavyFist = new SpecialAttack("Heavy Fist",
+			"Magical energy surrounds the gauntlet, creating an extra powerful blow!",
+			"Magical energy converges on the gauntlet, and as the blow lands the shockwave sends tremors through your arm with the sheer force outputted by the impact!",
+			"Magical energy converges on your gauntlet but the weight is too much to bare! You are unable to make meaningful contact with the enemy! Heavy Fist failed to land!",
+			2.0);
+	
+	public SpecialAttack colossusCrush = new SpecialAttack("Colossus Crush",
+			"Create A colossal being made out of pure magical energy to crush your enemy!",
+			"A colossal being made of pure magical energy standing 50 feet tall materializes on the battlefield, slamming its fist down on the enemy with devistating speed and force!",
+			"A colossal being begins to materialize on the battlefield but quickly disintegrates! Colossus Crush failed to go off!",
+			2.0);
+	
+	public SpecialAttack crushingWinds = new SpecialAttack("Crushing Winds",
+			"Two raging winds are smashed together, with your opponent in between, crushing them with the pure force of the two currents!",
+			"You hear raging winds coming from the left, and more coming from the right. That is when, in an instant, your oponent is crushed between the force of these two wind currents!",
+			"You summon two currents of raging wind but they are unfocused so fail to concentrate the pressure on your opponent! Crushing Winds failed to fire!",
+			2.0);
+	
+	public SpecialAttack doubleEarthWall = new SpecialAttack("Double Earth Wall",
+			"Errects two walls of rock from the earth, slaming your opponent on both sides!",
+			"Two rock walls errupt from the ground on either side of your opponent, quickly slamming together, crushing your opponent with devistating force!",
+			"Two rock walls emerge from the ground but quickly shatter to dust. Double Earth Wall failed to fire!",
+			2.0);
+	
+	public SpecialAttack flamingTornados = new SpecialAttack("Flaming tornados",
+			"Swirling tunnels of scorching flames reach to the heavens, appearing as though a tornado of flames has materialized on the battlefield!",
+			"Rotating Flames appear in multiple locations on the battlefield reaching towards the heavens, incinerating your opponent in the process!",
+			"Rotating flames begin to appear but quickly fizzle out! Flaming tornados fails to fire!",
+			2.0);
+	
+	public SpecialAttack curvingSplitStream = new SpecialAttack("Curving Split-Stream",
+			"Send out two piercing streams of water in two directions, and watch as the curve inward, impaling the enemy from two sides!",
+			"A hissing sound is heard as two piercing streams of water shoot from your wand, converging on the enemy and putting a hole through them from two directions!",
+			"Two streams of water shoot out of your wand but are unfocused and lack the necissary power to do any significant damage. Curving Split-Stream failed to land!",
+			2.0);
+	
+	// --------------------Chapter 3--------------------
+	
+	public SpecialAttack secondImpact = new SpecialAttack("Second Impact",
+			"Channel Magical energy inside the gauntlet, being released a split second after the energy of the first impact, serving as a second, even more devistating impact!",
+			"You feel the magical energy coursing through the inside of the gauntlet. The first impact lands with devistating force, being quickly preceeded by a secondary, even more damaging impact that rattles your opponent!",
+			"You charge up the magical energy in your gauntlet and swing at the enemy, but the enemy dodges! You failed to land Second Impact!",
+			2.5);
+	
+	public SpecialAttack celestialBeamRain = new SpecialAttack("Celestial Beam Rain",
+			"Channel magical energy to summon clestial beams of light that cover the battlefield!",
+			"As you pour mana into the ring, the clouds disipate as the skies open up and rain down beams of celectial energy, covering the battefield!",
+			"You pour mana into the ring but you are unfocused and fail to summon the celestial wrath! Celectial Beam Rain failed to summon!",
+			2.5);
+	
+	public SpecialAttack lightConvergence = new SpecialAttack("Light Convergence",
+			"All light from the surrounding area converges on the prisim, releasing a large focused beam of pure light energy to desimate opponenets!",
+			"All light in the surrounding area is focused into the prisim and redirected into a focused beam shot directly at your opponent!",
+			"All light from the surrounding area converges on the prisim, but due to a lack of focus, it fails to coverge into a single beam, being released in all directions. Light Convergence failed to fire!",
+			2.5);
+	
+	public SpecialAttack rockSlide = new SpecialAttack("Mountain Summoning - Rock Slide",
+			"Summon a mountain on the battlefield that releases a rockslide, cascading down upon your opponent!",
+			"A Mountain errupts in the center of the battefield, sending loose rock tumbling upon your opponent!",
+			"A mountain begins to rise from the ground but fails to fully materialize! Mountain Summoning - Rock Slide failed to fire!",
+			2.5);
+	
+	public SpecialAttack motherOfAllTornados = new SpecialAttack("Mother of all Tornados",
+			"Summon a swirling tunnel of violent winds that eclipses the sky! Legends have spoken of this power, referring to it as the \"Mother of all Tornados\"!",
+			"The sky turns as dark as the night as the clouds above turn black and begin to swirl! This funnel of powerful winds touches ground directly on top of your opponent, trapping them in swirling wind and debris!",
+			"The clouds turn dark and begin to swirl but fail to reach the ground! Mother of all Tornados failed to summon!",
+			2.5);
+	
+	public SpecialAttack doubleWave = new SpecialAttack("Double Wave",
+			"Summons two large waves of powerful water currents that collide into each other with your opponent in the middle!",
+			"The sound of crashing waves echos through the battlefield as two raging currents collide on your opponent, applying insane pressure and hitting them with the debris picked up from both waves!",
+			"Raging currents flood the battlefield but a lack of focus causes them to miss their mark, leaving the opponent with minimal damage! Double Wave failed to land!",
+			2.5);
+	
+	// --------------------Chapter 4--------------------
+	
+	public SpecialAttack demonStrike = new SpecialAttack("Demon Strike",
+			"Open a portal from the gates of hell, allowing a raging demon to emerge and unleashing its wrath upon your opponent!",
+			"A firey portal opens on the battlefield, as a raging demon emerges and unleashes the wrath of hell upon your enemy!",
+			"A firey portal begins to open but quickly slams shut! Demon Strike failed to fire!",
+			3.0);
+	
+	public SpecialAttack heavensRage = new SpecialAttack("Heaven's rage",
+			"Summon a powerful beam of celestial energy from the heavens to desimate your opponent!",
+			"The sky clears in an instant, and as if containing the energy of the sun itself, a beam of pure celestial energy decents from the heaven, doing massive damage to your opponent!",
+			"The sky clears but the celestial energy fails to materialize! Heaven's rage failed to fire!",
+			3.0);
+	
+	public SpecialAttack eternalDarkness = new SpecialAttack("Eternal Darkness",
+			"Casts the curse of the abyss upon your enemy, tormenting them with the psychological effects of eternal darkness!",
+			"Your enemies eyes go black, as they experience in an instant the psychological effects of a lifetime of eternal darkness!",
+			"You attempt to cast the abyssal curse upon your enemy but they remain uneffected! Eternal Darkness failed to land!",
+			3.0);
+	
+	public SpecialAttack weightOfTheDepths = new SpecialAttack("Weight of the Depths",
+			"Water surrounds your opponent and applies the pressure that would be experienced on the ocean floor to the opponent!",
+			"Water surrounds your opponent and applies the crushing weight from the ocean floor, crushing bone and making their organs bulge!",
+			"Water surrounds your opponent but quickly falls to the ground! Weight of the Depths failed to land!",
+			3.0);
+	public SpecialAttack impendingDoom = new SpecialAttack("Impending Doom",
+			"Fire rains down from the skies, covering the battlefield in scorching flames!",
+			"The skys split open, as hellfire rains down, burning everything in its path!",
+			"The sky splits open but hellfire fails to rain! Impending Doom failed to materialize!",
+			3.0);
+	public SpecialAttack eyeOfTheStorm = new SpecialAttack("Eye of the Storm",
+			"Summon a raging hurricane that surrounds your opponent with the eye of the storm shrinking until the winds consumen them!",
+			"The sky turns black as a raging hurricane forms around your opponent! Though initially safe in the eye of the storm, the eye shrinks until there is no safe place and your opponent is consumed by the raging winds and flying debris!",
+			"The sky turns black and a hurricane begins to materialize but dissipates quickly! Eye of the Storm failed to land!",
+			3.0);
+	public SpecialAttack straightToTheCore = new SpecialAttack("Straight to the Core",
+			"Open a crack in the ground, sending your opponent straight to the center of the earth! Burning them in the lava of the core!",
+			"The ground beneath your opponent violently splits open, sending your opponent plummiting into the earths core!",
+			"The earth begins to split open beneath your opponent but quickly slams shut! Straight to the Core failed to fire!",
+			3.0);
+			
 	
 	// --------------------Rogue Special Attacks--------------------
 	
