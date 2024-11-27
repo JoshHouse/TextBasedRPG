@@ -1394,8 +1394,8 @@ public class GameThread extends Throwable {
 		}
 		
 		Dialogue.characterDialogue(wizName , "Absolutely! This is not something I would ask you to do if there "
-				+ "wasn’t anything in it for you. I have heard rumors that the wizard’s Fire Staff lies within "
-				+ "his home, along with the Fire Stones. That Fire Staff is one of the strongest magic weapons "
+				+ "wasn’t anything in it for you. I have heard rumors that the wizard’s Hellfire Staff lies within "
+				+ "his home, along with the Fire Stones. That staff is one of the strongest magic weapons "
 				+ "you can find if you can make it through the Golem. Of course, I have only heard rumors and, "
 				+ "not having been there myself, I can’t confirm whether it’s there. But if it is, it would make "
 				+ "the trip worth it for just about any magic user.\n",
@@ -1680,13 +1680,13 @@ public class GameThread extends Throwable {
 		
 		Dialogue.infoDialogue("*As the beast falls, the ground shakes as it hits the ground. On the other "
 				+ "side of the opening, you see a door. That is no doubt the entrance to the Fire wizard’s "
-				+ "home. You enter to see, propped up on a stand, the fire staff glowing with flame energy. "
+				+ "home. You enter to see, propped up on a stand, the hellfire staff glowing with flame energy. "
 				+ "You pick up the staff and feel the magical power coursing through the staff. On a shelf above "
 				+ "the wizard’s alchemy table, you find the Fire Stone that Magnus asked you to retrieve. You "
 				+ "grab both and notice a chest by the wizard’s bed.*\n", 
 				txtSpd);
-		player.getInventory().add(wList.fireStaff);
-		System.out.println("The Fire Staff has been added to your Inventory!");
+		player.getInventory().add(wList.hellfireStaff);
+		System.out.println("The hellfire Staff has been added to your Inventory!");
 		System.out.println("The Fire Stone has been added to your Inventory!");
 		
 		makingChoice = true;
