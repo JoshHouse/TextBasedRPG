@@ -68,7 +68,7 @@ public class Shop implements Serializable {
 	 * Prints a line break to improve readability between menus
 	 */
 	public static void breakLine() {  
-	    System.out.println("------------------------------");
+	    System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
 	} 
 	
 	/**

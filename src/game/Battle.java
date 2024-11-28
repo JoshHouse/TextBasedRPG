@@ -138,96 +138,111 @@ public void setPlayerSpAtkMulti(double inputPlayerSpAtkMulti) {
 
 //----------------------------------Functions---------------------------------
 
-public static void breakLine() {  
-    System.out.println("------------------------------");
-}
 
-private void battleSetup(boolean shouldRegen) {
-	if (enemy.getCurrHP() != enemy.getHealth()) {
-		enemy.setCurrHP(enemy.getHealth());
-	}
-	if (player.getCurrHP() != player.getHealth() && shouldRegen) {
-		player.setCurrHP(player.getHealth());
-	}
-	if (player.getCurrMana() != player.getMana() && shouldRegen) {
-		player.setCurrMana(player.getMana());
-	}
-	this.setTurn(0);
-	this.setguardedTurn(0);
-	this.setSpeedTurn(0);
-	this.setPoisonTurn(0);
-	this.setPoisonDamage(0);
-	this.setPlayerWeaponDamage((int) this.getPlayer().getInventory().getEquipped().getDamage());
-	this.setPlayerSpAtkMulti(this.getPlayer().getInventory().getEquipped().getSpecialAttack().getAtkMultiplier());
-}
 /*
  * 
  * --------------------Default Battles--------------------
  * 
  */
-public boolean startBattle(Scanner keyboard, boolean shouldRegen) {
-	boolean inBattle = true;
-	boolean isWimp = false;
-
-	battleSetup(shouldRegen);
+	public boolean startBattle(Scanner keyboard, boolean shouldRegen) {
+		boolean inBattle = true;
+		boolean isWimp = false;
 	
-	Dialogue.infoDialogue("You have entered a battle!\n", txtSpd);
-	Dialogue.infoDialogue("Your opponent: " + this.getEnemy().getName() + "\n", txtSpd);
-	breakLine();
-	
-	while(inBattle) {
-		if (speedTurn > 0) {
-			isWimp = this.playerTurn(keyboard);
-			if (isWimp) {
-				return false;
-			}
-			speedTurn--;
-		} else {
-			if(turn == 0) {
+		battleSetup(shouldRegen);
+		
+		Dialogue.infoDialogue("You have entered a battle!\n", txtSpd);
+		Dialogue.infoDialogue("Your opponent: " + this.getEnemy().getName() + "\n", txtSpd);
+		breakLine();
+		
+		while(inBattle) {
+			if (speedTurn > 0) {
 				isWimp = this.playerTurn(keyboard);
 				if (isWimp) {
 					return false;
 				}
-				
-				if (guardedTurn > 0) {
-					guardedTurn--;
-				}
-				if (dbTurn > 0) {
-					dbTurn--;
-				}
-			}
-			else {
-				this.enemyTurn();
-				if (poisonTurn > 0) {
-					poisonTurn--;
-					if (poisonTurn == 0) {
-						this.setPoisonDamage(0);
+				speedTurn--;
+			} else {
+				if(turn == 0) {
+					isWimp = this.playerTurn(keyboard);
+					if (isWimp) {
+						return false;
+					}
+					
+					if (guardedTurn > 0) {
+						guardedTurn--;
+					}
+					if (dbTurn > 0) {
+						dbTurn--;
 					}
 				}
-			}
-			if (player.getCurrHP() <= 0) { //Check if battle continues after each turn
-				Dialogue.infoDialogue("You have been defeated!\n", txtSpd);
-				Dialogue.infoDialogue("Leaving the Battle Arena.\n", txtSpd);
-	            player.setCurrHP(player.getHealth());
-	            enemy.setCurrHP(enemy.getHealth());
-	            player.setCurrMana(player.getMana());
-	            return false;
-	        } else if (enemy.getCurrHP() <= 0) {
-				Dialogue.infoDialogue("You defeated the enemy!\n", txtSpd);
-	            player.setCurrHP(player.getHealth());
-	            enemy.setCurrHP(enemy.getHealth());
-	            player.setCurrMana(player.getMana());
-	            return true;
-	        } else {
-	            changeTurn(); // Change turn only if battle continues
-	        }
+				else {
+					this.enemyTurn();
+					if (poisonTurn > 0) {
+						poisonTurn--;
+						if (poisonTurn == 0) {
+							this.setPoisonDamage(0);
+						}
+					}
+				}
+				if (player.getCurrHP() <= 0) { //Check if battle continues after each turn
+					Dialogue.infoDialogue("You have been defeated!\n", txtSpd);
+					Dialogue.infoDialogue("Leaving the Battle Arena.\n", txtSpd);
+		            player.setCurrHP(player.getHealth());
+		            enemy.setCurrHP(enemy.getHealth());
+		            player.setCurrMana(player.getMana());
+		            return false;
+		        } else if (enemy.getCurrHP() <= 0) {
+					Dialogue.infoDialogue("You defeated the enemy!\n", txtSpd);
+		            player.setCurrHP(player.getHealth());
+		            enemy.setCurrHP(enemy.getHealth());
+		            player.setCurrMana(player.getMana());
+		            return true;
+		        } else {
+		            changeTurn(); // Change turn only if battle continues
+		        }
+			}	
 		}
-		
+		return false;
 	}
 	
-	return false;
+	private void enemyTurn() {
+		
+		if (poisonTurn > 0) {
+			enemy.setCurrHP(enemy.getCurrHP() - poisonDamage);
+			Dialogue.infoDialogue(enemy.getName() + ": Took " + this.getPoisonDamage() + "damage from the poison potion\n", txtSpd);
+			Dialogue.infoDialogue("Enemy health:" + enemy.getCurrHP() + "\n", txtSpd);
+		}
+		
+	    if(enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(40)) {
+	    	// Special Attack Functionality
+	    	if(enemy.getSpecialAttack().useSpAtk(70)) {
+	        	if (guardedTurn > 0) {
+	        		player.setCurrHP((int) (player.getCurrHP() - ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2)));
+	    			Dialogue.infoDialogue("You took half damage because you had your guard up! The enemy did " + ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2) + " damage!\n", txtSpd);
+	        	} else {
+	        		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier())));
+	    			Dialogue.infoDialogue("The enemy did " + (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) + "damage!\n", txtSpd);
+	        	}
+	    	} else {
+	    		Dialogue.infoDialogue("The Enemy did 0 damage!", txtSpd);
+	    	}
 	
-}
+	    } else {
+	    	// Regular Attack Functionality
+	    	if (guardedTurn > 0) {
+	    		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() / 2)));
+				Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
+				Dialogue.infoDialogue("You took half damage because you had your guard up! The enemy did " + (enemy.getDamage() / 2) + " damage!\n", txtSpd);
+	    	} else {
+	    		player.setCurrHP((int) (player.getCurrHP() - enemy.getDamage()));
+				Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
+				Dialogue.infoDialogue("The enemy did " + enemy.getDamage() + "damage!\n", txtSpd);
+	    	}
+	    }
+	    
+		Dialogue.infoDialogue("Your HP: " + player.getCurrHP() + "\n", txtSpd);
+	    breakLine();
+	}
 
 /*
  * 
@@ -299,8 +314,62 @@ public boolean startBattle(Scanner keyboard, boolean shouldRegen) {
 		}
 		return false;
 	}
+	
+	private boolean dragonTurn(Scanner keyboard) {
+		
+		if (poisonTurn > 0) {
+			enemy.setCurrHP(enemy.getCurrHP() - poisonDamage);
+			Dialogue.infoDialogue("The Beast took " + this.getPoisonDamage() + " damage from the poison potion!\n", txtSpd);
+			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+		}
+		
+		if (Luck.luckEvent(20)) {
+			Battle minionBattle = new Battle(this.getPlayer(), this.getMinion());
+			Dialogue.infoDialogue("One of Gilgemesh's children rushes into the battle aiming to protect it's father!", txtSpd);
+			if (!minionBattle.startBattle(keyboard, false)) {
+				return false;
+			}
+		} else if(enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(30)) {
+        	// Special Attack Functionality
+        	if(enemy.getSpecialAttack().useSpAtk(70)) {
+            	if (guardedTurn > 0) {
+            		player.setCurrHP((int) (player.getCurrHP() - ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2)));
+        			Dialogue.infoDialogue("You took half damage because you had your guard up! The dragon did " + ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2) + " damage!\n", txtSpd);
+            	} else {
+            		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier())));
+        			Dialogue.infoDialogue("The dragon did " + (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) + " damage!\n", txtSpd);
+            	}
+        	} else {
+        		Dialogue.infoDialogue("The dragon did 0 damage!", txtSpd);
+        	}
+
+        } else {
+        	// Regular Attack Functionality
+        	if (guardedTurn > 0) {
+        		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() / 2)));
+    			Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
+    			Dialogue.infoDialogue("You took half damage because you had your guard up! The dragon did " + (enemy.getDamage() / 2) + " damage!\n", txtSpd);
+        	} else {
+        		player.setCurrHP((int) (player.getCurrHP() - enemy.getDamage()));
+    			Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
+    			Dialogue.infoDialogue("The dragon did " + enemy.getDamage() + " damage!\n", txtSpd);
+        	}
+        }
+        
+		
+		Dialogue.infoDialogue("Your HP: " + player.getCurrHP() + "\n", txtSpd);
+        
+        breakLine();
+        return true;
+	}
 
 
+	/*
+	 * 
+	 * --------------------Player Turn Functions--------------------
+	 * 
+	 */
+	
 	private boolean playerTurn(Scanner keyboard) {
 		char pChoice;
 		boolean isPTurn = true;
@@ -364,126 +433,10 @@ public boolean startBattle(Scanner keyboard, boolean shouldRegen) {
 		return false;
 
 }
-	private void printInventoryConsumableArray(ArrayList<Consumable> arrayList) {
-		for(int x = 0; x < arrayList.size(); x++) {
-			Dialogue.infoDialogue(x+1 + ") " + arrayList.get(x).getName() + 
-					"\n Info: " + arrayList.get(x).getInfo() + "\n", txtSpd);
-		}
-	}
+	/*
+	 * --------------------Player Attack Functions--------------------
+	 */
 	
-
-// add different arrow ammos
-	private boolean selectItem(Scanner keyboard) {
-        ArrayList<Consumable> pInventory = player.getInventory().getConsumables();
-		boolean makingChoice = true;
-		boolean usedItem = false;
-        String pChoice;
-        int selection;
-        
-		while (makingChoice) {
-			Dialogue.infoDialogue("Choose an item to use from your inventory:\n", txtSpd);
-	        printInventoryConsumableArray(pInventory);
-			Dialogue.infoDialogue(pInventory.size()+1 + ") Cancel\n", txtSpd);
-			Dialogue.infoDialogue("Make your choice:\n", txtSpd);
-
-	            pChoice = keyboard.next();
-	            if (isNumeric(pChoice)) {
-	            	selection = Integer.parseInt(pChoice);
-	            } else {
-	            	selection = -1;
-	            }
-	            
-	            if (selection == pInventory.size() + 1) {
-	    			Dialogue.infoDialogue("Action canceled.\n", txtSpd);
-		            return false;
-		            
-		        } else if (selection - 1 >= 0 && selection - 1 < pInventory.size()) {
-		            usedItem = this.useItem(pInventory, selection - 1);
-		            if (!usedItem) {
-		            	return false;
-		            }
-		            return true;
-		        	
-		        } else {
-					Dialogue.infoDialogue("Invalid choice. Please select a valid item number.\n", txtSpd);
-		        }    
-	        
-		}
-		return false;
-        
-	}
-
-	private boolean useItem(ArrayList<Consumable> pInventory, int itemIndex) {
-        switch (pInventory.get(itemIndex).getConsumableType()) {
-        case 'd':
-			Dialogue.infoDialogue("You used a Damage Boost Potion! Boosting damage...\n", txtSpd);
-        	this.setDbTurn(4);
-			Dialogue.infoDialogue("You successfully used your Damage Boost Potion. You will now do 1.5x damage for "
-        			+ "the next 3 turns!\n", txtSpd);
-        	this.removeItem(pInventory, itemIndex);
-        	return true;
-
-        case 'h':
-            if (player.getCurrHP() + pInventory.get(itemIndex).getDamage() < player.getHealth()) {
-            	player.setCurrHP((int) (player.getCurrHP() + pInventory.get(itemIndex).getDamage()));
-            } else {
-            	player.setCurrHP(player.getHealth());
-            }
-			Dialogue.infoDialogue("You used a Health Potion! Restoring health...\n", txtSpd);
-			Dialogue.infoDialogue("You successfully used a health potion! Your health is now: " + player.getCurrHP() + "\n", txtSpd);
-        	this.removeItem(pInventory, itemIndex);
-        	return true;
-
-        case 'm':
-        	if (player.getCurrMana() + pInventory.get(itemIndex).getDamage() < player.getMana()) {
-        		player.setCurrMana((int)(player.getCurrMana() + pInventory.get(itemIndex).getDamage()));
-        	} else {
-        		player.setCurrMana(player.getMana());
-        	}
-			Dialogue.infoDialogue("You used a Mana Potion! Restoring mana...\n", txtSpd);
-			Dialogue.infoDialogue("You successfully used a mana potion! Your mana is now: " + player.getCurrMana() + "\n", txtSpd);
-        	this.removeItem(pInventory, itemIndex);
-        	return true;
-        	
-        case 's':
-        	this.setSpeedTurn(this.getSpeedTurn() + 2);
-			Dialogue.infoDialogue("You used a Speed Potion! You get two turns...\n", txtSpd);
-        	this.removeItem(pInventory, itemIndex);
-        	return true;
-
-        case 'p':
-        	if (this.getPoisonTurn() > 0) {
-    			Dialogue.infoDialogue("You cannot use a poison potion while another is already applied to this enemy!\n", txtSpd);
-        		return false;
-        	} else {
-            	this.setPoisonTurn(this.getPoisonTurn() + 3);
-            	this.setPoisonDamage((int) (pInventory.get(itemIndex).getDamage()));
-    			Dialogue.infoDialogue("You used a Poison Potion! The Enemy will be damaged for three turns!\n", txtSpd);
-            	this.removeItem(pInventory, itemIndex);
-            	return true;
-        	}
-        	
-        default:
-			Dialogue.infoDialogue("Unknown item type. Unable to use item.\n", txtSpd);
-            return false;
-        }
-
-	}
-	
-	private void removeItem(ArrayList<Consumable> pInventory, int itemIndex) {
-		if (pInventory.get(itemIndex).getCount() > 1) {
-			pInventory.get(itemIndex).setCount(pInventory.get(itemIndex).getCount() - 1);
-		} else {
-			pInventory.remove(itemIndex);
-		}
-	}
-
-	private void guard() {
-		Dialogue.infoDialogue("You guard yourself from three attacks.\n", txtSpd);
-		this.setguardedTurn(this.getguardedTurn() + 4);	
-	}
-
-
 	private boolean playerAttack(Scanner keyboard) {
 		boolean isAttacking = true;
 		char pChoice = 0;
@@ -736,111 +689,172 @@ public boolean startBattle(Scanner keyboard, boolean shouldRegen) {
 		}
 	}
 	
-	private boolean dragonTurn(Scanner keyboard) {
-		
-		if (poisonTurn > 0) {
-			enemy.setCurrHP(enemy.getCurrHP() - poisonDamage);
-			Dialogue.infoDialogue("The Beast took " + this.getPoisonDamage() + " damage from the poison potion!\n", txtSpd);
-			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
-		}
-		
-		if (Luck.luckEvent(20)) {
-			Battle minionBattle = new Battle(this.getPlayer(), this.getMinion());
-			Dialogue.infoDialogue("One of Gilgemesh's children rushes into the battle aiming to protect it's father!", txtSpd);
-			if (!minionBattle.startBattle(keyboard, false)) {
-				return false;
-			}
-		} else if(enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(30)) {
-        	// Special Attack Functionality
-        	if(enemy.getSpecialAttack().useSpAtk(70)) {
-            	if (guardedTurn > 0) {
-            		player.setCurrHP((int) (player.getCurrHP() - ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2)));
-        			Dialogue.infoDialogue("You took half damage because you had your guard up! The dragon did " + ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2) + " damage!\n", txtSpd);
-            	} else {
-            		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier())));
-        			Dialogue.infoDialogue("The dragon did " + (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) + " damage!\n", txtSpd);
-            	}
-        	} else {
-        		Dialogue.infoDialogue("The dragon did 0 damage!", txtSpd);
-        	}
 
-        } else {
-        	// Regular Attack Functionality
-        	if (guardedTurn > 0) {
-        		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() / 2)));
-    			Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
-    			Dialogue.infoDialogue("You took half damage because you had your guard up! The dragon did " + (enemy.getDamage() / 2) + " damage!\n", txtSpd);
+	/*
+	 * --------------------Player Using Items Functions--------------------
+	 */
+	
+	private boolean selectItem(Scanner keyboard) {
+        ArrayList<Consumable> pInventory = player.getInventory().getConsumables();
+		boolean makingChoice = true;
+		boolean usedItem = false;
+        String pChoice;
+        int selection;
+        
+		while (makingChoice) {
+			Dialogue.infoDialogue("Choose an item to use from your inventory:\n", txtSpd);
+	        printInventoryConsumableArray(pInventory);
+			Dialogue.infoDialogue(pInventory.size()+1 + ") Cancel\n", txtSpd);
+			Dialogue.infoDialogue("Make your choice:\n", txtSpd);
+
+	            pChoice = keyboard.next();
+	            if (isNumeric(pChoice)) {
+	            	selection = Integer.parseInt(pChoice);
+	            } else {
+	            	selection = -1;
+	            }
+	            
+	            if (selection == pInventory.size() + 1) {
+	    			Dialogue.infoDialogue("Action canceled.\n", txtSpd);
+		            return false;
+		            
+		        } else if (selection - 1 >= 0 && selection - 1 < pInventory.size()) {
+		            usedItem = this.useItem(pInventory, selection - 1);
+		            if (!usedItem) {
+		            	return false;
+		            }
+		            return true;
+		        	
+		        } else {
+					Dialogue.infoDialogue("Invalid choice. Please select a valid item number.\n", txtSpd);
+		        }    
+	        
+		}
+		return false;
+        
+	}
+
+	private boolean useItem(ArrayList<Consumable> pInventory, int itemIndex) {
+        switch (pInventory.get(itemIndex).getConsumableType()) {
+        case 'd':
+			Dialogue.infoDialogue("You used a Damage Boost Potion! Boosting damage...\n", txtSpd);
+        	this.setDbTurn(4);
+			Dialogue.infoDialogue("You successfully used your Damage Boost Potion. You will now do 1.5x damage for "
+        			+ "the next 3 turns!\n", txtSpd);
+        	this.removeItem(pInventory, itemIndex);
+        	return true;
+
+        case 'h':
+            if (player.getCurrHP() + pInventory.get(itemIndex).getDamage() < player.getHealth()) {
+            	player.setCurrHP((int) (player.getCurrHP() + pInventory.get(itemIndex).getDamage()));
+            } else {
+            	player.setCurrHP(player.getHealth());
+            }
+			Dialogue.infoDialogue("You used a Health Potion! Restoring health...\n", txtSpd);
+			Dialogue.infoDialogue("You successfully used a health potion! Your health is now: " + player.getCurrHP() + "\n", txtSpd);
+        	this.removeItem(pInventory, itemIndex);
+        	return true;
+
+        case 'm':
+        	if (player.getCurrMana() + pInventory.get(itemIndex).getDamage() < player.getMana()) {
+        		player.setCurrMana((int)(player.getCurrMana() + pInventory.get(itemIndex).getDamage()));
         	} else {
-        		player.setCurrHP((int) (player.getCurrHP() - enemy.getDamage()));
-    			Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
-    			Dialogue.infoDialogue("The dragon did " + enemy.getDamage() + " damage!\n", txtSpd);
+        		player.setCurrMana(player.getMana());
         	}
+			Dialogue.infoDialogue("You used a Mana Potion! Restoring mana...\n", txtSpd);
+			Dialogue.infoDialogue("You successfully used a mana potion! Your mana is now: " + player.getCurrMana() + "\n", txtSpd);
+        	this.removeItem(pInventory, itemIndex);
+        	return true;
+        	
+        case 's':
+        	this.setSpeedTurn(this.getSpeedTurn() + 2);
+			Dialogue.infoDialogue("You used a Speed Potion! You get two turns...\n", txtSpd);
+        	this.removeItem(pInventory, itemIndex);
+        	return true;
+
+        case 'p':
+        	if (this.getPoisonTurn() > 0) {
+    			Dialogue.infoDialogue("You cannot use a poison potion while another is already applied to this enemy!\n", txtSpd);
+        		return false;
+        	} else {
+            	this.setPoisonTurn(this.getPoisonTurn() + 3);
+            	this.setPoisonDamage((int) (pInventory.get(itemIndex).getDamage()));
+    			Dialogue.infoDialogue("You used a Poison Potion! The Enemy will be damaged for three turns!\n", txtSpd);
+            	this.removeItem(pInventory, itemIndex);
+            	return true;
+        	}
+        	
+        default:
+			Dialogue.infoDialogue("Unknown item type. Unable to use item.\n", txtSpd);
+            return false;
         }
-        
-		
-		Dialogue.infoDialogue("Your HP: " + player.getCurrHP() + "\n", txtSpd);
-        
-        breakLine();
-        return true;
+
 	}
 	
-	
-	
-	private void enemyTurn() {
-		
-		if (poisonTurn > 0) {
-			enemy.setCurrHP(enemy.getCurrHP() - poisonDamage);
-			Dialogue.infoDialogue(enemy.getName() + ": Took " + this.getPoisonDamage() + "damage from the poison potion\n", txtSpd);
-			Dialogue.infoDialogue("Enemy health:" + enemy.getCurrHP() + "\n", txtSpd);
+	private void removeItem(ArrayList<Consumable> pInventory, int itemIndex) {
+		if (pInventory.get(itemIndex).getCount() > 1) {
+			pInventory.get(itemIndex).setCount(pInventory.get(itemIndex).getCount() - 1);
+		} else {
+			pInventory.remove(itemIndex);
 		}
-		
-        if(enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(40)) {
-        	// Special Attack Functionality
-        	if(enemy.getSpecialAttack().useSpAtk(70)) {
-            	if (guardedTurn > 0) {
-            		player.setCurrHP((int) (player.getCurrHP() - ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2)));
-        			Dialogue.infoDialogue("You took half damage because you had your guard up! The enemy did " + ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2) + " damage!\n", txtSpd);
-            	} else {
-            		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier())));
-        			Dialogue.infoDialogue("The enemy did " + (enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) + "damage!\n", txtSpd);
-            	}
-        	} else {
-        		Dialogue.infoDialogue("The Enemy did 0 damage!", txtSpd);
-        	}
-
-        } else {
-        	// Regular Attack Functionality
-        	if (guardedTurn > 0) {
-        		player.setCurrHP((int) (player.getCurrHP() - (enemy.getDamage() / 2)));
-    			Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
-    			Dialogue.infoDialogue("You took half damage because you had your guard up! The enemy did " + (enemy.getDamage() / 2) + " damage!\n", txtSpd);
-        	} else {
-        		player.setCurrHP((int) (player.getCurrHP() - enemy.getDamage()));
-    			Dialogue.infoDialogue("*"+ enemy.getRegularAttack() + "*\n", txtSpd);
-    			Dialogue.infoDialogue("The enemy did " + enemy.getDamage() + "damage!\n", txtSpd);
-        	}
-        }
-        
-		
-		Dialogue.infoDialogue("Your HP: " + player.getCurrHP() + "\n", txtSpd);
-        
-        breakLine();
-	
 	}
 	
+	/*
+	 * --------------------Player Guard Functions--------------------
+	 */
+	private void guard() {
+		Dialogue.infoDialogue("You guard yourself from three attacks.\n", txtSpd);
+		this.setguardedTurn(this.getguardedTurn() + 4);	
+	}
+
 	
+	/*
+	 * 
+	 *  --------------------Helper Functions--------------------
+	 *
+	 */
 	
-	public void changeTurn() {
-		if(this.getTurn() == 0) 
-			this.setTurn(1);
-		else
-			this.setTurn(0);
+	public static void breakLine() {  
+	    System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+	}
+	
+	private void printInventoryConsumableArray(ArrayList<Consumable> arrayList) {
+		for(int x = 0; x < arrayList.size(); x++) {
+			Dialogue.infoDialogue(x+1 + ") " + arrayList.get(x).getName() + 
+					"\n Info: " + arrayList.get(x).getInfo() + "\n", txtSpd);
+		}
+	}
+
+	private void battleSetup(boolean shouldRegen) {
+		if (enemy.getCurrHP() != enemy.getHealth()) {
+			enemy.setCurrHP(enemy.getHealth());
+		}
+		if (player.getCurrHP() != player.getHealth() && shouldRegen) {
+			player.setCurrHP(player.getHealth());
+		}
+		if (player.getCurrMana() != player.getMana() && shouldRegen) {
+			player.setCurrMana(player.getMana());
+		}
+		this.setTurn(0);
+		this.setguardedTurn(0);
+		this.setSpeedTurn(0);
+		this.setPoisonTurn(0);
+		this.setPoisonDamage(0);
+		this.setPlayerWeaponDamage((int) this.getPlayer().getInventory().getEquipped().getDamage());
+		this.setPlayerSpAtkMulti(this.getPlayer().getInventory().getEquipped().getSpecialAttack().getAtkMultiplier());
 	}
 	
     private static boolean isNumeric(String str) {
         // Ensure the string only contains digits
         return str.matches("\\d+");
     }
+    
+	public void changeTurn() {
+		if(this.getTurn() == 0) 
+			this.setTurn(1);
+		else
+			this.setTurn(0);
+	}
     
     
 }

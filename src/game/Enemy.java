@@ -148,9 +148,7 @@ public class Enemy extends GameChar {
 			return "Rogue";
 		default:
 			return "null";
-		
 		}
-		
 	}
 
 	// -------------------toString-------------------

@@ -29,54 +29,23 @@ public class GameThread extends Throwable {
 		Player player = OpeningMenu.showOpeningMenu();
 		
 		GameChapters(player, scn);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//		Player p1 = new Player("Nova", new Inventory(true, true, true), 1000, 180, 1, 0, 50, 4, 2, 1, 2, 9);
-//		p1.getInventory().add(wList.sword1);
-//		p1.getInventory().add(wList.axe2);
-//		p1.getInventory().add(wList.spear2);
-//		p1.getInventory().add(wList.axe1);
-//		p1.getInventory().add(wList.sword3);
-//		Shopkeeper keep = new Shopkeeper();
-//		Shop shop = new Shop(p1, keep, "Armory");
-//		ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-//		String[] searchTxt = {
-//				"Nothing but the fluffy clouds and beautiful buildings ahead.\nIt's quite nice to look at.",
-//				"Around the corner, there's appears to be a mime entertaining a crowd.\nNothing that seems too interesting "
-//						+ "to you, however.",
-//				"As you walk around, you get annoyed by gnats buzzing around your ears.\nIf only they were bigger. "
-//						+ "You could slay them easily...",
-//				"The city streets are rather lively today.\nThough, there's no signs of trouble, thankfully." };
-//
-//		meleeChapter1(p1, scn);
-//
-//		Hub hub1 = new Hub(p1, "Central Street", shop, enemies, searchTxt);
-//		hub1.start(scn);
-//
-//		scn.close();
-
-		
 
 		scn.close();
 	}
 
 	/**
 	 * 
+	 * 
 	 * ----- Functions -----
 	 * 
+	 * 
 	 */
-	// --------------------GameThread function--------------------
+	
+	/*
+	 * 
+	 *  ----------------------------------------GameThread function----------------------------------------
+	 *  
+	 */
 	
 	public static void GameChapters(Player player, Scanner keyboard) {
 		boolean inChapter = false;
@@ -86,9 +55,7 @@ public class GameThread extends Throwable {
 		char pChoice;
 		
 		/*
-		 * 
 		 * --------------------Chapter 1--------------------
-		 * 
 		 */
 		if (player.getChapter() == 1) {
 			Hub chapter1Hub = instantiateHub(player, "Town");
@@ -143,9 +110,7 @@ public class GameThread extends Throwable {
 		}
 		
 		/*
-		 * 
 		 * --------------------Chapter 2--------------------
-		 * 
 		 */
 		if (player.getChapter() == 2) {
 			Hub chapter2Hub = instantiateHub(player, "Castle Common Grounds");
@@ -178,9 +143,7 @@ public class GameThread extends Throwable {
 		}
 		
 		/*
-		 * 
 		 * --------------------Chapter 3--------------------
-		 * 
 		 */
 		if (player.getChapter() == 3) {
 			Hub chapter3Hub = instantiateHub(player, "Castle Upper-Class Lobby");
@@ -233,9 +196,7 @@ public class GameThread extends Throwable {
 		}
 		
 		/*
-		 * 
 		 * --------------------Chapter 4--------------------
-		 * 
 		 */
 		if (player.getChapter() == 4) {
 			Hub chapter4Hub = instantiateHub(player, "Castle Hero's Sector");
@@ -314,81 +275,46 @@ public class GameThread extends Throwable {
 							}
 						}
 					}
-					
 				}
 			}
 		}
 	}
-	// --------------------Formatting Functions--------------------
-	public static void breakLine() {  
-	    System.out.println("------------------------------------------------------------------------------------------");
-	}
+
 	
-	// --------------------General Functions--------------------
-	public static void BeginningGame(Player player, Scanner keyboard) {
-		
-	}
+	/*
+	 * 
+	 *  
+	 *  ----------------------------------------Story Functions----------------------------------------
+	 *  
+	 *  
+	 */
+
+	/*
+	 * 
+	 * ------------------------------All class Story Functions------------------------------
+	 * 
+	 */
 	
-	public static Hub instantiateHub(Player player, String location) {
-		// Chapter 1
-		if (player.getChapter() == 1) {
-			Shopkeeper shopkeeperCh1 = new Shopkeeper();
-			String shopNameCh1 = "";
-			Shop ch1Shop = new Shop(player, shopkeeperCh1, shopNameCh1);
-			
-			ArrayList<Enemy> ch1Enemies = new ArrayList<Enemy>();
-			String[] ch1SearchTxt = new String[0];
-			
-			Hub chapter1Hub = new Hub(player, location, ch1Shop, ch1Enemies, ch1SearchTxt);
-			
-			return chapter1Hub;
-		}
-		// Chapter 2
-		if (player.getChapter() == 2) {
-			Shopkeeper shopkeeperCh2 = new Shopkeeper();
-			String shopNameCh2 = "";
-			Shop ch2Shop = new Shop(player, shopkeeperCh2, shopNameCh2);
-			
-			ArrayList<Enemy> ch2Enemies = new ArrayList<Enemy>();
-			String[] ch2SearchTxt = new String[0];
-			
-			Hub chapter2Hub = new Hub(player, location, ch2Shop, ch2Enemies, ch2SearchTxt);
-			
-			return chapter2Hub;
-		}
-		// Chapter 3
-		if (player.getChapter() == 3) {
-			Shopkeeper shopkeeperCh3 = new Shopkeeper();
-			String shopNameCh3 = "";
-			Shop ch3Shop = new Shop(player, shopkeeperCh3, shopNameCh3);
-			
-			ArrayList<Enemy> ch3Enemies = new ArrayList<Enemy>();
-			String[] ch3SearchTxt = new String[0];
-			
-			Hub chapter3Hub = new Hub(player, location, ch3Shop, ch3Enemies, ch3SearchTxt);
-			
-			return chapter3Hub;
-		}
-		// Chapter 4
-		if (player.getChapter() == 4) {
-			Shopkeeper shopkeeperCh4 = new Shopkeeper();
-			String shopNameCh4 = "";
-			Shop ch4Shop = new Shop(player, shopkeeperCh4, shopNameCh4);
-			
-			ArrayList<Enemy> ch4Enemies = new ArrayList<Enemy>();
-			String[] ch4SearchTxt = new String[0];
-			
-			Hub chapter4Hub = new Hub(player, location, ch4Shop, ch4Enemies, ch4SearchTxt);
-			
-			return chapter4Hub;
-		}
-		return null;
-	}
+	/*
+	 * --------------------Chapter 2--------------------
+	 */
 	
-	// --------------------Dialog Functions--------------------
 	public static void ApproachCastle(Player player) {
 		
 	}
+	
+	public static boolean kingsMission(Player player, Scanner keyboard) {
+		// king sends you on mission
+		// travel
+		
+		
+		// fight troll
+		return true;
+	}
+	
+	/*
+	 * --------------------Chapter 4--------------------
+	 */
 	
 	public static void KingsFinalMission(Player player) {
 		int txtSpd = 25;
@@ -404,270 +330,15 @@ public class GameThread extends Throwable {
 				+ "speak to one of my council members for advice, as their specialty in certain areas will be of more aid to you.", txtSpd);
 	}
 	
-	public static boolean meleeDragonApproach(Player player, Scanner scn) {
-
-		String kingKnight = "Paris, King's Left Hand";
-		Battle miniBoss = new Battle(player, eList.dWar);
-		boolean win = false;
-		int txtSpd = 25, wait = 1000;
-		boolean pResponse;
-		char input = 0;
-		
-		breakLine();
-		
-		Dialogue.infoDialogue("Once again, you find yourself in the company of Paris, having been called out by the king's "
-				+ "knight in regards to another mission. This time, the condescending look on his face was gone by the time "
-				+ "you arrived.\n\n"
-				, txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "Well, look what the cat finally dragged in.\n\n", txtSpd);
-		Pause.pause(wait + 500);
-		
-		Dialogue.infoDialogue("...ONLY the look wasn't present.\n\n", txtSpd + 10);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "Adicai's been singing nothing but praises for you for a while, and I have to "
-				+ "admit, even I am impressed to hear that the goblin champion fell by your hands and your hands alone. You "
-				+ "aren't the same wannabe hero that you were when we first met. You might actually be the perfect fit for a "
-				+ "task such as this.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		pResponse = true;
-		while (pResponse) {
-			Dialogue.infoDialogue("1) And that task would be...?\n2) You? Praising me? What a surprise!\nReponse: "
-					, 8);
-			input = scn.next().charAt(0);
-
-			switch (input) {
-			case '1', '2':
-				pResponse = false;
-				System.out.println();
-				break;
-			default:
-				System.err.println("Invalid choice. Try again.\n");
-				Pause.pause(350);
-				break;
-			}
-		}
-		
-		if (input == '1') {
-			Dialogue.characterDialogue(kingKnight, "How hard is it to wait til I finish talking? I was getting to that.\n\n",
-					txtSpd);
-		} else {
-			Dialogue.characterDialogue(kingKnight, "Yes, yes. As surprising as it may seem, you actually earned it.\n\n", 
-					txtSpd);
-		}
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "Now then, this is something that I myself along with the other key advisors "
-				+ "to the king have been focusing on. This kingdom has always been in grave jeopardy at the hands of a "
-				+ "powerful dragonlord. Sitting on top of the tallest mountain you can see from the castle gates is where its"
-				+ " nest is positioned. Naturally, you would think that we would have dealt with this by now what with all "
-				+ "the information we have. However, there's a slight issue.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "It's... impossible for even us to reach that peak. Although most of the lesser"
-				+ " dragons around the mountaintop have been dealt with, a handful remain. Furthermore, too many men have died"
-				+ " making the climb up the mountain. We've had no luck finding a better path. A warrior such as yourself was"
-				+ " capable of besting an entire army by yourself, so this may be doable for you.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "I need you to scout around the mountain without going past the midpoint. If "
-				+ "you can find a passageway up to the peak where the dragonlord resides, then I swear that a hefty reward "
-				+ "will be waiting for you the moment you find it and we confirm that you've done so.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		pResponse = true;
-		while (pResponse) {
-			Dialogue.infoDialogue("1) ...What would the reward be if I were to defeat the dragonlord while I'm there?\n"
-					+ "Reponse: "
-					, 8);
-			input = scn.next().charAt(0);
-
-			switch (input) {
-			case '1':
-				pResponse = false;
-				System.out.println();
-				break;
-			default:
-				System.err.println("Invalid choice. Try again.\n");
-				Pause.pause(350);
-				break;
-			}
-		}
-		
-		Dialogue.characterDialogue(kingKnight, "What?! Have you gone mad?! To take on the dragonlord single-handedly, that's "
-				+ "a fool's task! It's impossible! Suicide! You'd never survive!\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "The king's elite will lead a force strong enough to handle the dragonlord. We "
-				+ "don't need you to attempt to play hero by yourself.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		pResponse = true;
-		while (pResponse) {
-			Dialogue.infoDialogue("1) But that would lead to lots of casualties\n2) I don't care if you think I can handle it."
-					+ "\nReponse: "
-					, 8);
-			input = scn.next().charAt(0);
-
-			switch (input) {
-			case '1', '2':
-				pResponse = false;
-				System.out.println();
-				break;
-			default:
-				System.err.println("Invalid choice. Try again.\n");
-				Pause.pause(350);
-				break;
-			}
-		}
-		
-		if (input == '1') {
-			Dialogue.characterDialogue(kingKnight, "Well, yes... that is true, I...\n\n", txtSpd);
-		} else {
-			Dialogue.characterDialogue(kingKnight, "Are you that desperate to prove something here...?\n\n", txtSpd);
-		}
-		Pause.pause(wait);
-		
-		Dialogue.infoDialogue("Paris let out a loud sigh.\n\n", txtSpd);
-		Pause.pause(wait * 2);
-		
-		Dialogue.characterDialogue(kingKnight, "Hypothetically speaking... We're you capable of defeating a dragonlord without"
-				+ " any form of aid, we would allow you to name your price in terms of payment. I can't think of any other way"
-				+ " that it'd be fair for your efforts. Hoever, this is merely a hypothetical situation. Only a fool would go "
-				+ "out there and attempt to play hero over it.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "Regardless, I've given you your ACTUAL mission already. Head to the mountain "
-				+ "and find a path for our army to march up to the dragonlord. You will be paid handsomely upon your return."
-				+ "\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.infoDialogue("Despite Paris' warning, your mind was already made up. You had every intention of putting your "
-				+ "strength to the test against this dragonlord. Of course, you still had to find your own way up. With your "
-				+ "weapons ready to go, you set off towards the mountains, ready to climb towards your destination.\n\n"
-				+ "", txtSpd);
-		Pause.pause(wait);
-		
-		Pause.pause();
-		
-		breakLine();
-
-		Dialogue.infoDialogue(
-				"By this point, the kingdom looks like a simple town with how far you've come. Per the king's request, you "
-						+ "ascended into the mountaintops to reach the dragonlord's lair. You've not even come close "
-						+ "to entering, and "
-						+ "the sounds of it, and the nearby dragons fill your eardrums and mind with dread.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		txtSpd += 15;
-		Dialogue.infoDialogue("Their ferocious roars. ", txtSpd);
-		Pause.pause(wait);
-		Dialogue.infoDialogue("The flapping of wings. ", txtSpd);
-		Pause.pause(wait);
-		Dialogue.infoDialogue("The smell of smoke. ", txtSpd);
-		Pause.pause(wait);
-		Dialogue.infoDialogue("The field of bones around you. ", txtSpd);
-		Pause.pause(wait);
-		Dialogue.infoDialogue("The weapons of those who previously challenged it.\n", txtSpd);
-		Pause.pause(wait);
-		Dialogue.infoDialogue("All these things fill you with both fear, and determination.\n\n", txtSpd);
-		Pause.pause(wait);
-		txtSpd -= 15;
-
-		Dialogue.infoDialogue(
-				"With your goal in mind, you push on ahead further up the mountain. By this point, it appears that the sides "
-						+ "are becoming too steep for you to continue climbing, and you'd likely fall to your death "
-						+ "before ever seeing the dragonlord. Having a look around, you can see a flat area of the mountain, "
-						+ "with a weak spot in the side.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.infoDialogue(
-				"Climbing up and walking to that spot, you peered through the cracks to see that the inside was hollowed, as "
-						+ "if a path had been carved inside of the mountain that would lead you up safely. "
-						+ "Taking out the great Phoenix "
-						+ "Cleaver received from Adicai, you strike the cracked wall with all your might, "
-						+ "shattering it and giving you a clearer view of the carved path ahead.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.infoDialogue(
-				"You stepped into the hollowed mountain and swing the greataxe in order to cause the blade to light ablaze, "
-						+ "giving you a light so that you can see ahead. It appeared that you had stepped foot into a large "
-						+ "cavern with an empty nest in the center, and a broken spiral staircase carved out into the walls "
-						+ "leading both up and down. Though the stairs were burned and broken, they were stable and long "
-						+ "enough that you'd have the might to make it to the top.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.infoDialogue(
-				"However, you were taken back by a loud roar as a humanoid creature descended from above, landing on the "
-						+ "ground hard as a crate formed beneath its scaly feet. Before you was a draconic being that was "
-						+ "only slightly taller than you, standing upright and wielding a long glaive. You could feel "
-						+ "its murderous intent from miles away, even if it hadn't said a word. The dragonoid growled "
-						+ "as it ready its weapon, challenging you to a fight.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		breakLine();
-		win = miniBoss.startBattle(scn, true);
-		breakLine();
-
-		if (win) {
-
-			Dialogue.infoDialogue(
-					"The dragonoid warrior collapsed dead at your feet as you look around, trying to see if it came alone "
-							+ "or had friends lying in wait. Not seeing or hearing another living soul in the cavern, "
-							+ "you begin making your way up the spiral staircase.\n\n",
-					txtSpd);
-			Pause.pause(wait);
-
-			Dialogue.infoDialogue("The further you head up, you begin to see an opening at the top, and the "
-					+ "sight of a dragon flying around high in the sky. You make your way closer and closer"
-					+ " to the top, conserving your stamina for the fight\nto come.\n\n", txtSpd);
-			Pause.pause(wait);
-
-			Dialogue.infoDialogue("Finally... you reach the top.\n\n", txtSpd);
-			Pause.pause(wait);
-
-			Dialogue.infoDialogue("You mentally prepare yourself as the dragon above... the dragonlord... "
-					+ "sees you and descends...", txtSpd);
-			Pause.pause(wait);
-
-		}
-
-		return true;
-	}
+	/*
+	 * 
+	 * ------------------------------Melee Story Functions------------------------------
+	 * 
+	 */
 	
-	public static boolean rangedDragonApproach(Player player, Scanner keyboard) {
-		return true;
-	}
-	
-	public static boolean mageDragonApproach(Player player, Scanner keyboard) {
-		return true;
-	}
-	
-	public static boolean rogueDragonApproach(Player player, Scanner keyboard) {
-		return true;
-	}
-	
-	// --------------------Mission Functions--------------------
-	public static boolean kingsMission(Player player, Scanner keyboard) {
-		// king sends you on mission
-		// travel
-		
-		
-		// fight troll
-		return true;
-	}
-	
-	public static boolean dragonFight(Player player, Scanner keyboard) {
-		return true;
-	}
+	/*
+	 * --------------------Chapter 1--------------------
+	 */
 	
 	public static boolean meleeChapter1(Player player, Scanner scn) {
 
@@ -908,7 +579,7 @@ public class GameThread extends Throwable {
 			Pause.pause();
 
 			System.out.println(
-					"---------------------------------------------------------------------------------------------------");
+					"-----------------------------------------------------------------------------------------------------------------------------");
 
 			Dialogue.infoDialogue(
 					"The sparring session lasted barely over a minute before Jagatai found himself satisfied with you, "
@@ -960,6 +631,629 @@ public class GameThread extends Throwable {
 
 		return true;
 	}
+	
+	/*
+	 * --------------------Chapter 3--------------------
+	 */
+	
+	public static boolean meleeSpecialMission(Player player, Scanner scn) {
+
+		int txtSpd = 25, wait = 1000, battleCount = 1;
+		boolean pResponse;
+		char input = ' ';
+		boolean win = false;
+		String kingKnight = "Paris, King's Left Hand";
+		String ally1Name = "Jagatai, Retired Warrior", ally2Name = "Knight Adicai";
+		String boss1Name = "Kioq, Goblin Champion";
+		breakLine();
+
+		Enemy e1 = eList.goblin1, e2 = eList.goblin2, eBoss = eList.goblinBoss;
+		e1.getInventory();
+
+		Battle battle1 = new Battle(player, e1), battle2 = new Battle(player, e2),
+				bossBattle = new Battle(player, eBoss);
+		
+		Dialogue.infoDialogue("You approach the king's chamber after receiving a summons concerning a new task for"
+				+ " you. However, you were quickly stopped as the chamber doors opened, and stepping out was one of the king's"
+				+ " loyal commanders, looking at you with a condescending expression.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "You've been quite busy I see. Trying to rack up a good reputation with the "
+				+ "royal court now by pleasing the king, are we? Quite ambitious for a rookie. But that's enough discussion. "
+				+ "I'm the one that sent that summons. I have a task for somebody that's unable to keep still. Someone like"
+				+ " you.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Though his attitude got annoying to you quickly, you knew that it'd be in your best interest "
+				+ "to listen to Paris' request.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Color me surprised to hear that a large band of goblins- yes those creatures-"
+				+ " have begun to organize themselves into a unit that threatens the safety of this kingdom. While it would "
+				+ "be extremely easy for me to deploy a platoon to deal with them and be on my way, I'd rather not waste "
+				+ "many of my own soldiers like this.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "So! What better way to solve the issue than to delegate it the new hotshot "
+				+ "adventurer that's the talk of the town? I want you to deal with the kingdom's goblin problem. I don't "
+				+ "intend to take no for an answer, so don't bother.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) I wasn't going to say no, so I'll be going now.\n2) Are you finished yet?\nReponse: "
+					, 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+		
+		if (input == '1') {
+			Dialogue.characterDialogue(kingKnight, "I do love how we're on the same page, but I would love it even more if you"
+					+ " didn't interrupt me. I wasn't finished talking.\n\n", txtSpd);
+		} else {
+			Dialogue.characterDialogue(kingKnight, "I'd be finished a lot sooner if you wouldn't interrupt me. Now, as I was "
+					+ "about to say...\n\n", txtSpd);
+		}
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("You begin to consider how bad walking away now would hurt your reputation, thinking just long "
+				+ "enough for Paris to say something interesting.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "General Adicai is insistent on heading out personally to defeat these goblins "
+				+ "alongside you. There's something about the appearance of a goblin champion that's made him restless, so "
+				+ "get along well with him.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "I suggest that you keep in mind that Adicai is far more important to this "
+				+ "kingdom that you'll ever be. Your most important duty will be to ensure that he returns safe and sound.\n\n"
+				, txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(ally2Name, "I am more than capable of taking care of myself, sir Paris.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Suddenly the general in question, Adicai, appraoches both you and Paris, having overheard the "
+				+ "conversation. After his initial statement, he turned to you as his tone softened.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(ally2Name, "You must be the new adventurer I've heard about. My name is Adicai. You needn't"
+				+ " worry about me on the battlefield. Our main goal will be to ensure that as many goblins are wiped out as "
+				+ "possible, and defeating the ringleader behind their organization. You can use whatever you see fit for "
+				+ "this operation. I'll be waiting for you to prepare.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "...Regardless of Adicai's concerns, keep in mind what I said. That is all."
+				+ " I'll leave you two to take care of this.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Paris headed back for the king's chamber. Adicai saluted you before he left. All that was left"
+				+ " to do was prepare yourself for the battle with the goblins... and you had an idea on how to do so.\n\n"
+				, txtSpd);
+		Pause.pause(wait);
+		
+		Pause.pause();
+		
+		breakLine();
+
+		Dialogue.infoDialogue(
+				"Under the orders of the king's knight, you have been given the task of defeating the goblin army that has "
+				+ "been threatening the safety of this kingdom, working alongside of the king's generals, Adicai. "
+						+ "In order to have as many allies as possible, you pay a visit to the blacksmith Jagatai, "
+						+ "in hopes of marching with a team of three.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name,
+				"So you trust an old man enough to ask for his help against a horde of goblins, eh? I'm flattered. I "
+						+ "could use a little exercise.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name,
+				"Make sure you're ready for this. I'm ready to go at any time. But once we're out there, don't expect "
+						+ "to turn back until we've wiped them out. Are you ready for this?\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) Yes\n2) No.\nReponse: ", 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+
+		if (input == '1') {
+			Dialogue.characterDialogue(ally1Name, "Just like I expected from you. Let's move.\n\n", txtSpd);
+		} else {
+			Dialogue.characterDialogue(ally1Name, "Then don't keep us waiting for long.\n\n", txtSpd);
+			return false;
+		}
+		Pause.pause(wait);
+
+		breakLine();
+
+		Dialogue.infoDialogue("It was not long before your party set out to march on the goblin horde. "
+				+ "Leaving the safety of the kingdom and stepping out of the walls, you would soon find "
+				+ "that it would not take long to arrive at your destination... or rather, your destination had moved "
+				+ "closer. Much closer. Only a few miles outside the "
+				+ "kingdom, the goblin horde had managed to set up their camp for a closer attack.\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name,
+				"These foul beasts have the gall to set up an encampment on the outskirts of our borders? Hmph. Kioq is an "
+						+ "issue that I should have dealt with long ago.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name,
+				"Looks like the goblins have gotten restless and are about ready to ransack the place. There's no getting "
+						+ "the jump on them when they're this ready to go. Only way we're going to deal with this problem "
+						+ "is to\ntackle it head on.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name,
+				"Ah, but that's how the famous \"Jagatai the Grey\" likes to fight, is it not?\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name, "Took the words right out of my mouth.\n\n", txtSpd);
+		Pause.pause(wait);
+
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) Are you two friends?\n2) Do you two know each other?\nReponse: ", 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+ 		}
+
+		if (input == '1') {
+			Dialogue.characterDialogue(ally1Name, "I wouldn't go that far. But, we have heard of each other.\n\n",
+					txtSpd);
+		} else {
+			Dialogue.characterDialogue(ally2Name,
+					"You won't find many that don't know of this man's feats in his prime.\n\n", txtSpd);
+		}
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name,
+				"Enough chatter for now. The ones on the front lines are weak. We'll tear through them with ease separately. "
+						+ "Whichever one is first to reach the commander- the goblin's champion, Kioq- "
+						+ "may try their hand in gaining the glory of taking his head.",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally1Name,
+				"Just cause they're weak doesn't mean you can drop your guard. Don't die out there you two.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name, "As if I'd lose a battle to lesser creatures, yet alone my life.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(ally2Name, "FORWARD!!\n\n", txtSpd - 10);
+		Pause.pause(wait);
+
+		Pause.pause();
+		breakLine();
+
+		while (!win) {
+
+			if (battleCount % 3 == 0) {
+				if (battle2.startBattle(scn, true)) {
+					battleCount++;
+				}
+			} else {
+				if (battle1.startBattle(scn, true)) {
+					battleCount++;
+				}
+			}
+
+			if (battleCount == 6) {
+				win = true;
+			}
+
+		}
+
+		win = false;
+
+		Dialogue.infoDialogue(
+				"Battling your way through several goblins, you find yourself separated from your companions as more and "
+						+ "more goblins approached. Suddenly, they all stopped in place as loud footsteps "
+						+ "were stomping up behind you.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(boss1Name, "Grr... Dem first w'ves... all weaklings!\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue("Behind you was a massive, big-bellied goblin wielding a greataxe in each hand. "
+				+ "Judging by his size and presence, "
+				+ "it was clear to you that this was the goblin champion you were after.\n\n", txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue(boss1Name,
+				"I'm tired o' all dis waitin' round! How bout I beat puny human to pulp now!?\n\n", txtSpd);
+		Pause.pause(wait);
+
+		breakLine();
+
+		while (!win) {
+			win = bossBattle.startBattle(scn, true);
+		}
+
+		if (win) {
+
+			Dialogue.infoDialogue("The champion of goblins now lays dead at your feet as you catch your breath. "
+					+ "Any goblins that were around you "
+					+ "began to back away in fear before they all ran away, abandoning their plan completely."
+					+ " As all your adversaries "
+					+ "were either dead or have fled, you could hear familiar footsteps as your companions "
+					+ "finally caught up with you.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(ally2Name, "Impressive... you were able to fell Kioq by yourself.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(ally1Name,
+					"Sorry about the delay. There were more of these guys than we thought. "
+							+ "But, it looks like you didn't even need us "
+							+ "in the first place. Adicai was right to choose you for this.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue(
+					"Adicai approached the fallen goblin champion and picked up one of the axes that he had wielded.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(ally2Name,
+					"At long last... I am able to pry this from the grips of this foul beast.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			pResponse = true;
+			while (pResponse) {
+				Dialogue.infoDialogue(
+						"1) What's special about that axe?\n2) Were you after the goblins to steal that axe?\nReponse: ",
+						8);
+				input = scn.next().charAt(0);
+
+				switch (input) {
+				case '1', '2':
+					pResponse = false;
+					System.out.println();
+					break;
+				default:
+					System.err.println("Invalid choice. Try again.\n");
+					Pause.pause(350);
+					break;
+				}
+			}
+
+			if (input == '2') {
+				Dialogue.characterDialogue(ally2Name,
+						"Indeed... I wanted to steal this from the thieves who originally stole it.\n\n", txtSpd);
+			}
+			Pause.pause(wait);
+
+			Dialogue.characterDialogue(ally2Name,
+					"This is the weapon of my father. Many years ago, he was slain in a war against the beasts of the earth, "
+							+ "and this axe was taken from his corpse. I was but a young lad back then, and hardly "
+							+ "with the power to "
+							+ "get it back. Now, I can finally rejoice knowing that the axe has been retrieved from the "
+							+ "hands of the "
+							+ "goblin champion, a fool who can't even wield the weapon to its fullest potential and draw out "
+							+ "its special attack.\n\n",
+					txtSpd);
+
+			Dialogue.characterDialogue(ally2Name,
+					"However, I was not the one who retrieved this weapon. Therefore, I cannot say that I am truly "
+							+ "worthy to wield it\nin my father's place...\n\n",
+					txtSpd);
+
+			Dialogue.infoDialogue(
+					"Adicai hands over the greataxe to you, the one responsible for defeating the goblin champion.\n\n",
+					txtSpd);
+
+			Dialogue.characterDialogue(ally2Name,
+					"As the slayer of Kioq, I want you to have this. Bring out the full potential of "
+							+ "this weapon in your quests. I wish nothing but success for you," + player.getName()
+							+ ".\n\n",
+					txtSpd);
+
+			player.getInventory().add(wList.axe4);
+			Dialogue.infoDialogue("[You got the Phoenix Cleaver]\n\n", txtSpd);
+			Pause.pause(wait);
+
+		}
+
+		return true;
+
+	}
+	
+	/*
+	 * --------------------Chapter 4--------------------
+	 */
+	
+	public static boolean meleeDragonApproach(Player player, Scanner scn) {
+
+		String kingKnight = "Paris, King's Left Hand";
+		Battle miniBoss = new Battle(player, eList.dWar);
+		boolean win = false;
+		int txtSpd = 25, wait = 1000;
+		boolean pResponse;
+		char input = 0;
+		
+		breakLine();
+		
+		Dialogue.infoDialogue("Once again, you find yourself in the company of Paris, having been called out by the king's "
+				+ "knight in regards to another mission. This time, the condescending look on his face was gone by the time "
+				+ "you arrived.\n\n"
+				, txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Well, look what the cat finally dragged in.\n\n", txtSpd);
+		Pause.pause(wait + 500);
+		
+		Dialogue.infoDialogue("...ONLY the look wasn't present.\n\n", txtSpd + 10);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Adicai's been singing nothing but praises for you for a while, and I have to "
+				+ "admit, even I am impressed to hear that the goblin champion fell by your hands and your hands alone. You "
+				+ "aren't the same wannabe hero that you were when we first met. You might actually be the perfect fit for a "
+				+ "task such as this.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) And that task would be...?\n2) You? Praising me? What a surprise!\nReponse: "
+					, 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+		
+		if (input == '1') {
+			Dialogue.characterDialogue(kingKnight, "How hard is it to wait til I finish talking? I was getting to that.\n\n",
+					txtSpd);
+		} else {
+			Dialogue.characterDialogue(kingKnight, "Yes, yes. As surprising as it may seem, you actually earned it.\n\n", 
+					txtSpd);
+		}
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Now then, this is something that I myself along with the other key advisors "
+				+ "to the king have been focusing on. This kingdom has always been in grave jeopardy at the hands of a "
+				+ "powerful dragonlord. Sitting on top of the tallest mountain you can see from the castle gates is where its"
+				+ " nest is positioned. Naturally, you would think that we would have dealt with this by now what with all "
+				+ "the information we have. However, there's a slight issue.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "It's... impossible for even us to reach that peak. Although most of the lesser"
+				+ " dragons around the mountaintop have been dealt with, a handful remain. Furthermore, too many men have died"
+				+ " making the climb up the mountain. We've had no luck finding a better path. A warrior such as yourself was"
+				+ " capable of besting an entire army by yourself, so this may be doable for you.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "I need you to scout around the mountain without going past the midpoint. If "
+				+ "you can find a passageway up to the peak where the dragonlord resides, then I swear that a hefty reward "
+				+ "will be waiting for you the moment you find it and we confirm that you've done so.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) ...What would the reward be if I were to defeat the dragonlord while I'm there?\n"
+					+ "Reponse: "
+					, 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+		
+		Dialogue.characterDialogue(kingKnight, "What?! Have you gone mad?! To take on the dragonlord single-handedly, that's "
+				+ "a fool's task! It's impossible! Suicide! You'd never survive!\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "The king's elite will lead a force strong enough to handle the dragonlord. We "
+				+ "don't need you to attempt to play hero by yourself.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		pResponse = true;
+		while (pResponse) {
+			Dialogue.infoDialogue("1) But that would lead to lots of casualties\n2) I don't care if you think I can handle it."
+					+ "\nReponse: "
+					, 8);
+			input = scn.next().charAt(0);
+
+			switch (input) {
+			case '1', '2':
+				pResponse = false;
+				System.out.println();
+				break;
+			default:
+				System.err.println("Invalid choice. Try again.\n");
+				Pause.pause(350);
+				break;
+			}
+		}
+		
+		if (input == '1') {
+			Dialogue.characterDialogue(kingKnight, "Well, yes... that is true, I...\n\n", txtSpd);
+		} else {
+			Dialogue.characterDialogue(kingKnight, "Are you that desperate to prove something here...?\n\n", txtSpd);
+		}
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Paris let out a loud sigh.\n\n", txtSpd);
+		Pause.pause(wait * 2);
+		
+		Dialogue.characterDialogue(kingKnight, "Hypothetically speaking... We're you capable of defeating a dragonlord without"
+				+ " any form of aid, we would allow you to name your price in terms of payment. I can't think of any other way"
+				+ " that it'd be fair for your efforts. Hoever, this is merely a hypothetical situation. Only a fool would go "
+				+ "out there and attempt to play hero over it.\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.characterDialogue(kingKnight, "Regardless, I've given you your ACTUAL mission already. Head to the mountain "
+				+ "and find a path for our army to march up to the dragonlord. You will be paid handsomely upon your return."
+				+ "\n\n", txtSpd);
+		Pause.pause(wait);
+		
+		Dialogue.infoDialogue("Despite Paris' warning, your mind was already made up. You had every intention of putting your "
+				+ "strength to the test against this dragonlord. Of course, you still had to find your own way up. With your "
+				+ "weapons ready to go, you set off towards the mountains, ready to climb towards your destination.\n\n"
+				+ "", txtSpd);
+		Pause.pause(wait);
+		
+		Pause.pause();
+		
+		breakLine();
+
+		Dialogue.infoDialogue(
+				"By this point, the kingdom looks like a simple town with how far you've come. Per the king's request, you "
+						+ "ascended into the mountaintops to reach the dragonlord's lair. You've not even come close "
+						+ "to entering, and "
+						+ "the sounds of it, and the nearby dragons fill your eardrums and mind with dread.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		txtSpd += 15;
+		Dialogue.infoDialogue("Their ferocious roars. ", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("The flapping of wings. ", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("The smell of smoke. ", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("The field of bones around you. ", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("The weapons of those who previously challenged it.\n", txtSpd);
+		Pause.pause(wait);
+		Dialogue.infoDialogue("All these things fill you with both fear, and determination.\n\n", txtSpd);
+		Pause.pause(wait);
+		txtSpd -= 15;
+
+		Dialogue.infoDialogue(
+				"With your goal in mind, you push on ahead further up the mountain. By this point, it appears that the sides "
+						+ "are becoming too steep for you to continue climbing, and you'd likely fall to your death "
+						+ "before ever seeing the dragonlord. Having a look around, you can see a flat area of the mountain, "
+						+ "with a weak spot in the side.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"Climbing up and walking to that spot, you peered through the cracks to see that the inside was hollowed, as "
+						+ "if a path had been carved inside of the mountain that would lead you up safely. "
+						+ "Taking out the great Phoenix "
+						+ "Cleaver received from Adicai, you strike the cracked wall with all your might, "
+						+ "shattering it and giving you a clearer view of the carved path ahead.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"You stepped into the hollowed mountain and swing the greataxe in order to cause the blade to light ablaze, "
+						+ "giving you a light so that you can see ahead. It appeared that you had stepped foot into a large "
+						+ "cavern with an empty nest in the center, and a broken spiral staircase carved out into the walls "
+						+ "leading both up and down. Though the stairs were burned and broken, they were stable and long "
+						+ "enough that you'd have the might to make it to the top.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.infoDialogue(
+				"However, you were taken back by a loud roar as a humanoid creature descended from above, landing on the "
+						+ "ground hard as a crate formed beneath its scaly feet. Before you was a draconic being that was "
+						+ "only slightly taller than you, standing upright and wielding a long glaive. You could feel "
+						+ "its murderous intent from miles away, even if it hadn't said a word. The dragonoid growled "
+						+ "as it ready its weapon, challenging you to a fight.\n\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		breakLine();
+		win = miniBoss.startBattle(scn, true);
+		breakLine();
+
+		if (win) {
+
+			Dialogue.infoDialogue(
+					"The dragonoid warrior collapsed dead at your feet as you look around, trying to see if it came alone "
+							+ "or had friends lying in wait. Not seeing or hearing another living soul in the cavern, "
+							+ "you begin making your way up the spiral staircase.\n\n",
+					txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue("The further you head up, you begin to see an opening at the top, and the "
+					+ "sight of a dragon flying around high in the sky. You make your way closer and closer"
+					+ " to the top, conserving your stamina for the fight\nto come.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue("Finally... you reach the top.\n\n", txtSpd);
+			Pause.pause(wait);
+
+			Dialogue.infoDialogue("You mentally prepare yourself as the dragon above... the dragonlord... "
+					+ "sees you and descends...", txtSpd);
+			Pause.pause(wait);
+
+		}
+
+		return true;
+	}
+	
+	/*
+	 * 
+	 * ------------------------------Ranged Story Functions------------------------------
+	 * 
+	 */
+	
+	/*
+	 * --------------------Chapter 1--------------------
+	 */
 	
 	public static boolean rangerChapter1(Player player, Scanner keyboard) {
 	    boolean makingChoice = true;
@@ -1106,8 +1400,149 @@ public class GameThread extends Throwable {
 
 	    return true;
 	}
+	
+	/*
+	 * --------------------Chapter 3--------------------
+	 */
+	
+	public static boolean rangedSpecialMission(Player player, Scanner keyboard) {
+	    int txtSpd = 25;
+	    char pChoice;
+	    boolean makingChoice = true;
+	    String pName = player.getName();
+	    String rangerName = "Elaris the Ranger";
 
+	    breakLine();
+	    Dialogue.characterDialogue(rangerName, "Ah, " + pName + "! I’ve been meaning to speak with you. Your skill with a bow is unmatched in these parts, and there’s a dire situation that needs addressing.", txtSpd);
 
+	    while (makingChoice) {
+	        Dialogue.characterDialogue(rangerName, "The Shadow Stalker pack has taken over an ancient territory nearby, and their alpha, Nightfang, is growing stronger by the day. We need you to stop him before the pack becomes unstoppable.\n"
+	                + "Are you willing to take on this mission?\n"
+	                + "1) Yes, I’ll take on the challenge.\n"
+	                + "2) I’m not sure. This sounds dangerous.\n", txtSpd);
+	        pChoice = keyboard.next().charAt(0);
+
+	        switch (pChoice) {
+	        case '1':
+	            breakLine();
+	            Dialogue.characterDialogue(pName, "Yes, I’ll take on the challenge.\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        case '2':
+	            breakLine();
+	            Dialogue.characterDialogue(pName, "I’m not sure. This sounds dangerous.\n", txtSpd);
+	            Dialogue.characterDialogue(rangerName, "It is dangerous, but you’re the only one capable of stopping Nightfang. Let me know if you change your mind.\n", txtSpd);
+	            return false;
+
+	        default:
+	            breakLine();
+	            System.err.println("(Invalid choice. Please try again)");
+	            break;
+	        }
+	    }
+
+	    Dialogue.characterDialogue(rangerName, "Nightfang’s territory lies in the Heartshadow Woods. It’s a twisted place of darkness, but you’ll have an important choice to make when you arrive. "
+	            + "Nightfang prowls between two locations, and you’ll need to decide where to confront him.", txtSpd);
+
+	    Dialogue.infoDialogue("*You gather your gear and head out, the forest growing darker as you approach the Heartshadow Woods. The air is thick with mist, and the faint glow of fireflies provides the only light. "
+	            + "After some time, you reach the edge of the woods where a fork in the path offers two distinct routes.*\n", txtSpd);
+
+	    makingChoice = true;
+	    while (makingChoice) {
+	        Dialogue.infoDialogue("*Which path will you take?*\n"
+	                + "1) *The Ancient Clearing: An open field where moonlight breaks through the canopy, casting eerie shadows.*\n"
+	                + "2) *The Cursed Hollow: A narrow gorge filled with jagged rocks and an oppressive darkness.*\n", txtSpd);
+	        pChoice = keyboard.next().charAt(0);
+
+	        switch (pChoice) {
+	        case '1':
+	            breakLine();
+	            Dialogue.infoDialogue("*You choose the path to the Ancient Clearing, where the forest opens into a large field. Moonlight filters down through the twisted branches, illuminating the clearing in a pale silver glow. "
+	                    + "The ground is covered in moss and glowing mushrooms, and the air hums with an unnatural silence. You step into the clearing cautiously, sensing movement among the shadows.*\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        case '2':
+	            breakLine();
+	            Dialogue.infoDialogue("*You choose the path to the Cursed Hollow, where the forest closes in tightly around you. The narrow gorge is suffocating, with jagged rocks jutting out like broken teeth. "
+	                    + "A faint red glow pulses from deep within, and the sound of dripping water echoes eerily. The oppressive air weighs heavily on your chest as you venture deeper, your every step crunching against loose stone.*\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        default:
+	            breakLine();
+	            System.err.println("(Invalid choice. Please try again)");
+	            break;
+	        }
+	    }
+
+	    Dialogue.infoDialogue("*You hear a guttural growl nearby, and your heart races as you realize Nightfang is near. The alpha Shadow Stalker emerges from the darkness, its glowing red eyes locked onto you. "
+	            + "The creature stands taller than any of its kin, its fur bristling with shadowy tendrils that shift and writhe as if alive. Its razor-sharp claws glint in the dim light.*\n", txtSpd);
+
+	    makingChoice = true;
+	    while (makingChoice) {
+	        Dialogue.infoDialogue("*What do you do?*\n"
+	                + "1) *Raise your bow and prepare for battle.*\n"
+	                + "2) *Try to find a better position for the fight.*\n", txtSpd);
+	        pChoice = keyboard.next().charAt(0);
+
+	        switch (pChoice) {
+	        case '1':
+	            breakLine();
+	            Dialogue.infoDialogue("*You nock an arrow and face Nightfang head-on, your heart pounding as you prepare for a fierce battle.*\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        case '2':
+	            breakLine();
+	            Dialogue.infoDialogue("*You dart behind a nearby boulder, using the terrain to gain a tactical advantage. Nightfang circles, its glowing eyes tracking your every move.*\n", txtSpd);
+	            makingChoice = false;
+	            break;
+
+	        default:
+	            breakLine();
+	            System.err.println("(Invalid choice. Please try again)");
+	            break;
+	        }
+	    }
+
+	    /*
+	     * Nightfang Boss Fight
+	     * 
+	     * lose:
+	     * return false;
+	     * 
+	     * win:
+	     */
+
+	    Dialogue.infoDialogue("*As the battle concludes, Nightfang collapses with a final, ear-splitting howl. The oppressive atmosphere of the woods begins to lift, and the shadows that clung to the trees slowly recede. "
+	            + "The forest is quiet once more, save for the rustling of leaves in a gentle breeze. You take a moment to catch your breath, the adrenaline of the fight still coursing through your veins.*\n", txtSpd);
+
+	    Dialogue.infoDialogue("*You begin your journey back to Elaris, the weight of your victory etched in every step you take.*\n", txtSpd);
+
+	    Dialogue.characterDialogue(rangerName, "You’ve returned! And from the look of you, I’d say the mission was a success. The woods will remember your courage, and so will I. Thank you, " + pName + ". You’ve done more than you know.\n", txtSpd);
+
+	    return true;
+	}
+	
+	/*
+	 * --------------------Chapter 4--------------------
+	 */
+	
+	public static boolean rangedDragonApproach(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	/*
+	 * 
+	 * ------------------------------Mage Story Functions------------------------------
+	 * 
+	 */
+	
+	/*
+	 * --------------------Chapter 1--------------------
+	 */
 	
 	public static boolean mageChapter1(Player player, Scanner keyboard) {
 		boolean makingChoice = true;
@@ -1252,9 +1687,9 @@ public class GameThread extends Throwable {
 		return true;
 	}
 	
-	public static boolean rogueChapter1(Player player, Scanner keyboard) {
-		return true;
-	}
+	/*
+	 * --------------------Chapter 3--------------------
+	 */
 	
 	public static boolean mageSpecialMission(Player player, Scanner keyboard) {
 		int txtSpd = 25; 
@@ -1760,545 +2195,55 @@ public class GameThread extends Throwable {
 		return true;
 	}
 	
-	public static boolean rangedSpecialMission(Player player, Scanner keyboard) {
-	    int txtSpd = 25;
-	    char pChoice;
-	    boolean makingChoice = true;
-	    String pName = player.getName();
-	    String rangerName = "Elaris the Ranger";
-
-	    breakLine();
-	    Dialogue.characterDialogue(rangerName, "Ah, " + pName + "! I’ve been meaning to speak with you. Your skill with a bow is unmatched in these parts, and there’s a dire situation that needs addressing.", txtSpd);
-
-	    while (makingChoice) {
-	        Dialogue.characterDialogue(rangerName, "The Shadow Stalker pack has taken over an ancient territory nearby, and their alpha, Nightfang, is growing stronger by the day. We need you to stop him before the pack becomes unstoppable.\n"
-	                + "Are you willing to take on this mission?\n"
-	                + "1) Yes, I’ll take on the challenge.\n"
-	                + "2) I’m not sure. This sounds dangerous.\n", txtSpd);
-	        pChoice = keyboard.next().charAt(0);
-
-	        switch (pChoice) {
-	        case '1':
-	            breakLine();
-	            Dialogue.characterDialogue(pName, "Yes, I’ll take on the challenge.\n", txtSpd);
-	            makingChoice = false;
-	            break;
-
-	        case '2':
-	            breakLine();
-	            Dialogue.characterDialogue(pName, "I’m not sure. This sounds dangerous.\n", txtSpd);
-	            Dialogue.characterDialogue(rangerName, "It is dangerous, but you’re the only one capable of stopping Nightfang. Let me know if you change your mind.\n", txtSpd);
-	            return false;
-
-	        default:
-	            breakLine();
-	            System.err.println("(Invalid choice. Please try again)");
-	            break;
-	        }
-	    }
-
-	    Dialogue.characterDialogue(rangerName, "Nightfang’s territory lies in the Heartshadow Woods. It’s a twisted place of darkness, but you’ll have an important choice to make when you arrive. "
-	            + "Nightfang prowls between two locations, and you’ll need to decide where to confront him.", txtSpd);
-
-	    Dialogue.infoDialogue("*You gather your gear and head out, the forest growing darker as you approach the Heartshadow Woods. The air is thick with mist, and the faint glow of fireflies provides the only light. "
-	            + "After some time, you reach the edge of the woods where a fork in the path offers two distinct routes.*\n", txtSpd);
-
-	    makingChoice = true;
-	    while (makingChoice) {
-	        Dialogue.infoDialogue("*Which path will you take?*\n"
-	                + "1) *The Ancient Clearing: An open field where moonlight breaks through the canopy, casting eerie shadows.*\n"
-	                + "2) *The Cursed Hollow: A narrow gorge filled with jagged rocks and an oppressive darkness.*\n", txtSpd);
-	        pChoice = keyboard.next().charAt(0);
-
-	        switch (pChoice) {
-	        case '1':
-	            breakLine();
-	            Dialogue.infoDialogue("*You choose the path to the Ancient Clearing, where the forest opens into a large field. Moonlight filters down through the twisted branches, illuminating the clearing in a pale silver glow. "
-	                    + "The ground is covered in moss and glowing mushrooms, and the air hums with an unnatural silence. You step into the clearing cautiously, sensing movement among the shadows.*\n", txtSpd);
-	            makingChoice = false;
-	            break;
-
-	        case '2':
-	            breakLine();
-	            Dialogue.infoDialogue("*You choose the path to the Cursed Hollow, where the forest closes in tightly around you. The narrow gorge is suffocating, with jagged rocks jutting out like broken teeth. "
-	                    + "A faint red glow pulses from deep within, and the sound of dripping water echoes eerily. The oppressive air weighs heavily on your chest as you venture deeper, your every step crunching against loose stone.*\n", txtSpd);
-	            makingChoice = false;
-	            break;
-
-	        default:
-	            breakLine();
-	            System.err.println("(Invalid choice. Please try again)");
-	            break;
-	        }
-	    }
-
-	    Dialogue.infoDialogue("*You hear a guttural growl nearby, and your heart races as you realize Nightfang is near. The alpha Shadow Stalker emerges from the darkness, its glowing red eyes locked onto you. "
-	            + "The creature stands taller than any of its kin, its fur bristling with shadowy tendrils that shift and writhe as if alive. Its razor-sharp claws glint in the dim light.*\n", txtSpd);
-
-	    makingChoice = true;
-	    while (makingChoice) {
-	        Dialogue.infoDialogue("*What do you do?*\n"
-	                + "1) *Raise your bow and prepare for battle.*\n"
-	                + "2) *Try to find a better position for the fight.*\n", txtSpd);
-	        pChoice = keyboard.next().charAt(0);
-
-	        switch (pChoice) {
-	        case '1':
-	            breakLine();
-	            Dialogue.infoDialogue("*You nock an arrow and face Nightfang head-on, your heart pounding as you prepare for a fierce battle.*\n", txtSpd);
-	            makingChoice = false;
-	            break;
-
-	        case '2':
-	            breakLine();
-	            Dialogue.infoDialogue("*You dart behind a nearby boulder, using the terrain to gain a tactical advantage. Nightfang circles, its glowing eyes tracking your every move.*\n", txtSpd);
-	            makingChoice = false;
-	            break;
-
-	        default:
-	            breakLine();
-	            System.err.println("(Invalid choice. Please try again)");
-	            break;
-	        }
-	    }
-
-	    /*
-	     * Nightfang Boss Fight
-	     * 
-	     * lose:
-	     * return false;
-	     * 
-	     * win:
-	     */
-
-	    Dialogue.infoDialogue("*As the battle concludes, Nightfang collapses with a final, ear-splitting howl. The oppressive atmosphere of the woods begins to lift, and the shadows that clung to the trees slowly recede. "
-	            + "The forest is quiet once more, save for the rustling of leaves in a gentle breeze. You take a moment to catch your breath, the adrenaline of the fight still coursing through your veins.*\n", txtSpd);
-
-	    Dialogue.infoDialogue("*You begin your journey back to Elaris, the weight of your victory etched in every step you take.*\n", txtSpd);
-
-	    Dialogue.characterDialogue(rangerName, "You’ve returned! And from the look of you, I’d say the mission was a success. The woods will remember your courage, and so will I. Thank you, " + pName + ". You’ve done more than you know.\n", txtSpd);
-
-	    return true;
-	}
-
+	/*
+	 * --------------------Chapter 4--------------------
+	 */
 	
-	public static boolean meleeSpecialMission(Player player, Scanner scn) {
-
-		int txtSpd = 25, wait = 1000, battleCount = 1;
-		boolean pResponse;
-		char input = ' ';
-		boolean win = false;
-		String kingKnight = "Paris, King's Left Hand";
-		String ally1Name = "Jagatai, Retired Warrior", ally2Name = "Knight Adicai";
-		String boss1Name = "Kioq, Goblin Champion";
-		breakLine();
-
-		Enemy e1 = eList.goblin1, e2 = eList.goblin2, eBoss = eList.goblinBoss;
-		e1.getInventory();
-
-		Battle battle1 = new Battle(player, e1), battle2 = new Battle(player, e2),
-				bossBattle = new Battle(player, eBoss);
-		
-		Dialogue.infoDialogue("You approach the king's chamber after receiving a summons concerning a new task for"
-				+ " you. However, you were quickly stopped as the chamber doors opened, and stepping out was one of the king's"
-				+ " loyal commanders, looking at you with a condescending expression.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "You've been quite busy I see. Trying to rack up a good reputation with the "
-				+ "royal court now by pleasing the king, are we? Quite ambitious for a rookie. But that's enough discussion. "
-				+ "I'm the one that sent that summons. I have a task for somebody that's unable to keep still. Someone like"
-				+ " you.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.infoDialogue("Though his attitude got annoying to you quickly, you knew that it'd be in your best interest "
-				+ "to listen to Paris' request.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "Color me surprised to hear that a large band of goblins- yes those creatures-"
-				+ " have begun to organize themselves into a unit that threatens the safety of this kingdom. While it would "
-				+ "be extremely easy for me to deploy a platoon to deal with them and be on my way, I'd rather not waste "
-				+ "many of my own soldiers like this.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "So! What better way to solve the issue than to delegate it the new hotshot "
-				+ "adventurer that's the talk of the town? I want you to deal with the kingdom's goblin problem. I don't "
-				+ "intend to take no for an answer, so don't bother.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		pResponse = true;
-		while (pResponse) {
-			Dialogue.infoDialogue("1) I wasn't going to say no, so I'll be going now.\n2) Are you finished yet?\nReponse: "
-					, 8);
-			input = scn.next().charAt(0);
-
-			switch (input) {
-			case '1', '2':
-				pResponse = false;
-				System.out.println();
-				break;
-			default:
-				System.err.println("Invalid choice. Try again.\n");
-				Pause.pause(350);
-				break;
-			}
-		}
-		
-		if (input == '1') {
-			Dialogue.characterDialogue(kingKnight, "I do love how we're on the same page, but I would love it even more if you"
-					+ " didn't interrupt me. I wasn't finished talking.\n\n", txtSpd);
-		} else {
-			Dialogue.characterDialogue(kingKnight, "I'd be finished a lot sooner if you wouldn't interrupt me. Now, as I was "
-					+ "about to say...\n\n", txtSpd);
-		}
-		Pause.pause(wait);
-		
-		Dialogue.infoDialogue("You begin to consider how bad walking away now would hurt your reputation, thinking just long "
-				+ "enough for Paris to say something interesting.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "General Adicai is insistent on heading out personally to defeat these goblins "
-				+ "alongside you. There's something about the appearance of a goblin champion that's made him restless, so "
-				+ "get along well with him.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "I suggest that you keep in mind that Adicai is far more important to this "
-				+ "kingdom that you'll ever be. Your most important duty will be to ensure that he returns safe and sound.\n\n"
-				, txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(ally2Name, "I am more than capable of taking care of myself, sir Paris.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.infoDialogue("Suddenly the general in question, Adicai, appraoches both you and Paris, having overheard the "
-				+ "conversation. After his initial statement, he turned to you as his tone softened.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(ally2Name, "You must be the new adventurer I've heard about. My name is Adicai. You needn't"
-				+ " worry about me on the battlefield. Our main goal will be to ensure that as many goblins are wiped out as "
-				+ "possible, and defeating the ringleader behind their organization. You can use whatever you see fit for "
-				+ "this operation. I'll be waiting for you to prepare.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.characterDialogue(kingKnight, "...Regardless of Adicai's concerns, keep in mind what I said. That is all."
-				+ " I'll leave you two to take care of this.\n\n", txtSpd);
-		Pause.pause(wait);
-		
-		Dialogue.infoDialogue("Paris headed back for the king's chamber. Adicai saluted you before he left. All that was left"
-				+ " to do was prepare yourself for the battle with the goblins... and you had an idea on how to do so.\n\n"
-				, txtSpd);
-		Pause.pause(wait);
-		
-		Pause.pause();
-		
-		breakLine();
-
-		Dialogue.infoDialogue(
-				"Under the orders of the king's knight, you have been given the task of defeating the goblin army that has "
-				+ "been threatening the safety of this kingdom, working alongside of the king's generals, Adicai. "
-						+ "In order to have as many allies as possible, you pay a visit to the blacksmith Jagatai, "
-						+ "in hopes of marching with a team of three.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally1Name,
-				"So you trust an old man enough to ask for his help against a horde of goblins, eh? I'm flattered. I "
-						+ "could use a little exercise.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally1Name,
-				"Make sure you're ready for this. I'm ready to go at any time. But once we're out there, don't expect "
-						+ "to turn back until we've wiped them out. Are you ready for this?\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		pResponse = true;
-		while (pResponse) {
-			Dialogue.infoDialogue("1) Yes\n2) No.\nReponse: ", 8);
-			input = scn.next().charAt(0);
-
-			switch (input) {
-			case '1', '2':
-				pResponse = false;
-				System.out.println();
-				break;
-			default:
-				System.err.println("Invalid choice. Try again.\n");
-				Pause.pause(350);
-				break;
-			}
-		}
-
-		if (input == '1') {
-			Dialogue.characterDialogue(ally1Name, "Just like I expected from you. Let's move.\n\n", txtSpd);
-		} else {
-			Dialogue.characterDialogue(ally1Name, "Then don't keep us waiting for long.\n\n", txtSpd);
-			return false;
-		}
-		Pause.pause(wait);
-
-		breakLine();
-
-		Dialogue.infoDialogue("It was not long before your party set out to march on the goblin horde. "
-				+ "Leaving the safety of the kingdom and stepping out of the walls, you would soon find "
-				+ "that it would not take long to arrive at your destination... or rather, your destination had moved "
-				+ "closer. Much closer. Only a few miles outside the "
-				+ "kingdom, the goblin horde had managed to set up their camp for a closer attack.\n\n", txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally2Name,
-				"These foul beasts have the gall to set up an encampment on the outskirts of our borders? Hmph. Kioq is an "
-						+ "issue that I should have dealt with long ago.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally1Name,
-				"Looks like the goblins have gotten restless and are about ready to ransack the place. There's no getting "
-						+ "the jump on them when they're this ready to go. Only way we're going to deal with this problem "
-						+ "is to\ntackle it head on.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally2Name,
-				"Ah, but that's how the famous \"Jagatai the Grey\" likes to fight, is it not?\n\n", txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally1Name, "Took the words right out of my mouth.\n\n", txtSpd);
-		Pause.pause(wait);
-
-		pResponse = true;
-		while (pResponse) {
-			Dialogue.infoDialogue("1) Are you two friends?\n2) Do you two know each other?\nReponse: ", 8);
-			input = scn.next().charAt(0);
-
-			switch (input) {
-			case '1', '2':
-				pResponse = false;
-				System.out.println();
-				break;
-			default:
-				System.err.println("Invalid choice. Try again.\n");
-				Pause.pause(350);
-				break;
-			}
- 		}
-
-		if (input == '1') {
-			Dialogue.characterDialogue(ally1Name, "I wouldn't go that far. But, we have heard of each other.\n\n",
-					txtSpd);
-		} else {
-			Dialogue.characterDialogue(ally2Name,
-					"You won't find many that don't know of this man's feats in his prime.\n\n", txtSpd);
-		}
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally2Name,
-				"Enough chatter for now. The ones on the front lines are weak. We'll tear through them with ease separately. "
-						+ "Whichever one is first to reach the commander- the goblin's champion, Kioq- "
-						+ "may try their hand in gaining the glory of taking his head.",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally1Name,
-				"Just cause they're weak doesn't mean you can drop your guard. Don't die out there you two.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally2Name, "As if I'd lose a battle to lesser creatures, yet alone my life.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(ally2Name, "FORWARD!!\n\n", txtSpd - 10);
-		Pause.pause(wait);
-
-		Pause.pause();
-		breakLine();
-
-		while (!win) {
-
-			if (battleCount % 3 == 0) {
-				if (battle2.startBattle(scn, true)) {
-					battleCount++;
-				}
-			} else {
-				if (battle1.startBattle(scn, true)) {
-					battleCount++;
-				}
-			}
-
-			if (battleCount == 6) {
-				win = true;
-			}
-
-		}
-
-		win = false;
-
-		Dialogue.infoDialogue(
-				"Battling your way through several goblins, you find yourself separated from your companions as more and "
-						+ "more goblins approached. Suddenly, they all stopped in place as loud footsteps "
-						+ "were stomping up behind you.\n\n",
-				txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(boss1Name, "Grr... Dem first w'ves... all weaklings!\n\n", txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.infoDialogue("Behind you was a massive, big-bellied goblin wielding a greataxe in each hand. "
-				+ "Judging by his size and presence, "
-				+ "it was clear to you that this was the goblin champion you were after.\n\n", txtSpd);
-		Pause.pause(wait);
-
-		Dialogue.characterDialogue(boss1Name,
-				"I'm tired o' all dis waitin' round! How bout I beat puny human to pulp now!?\n\n", txtSpd);
-		Pause.pause(wait);
-
-		breakLine();
-
-		while (!win) {
-			win = bossBattle.startBattle(scn, true);
-		}
-
-		if (win) {
-
-			Dialogue.infoDialogue("The champion of goblins now lays dead at your feet as you catch your breath. "
-					+ "Any goblins that were around you "
-					+ "began to back away in fear before they all ran away, abandoning their plan completely."
-					+ " As all your adversaries "
-					+ "were either dead or have fled, you could hear familiar footsteps as your companions "
-					+ "finally caught up with you.\n\n", txtSpd);
-			Pause.pause(wait);
-
-			Dialogue.characterDialogue(ally2Name, "Impressive... you were able to fell Kioq by yourself.\n\n", txtSpd);
-			Pause.pause(wait);
-
-			Dialogue.characterDialogue(ally1Name,
-					"Sorry about the delay. There were more of these guys than we thought. "
-							+ "But, it looks like you didn't even need us "
-							+ "in the first place. Adicai was right to choose you for this.\n\n",
-					txtSpd);
-			Pause.pause(wait);
-
-			Dialogue.infoDialogue(
-					"Adicai approached the fallen goblin champion and picked up one of the axes that he had wielded.\n\n",
-					txtSpd);
-			Pause.pause(wait);
-
-			Dialogue.characterDialogue(ally2Name,
-					"At long last... I am able to pry this from the grips of this foul beast.\n\n", txtSpd);
-			Pause.pause(wait);
-
-			pResponse = true;
-			while (pResponse) {
-				Dialogue.infoDialogue(
-						"1) What's special about that axe?\n2) Were you after the goblins to steal that axe?\nReponse: ",
-						8);
-				input = scn.next().charAt(0);
-
-				switch (input) {
-				case '1', '2':
-					pResponse = false;
-					System.out.println();
-					break;
-				default:
-					System.err.println("Invalid choice. Try again.\n");
-					Pause.pause(350);
-					break;
-				}
-			}
-
-			if (input == '2') {
-				Dialogue.characterDialogue(ally2Name,
-						"Indeed... I wanted to steal this from the thieves who originally stole it.\n\n", txtSpd);
-			}
-			Pause.pause(wait);
-
-			Dialogue.characterDialogue(ally2Name,
-					"This is the weapon of my father. Many years ago, he was slain in a war against the beasts of the earth, "
-							+ "and this axe was taken from his corpse. I was but a young lad back then, and hardly "
-							+ "with the power to "
-							+ "get it back. Now, I can finally rejoice knowing that the axe has been retrieved from the "
-							+ "hands of the "
-							+ "goblin champion, a fool who can't even wield the weapon to its fullest potential and draw out "
-							+ "its special attack.\n\n",
-					txtSpd);
-
-			Dialogue.characterDialogue(ally2Name,
-					"However, I was not the one who retrieved this weapon. Therefore, I cannot say that I am truly "
-							+ "worthy to wield it\nin my father's place...\n\n",
-					txtSpd);
-
-			Dialogue.infoDialogue(
-					"Adicai hands over the greataxe to you, the one responsible for defeating the goblin champion.\n\n",
-					txtSpd);
-
-			Dialogue.characterDialogue(ally2Name,
-					"As the slayer of Kioq, I want you to have this. Bring out the full potential of "
-							+ "this weapon in your quests. I wish nothing but success for you," + player.getName()
-							+ ".\n\n",
-					txtSpd);
-
-			player.getInventory().add(wList.axe4);
-			Dialogue.infoDialogue("[You got the Phoenix Cleaver]\n\n", txtSpd);
-			Pause.pause(wait);
-
-		}
-
+	public static boolean mageDragonApproach(Player player, Scanner keyboard) {
 		return true;
-
 	}
+	
+	/*
+	 * 
+	 * ------------------------------Rogue Story Functions------------------------------
+	 * 
+	 */
+	
+	/*
+	 * --------------------Chapter 1--------------------
+	 */
+	
+	public static boolean rogueChapter1(Player player, Scanner keyboard) {
+		return true;
+	}
+	
+	/*
+	 * --------------------Chapter 3--------------------
+	 */
 	
 	public static boolean rogueSpecialMission(Player player, Scanner keyboard) {
 		return true;
 	}
 	
-	/**
-	 * Pauses console till the user presses the enter key.
+	/*
+	 * --------------------Chapter 4--------------------
 	 */
-	public static void pause() {
 
-		System.out.println("Press \"ENTER\" to continue...");
-
-		try {
-			System.in.read(new byte[2]);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+	public static boolean rogueDragonApproach(Player player, Scanner keyboard) {
+		return true;
 	}
 
-	/**
-	 * Pauses console for a set number of milliseconds.
+	
+	/*
 	 * 
-	 * @param time - The number of milliseconds to sleep.
-	 */
-	public static void pause(long time) {
-
-		try {
-			Thread.sleep(time);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * Takes the player and the enemy and processes exchange of EXP and currency
+	 * ------------------------------Save & Load Functionality------------------------------
 	 * 
-	 * @param p1
-	 * @param e1
 	 */
-	public static void EXPDefeat(Player p1, Enemy e1) {
-
-		System.out.println("Defeated " + e1.getName() + "!\nRewards:");
-		System.out.println("- " + e1.getExp() + " EXP");
-		System.out.println("- " + e1.getCurrency() + " Money");
-
-		p1.setExp(p1.getExp() + e1.getExp()); // Add EXP after displayed messages
-		p1.lvlUp(); // Attempt to level up
-		p1.setCurrency(p1.getCurrency() + e1.getCurrency()); // Add currency after displayed messages
+	
+	public static void BeginningGame(Player player, Scanner keyboard) {
+		
 	}
-
+	
 	/**
 	 * Takes and serializes Player object and stores it in a file to be reloaded later.
 	 *
@@ -2323,6 +2268,102 @@ public class GameThread extends Throwable {
 			System.out.println("Game loaded successfully.");
 			return player;
 		} catch (Exception e) {e.printStackTrace();}
+		return null;
+	}
+	
+	
+	
+	/*
+	 * 
+	 *  ------------------------------Helper Functions------------------------------
+	 *  
+	 */
+	
+	public static void breakLine() {  
+	    System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+	}
+	
+	/**
+	 * Pauses console till the user presses the enter key.
+	 */
+	public static void pause() {
+
+		System.out.println("Press \"ENTER\" to continue...");
+
+		try {
+			System.in.read(new byte[2]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Pauses console for a set number of milliseconds.
+	 * 
+	 * @param time - The number of milliseconds to sleep.
+	 */
+	public static void pause(long time) {
+
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Hub instantiateHub(Player player, String location) {
+		// Chapter 1
+		if (player.getChapter() == 1) {
+			Shopkeeper shopkeeperCh1 = new Shopkeeper();
+			String shopNameCh1 = "";
+			Shop ch1Shop = new Shop(player, shopkeeperCh1, shopNameCh1);
+			
+			ArrayList<Enemy> ch1Enemies = new ArrayList<Enemy>();
+			String[] ch1SearchTxt = new String[0];
+			
+			Hub chapter1Hub = new Hub(player, location, ch1Shop, ch1Enemies, ch1SearchTxt);
+			
+			return chapter1Hub;
+		}
+		// Chapter 2
+		if (player.getChapter() == 2) {
+			Shopkeeper shopkeeperCh2 = new Shopkeeper();
+			String shopNameCh2 = "";
+			Shop ch2Shop = new Shop(player, shopkeeperCh2, shopNameCh2);
+			
+			ArrayList<Enemy> ch2Enemies = new ArrayList<Enemy>();
+			String[] ch2SearchTxt = new String[0];
+			
+			Hub chapter2Hub = new Hub(player, location, ch2Shop, ch2Enemies, ch2SearchTxt);
+			
+			return chapter2Hub;
+		}
+		// Chapter 3
+		if (player.getChapter() == 3) {
+			Shopkeeper shopkeeperCh3 = new Shopkeeper();
+			String shopNameCh3 = "";
+			Shop ch3Shop = new Shop(player, shopkeeperCh3, shopNameCh3);
+			
+			ArrayList<Enemy> ch3Enemies = new ArrayList<Enemy>();
+			String[] ch3SearchTxt = new String[0];
+			
+			Hub chapter3Hub = new Hub(player, location, ch3Shop, ch3Enemies, ch3SearchTxt);
+			
+			return chapter3Hub;
+		}
+		// Chapter 4
+		if (player.getChapter() == 4) {
+			Shopkeeper shopkeeperCh4 = new Shopkeeper();
+			String shopNameCh4 = "";
+			Shop ch4Shop = new Shop(player, shopkeeperCh4, shopNameCh4);
+			
+			ArrayList<Enemy> ch4Enemies = new ArrayList<Enemy>();
+			String[] ch4SearchTxt = new String[0];
+			
+			Hub chapter4Hub = new Hub(player, location, ch4Shop, ch4Enemies, ch4SearchTxt);
+			
+			return chapter4Hub;
+		}
 		return null;
 	}
 
