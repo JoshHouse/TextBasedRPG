@@ -25,6 +25,10 @@ public class EnemyList {
 			" swings his sword with all his might.");
 
 	// --------------------Chapter 2 Enemies--------------------
+	
+	/** King's Mission Troll */
+	public Enemy grakthar = new Enemy("Grakthar the Troll", new Inventory(), 850, 1500, 18, 425, 350, 1, spAtkList.none, 
+			" swings his club with brutal force.");
 
 	// --------------------Chapter 3 Enemies--------------------
 
