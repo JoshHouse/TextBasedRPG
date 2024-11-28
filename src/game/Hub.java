@@ -140,16 +140,17 @@ public class Hub implements Serializable {
 
 					continuing = false;
 
-					if (Luck.luckEvent(50)) {
+					if (Luck.luckEvent(50) && enemies.size() != 0) {
 						Dialogue.infoDialogue("Enemy Found!\n\n", 4);
 						this.setCurrEnemy(enemies.get(Luck.getRandNum(enemies.size())));
 						searching = false;
 						battling = true;
 					} else {
-
-						int num = Luck.getRandNum(this.searchTxt.length);
-						Dialogue.infoDialogue(this.searchTxt[num], 15);
-						Pause.pause(500);
+						if (this.searchTxt.length != 0) {
+							int num = Luck.getRandNum(this.searchTxt.length);
+							Dialogue.infoDialogue(this.searchTxt[num], 15);
+							Pause.pause(500);
+						}
 
 						while (!continuing) {
 							Dialogue.infoDialogue("\n\n1) Continue Searching\t\t2) Stop Searching\nYour Choice: ", 4);
@@ -193,9 +194,16 @@ public class Hub implements Serializable {
 			case '5': // Progress the story
 				return true;
 			case '6': // Rest and recover
-				player.setCurrency(player.getCurrency() - 100);
-				Dialogue.infoDialogue("\nYou've paid 100 gold to rest and recover your health.\n", 10);
-				Pause.pause(2000);
+				if (player.getCurrency() > 100) {
+					player.setCurrency(player.getCurrency() - 100);
+					Dialogue.infoDialogue("\nYou've paid 100 gold to rest and recover your health.\n", 10);
+					Pause.pause(2000);
+				} else {
+					player.setCurrency(0);
+					Dialogue.infoDialogue("\nYou used the rest of your money to rent a room in the in. You rested and recovered your health.\n", 10);
+					Pause.pause(2000);
+				}
+				
 				break;
 			case '7': // Save and Exit
 				return false;

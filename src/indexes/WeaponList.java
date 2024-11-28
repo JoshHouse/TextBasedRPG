@@ -13,6 +13,10 @@ public class WeaponList {
 
 	private static SpAtkList spAtk = new SpAtkList();
 	
+	// --------------------Null Weapon--------------------
+	/** Weapon to represent no weapon**/
+	public Weapon nullWeapon = new Weapon("0000", "No Weapon", "No Weapon", 0, 0, 0, 0, false, 0, spAtk.none);
+	
 	// --------------------Melee Weapons--------------------
 	/** Iron Sword */
 	public Weapon sword1 = new Weapon("f001", "Iron Sword",

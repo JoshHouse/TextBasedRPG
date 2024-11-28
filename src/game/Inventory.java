@@ -1,12 +1,16 @@
 package game;
 
 import java.util.ArrayList;
+
+import indexes.WeaponList;
+
 import java.io.Serial;
 import java.io.Serializable;
 
 public class Inventory implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 4L;
+	private static WeaponList wList = new WeaponList();
 
 	private ArrayList<Weapon> weapons;
 	private ArrayList<Consumable> consumables;
@@ -68,7 +72,11 @@ public class Inventory implements Serializable {
 	}
 	
 	public Weapon getEquipped() {
+		if(this.getWeapons().size() == 0) {
+			return wList.nullWeapon;
+		} else {
 		return weapons.get(0);
+		}
 	}
 	
 	
