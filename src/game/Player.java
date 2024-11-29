@@ -26,7 +26,7 @@ public class Player extends GameChar {
 	 */
 	public Player() {
 		super();
-		this.chapter = 1;
+		this.chapter = 0;
 		this.mana = 0;
 		this.expThreshold = 100;
 		this.lvlMelee = 1;
