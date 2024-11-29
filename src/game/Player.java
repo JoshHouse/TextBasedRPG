@@ -55,8 +55,8 @@ public class Player extends GameChar {
 	 * @param inputlvlLuck
 	 */
 	public Player(String inputName, Inventory inputInventory, int inputCurrency, int inputHealth, int inputLevel,
-			int inputExp, int chapter, int inputMana, int inputlvlMelee, int inputlvlRanged, int inputlvlMage, int inputlvlRogue,
-			int inputlvlLuck) {
+			int inputExp, int chapter, int inputMana, int inputlvlMelee, int inputlvlRanged, int inputlvlMage,
+			int inputlvlRogue, int inputlvlLuck) {
 
 		super(inputName, inputInventory, inputCurrency, inputHealth, inputLevel, inputExp);
 		this.chapter = chapter;
@@ -79,7 +79,7 @@ public class Player extends GameChar {
 	 */
 	public Player(String inputName) {
 		super(inputName);
-		this.chapter = 1;
+		this.chapter = 0;
 		this.mana = 100;
 		this.expThreshold = 100;
 		this.lvlMelee = 1;
@@ -99,7 +99,7 @@ public class Player extends GameChar {
 	public int getMana() {
 		return this.mana;
 	}
-	
+
 	public int getCurrMana() {
 		return this.currMana;
 	}
@@ -134,14 +134,17 @@ public class Player extends GameChar {
 
 	// -------------------Setters-------------------
 
-	public void setChapter(int chapter) { this.chapter = chapter; }
+	public void setChapter(int chapter) {
+		this.chapter = chapter;
+	}
 
-	public void setMana(int mana) { this.mana = mana; }
-	
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+
 	public void setCurrMana(int inputCurrMana) {
 		this.currMana = inputCurrMana;
 	}
-	
 
 	public void setExpThreshold(Double expThreshold) {
 		this.expThreshold = expThreshold;
@@ -185,13 +188,13 @@ public class Player extends GameChar {
 	 */
 	public void profile() {
 
-		System.out.println("-----------------------YOUR PROFILE-----------------------------\nName: " + this.getName()
-				+ "\nChapter: " + this.getChapter() + "\nLevel: " + this.getLevel() + "\nEXP till next level: " + (int) (this.expThreshold - this.getExp())
-				+ "\nMax HP: " + this.getHealth() + "\t\tMana: " + this.mana + "\nLuck: " + this.lvlLuck
-				+ "\t\t\tMoney: " + this.getCurrency() + "\n\t\t\t-----Levels-----\n" + "Melee Lv: " + this.lvlMelee
-				+ "\tRanged Lv: " + this.lvlRanged + "\tRouge Lv: " + this.lvlRogue + "\tMage Lv: " + this.lvlMage
-				+ "\nEquipped Weapon: " + this.getInventory().getEquipped().getName()
-				+ "\n----------------------------------------------------------------\n");
+		Dialogue.infoDialogue("-----------------------YOUR PROFILE-----------------------------\nName: " + this.getName()
+		+ "\nChapter: " + this.getChapter() + "\nLevel: " + this.getLevel() + "\nEXP till next level: "
+		+ (int) (this.expThreshold - this.getExp()) + "\nMax HP: " + this.getHealth() + "\t\tMana: " + this.mana
+		+ "\nLuck: " + this.lvlLuck + "\t\t\tMoney: " + this.getCurrency() + "\n\t\t\t-----Levels-----\n"
+		+ "Melee Lv: " + this.lvlMelee + "\tRanged Lv: " + this.lvlRanged + "\tRouge Lv: " + this.lvlRogue
+		+ "\tMage Lv: " + this.lvlMage + "\nEquipped Weapon: " + this.getInventory().getEquipped().getName()
+		+ "\n----------------------------------------------------------------\n\n", 4);
 
 	}
 
@@ -416,7 +419,7 @@ public class Player extends GameChar {
 	 */
 	public void increaseStats(Scanner scn) {
 
-		String input; // Holds user input
+		char input; // Holds user input
 
 		if (this.sklPt <= 0) { // Exit the method if it is called when there's no skill points
 			System.out.println("You don't have any skill points to use.");
@@ -427,52 +430,44 @@ public class Player extends GameChar {
 		while (this.sklPt > 0) { // Allow user to keep spending till their skill points are gone, or they cancel
 
 			// Menu
-			System.out.println("-----------------------------------");
-			System.out.println("Available Skill Points: " + this.sklPt);
-			System.out.println("Which stat do you want to level up?\n");
-			System.out.println("1) Melee (Lvl: " + this.lvlMelee + ")");
-			System.out.println("2) Ranged (Lvl: " + this.lvlRanged + ")");
-			System.out.println("3) Rogue (Lvl: " + this.lvlRogue + ")");
-			System.out.println("4) Mage (Lvl: " + this.lvlMage + ")");
-			System.out.println("5) Luck (Lvl: " + this.lvlLuck + ")");
-			System.out.println("6) Cancel\n");
-			System.out.println("-----------------------------------");
+			Dialogue.infoDialogue("-----------------------------------\n" + "Available Skill Points: " + this.sklPt
+					+ "\nWhich stat do you want to level up?\n" + "1) Melee (Lvl: " + this.lvlMelee + ")\n"
+					+ "2) Ranged (Lvl: " + this.lvlRanged + ")\n" + "3) Rogue (Lvl: " + this.lvlRogue + ")\n"
+					+ "4) Mage (Lvl: " + this.lvlMage + ")\n" + "5) Luck (Lvl: " + this.lvlLuck + ")\n" + "6) Cancel\n"
+					+ "-----------------------------------\n" + "Type the number of the stat to increase it: ", 8);
 
-			System.out.print("Type the number or the name of the stat: ");
-			input = scn.nextLine();
-			input = input.toLowerCase(); // Convert any letters to lower case
-
+			input = scn.next().charAt(0);
 			switch (input) {
 
-			case "1", "melee":
+			case '1':
 				this.lvlMelee++;
 				this.sklPt--;
 				break;
-			case "2", "ranged":
+			case '2':
 				this.lvlRanged++;
 				this.sklPt--;
 				break;
-			case "3", "rogue":
+			case '3':
 				this.lvlRogue++;
 				this.sklPt--;
 				break;
-			case "4", "mage":
+			case '4':
 				this.lvlMage++;
 				this.setMana(this.getMana() + 30);
 				this.sklPt--;
 				break;
-			case "5", "luck":
+			case '5':
 				this.lvlLuck++;
 				this.sklPt--;
 				break;
-			case "6", "cancel": // Cancels spending and exits the method
+			case '6': // Cancels spending and exits the method
 				return;
 			default:
-				System.out.println("Invalid Input\n");
+				System.err.println("Invalid Input\n");
+				Pause.pause(350);
 				break;
 
 			}
-			this.setHealth(this.getHealth() + 50);
 		}
 
 	}
@@ -501,10 +496,13 @@ public class Player extends GameChar {
 		}
 
 		if (count == 1) { // Only leveled up once in one sitting
-			System.out.println("Your level has increased to " + this.getLevel() + "! You've earned a skill point!");
+			Dialogue.infoDialogue("Your level has increased to " + this.getLevel() + "! You've earned a skill point!\n\n",
+					15);
 		} else { // Leveled up multiple times in one sitting
-			System.out.println(
-					"Your level has increased to " + this.getLevel() + "! You've earned " + count + " skill points!");
+			Dialogue.infoDialogue(
+					"Your level has increased to " + this.getLevel() + "! You've earned " + count + " skill points!\n\n",
+					15);
+
 		}
 
 	}
