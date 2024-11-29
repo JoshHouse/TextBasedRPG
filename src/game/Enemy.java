@@ -1,6 +1,8 @@
 package game;
 
 public class Enemy extends GameChar {
+	private static final long serialVersionUID = 2278963204058868554L;
+
 	
 	// -------------------Variables-------------------
 	
