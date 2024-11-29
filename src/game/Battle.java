@@ -911,7 +911,7 @@ public class Battle {
 
 		player.setExp(player.getExp() + enemy.getExp());
 		player.setCurrency(player.getCurrency() + enemy.getCurrency());
-		Dialogue.infoDialogue("Received " + enemy.getExp() + "!\n", 30);
+		Dialogue.infoDialogue("Received " + enemy.getExp() + " EXP!\n", 30);
 		Pause.pause(1000);
 		Dialogue.infoDialogue("Received " + enemy.getCurrency() + " Money!\n\n", 30);
 		Pause.pause(1000);
