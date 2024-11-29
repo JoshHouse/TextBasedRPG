@@ -2425,54 +2425,217 @@ public class GameThread extends Throwable {
 	public static Hub instantiateHub(Player player, String location) {
 		// Chapter 1
 		if (player.getChapter() == 1) {
-			Shopkeeper shopkeeperCh1 = new Shopkeeper();
-			String shopNameCh1 = "";
+
+			// Shopkeeper's text when you're in the shop
+			ArrayList<String> s1txt = new ArrayList<String>();
+			s1txt.add("I know I said no jokes... buuuuuut...");
+			s1txt.add("Never seen you around before. You new? Did a friend recommend me to ya?");
+
+			// Initialize the shopkeeper
+			Shopkeeper shopkeeperCh1 = new Shopkeeper("Foolz, the Jester", new Inventory(),
+					"Welcome! I can promise you there's no tricks here, just good, quality items!",
+					"Thank you, thank you. Have a nice day, and tell all your friends about ol' Jester!",
+					"Nice pick! Don't go using it for crimes! Not that I could stop you if you did, but still.", s1txt);
+
+			// Add weapons to the shopkeeper's inventory
+			Item[] items = { wList.bow2, wList.ironAxe, wList.rapier, wList.curveSword, wList.bow3, wList.bow4,
+					wList.natureWand, wList.windTome, wList.waterTome, wList.fireTome, wList.fist1, wList.warScythe,
+					wList.lightningWand, wList.bigAxe, wList.shortSpear, wList.longSpear, wList.ironSword };
+			shopkeeperCh1.getInventory().addMulti(items);
+
+			// Create the shop
+			String shopNameCh1 = "Jester, the Town's 1st Shop";
 			Shop ch1Shop = new Shop(player, shopkeeperCh1, shopNameCh1);
-			
+
+			// Create the ArrayList of enemies
 			ArrayList<Enemy> ch1Enemies = new ArrayList<Enemy>();
-			String[] ch1SearchTxt = new String[0];
-			
+
+			Enemy e1 = eList.wolf, e2 = eList.boar, e3 = eList.bear;
+			ch1Enemies.add(e1);
+			ch1Enemies.add(e2);
+			ch1Enemies.add(e3);
+
+			// Text while searching for enemies
+			String[] ch1SearchTxt = { "Quite the lovely town this place is. Hopefully it stays that way...",
+					"You look around to see the streets filled with bustling shops... how much money do you have again?",
+					"Just outside of town, you find beautiful fields filled with all sorts of creatures. Thankfully, you haven't "
+							+ "provoked one... yet." };
+
+			// Create the hub
 			Hub chapter1Hub = new Hub(player, location, ch1Shop, ch1Enemies, ch1SearchTxt);
-			
+
+			// Return the hub
 			return chapter1Hub;
+
 		}
 		// Chapter 2
 		if (player.getChapter() == 2) {
-			Shopkeeper shopkeeperCh2 = new Shopkeeper();
-			String shopNameCh2 = "";
+
+			// Shopkeeper's text when you're in the shop
+			ArrayList<String> s2txt = new ArrayList<String>();
+			s2txt.add("New around here? That's fine, take yuor time having a good look around.");
+			s2txt.add(
+					"Queensly's been around for a long time, you know. So we've got quite the vast collection of items.");
+			s2txt.add(
+					"You know, I've always considered adding various jewelry to our roster. If this place were an accessory shop, "
+							+ "would that interest anyone you know?");
+
+			// Initialize the shopkeeper
+			Shopkeeper shopkeeperCh2 = new Shopkeeper("Aphrodite, Manager of Queensly", new Inventory(),
+					"Oh? What brings you to this humble abode? Were you drawn here by the beauty of our wares? Or was it by my "
+							+ "own natural good looks?",
+					"Don't be a stranger, you hear? You're always welcome around here.",
+					"Ooh, what an excellent choice.", s2txt);
+
+			Item[] shopItems = { wList.ironSword, wList.waterTome, wList.bow5, wList.bow6, wList.bigSword, wList.bigAxe,
+					wList.knightSpear, wList.elecAxe, wList.bDragAxe, wList.spikeFist, wList.strVirt, wList.bloodClaws,
+					wList.ironHeartAmulet, wList.titansGauntlet, wList.colossusRing, wList.forceWand };
+			shopkeeperCh2.getInventory().addMulti(shopItems);
+
+			// Create the shop
+			String shopNameCh2 = "Queensly, the Town's 2nd Shop";
 			Shop ch2Shop = new Shop(player, shopkeeperCh2, shopNameCh2);
-			
+
+			// Create the ArrayList of enemies
 			ArrayList<Enemy> ch2Enemies = new ArrayList<Enemy>();
-			String[] ch2SearchTxt = new String[0];
-			
+
+			Enemy e1 = eList.criminal, e2 = eList.mercA, e3 = eList.thief, e4 = eList.ruffian;
+			Item[] e1Loot = { wList.bow3, wList.spikeFist };
+			Item[] e2Loot = { wList.pickAxe, wList.ironSword, wList.bow2 };
+			Item[] e3Loot = { wList.waterTome, wList.bow4, wList.fist1, wList.curveSword, wList.knightSpear };
+			Item[] e4Loot = { wList.fist1, wList.spikeFist };
+			e1.getInventory().addMulti(e1Loot);
+			e2.getInventory().addMulti(e2Loot);
+			e3.getInventory().addMulti(e3Loot);
+			e4.getInventory().addMulti(e4Loot);
+
+			ch2Enemies.add(e1);
+			ch2Enemies.add(e2);
+			ch2Enemies.add(e3);
+			ch2Enemies.add(e4);
+
+			// Text while searching for enemies
+			String[] ch2SearchTxt = {
+					"From the castle windows, you can see the streets below, beautiful gardens, and several troops "
+							+ "stationed on guard.",
+					"The kingdom seems incredibly peaceful today." };
+
+			// Create the hub
 			Hub chapter2Hub = new Hub(player, location, ch2Shop, ch2Enemies, ch2SearchTxt);
-			
+
+			// Return the hub
 			return chapter2Hub;
+
 		}
 		// Chapter 3
 		if (player.getChapter() == 3) {
-			Shopkeeper shopkeeperCh3 = new Shopkeeper();
-			String shopNameCh3 = "";
+
+			ArrayList<String> s3txt = new ArrayList<String>();
+			s3txt.add(
+					"I like to make a little small talk with all of my newcomers to get to know them better. How about I start "
+							+ "with myself? I, the honorable Kimbly who watches over this shop day and night, was once but a "
+							+ "humble lad coming from a small town on the outskirts of-");
+			s3txt.add(
+					"Every day, I am glad that my mother sent me down the righteous path that I'm on! Believe it or not, but "
+							+ "this very shop, Kingsly, used to be run by her! Yes, I remember it like it was yesterday. Though "
+							+ "the wares weren't nearly as plentiful back then, but it was also a far different time. Adventurers "
+							+ "weren't in the droves that they were nowadays and business was hardly-");
+			s3txt.add(
+					"Why just looking at you reminds me of the day when I used to be a knight for the kingdom. My father first "
+							+ "gifted me a spectactular sword that I keep with me till this day- the Blade of Honor! I'll tell "
+							+ "you, it is one of a kind! If it weren't for a weapon as illustrious and noble as this one, I might"
+							+ "not have passed all the tests required to serve this kingdom and I might not be retired to where "
+							+ "I can watch over the new generation of soon-to-be honorable-");
+
+			Shopkeeper shopkeeperCh3 = new Shopkeeper("Honorable Kimbly", new Inventory(),
+					"Welcome one and all to the revered store Kingsly, known far and wide as the kingdom's most famous shop for "
+							+ "supplying its various adventurers, guards, and all else with only the most well kept, the most "
+							+ "sturidest, and the most-",
+					"Thank you, noble warrior, for the time and possibly money you've spent here at Kingsly! Remember, if you "
+							+ "find yourself in need of a new tool for justful means, a new souvenir or gift to give to the "
+							+ "missus, or something that you would proudly display in your home, the most revered shop in all-",
+					"I see you've gone through with your purchase! Before you move on, might you all this man to take the time to "
+							+ "tell you about the warranty offers that we have on all of our-",
+					s3txt);
+
+			Item[] shopItems = { wList.cloudburst, wList.stalSpear, wList.onyxSword, wList.floatingSword,
+					wList.lionFist, wList.coffinClub, wList.flashpoint, wList.rubyCatalyst, wList.celestialRing,
+					wList.crimsonPrism, wList.eqStaff };
+			shopkeeperCh3.getInventory().addMulti(shopItems);
+
+			String shopNameCh3 = "Kingsly, the Town's 3rd Shop";
 			Shop ch3Shop = new Shop(player, shopkeeperCh3, shopNameCh3);
-			
+
 			ArrayList<Enemy> ch3Enemies = new ArrayList<Enemy>();
-			String[] ch3SearchTxt = new String[0];
-			
+			Enemy e1 = eList.aWolf, e2 = eList.badKnight, e3 = eList.bigSnake, e4 = eList.mercB, e5 = eList.shaman,
+					e6 = eList.orcRaider;
+			Item[] e2Items = { wList.badSword, wList.bDragAxe };
+			Item[] e4Items = { wList.bloodClaws, wList.bow8, wList.colossusRing, wList.knightSpear };
+			Item[] e5Items = { wList.rubyCatalyst };
+			Item[] e6Items = { wList.boneSword };
+
+			e2.getInventory().addMulti(e2Items);
+			e4.getInventory().addMulti(e4Items);
+			e5.getInventory().addMulti(e5Items);
+			e6.getInventory().addMulti(e6Items);
+
+			ch3Enemies.add(e1);
+			ch3Enemies.add(e2);
+			ch3Enemies.add(e3);
+			ch3Enemies.add(e4);
+			ch3Enemies.add(e5);
+			ch3Enemies.add(e6);
+
+			String[] ch3SearchTxt = {
+					"So far, the sights seem a bit borning... nothing out of the ordinary in the upper areas.",
+					"There do seem to be a lot of interesting creatures on display here... is this a private zoo?",
+					"Walking up and down these halls seems to be working up a sweat... maybe you should take a break "
+							+ "and cool off." };
+
 			Hub chapter3Hub = new Hub(player, location, ch3Shop, ch3Enemies, ch3SearchTxt);
-			
+
 			return chapter3Hub;
 		}
 		// Chapter 4
 		if (player.getChapter() == 4) {
-			Shopkeeper shopkeeperCh4 = new Shopkeeper();
-			String shopNameCh4 = "";
+
+			ArrayList<String> s4txt = new ArrayList<String>();
+			s4txt.add("What are you standing around for? I haven't got all day.");
+			s4txt.add("We only sell the finest replicas here.");
+			s4txt.add("You break it, you buy it. Watch what you touch.");
+
+			Shopkeeper shopkeeperCh4 = new Shopkeeper("Big Boss Adan", new Inventory(),
+					"Don't waste my time. Buy something, or get out.", "Hmph. See ya.", "...Good eye.", s4txt);
+			String shopNameCh4 = "Aces High, the Town's 4th Shop";
+
+			Item[] shopItems = { wList.requiem, wList.severance, wList.trickBlade, wList.graceGlory, wList.luBuSpear,
+					wList.kingOath, wList.hellsFuryRing, wList.celestialCurseShard, wList.abyssalAmethest,
+					wList.tsunamiScroll, wList.bow10 };
+			shopkeeperCh4.getInventory().addMulti(shopItems);
 			Shop ch4Shop = new Shop(player, shopkeeperCh4, shopNameCh4);
-			
+
 			ArrayList<Enemy> ch4Enemies = new ArrayList<Enemy>();
-			String[] ch4SearchTxt = new String[0];
+			Enemy e1 = eList.warBear, e2 = eList.ryu, e3 = eList.fireKnight;
 			
+			Item[] e1Items = {wList.iceAxe, wList.ironAxe, wList.waterTome};
+			Item[] e2Items = {wList.fist1};
+			Item[] e3Items = {wList.hellsFuryRing, wList.bDragAxe};
+			
+			e1.getInventory().addMulti(e1Items);
+			e2.getInventory().addMulti(e2Items);
+			e3.getInventory().addMulti(e3Items);
+			
+			ch4Enemies.add(e1);
+			ch4Enemies.add(e2);
+			ch4Enemies.add(e3);
+			
+			String[] ch4SearchTxt = {
+					"Reaching a place likes this means you're the elite of elites. Hope you feel that way.",
+					"You start to wonder what food tastes like for people here out of hunger... perhpaps you should take a break?",
+					"As you grow bored, you beg for something to happen... alas..."};
+
 			Hub chapter4Hub = new Hub(player, location, ch4Shop, ch4Enemies, ch4SearchTxt);
-			
+
 			return chapter4Hub;
 		}
 		return null;
