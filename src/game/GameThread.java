@@ -609,7 +609,7 @@ public class GameThread extends Throwable {
 				txtSpd);
 		Pause.pause(wait);
 
-		player.getInventory().add(wList.sword1);
+		player.getInventory().add(wList.ironSword);
 		Dialogue.infoDialogue("[You got an Iron Sword]\n\n", txtSpd);
 		Pause.pause(wait);
 
