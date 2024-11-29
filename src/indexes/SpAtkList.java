@@ -26,8 +26,8 @@ public class SpAtkList {
 	/** Special Attack - Great Slash. */
 	public SpecialAttack gSlash = new SpecialAttack("Great Slash",
 			"Peform a powerful upwards slash that threatens to tear your enemy in two!",
-			" holds their blade behind them and charges forward, swinging upwards with all their might\n"
-					+ "as if aiming to split the clouds in two.",
+			" holds their blade behind them and charges forward, swinging upwards with all their might, "
+					+ "as if aiming to split the clouds in two!",
 			" holds their blade behind them and charges forward, yet misses their foe as they swing towards the sky.",
 			1.3);
 
