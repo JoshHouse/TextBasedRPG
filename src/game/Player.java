@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player extends GameChar {
+	private static final long serialVersionUID = -2424146161505623045L;
 
 	// -------------------Variables-------------------
 
@@ -16,7 +17,7 @@ public class Player extends GameChar {
 	private int lvlMage;
 	private int lvlRogue;
 	private int lvlLuck;
-	private int sklPt = 4;
+	private int sklPt = 0;
 
 	// -------------------Constructors-------------------
 
