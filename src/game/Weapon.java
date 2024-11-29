@@ -261,7 +261,7 @@ public class Weapon extends Item {
 	public void displayInfo() {
 
 		// Bae information
-		String info = "------------" + this.getName() + "------------\n" + this.getInfo() + "\nRarity: "
+		String info = "\n------------" + this.getName() + "------------\n" + this.getInfo() + "\nRarity: "
 				+ this.getRarity() + "\t\tDamage: " + this.getDamage() + "\t\tType: " + this.getDamageType()
 				+ "\nMana Usage: " + this.manaUsage + "\n";
 
@@ -276,7 +276,7 @@ public class Weapon extends Item {
 		}
 
 		// Print the info
-		System.out.println(info + "\n--------------------\n");
+		Dialogue.infoDialogue(info + "\n--------------------\n", 5);
 
 	}
 	
