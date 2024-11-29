@@ -1,15 +1,16 @@
 package game;
 
 public class Consumable extends Item {
+	private static final long serialVersionUID = 5888128779343152967L;
 
 	// -------------------Variables-------------------
-	
+
 	private int count;
 	private boolean usable;
 	private char consumableType;
 
 	// -------------------Constructors-------------------
-	
+
 	/**
 	 * Base constructor
 	 */
@@ -35,7 +36,7 @@ public class Consumable extends Item {
 	 * @param inputCount
 	 * @param inputIsUsable
 	 */
-	public Consumable(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue, 
+	public Consumable(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue,
 			int inputDamage, int inputType, boolean inputIsSellable, int inputCount, boolean inputIsUsable,
 			char inputConsumableType) {
 
@@ -58,7 +59,7 @@ public class Consumable extends Item {
 	 * @param inputCount
 	 * @param inputIsUsable
 	 */
-	public Consumable(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue, 
+	public Consumable(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue,
 			boolean inputIsSellable, int inputCount, boolean inputIsUsable, char inputConsumableType) {
 
 		super(inputKey, inputName, inputInfo, inputRarity, inputValue, inputIsSellable, 'c');
@@ -72,11 +73,11 @@ public class Consumable extends Item {
 	public int getCount() {
 		return this.count;
 	}
-	
+
 	public boolean isUsable() {
 		return this.usable;
 	}
-	
+
 	public char getConsumableType() {
 		return this.consumableType;
 	}
@@ -86,38 +87,42 @@ public class Consumable extends Item {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
+
 	public void setConsumableType(char inputConsumableType) {
 		this.consumableType = inputConsumableType;
 	}
 
 	// ---------------------Functions-------------------
-	
+
 	public void displayInfo() {
-		System.out.println("----------" + this.getName() + "----------\n" + this.getInfo() + "\n" + 
-					"Rarity: " + this.getRarity() + "\t\tDamage: " + this.getDamage() + "\t\tType: " + this.getDamageType()
-					+ "\"Amount Held: "  + this.getCount() + "\n--------------------\n");
+		System.out.println("----------" + this.getName() + "----------\n" + this.getInfo() + "\n" + "Rarity: "
+				+ this.getRarity() + "\t\tDamage: " + this.getDamage() + "\t\tType: " + this.getDamageType()
+				+ "\"Amount Held: " + this.getCount() + "\n--------------------\n");
 	}
-	
+
 	public boolean equals(Consumable consumable) {
 		if (this.getKey() == consumable.getKey()) {
-		if (this.getName() == consumable.getName()) {
-		if (this.getInfo() == consumable.getInfo()) {
-		if (this.getRarity() == consumable.getRarity() ) {
-		if (this.getValue() == consumable.getValue()) {
-		if (this.getDamage() == consumable.getDamage()) {
-		if (this.getDamageType() == consumable.getDamageType()) {
-		return true;
-		}}}}}}}
+			if (this.getName() == consumable.getName()) {
+				if (this.getInfo() == consumable.getInfo()) {
+					if (this.getRarity() == consumable.getRarity()) {
+						if (this.getValue() == consumable.getValue()) {
+							if (this.getDamage() == consumable.getDamage()) {
+								if (this.getDamageType() == consumable.getDamageType()) {
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		return false;
 	}
-	
+
 	// ---------------------toString---------------------
 
 	public String toString() {
-		return super.toString() +
-				"Amount: " + this.count + "\n" +
-				"Is Sellable?:" + this.getIsSellable() + "\n";
+		return super.toString() + "Amount: " + this.count + "\n" + "Is Sellable?:" + this.getIsSellable() + "\n";
 	}
 
 }
