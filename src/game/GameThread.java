@@ -335,23 +335,23 @@ public class GameThread extends Throwable {
 
 		Dialogue.infoDialogue(
 				"You are led through the grand halls of the castle, every step echoing off the polished marble floors. "
-						+ "The air is thick with the scent of incense, and sunlight streams through towering stained-glass windows, casting vibrant\n"
+						+ "The air is thick with the scent of incense, and sunlight streams through towering stained-glass windows, casting vibrant"
 						+ "patterns on the walls. Guards, clad in golden armor, stand at attention as you pass, their expressions unreadable. "
-						+ "Ahead lies the throne room, its gilded doors slowly creaking open to reveal an awe-inspiring sight.\n\n",
+						+ "Ahead lies the throne room, its gilded doors slowly creaking open to reveal an awe-inspiring sight.\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
-				"At the end of the cavernous hall sits King Mightus, the extraordinary ruler of the kingdom. His throne, carved from a single\n"
-						+ "block of shimmering gold, gleams in the sunlight. The king himself is a towering figure, clad in resplendent robes\n"
-						+ "that seem to shimmer with every color of the rainbow. His presence is overwhelming, a mix of authority and\n"
-						+ "charisma that leaves you momentarily speechless.\n\n",
+				"At the end of the cavernous hall sits King Mightus, the extraordinary ruler of the kingdom. His throne, carved from a single"
+						+ "block of shimmering gold, gleams in the sunlight. The king himself is a towering figure, clad in resplendent robes"
+						+ "that seem to shimmer with every color of the rainbow. His presence is overwhelming, a mix of authority and"
+						+ "charisma that leaves you momentarily speechless.\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue("King Mightus",
 				"Ah, the newcomer who has stirred whispers across my kingdom. Step forward, " + player.getName()
-						+ ", and let me see the face of this promising adventurer.",
+						+ ", and let me see the face of this promising adventurer.\n",
 				txtSpd);
 		Pause.pause(wait);
 
@@ -367,61 +367,61 @@ public class GameThread extends Throwable {
 
 		if (choice == '1') { // Nervous Response
 			Dialogue.characterDialogue(player.getName(),
-					"(Nervously) Y-Your Majesty… I… It’s an honor… I mean… I’m speechless!", txtSpd);
+					"(Nervously) Y-Your Majesty… I… It’s an honor… I mean… I’m speechless!\n", txtSpd);
 			Dialogue.characterDialogue("King Mightus",
-					"Your nervousness speaks to your humility. It is not every day one stands before royalty, I understand.",
+					"Your nervousness speaks to your humility. It is not every day one stands before royalty, I understand.\n",
 					txtSpd);
 		} else if (choice == '2') { // Confident Response
-			Dialogue.characterDialogue(player.getName(), "(Confidently) Your Majesty, I’m honored to stand before you.",
+			Dialogue.characterDialogue(player.getName(), "(Confidently) Your Majesty, I’m honored to stand before you.\n",
 					txtSpd);
 			Dialogue.characterDialogue("King Mightus",
-					"A confident reply—good. Confidence, tempered with humility, will serve you well in this mission.",
+					"A confident reply—good. Confidence, tempered with humility, will serve you well in this mission.\n",
 					txtSpd);
 		} else if (choice == '3') { // Awkward Response
-			Dialogue.characterDialogue(player.getName(), "(Awkwardly) Uh… Hi? This is all a bit overwhelming...",
+			Dialogue.characterDialogue(player.getName(), "(Awkwardly) Uh… Hi? This is all a bit overwhelming...\n",
 					txtSpd);
 			Dialogue.characterDialogue("King Mightus",
-					"An honest reaction. Overwhelming, perhaps, but clarity of purpose will guide you forward.",
+					"An honest reaction. Overwhelming, perhaps, but clarity of purpose will guide you forward.\n",
 					txtSpd);
 		} else {
-			Dialogue.infoDialogue("Invalid response. The King awaits your proper reply.", txtSpd);
+			Dialogue.infoDialogue("Invalid response. The King awaits your proper reply.\n", txtSpd);
 			return false; // Exit if invalid choice
 		}
 
 		Dialogue.characterDialogue("King Mightus",
-				"I have summoned you for a mission that requires great courage and skill.", txtSpd);
+				"I have summoned you for a mission that requires great courage and skill.\n", txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
-				"The king's tone sharpens as he describes the mission—a cruel troll named Grakthar the Vile, terrorizing the outskirts of the kingdom.\n\n",
+				"The king's tone sharpens as he describes the mission—a cruel troll named Grakthar the Vile, terrorizing the outskirts of the kingdom.\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue("King Mightus",
 				"Grakthar dwells in the dark depths of the Shadowgrove. Many have faced him, and all have failed. "
-						+ "This will be your first great test. Prepare well, for you will need every ounce of strength and cunning to prevail.",
+						+ "This will be your first great test. Prepare well, for you will need every ounce of strength and cunning to prevail.\n",
 				txtSpd);
 		breakLine();
 
 		// Player preparation
 		Dialogue.infoDialogue(
-				"You leave the throne room, the weight of the mission pressing on your shoulders. The guards guide you to the castle’s armory.",
+				"You leave the throne room, the weight of the mission pressing on your shoulders. The guards guide you to the castle’s armory.\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.infoDialogue(
-				"The castle's blacksmith sharpens your weapons and provides new supplies for the journey. You ensure your quiver is full and ready.\n\n",
+				"The castle's blacksmith ensures that your weapons are in good condition and that you are well prepared for the journey ahead of you.\n",
 				txtSpd);
 		Pause.pause(wait);
 
 		Dialogue.characterDialogue("Blacksmith",
-				"Your gear is as ready as it’ll ever be. Good luck out there, adventurer. Grakthar isn’t just a brute—he’s clever.",
+				"Your gear is as ready as it’ll ever be. Good luck out there, adventurer. Grakthar isn’t just a brute—he’s clever.\n",
 				txtSpd);
 		breakLine();
 
 		Dialogue.infoDialogue(
 				"As night falls, you arrive at the edge of the Shadowgrove. The forest is dark and twisted, the air thick with malice. You draw your weapon, "
-						+ "prepared for the battle ahead.\n\n",
+						+ "prepared for the battle ahead.\n",
 				txtSpd);
 		Pause.pause(wait);
 
@@ -432,34 +432,34 @@ public class GameThread extends Throwable {
 
 		if (win) {
 			Dialogue.infoDialogue(
-					"Grakthar the Vile lets out a thunderous roar, his massive body crashing to the ground with a tremor that shakes the forest.\n"
-							+ "The once-dominant monster, now lifeless, lies amidst the dark shadows of the grove. A moment of eerie silence follows,\n"
-							+ "broken only by the rustling of leaves in the wind. You have done it—Grakthar's reign of terror has ended.\n\n",
+					"Grakthar the Vile lets out a thunderous roar, his massive body crashing to the ground with a tremor that shakes the forest."
+							+ "The once-dominant monster, now lifeless, lies amidst the dark shadows of the grove. A moment of eerie silence follows,"
+							+ "broken only by the rustling of leaves in the wind. You have done it—Grakthar's reign of terror has ended.\n",
 					txtSpd);
 			Pause.pause(wait);
 
 			Dialogue.infoDialogue(
-					"As the adrenaline fades, you take a deep breath, steadying yourself as the reality of your victory sets in.\n"
+					"As the adrenaline fades, you take a deep breath, steadying yourself as the reality of your victory sets in."
 							+ "The Shadowgrove seems less menacing now, its dark presence waning with the fall of the vile beast. "
-							+ "You prepare to return to the castle, carrying news of your triumph.\n\n",
+							+ "You prepare to return to the castle, carrying news of your triumph.\n",
 					txtSpd);
 			Pause.pause(wait);
 
 			Dialogue.characterDialogue("King Mightus",
 					"You have done what no other could. My kingdom owes you a debt of gratitude, " + player.getName()
-							+ ". You are a true hero.",
+							+ ". You are a true hero.\n",
 					txtSpd);
 			breakLine();
 		} else {
 			Dialogue.infoDialogue(
-					"Grakthar lets out a guttural laugh as he towers over you, his cruel eyes glowing with triumph.\n"
-							+ "His massive hand raises, ready to deliver the final blow. Your vision blurs as you fall to the ground, your strength spent.\n\n",
+					"Grakthar lets out a guttural laugh as he towers over you, his cruel eyes glowing with triumph."
+							+ "His massive hand raises, ready to deliver the final blow. Your vision blurs as you fall to the ground, your strength spent.\n",
 					txtSpd);
 			Pause.pause(wait);
 
 			Dialogue.infoDialogue(
-					"The last thing you hear is the sound of Grakthar’s heavy footsteps fading into the shadows, his reign of terror unbroken.\n"
-							+ "The Shadowgrove remains a place of fear, and the kingdom's people will suffer once more...\n\n",
+					"The last thing you hear is the sound of Grakthar’s heavy footsteps fading into the shadows, his reign of terror unbroken."
+							+ "The Shadowgrove remains a place of fear, and the kingdom's people will suffer once more...\n",
 					txtSpd);
 			breakLine();
 			return false;
@@ -483,7 +483,7 @@ public class GameThread extends Throwable {
 				+ "have taken on every challenge that has been presented to you so I have an inclination you might find "
 				+ "this proposal appealing. If you managed to conquer this dragon, you would free our kingdom from its rain "
 				+ "of tyrany and we would forever be indebted to you. Based on how you would like to approach this battle, "
-				+ "speak to one of my council members for advice, as their specialty in certain areas will be of more aid to you.",
+				+ "speak to one of my council members for advice, as their specialty in certain areas will be of more aid to you.\n",
 				txtSpd);
 	}
 

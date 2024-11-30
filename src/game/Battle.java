@@ -33,6 +33,7 @@ public class Battle {
 	public Battle(Player inputPlayer, Enemy inputEnemy, Enemy inputMinion) {
 		this.setPlayer(inputPlayer);
 		this.setEnemy(inputEnemy);
+		this.setMinion(inputMinion);
 		this.setTurn(0);
 		this.setguardedTurn(0);
 		this.setSpeedTurn(0);
@@ -655,7 +656,7 @@ public class Battle {
 					return true;
 				} else {
 					enemy.setCurrHP(
-							(int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
+							(int) (enemy.getCurrHP() - ((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti())));
 					player.setCurrMana(
 							(int) (player.getCurrMana() - (player.getInventory().getEquipped().getManaUsage() * 1.2)));
 					Dialogue.infoDialogue(
@@ -663,7 +664,7 @@ public class Battle {
 									+ " mana!\n" + "You have " + player.getCurrMana() + " mana remaining! \n",
 							txtSpd);
 					Dialogue.infoDialogue(
-							"You did " + ((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti())
+							"You did " + ((int) (this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti())
 									+ " damage!\n",
 							txtSpd);
 					return true;
