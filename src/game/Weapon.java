@@ -6,7 +6,6 @@ public class Weapon extends Item {
 
 	private int manaUsage;
 	private SpecialAttack specialAttack;
-	private String manaElement;
 
 	// -------------------Constructors-------------------
 
@@ -31,29 +30,6 @@ public class Weapon extends Item {
 		this.setManaUsage(inputWeapon.getManaUsage());
 		this.setSpecialAttack(new SpecialAttack(inputWeapon.getSpecialAttack()));
 	}
-
-	/**
-	 * Constructor that initializes all values
-	 * 
-	 * @param name
-	 * @param info
-	 * @param rarity
-	 * @param inputValue
-	 * @param damage
-	 * @param dmgType
-	 * @param inputIsSellable
-	 * @param manaUsage
-	 * @param spAtk
-	 * @param inputManaElement
-	 */
-	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
-			Boolean inputIsSellable, int manaUsage, SpecialAttack spAtk, char inputManaElement) {
-		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
-		this.manaUsage = manaUsage;
-		this.specialAttack = spAtk;
-		this.setManaElementChar(inputManaElement);
-
-	}
 	
 	/**
 	 * Constructor that initializes all values except manaElement so other constructors dont need to be
@@ -74,7 +50,6 @@ public class Weapon extends Item {
 		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = spAtk;
-		this.setManaElementChar('b');
 
 	}
 	
@@ -96,7 +71,6 @@ public class Weapon extends Item {
 		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
 		this.manaUsage = 0;
 		this.specialAttack = spAtk;
-		this.setManaElementChar('b');
 
 	}
 
@@ -122,28 +96,6 @@ public class Weapon extends Item {
 	}
 
 	/**
-	 * Constructor that initializes weapons that are sellable, but use no mana and
-	 * have special attacks.
-	 * 
-	 * @param name
-	 * @param info
-	 * @param rarity
-	 * @param inputValue
-	 * @param damage
-	 * @param dmgType
-	 * @param inputIsSellable
-	 * @param inputManaElement
-	 */
-	public Weapon(String key, String name, String info, int rarity, int inputValue, int damage, int dmgType,
-			Boolean inputIsSellable, SpecialAttack spAtk, char inputManaElement) {
-		super(key, name, info, rarity, inputValue, damage, dmgType, inputIsSellable, 'w');
-		this.manaUsage = 0;
-		this.specialAttack = spAtk;
-		this.setManaElementChar(inputManaElement);
-
-	}
-
-	/**
 	 * Constructor that instantiates weapons that are not sellable. Sets IsSellable
 	 * to False and Value to 0
 	 * 
@@ -154,14 +106,12 @@ public class Weapon extends Item {
 	 * @param dmgType
 	 * @param manaUsage
 	 * @param spAtk
-	 * @param inputManaElement
 	 */
 	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, int manaUsage,
-			SpecialAttack spAtk, char inputManaElement) {
+			SpecialAttack spAtk) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = spAtk;
-		this.setManaElementChar(inputManaElement);
 	}
 
 	/**
@@ -211,12 +161,10 @@ public class Weapon extends Item {
 	 * @param manaUsage
 	 * @param inputManaElement
 	 */
-	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, int manaUsage, 
-			char inputManaElement) {
+	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, int manaUsage) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
 		this.manaUsage = manaUsage;
 		this.specialAttack = new SpecialAttack();
-		this.setManaElementChar(inputManaElement);
 
 	}
 
@@ -229,10 +177,6 @@ public class Weapon extends Item {
 	public SpecialAttack getSpecialAttack() {
 		return this.specialAttack;
 	}
-	
-	public String getManaElement() {
-		return this.manaElement;
-	}
 
 	// -------------------Setters-------------------
 
@@ -242,14 +186,6 @@ public class Weapon extends Item {
 
 	public void setSpecialAttack(SpecialAttack spAtk) {
 		this.specialAttack = spAtk;
-	}
-	
-	public void setManaElement(String inputManaElement) {
-		this.manaElement = inputManaElement;
-	}
-	
-	public void setManaElementChar(char inputManaElement) {
-		this.manaElement = this.calculateManaElementOnChar(inputManaElement);
 	}
 
 	// -------------------Functions------------------
