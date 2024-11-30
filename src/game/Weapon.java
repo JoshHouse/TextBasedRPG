@@ -159,7 +159,6 @@ public class Weapon extends Item {
 	 * @param damage
 	 * @param dmgType
 	 * @param manaUsage
-	 * @param inputManaElement
 	 */
 	public Weapon(String key, String name, String info, int rarity, int damage, int dmgType, int manaUsage) {
 		super(key, name, info, rarity, damage, dmgType, 'w');
