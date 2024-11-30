@@ -5,3 +5,4 @@ bin
 /target/
 .metadata/
 pom.xml
+gameSave.ser
