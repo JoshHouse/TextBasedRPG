@@ -14,7 +14,6 @@ public class Inventory implements Serializable {
 
 	private ArrayList<Weapon> weapons;
 	private ArrayList<Consumable> consumables;
-	private ArrayList<KeyItem> keyItems;
 	private int specialArrows = 0;
 
 	/**
@@ -23,7 +22,6 @@ public class Inventory implements Serializable {
 	public Inventory() {
 		this.weapons = new ArrayList<Weapon>();
 		this.consumables = new ArrayList<Consumable>();
-		this.keyItems = new ArrayList<KeyItem>();
 	}
 
 	/**
@@ -35,11 +33,10 @@ public class Inventory implements Serializable {
 	 * @param enableArrows      - Enables the inventory of arrows.
 	 * @param enableKeyItems    - Enables the inventory of key items.
 	 */
-	public Inventory(boolean enableWeapons, boolean enableConsumables, boolean enableKeyItems) {
+	public Inventory(boolean enableWeapons, boolean enableConsumables) {
 
 		this.weapons = ((enableWeapons == true) ? new ArrayList<Weapon>() : null);
 		this.consumables = ((enableConsumables == true) ? new ArrayList<Consumable>() : null);
-		this.keyItems = ((enableKeyItems == true) ? new ArrayList<KeyItem>() : null);
 
 	}
 	
@@ -50,11 +47,9 @@ public class Inventory implements Serializable {
 	 * @param inputConsumables
 	 * @param inputKeyItems
 	 */
-	public Inventory(ArrayList<Weapon> inputWeapons, ArrayList<Consumable> inputConsumables, 
-			ArrayList<KeyItem> inputKeyItems) {
+	public Inventory(ArrayList<Weapon> inputWeapons, ArrayList<Consumable> inputConsumables) {
 		this.weapons = inputWeapons;
 		this.consumables = inputConsumables;
-		this.keyItems = inputKeyItems;	
 	}
 
 	// ------------------------------Getters------------------------------
@@ -65,10 +60,6 @@ public class Inventory implements Serializable {
 
 	public ArrayList<Consumable> getConsumables() {
 		return consumables;
-	}
-
-	public ArrayList<KeyItem> getKeyItems() {
-		return keyItems;
 	}
 	
 	public Weapon getEquipped() {
@@ -108,10 +99,6 @@ public class Inventory implements Serializable {
 		this.consumables = inputConsumables;
 	}
 	
-	public void setKeyItems(ArrayList<KeyItem> inputKeyItems) {
-		this.keyItems = inputKeyItems;
-	}
-	
 	public void setSpecialArrows(int count) {
 		this.specialArrows = Math.max(0, count);
 	}
@@ -133,9 +120,6 @@ public class Inventory implements Serializable {
 			break;
 		case 'c':
 			this.getConsumables().add((Consumable) item);
-			break;
-		case 'k':
-			this.getKeyItems().add((KeyItem) item);
 			break;
 		default:
 			System.err.println("Error: Item is corrupted. Cannot be added.");
@@ -171,10 +155,6 @@ public class Inventory implements Serializable {
 		returnString = returnString + "-----Consumables-----\n";
 		for (int x = 0; x < consumables.size(); x++) {
 			returnString = returnString + consumables.get(x) + "---------------\n";
-		}
-		returnString = returnString + "-----KeyItems-----\n";
-		for (int x = 0; x < weapons.size(); x++) {
-			returnString = returnString + keyItems.get(x) + "---------------\n";
 		}
 		return returnString;
 	}
