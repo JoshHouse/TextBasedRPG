@@ -2581,34 +2581,6 @@ public class GameThread extends Throwable {
 				"-----------------------------------------------------------------------------------------------------------------------------");
 	}
 
-	/**
-	 * Pauses console till the user presses the enter key.
-	 */
-	public static void pause() {
-
-		System.out.println("Press \"ENTER\" to continue...");
-
-		try {
-			System.in.read(new byte[2]);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Pauses console for a set number of milliseconds.
-	 * 
-	 * @param time - The number of milliseconds to sleep.
-	 */
-	public static void pause(long time) {
-
-		try {
-			Thread.sleep(time);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static Hub instantiateHub(Player player, String location) {
 		// Chapter 1
 		if (player.getChapter() == 1) {
