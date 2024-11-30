@@ -16,7 +16,7 @@ public class Item implements Serializable {
 	private int value;
 	private double damage;
 	private String damageType;
-	private Boolean sellable;
+	private boolean sellable;
 	private char itemType;
 
 	// -------------------Constructors-------------------
@@ -67,7 +67,7 @@ public class Item implements Serializable {
 	 * @param inputItemType
 	 */
 	public Item(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue, int inputDamage, 
-			int inputDamagetype, Boolean inputsellable, char inputItemType) {
+			int inputDamagetype, boolean inputsellable, char inputItemType) {
 		this.key = inputKey;
 		this.name = inputName;
 		this.info = inputInfo;
@@ -117,7 +117,7 @@ public class Item implements Serializable {
 	 * @param inputItemType
 	 */
 	public Item(String inputKey, String inputName, String inputInfo, int inputRarity, int inputValue,
-			Boolean inputsellable, char inputItemType) {
+			boolean inputsellable, char inputItemType) {
 		this.key = inputKey;
 		this.name = inputName;
 		this.info = inputInfo;
@@ -229,7 +229,7 @@ public class Item implements Serializable {
 		this.damageType = this.calculateDamageTypeInt(inputDamageTypeInt);
 	}
 
-	public void setIsSellable(Boolean inputsellable) {
+	public void setIsSellable(boolean inputsellable) {
 		this.sellable = inputsellable;
 	}
 	
