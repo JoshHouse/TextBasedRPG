@@ -121,13 +121,73 @@ public class GameThread extends Throwable {
 					}
 					// Progressing with the main story
 				} else {
-					breakLine();
-					chapterCompleted = ApproachCastle(player);
-					
-					if (chapterCompleted) {
-						inChapter = false;
-						player.setChapter(player.getChapter() + 1);
+					if (player.getlvlMelee() >= 3 || player.getlvlMage() >= 3 
+							|| player.getlvlRanged() >= 3 || player.getlvlRogue() >= 3) {
+						
+						if (player.getInventory().getWeapons().size() >= 2) {
+							boolean lvlMatchesInventory = false;
+							for (int x = 0; x < player.getInventory().getWeapons().size(); x++) {
+								switch(player.getInventory().getWeapons().get(x).getDamageType()) {
+								case "Melee":
+									if (player.getlvlMelee() >= 3) {
+										lvlMatchesInventory = true;
+									}
+									break;
+								case "Ranged":
+									if (player.getlvlRanged() >= 3) {
+										lvlMatchesInventory = true;
+									}
+									break;
+								case "Magic":
+									if (player.getlvlMage() >= 3) {
+										lvlMatchesInventory = true;
+									}
+									break;
+								case "Rogue":
+									if (player.getlvlRogue() >= 3) {
+										lvlMatchesInventory = true;
+									}
+									break;
+								default:
+									break;
+								}
+							}
+							
+							if (lvlMatchesInventory) {
+								breakLine();
+								chapterCompleted = ApproachCastle(player);
+								
+								if (chapterCompleted) {
+									inChapter = false;
+									player.setChapter(player.getChapter() + 1);
+								}
+							} else {
+								Dialogue.infoDialogue("It is wise to ensure that the class that you have leveled "
+										+ "up matches a weapon in your inventory. This will maximise the benefit "
+										+ "gained from leveling up a class level.\n"
+										+ "*Tip: By navigating to view character, you can both view what weapons"
+										+ "you have as well as your profile which shows what your class levels are*", txtSpd);
+							}
+							
+						} else {
+							breakLine();
+							Dialogue.infoDialogue("Before progressing to the castle, it is wise to purchace at "
+									+ "least one weapon from the town's shop! More powerful weapons will help you "
+									+ "contend with the powerful enemies you might face on castle grounds.\n"
+									+ "*Tip: You can increase your currency by looking around the town! You might "
+									+ "encounter some enemies that, if defeated will give you currency!*\n", txtSpd);
+						}
+						
+						
+					} else {
+						breakLine();
+						Dialogue.infoDialogue("Before progressing to the castle, it is wise to level up one of "
+								+ "your class levels to at least level 3 to contend with any foes you might "
+								+ "encounter on castle grounds.\n"
+								+ "*Tip: You can increase your level by looking around the town! You might "
+								+ "encounter some enemies that, if defeated will give you exp!*\n", txtSpd);
 					}
+
 
 				}
 			}
