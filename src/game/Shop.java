@@ -88,7 +88,8 @@ public class Shop implements Serializable {
 	private void printInventoryWeaponsArray(ArrayList<Weapon> arrayList) {
 		for(int x = 0; x < arrayList.size(); x++) {
 			Dialogue.infoDialogue(x+1 + ") " + arrayList.get(x).getName() + 
-					"\t Value: " + arrayList.get(x).getValue() + "\n", txtSpd);
+					"\n\t -Type: " + arrayList.get(x).getDamageType() +
+					"\n\t -Value: " + arrayList.get(x).getValue() + "\n", 10);
 		}
 		
 	}
@@ -103,7 +104,7 @@ public class Shop implements Serializable {
 	private void printInventoryConsumableArray(ArrayList<Consumable> arrayList) {
 		for(int x = 0; x < arrayList.size(); x++) {
 			Dialogue.infoDialogue(x+1 + ") " + arrayList.get(x).getName() + 
-					"\t Value: " + arrayList.get(x).getValue() + "\n", txtSpd);
+					"\t Value: " + arrayList.get(x).getValue() + "\n", 1);
 		}
 	}
 	
