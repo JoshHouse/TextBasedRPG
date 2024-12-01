@@ -5,4 +5,7 @@ bin
 /target/
 .metadata/
 pom.xml
+.idea/
+out/
+*.iml
 gameSave.ser

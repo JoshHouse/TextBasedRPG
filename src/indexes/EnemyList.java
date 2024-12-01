@@ -118,6 +118,11 @@ public class EnemyList {
 	public Enemy tutor1 = new Enemy("Blacksmith Jagatai", new Inventory(), 0, 65, 1, 100, 10, 1, spAtkList.none,
 			"Jagatai swings his sword with \"all\" his might.");
 
+	/** Drunkard - Tutorial fight for rouge class. */
+	public Enemy drunkard = new Enemy("Belligerent Drunk", new Inventory(), 15, 100, 1, 25, 5, 1, spAtkList.none,
+			"The drunkard throws a wild haymaker!.");
+
+
 	// ----------------------------------------------------------------------------------------------------------------
 
 	/*

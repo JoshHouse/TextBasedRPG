@@ -142,7 +142,67 @@ public class WeaponList {
 					+ "to your will!",
 			5, 12000, 1500, 3, true, 100, spAtk.straightToTheCore);
 
-	// --------------------Rogue Weapons--------------------
+	/*
+	 *
+	 * --------------------Rogue Weapons--------------------
+	 *
+	 */
+
+	// --------------------Chapter 1--------------------
+
+	public Weapon starterDagger = new Weapon("r101", "Starter Dagger",
+			"A simple dagger, perfect for quick strikes and fending off wildlife.",
+			1, 20, 100, 4, false, 0, spAtk.basicSlash);
+
+	public Weapon shurikenSet = new Weapon("r102", "Shuriken Set",
+			"Lightweight bladed stars designed for swift, ranged strikes from the shadows.",
+			2, 80, 30, 4, true, 0, spAtk.throwingBarrage);
+
+	public Weapon poisonTippedKnife = new Weapon("r103", "Poison-Tipped Knife",
+			"A dagger coated with poison to weaken your enemies with every strike.",
+			2, 100, 35, 4, true, 0, spAtk.poisonStrike);
+
+	// --------------------Chapter 2--------------------
+
+	public Weapon twinFangs = new Weapon("r201", "Twin Fangs",
+			"A pair of deadly daggers designed for rogues who excel at dual-wielding.",
+			3, 200, 75, 4, true, 0, spAtk.twinFangStrike);
+
+	public Weapon viperEdge = new Weapon("r202", "Viper’s Edge",
+			"A serrated dagger designed to cause bleeding with every slash.",
+			3, 250, 80, 4, true, 0, spAtk.bleedOut);
+
+	public Weapon shadowBlade = new Weapon("r203", "Shadow Blade",
+			"A dagger that dampens sound, allowing you to move silently and strike unseen.",
+			3, 300, 85, 4, true, 0, spAtk.shadowStep);
+
+	// --------------------Chapter 3--------------------
+
+	public Weapon nightPiercer = new Weapon("r301", "Night Piercer",
+			"A curved blade capable of delivering devastating critical hits when attacking from stealth.",
+			4, 1200, 300, 4, true, 0, spAtk.criticalAmbush);
+
+	public Weapon assassinFangs = new Weapon("r302", "Assassin’s Fangs",
+			"Twin blades that enhance your agility, allowing for rapid, successive strikes.",
+			4, 1500, 325, 4, true, 0, spAtk.frenzyAttack);
+
+	public Weapon throwingAxe = new Weapon("r303", "Throwing Axe",
+			"A nimble hatchet that can be thrown to dispatch enemies at a distance.",
+			4, 1800, 350, 4, true, 0, spAtk.piercingThrow);
+
+	// --------------------Chapter 4--------------------
+
+	public Weapon shadowReaver = new Weapon("r401", "Shadow Reaver",
+			"A legendary blade said to drink the life force of those it strikes, empowering the wielder.",
+			5, 7000, 1000, 4, true, 0, spAtk.lifeSteal);
+
+	public Weapon phantomFangs = new Weapon("r402", "Phantom Fangs",
+			"A mystical set of dual daggers that are said to phase through armor.",
+			5, 8000, 1100, 4, true, 0, spAtk.armorPierce);
+
+	public Weapon silentExecutioner = new Weapon("r403", "Silent Executioner",
+			"A blade shrouded in mystery, known for its ability to end fights before they begin.",
+			5, 10000, 1200, 4, true, 0, spAtk.deathMark);
 
 	/*
 	 * 

@@ -363,7 +363,104 @@ public class SpAtkList {
 			"The earth begins to split open beneath your opponent but quickly slams shut! Straight to the Core failed to fire!",
 			3.0);
 
-	// --------------------Rogue Special Attacks--------------------
+	/*
+	 *
+	 * --------------------Rogue Special Attacks--------------------
+	 *
+	 */
+
+	// --------------------Chapter 1--------------------
+
+	/** Special Attack - Poison Strike */
+	public SpecialAttack poisonStrike = new SpecialAttack("Poison Strike",
+			"Coat your blade with poison, delivering a strike that weakens and damages your opponent over time.",
+			"You swiftly coat your blade in poison and land a precise strike! The venom begins to take effect immediately.",
+			"You attempt to coat your blade, but the poison slips off before you can strike! Poison Strike failed to land!",
+			1.8);
+
+	/** Special Attack - Basic Slash */
+	public SpecialAttack basicSlash = new SpecialAttack("Silent Slash",
+			"A quick and precise slash aimed at the enemy’s weak spot, dealing decent damage.",
+			"You move with deadly silence, your blade slicing through the enemy’s defenses with ease.",
+			"You move in for the attack, but your blade misses its mark. Basic Slash failed to land!",
+			1.2);
+
+	/** Special Attack - Throwing Barrage */
+	public SpecialAttack throwingBarrage = new SpecialAttack("Throwing Barrage",
+			"Hurl a volley of shurikens at your enemy, overwhelming them with rapid strikes.",
+			"You reach for your shurikens and unleash a flurry of blades, hitting the target with deadly accuracy.",
+			"You throw a handful of shurikens, but your aim falters, and the blades scatter harmlessly! Throwing Barrage failed to hit!",
+			1.5);
+
+	// --------------------Chapter 2--------------------
+
+	/** Special Attack - Bleed Out */
+	public SpecialAttack bleedOut = new SpecialAttack("Bleed Out",
+			"A vicious strike that causes your opponent to bleed heavily, dealing damage over time.",
+			"You land a deep slash, and blood begins to pour from the wound, weakening your opponent.",
+			"You swing your blade, but the attack lacks the precision needed to cause serious damage. Bleed Out failed to land!",
+			2.4);
+
+	/** Special Attack - Shadow Step */
+	public SpecialAttack shadowStep = new SpecialAttack("Shadow Step",
+			"Disappear into the shadows and strike from behind, catching your opponent off-guard.",
+			"You vanish into the darkness and reappear behind your opponent, landing a devastating blow.",
+			"You attempt to step into the shadows, but your opponent senses your movement! Shadow Step failed to land!",
+			2.6);
+
+	/** Special Attack - Twin Fang Strike */
+	public SpecialAttack twinFangStrike = new SpecialAttack("Twin Fang Strike",
+			"Strike twice in rapid succession with dual daggers, aiming for critical points.",
+			"Your daggers flash in the air as you land two precise strikes, dealing devastating damage.",
+			"You swing your daggers, but your opponent dodges the second strike! Twin Fang Strike failed to land!",
+			2.0);
+
+	// --------------------Chapter 3--------------------
+
+	/** Special Attack - Critical Ambush */
+	public SpecialAttack criticalAmbush = new SpecialAttack("Critical Ambush",
+			"Wait for the perfect moment to strike, dealing critical damage from stealth.",
+			"You bide your time, then strike with precision, dealing a devastating critical hit!",
+			"You attempt to strike from stealth, but your timing is off! Critical Ambush failed to land!",
+			2.6);
+
+	/** Special Attack - Frenzy Attack */
+	public SpecialAttack frenzyAttack = new SpecialAttack("Frenzy Attack",
+			"Unleash a flurry of rapid attacks, overwhelming your opponent with sheer speed.",
+			"You lash out with a series of lightning-fast strikes, leaving your opponent battered and stunned.",
+			"You launch into a frenzy, but your strikes fail to find their target! Frenzy Attack failed to land!",
+			2.9);
+
+	/** Special Attack - Piercing Throw */
+	public SpecialAttack piercingThrow = new SpecialAttack("Piercing Throw",
+			"Target a weak point with your axe, bypassing armor and dealing massive damage.",
+			"You line up your shot and throw with deadly accuracy, piercing through your opponent’s armor!",
+			"You hurl your blade, but it glances off the opponent’s armor! Piercing Throw failed to land!",
+			3.5);
+
+	// --------------------Chapter 4--------------------
+
+	/** Special Attack - Life Steal */
+	public SpecialAttack lifeSteal = new SpecialAttack("Life Steal",
+			"Drain the life force from your enemy with a precise strike, healing yourself in the process.",
+			"You lash out. Your blade glows faintly as it siphons your opponent’s life force, rejuvenating you!",
+			"You strike, but the connection is weak, and you fail to drain any life force. Life Steal failed to land!",
+			4);
+
+	/** Special Attack - Armor Pierce */
+	public SpecialAttack armorPierce = new SpecialAttack("Armor Pierce",
+			"Strike with enough force to bypass even the strongest armor, dealing massive damage.",
+			"Your blade finds the weak spot in your opponent’s armor, piercing through with devastating precision!",
+			"You aim for the weak spot but fail to penetrate the armor! Armor Pierce failed to land!",
+			4.5);
+
+	/** Special Attack - Death Mark */
+	public SpecialAttack deathMark = new SpecialAttack("Death Mark",
+			"Mark your opponent for death, dealing massive damage and weakening them for future attacks.",
+			"Your blade leaves a glowing mark on your opponent, signaling their imminent demise!",
+			"You attempt to mark your opponent, but they evade your strike! Death Mark failed to land!",
+			5.0);
+
 
 	// --------------------Enemy Special Attacks--------------------
 

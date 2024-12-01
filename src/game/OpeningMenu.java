@@ -16,19 +16,14 @@ public class OpeningMenu {
             switch (choice) {
                 case '1':
                     // New game
-                    System.out.println("Starting New Game...\n\nYou wake up confused and unsure of your surroundings...\nYou try to remember your own name..? ");
-                    System.out.println("Enter your name: ");
+                    System.out.print("Starting New Game...\n\nYou wake up confused and unsure of your surroundings...\nYou try to remember your own name..?\nEnter your name: ");
+                    scanner.nextLine();
                     return new Player(scanner.nextLine());
                 case '2':
                     // Saved game
                     Player player = GameThread.load();
-                    if (player != null) {
-                        System.out.println("Game loaded successfully.");
-                        return player;
-                    } else {
-                        System.out.println("No saved game found or failed to load.");
-                        break;
-                    }
+                    if (player != null) {return player;}
+                    else {break;}
                 case '3':
                     // Settings (placeholder)
                     System.out.println("=== Settings ===\nSettings placeholder...");

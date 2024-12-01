@@ -68,7 +68,7 @@ public class GameThread extends Throwable {
 				breakLine();
 				Dialogue.infoDialogue(
 						"You find yourself at a crossroads. Where do you decide to go?\n" + "1) Armory (Melee) \n"
-								+ "2) Archery Range (Ranger) \n" + "3) Wizard's tower (Mage) \n" + "4) (Rogue) \n",
+								+ "2) Archery Range (Ranger) \n" + "3) Wizard's tower (Mage) \n" + "4) Shady Tavern (Rogue) \n",
 						txtSpd);
 				pChoice = keyboard.next().charAt(0);
 				System.out.println();
@@ -2660,8 +2660,151 @@ public class GameThread extends Throwable {
 	 */
 
 	public static boolean rogueChapter1(Player player, Scanner keyboard) {
-		return true;
-	}
+    boolean makingChoice = true;
+    boolean playerWon = false;
+    int txtSpd = 10, wait = 1000;
+
+    breakLine();
+	Dialogue.infoDialogue(
+		"You step into the 'Black Veil Tavern,' the door creaking loudly as you push it open. Inside, the air is heavy with the smell of spilled beer and musky patrons. "
+		+ "The place is dimly lit, just a few candles flickering here and there. Groups of shady-looking people are scattered around, hunched over their drinks or arguing over a game of dice. "
+		+ "In the corner, a man strums an out of tune fiddle but no one seems to pay him any mind. Every so often, the room bursts into laughter at someone’s drunken antics.\n",
+		txtSpd
+	);
+	Pause.pause(wait);
+
+	Dialogue.infoDialogue(
+		"You make your way to the bar. Behind it, a big, gruff-looking bartender is polishing a glass, though it’s hard to tell if the rag he’s using is actually making it any cleaner. "
+		+ "He glances at you, his one good eye sizing you up. Nearby, a drunk guy wobbles dangerously on his stool, mumbling to himself about something no one can understand.\n",
+		txtSpd
+	);
+
+    Pause.pause(wait);
+
+    Dialogue.characterDialogue("Bartender",
+        "Ah, a fresh face. You’ve got the look of someone who’s seen their share of shadows. I hope you can back that up."
+        + "We don’t get many fools here who can hold their own. You’ll need this if you want to survive in these parts.\n",
+        txtSpd
+    );
+    Pause.pause(wait);
+
+    Dialogue.infoDialogue(
+        "The bartender reaches under the counter and pulls out a sleek dagger, its blade gleaming even in the dim tavern light.\n",
+			txtSpd
+    );
+    Pause.pause(wait);
+
+    player.getInventory().add(wList.starterDagger);
+    Dialogue.infoDialogue("A starter dagger has been added to your inventory!\n", txtSpd);
+    player.getInventory().getWeaponOnKey(wList.starterDagger.getKey()).displayInfo();
+
+    Dialogue.characterDialogue("Bartender",
+        "Now, keep your wits about you. This place has its share of trouble, and not everyone knows when to leave well enough alone.\n",
+        txtSpd
+    );
+    Pause.pause(wait);
+
+    Dialogue.infoDialogue(
+        "As the bartender finishes his sentence, the drunkard nearby lurches to his feet. His glass tumbles to the floor, shattering. "
+        + "He stumbles toward you, his bloodshot eyes narrowing as he sways unsteadily.\n",
+        txtSpd
+    );
+    Pause.pause(wait);
+
+    Dialogue.characterDialogue("Drunkard",
+        "You! Fancy-lookin’ rogue! You think you’re better than me? Hah! Let’s see how tough you really are!\n",
+        txtSpd
+    );
+    Pause.pause(wait);
+
+    Dialogue.infoDialogue(
+        "The drunkard swings wildly at you, his fists clenched. The bartender sighs and steps back, clearly unimpressed.\n",
+        txtSpd
+    );
+    Pause.pause(wait);
+
+    Dialogue.characterDialogue("Bartender",
+        "Well, don’t just stand there. Deal with him before he wrecks more of my place. Consider it your first test.\n",
+        txtSpd
+    );
+
+    Battle tutorialBattle = new Battle(player, eList.drunkard);
+
+    while (!playerWon) {
+        playerWon = tutorialBattle.startBattle(keyboard, true);
+        if (!playerWon) {
+            player.setCurrHP(player.getHealth());
+            tutorialBattle.getEnemy().setCurrHP(tutorialBattle.getEnemy().getHealth());
+            tutorialBattle.setTurn(0);
+            Dialogue.characterDialogue("Bartender",
+                "Come on, kid. I gave you the tools; now show me you know how to use them.",
+                txtSpd
+            );
+        }
+    }
+
+    breakLine();
+    Dialogue.characterDialogue("Bartender",
+        "Not bad, kid. You’ve got some potential. That idiot won’t be bothering anyone for a while. Now listen closely.\n",
+        txtSpd
+    );
+    Pause.pause(wait);
+
+    Dialogue.characterDialogue("Bartender",
+        "If you’re serious about making a name for yourself, head to the castle. The King’s always looking for skilled adventurers. "
+        + "You might even pick up some decent coin. And if you live to tell the tale, come back here. There’s always work for a rogue who knows their way around trouble.\n",
+        txtSpd
+    );
+    Pause.pause(wait);
+
+    Dialogue.infoDialogue(
+        "(As you battle enemies during your adventure, you will earn EXP after defeating them, the amount varying "
+        + "from enemy to enemy. Once you gain enough EXP, you will level up. Your stats will increase, "
+        + "and you will receive a skill point to spend on one of the class stats, or your luck stat. "
+        + "You can view your overall level, the level of each stat, how much EXP you need to level up again, "
+        + "and how many skill points you have available to spend all from your profile after the tutorial.)\n\n",
+        txtSpd
+    );
+
+    while (makingChoice) {
+        breakLine();
+        Dialogue.characterDialogue("Bartender",
+            "1) Thanks for the advice. I’ll head to the castle.\n"
+            + "2) I’ll stick around. Might be more opportunities here.\n",
+            txtSpd
+        );
+        char pChoice = keyboard.next().charAt(0);
+
+        switch (pChoice) {
+            case '1':
+                breakLine();
+                Dialogue.characterDialogue(player.getName(),
+                    "Thanks for the advice. I’ll head to the castle.\n",
+                    txtSpd
+                );
+                Pause.pause(wait);
+                makingChoice = false;
+                break;
+
+            case '2':
+                breakLine();
+                Dialogue.characterDialogue(player.getName(),
+                    "I’ll stick around. Might be more opportunities here.\n",
+                    txtSpd
+                );
+                Pause.pause(wait);
+                makingChoice = false;
+                break;
+
+            default:
+                Dialogue.infoDialogue("(Invalid choice. Please try again)\n", txtSpd);
+                break;
+        }
+    }
+
+    return true;
+}
+
 
 	/*
 	 * --------------------Chapter 3--------------------
@@ -2712,11 +2855,10 @@ public class GameThread extends Throwable {
 	public static Player load() {
 		try (FileInputStream fileIn = new FileInputStream("gameSave.ser");
 				ObjectInputStream in = new ObjectInputStream(fileIn)) {
-			Player player = (Player) in.readObject();
 			System.out.println("Game loaded successfully.");
-			return player;
+            return (Player) in.readObject();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("No saved game found.");
 		}
 		return null;
 	}
