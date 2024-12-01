@@ -84,11 +84,11 @@ public class WeaponList {
 			1, 25, 15, 3, true, 10, spAtk.pBeam);
 
 	public Weapon windTome = new Weapon("f216", "Tome of Forceful Wind",
-			"A spell tome used to channel mana, turning them into forceful winds!", 2, 60, 40, 3, true, 20,
+			"A spell tome used to channel mana, turning them into forceful winds!", 2, 100, 40, 3, true, 20,
 			spAtk.windSlash);
 
 	public Weapon earthTome = new Weapon("f217", "Tome of Earth",
-			"A spell tome used to channel mana, moving the earth around you with devistating force!", 3, 70, 45, 3,
+			"A spell tome used to channel mana, moving the earth around you with devistating force!", 3, 130, 45, 3,
 			true, 20, spAtk.massiveBoulder);
 
 	// --------------------Chapter 2--------------------
@@ -96,51 +96,51 @@ public class WeaponList {
 	public Weapon tremorWand = new Weapon("f225", "Wand of Tremors",
 			"A wand capable of channeling mana into the earth, making the entire ground shake as it moves the earth "
 					+ "beneath the battlefield!",
-			3, 180, 115, 3, true, 40, spAtk.doubleEarthWall);
+			3, 300, 115, 3, true, 40, spAtk.doubleEarthWall);
 
 	public Weapon flameWand = new Weapon("f226", "Wand of Scorching Flames",
-			"A wand used to convert mana into blazing flames, scorching everything it touches!", 3, 200, 120, 3, true,
+			"A wand used to convert mana into blazing flames, scorching everything it touches!", 3, 400, 120, 3, true,
 			45, spAtk.flamingTornados);
 
 	public Weapon streamWand = new Weapon("f227", "Wand of Piercing Streams",
 			"A wand that converts mana into highly pressurized, condensed streams of water capable of putting a hole "
 					+ "through diamond itself!",
-			3, 225, 125, 3, true, 50, spAtk.curvingSplitStream);
+			3, 500, 125, 3, true, 50, spAtk.curvingSplitStream);
 
 	// --------------------Chapter 3--------------------
 
 	public Weapon tornadoStaff = new Weapon("f235", "Tornado Staff",
-			"A staff capable of using mana to summon powerful tornados to disrupt the battlefield", 4, 750, 425, 3,
+			"A staff capable of using mana to summon powerful tornados to disrupt the battlefield", 4, 2000, 425, 3,
 			true, 65, spAtk.motherOfAllTornados);
 
 	public Weapon floodStaff = new Weapon("f236", "Flood Staff",
 			"A staff used to convert mana into  insane amounts of water, washing away the battlefield, and your "
 					+ "enemies along with it!",
-			4, 800, 450, 3, true, 70, spAtk.doubleWave);
+			4, 2500, 450, 3, true, 70, spAtk.doubleWave);
 
 	public Weapon hellfireStaff = new Weapon("f237", "Hellfire Staff",
 			"A staff used to summon the flames from the gates of hell themselves, leaving anything it touches as "
 					+ "a pile of ash!",
-			5, 1000, 500, 3, true, 75, spAtk.fireWall);
+			5, 3000, 500, 3, true, 75, spAtk.fireWall);
 
 	// --------------------Chapter 4--------------------
 
 	public Weapon apocolypseScroll = new Weapon("f245", "Scroll of the Apocolypse",
 			"A scroll that teaches you the secrets of fire-based magic, allowing you to become one with the mana "
 					+ "flowing through you, converting that mana into fire that rain's down from the heavens!",
-			5, 3500, 1350, 3, true, 90, spAtk.impendingDoom);
+			5, 10000, 1350, 3, true, 90, spAtk.impendingDoom);
 
 	public Weapon hurricaneScroll = new Weapon("f246", "Scroll of the Hurricane",
 			"A scroll that teaches you the secrets of wind-based magic, allowing you to become one with the mana "
 					+ "flowing through you, converting that mana into hurricanes, utilizing the forces of mother-nature "
 					+ "herself to destroy your opponents!",
-			5, 3750, 1400, 3, true, 90, spAtk.eyeOfTheStorm);
+			5, 11000, 1400, 3, true, 90, spAtk.eyeOfTheStorm);
 
 	public Weapon canyonScroll = new Weapon("f247", "Scoll of Canyon Creation",
 			"A scroll that teaches you the secrets of earth-based magic, allowing you to become one with the mana "
 					+ "flowing through you, embewing that mana into the ground beneth you, allowing you to bend the earth "
 					+ "to your will!",
-			5, 4000, 1500, 3, true, 100, spAtk.straightToTheCore);
+			5, 12000, 1500, 3, true, 100, spAtk.straightToTheCore);
 
 	// --------------------Rogue Weapons--------------------
 
@@ -209,18 +209,18 @@ public class WeaponList {
 	// ---------------------MAGE---------------------
 
 	public Weapon natureWand = new Weapon("f212", "Nature Wand",
-			"A wand used to channel the nature energy from your enviornment!", 1, 40, 25, 3, true, 15,
+			"A wand used to channel the nature energy from your enviornment!", 1, 75, 25, 3, true, 15,
 			spAtk.naturesGift);
 
 	public Weapon lightningWand = new Weapon("f213", "Lightning Wand",
-			"A wand capable of harnessing the power of electricity!", 2, 45, 30, 3, true, 15, spAtk.multiStrike);
+			"A wand capable of harnessing the power of electricity!", 2, 90, 30, 3, true, 15, spAtk.multiStrike);
 
 	public Weapon fireTome = new Weapon("f214", "Tome of Fire",
-			"A spell tome used to channel mana, turning them into deadly flames!", 2, 50, 35, 3, true, 20,
+			"A spell tome used to channel mana, turning them into deadly flames!", 2, 100, 35, 3, true, 20,
 			spAtk.fireBall);
 
 	public Weapon waterTome = new Weapon("f215", "Tome of Water",
-			"A spell tome used to channel mana, turning them into powerful streams of water!", 2, 60, 40, 3, true, 20,
+			"A spell tome used to channel mana, turning them into powerful streams of water!", 2, 100, 40, 3, true, 20,
 			spAtk.crushingWave);
 
 	// ---------------------ROGUE--------------------
@@ -271,21 +271,21 @@ public class WeaponList {
 
 	public Weapon ironHeartAmulet = new Weapon("f221", "Iron-Heart Amulet",
 			"An amulet that allows you to channel your mana, creating formations of iron to send towards your enemies!",
-			2, 100, 85, 3, true, 30, spAtk.bladeRain);
+			2, 300, 85, 3, true, 30, spAtk.bladeRain);
 
 	public Weapon titansGauntlet = new Weapon("f222", "Silver-Titan's Gauntlet",
 			"A gauntlet said to be forged by the titans, embewing your punches with mana, significantly increasing "
 					+ "their effectiveness!",
-			2, 125, 90, 3, true, 30, spAtk.heavyFist);
+			2, 500, 90, 3, true, 30, spAtk.heavyFist);
 
 	public Weapon colossusRing = new Weapon("f223", "Silver-Colossus Ring",
 			"A ring that channels the energy of colossus entities, using mana to release devistating waves of magical energy!",
-			2, 150, 95, 3, true, 35, spAtk.colossusCrush);
+			2, 700, 95, 3, true, 35, spAtk.colossusCrush);
 
 	public Weapon forceWand = new Weapon("f224", "Wand of Unrelenting Force",
 			"A wand that channels your magical energy, converting it into unrelenting winds, capable of sending your enemies "
 					+ "flying!",
-			2, 160, 100, 3, true, 35, spAtk.crushingWinds);
+			2, 700, 100, 3, true, 35, spAtk.crushingWinds);
 
 	// ---------------------ROGUE--------------------
 
@@ -341,22 +341,22 @@ public class WeaponList {
 	// ---------------------MAGE---------------------
 
 	public Weapon rubyCatalyst = new Weapon("f231", "Ruby Catalyst",
-			"A gauntlet infused with powerful ruby gemstones, embewing punches unprecidented magical energy!", 3, 550,
+			"A gauntlet infused with powerful ruby gemstones, embewing punches unprecidented magical energy!", 3, 2000,
 			325, 3, true, 55, spAtk.secondImpact);
 
 	public Weapon celestialRing = new Weapon("f232", "Saphire Celestial Ring",
 			"A ring infused with powerful saphire gemstones used to channel the power of the celestial entites themselves!",
-			3, 600, 350, 3, true, 60, spAtk.celestialBeamRain);
+			3, 2500, 350, 3, true, 60, spAtk.celestialBeamRain);
 
 	public Weapon crimsonPrism = new Weapon("f233", "Crimson Prism",
 			"A prisim embewed with Crimson gemstones, used to convert the light energy of the sun into powerful beams "
 					+ "of magical energy, burning a whole through anything it is pointed at!",
-			3, 650, 375, 3, true, 60, spAtk.lightConvergence);
+			3, 2500, 375, 3, true, 60, spAtk.lightConvergence);
 
 	public Weapon eqStaff = new Weapon("f234", "Earthquake Staff",
 			"A staff capable of using magical energy to move the tectonic plates themselves, causing earthquakes throughout "
 					+ "the battlefield!",
-			3, 700, 400, 3, true, 65, spAtk.rockSlide);
+			3, 3000, 400, 3, true, 65, spAtk.rockSlide);
 
 	// ---------------------ROGUE--------------------
 
@@ -408,23 +408,23 @@ public class WeaponList {
 	// ---------------------MAGE---------------------
 
 	public Weapon hellsFuryRing = new Weapon("f241", "Onyx Ring of Hell's Fury",
-			"A ring embewed with Onyx gemstones, summoning the fury of hell itself upon your enemies!", 3, 2500, 1150,
+			"A ring embewed with Onyx gemstones, summoning the fury of hell itself upon your enemies!", 3, 10000, 1150,
 			3, true, 80, spAtk.demonStrike);
 
 	public Weapon celestialCurseShard = new Weapon("f242", "Diamond Shard of Celestial Curse",
 			"A shard that, when embewed with mana, channels the anger and wrath of the Gods, unleashing it upon your enemies!",
-			4, 2750, 1200, 3, true, 80, spAtk.heavensRage);
+			4, 10000, 1200, 3, true, 80, spAtk.heavensRage);
 
 	public Weapon abyssalAmethest = new Weapon("f243", "Abyssal Amethest",
 			"An amethyst gemstone, enchanted to use mana to summon the wrath of the mythical beasts from the deapths of "
 					+ "the abyss!",
-			4, 3000, 1250, 3, true, 85, spAtk.eternalDarkness);
+			4, 12000, 1250, 3, true, 85, spAtk.eternalDarkness);
 
 	public Weapon tsunamiScroll = new Weapon("f244", "Scroll of the Tsunami",
 			"A scroll that teaches you the secrets of water-based magic, allowing you to become one with the mana flowing "
 					+ "through you, and converting that mana directly into massive waves of water capable of destroying entire "
 					+ "kingdoms in one attack!",
-			5, 3250, 1300, 3, true, 85, spAtk.weightOfTheDepths);
+			5, 12000, 1300, 3, true, 85, spAtk.weightOfTheDepths);
 
 	// ---------------------ROGUE--------------------
 

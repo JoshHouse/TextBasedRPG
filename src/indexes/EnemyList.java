@@ -156,10 +156,10 @@ public class EnemyList {
 
 	// ---------------------MAGE---------------------
 
-	public Enemy fireElemental = new Enemy("Fire Elemental", new Inventory(), 500, 1000, 15, 200, 200, 3,
+	public Enemy fireElemental = new Enemy("Fire Elemental", new Inventory(), 500, 10000, 15, 200, 200, 3,
 			spAtkList.fireWall, "The fire elemental brings its flaming fist down with murderous intent!");
 
-	public Enemy fireRockGolem = new Enemy("Fire Elemental Rock Golem", new Inventory(), 1000, 1750, 20, 500, 400, 3,
+	public Enemy fireRockGolem = new Enemy("Fire Elemental Rock Golem", new Inventory(), 1000, 20000, 20, 500, 400, 3,
 			spAtkList.erruption, "The golem throws a flaming boulder of firey rock directly at you!");
 
 	// ---------------------ROGUE--------------------
@@ -180,13 +180,13 @@ public class EnemyList {
 	 */
 
 	/** Gilgamesh the Dragon - Final Boss */
-	public Enemy gilgemeshTheDragon = new Enemy("Gilgemesh the Dragon", new Inventory(), 5000, 5000, 30, 5000, 300, 5,
+	public Enemy gilgemeshTheDragon = new Enemy("Gilgemesh the Dragon", new Inventory(), 5000, 30000, 30, 5000, 300, 5,
 			spAtkList.hellFire,
 			"With blazing speed and ferocity, Gilgemesh flap's his wings and soares toward you, and stabs you with his "
 					+ "razor-sharp claws!");
 
 	/** Juvenile Dragon - Final Boss's Minions */
-	public Enemy gilgemeshsChildren = new Enemy("Juvenile Dragon", new Inventory(), 2000, 2000, 20, 1500, 150, 5,
+	public Enemy gilgemeshsChildren = new Enemy("Juvenile Dragon", new Inventory(), 2000, 15000, 20, 1500, 150, 5,
 			spAtkList.flameBreath,
 			"With its biteforce rivaling the crushing power of a castle stone, the Juvenile Dragon clamps onto your arm, "
 					+ "leaving serious damage in its wake!");
