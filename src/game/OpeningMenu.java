@@ -11,15 +11,15 @@ public class OpeningMenu {
 
         while (true) {
             System.out.println("=== Welcome to the Game ===\n1. New Game\n2. Load Saved Game\n3. Settings\n4. Exit\nChoose an option: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            char choice = scanner.next().charAt(0);
 
             switch (choice) {
-                case 1:
+                case '1':
                     // New game
                     System.out.println("Starting New Game...\n\nYou wake up confused and unsure of your surroundings...\nYou try to remember your own name..? ");
+                    System.out.println("Enter your name: ");
                     return new Player(scanner.nextLine());
-                case 2:
+                case '2':
                     // Saved game
                     Player player = GameThread.load();
                     if (player != null) {
@@ -29,11 +29,11 @@ public class OpeningMenu {
                         System.out.println("No saved game found or failed to load.");
                         break;
                     }
-                case 3:
+                case '3':
                     // Settings (placeholder)
                     System.out.println("=== Settings ===\nSettings placeholder...");
                     break;
-                case 4:
+                case '4':
                     // Exit
                     System.out.println("Exiting the game.");
                     System.exit(0);
