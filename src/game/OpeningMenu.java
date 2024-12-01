@@ -16,9 +16,10 @@ public class OpeningMenu {
             switch (choice) {
                 case '1':
                     // New game
-                    System.out.print("Starting New Game...\n\nYou wake up confused and unsure of your surroundings...\nYou try to remember your own name..?\nEnter your name: ");
-                    scanner.nextLine();
-                    return new Player(scanner.nextLine());
+                    System.out.println("Starting New Game...\n\nYou wake up confused and unsure of your surroundings...\nYou try to remember your own name..? ");
+                    System.out.println("Enter your name: ");
+                    String name = scanner.next();
+                    return new Player(name);
                 case '2':
                     // Saved game
                     Player player = GameThread.load();
