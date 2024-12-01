@@ -2498,7 +2498,153 @@ public class GameThread extends Throwable {
 	 */
 
 	public static boolean mageDragonApproach(Player player, Scanner keyboard) {
+		String wizName = "Magnus the King's wizard";
+		int txtSpd = 25;
+		Battle trollFight = new Battle(player, eList.troll);
+		boolean isResponding;
+		int pChoice;
 		
+		Dialogue.characterDialogue(wizName, "", txtSpd);
+		Dialogue.characterDialogue(player.getName(), "", txtSpd);
+		Dialogue.infoDialogue("", txtSpd);
+		
+		isResponding = true;
+		while (isResponding) {
+			Dialogue.infoDialogue("How do you respond? \n"
+					+ "1) \n"
+					+ "2) \n", txtSpd);
+			pChoice = keyboard.next().charAt(0);
+			switch (pChoice) {
+			case '1':
+				
+				break;
+			case '2':
+				
+				break;
+			default:
+				
+				break;
+			}
+		}
+			
+		breakLine();
+		Dialogue.characterDialogue(wizName, "So you intend on fighting Gilgemesh the Dragon huh? That is no small task "
+				+ "to undertake! Gilgemesh is a fearsome beast that has terrorized our kingdom for decades. No adventurer, "
+				+ "warior, or army we have sent to take him on has come back unscathed... or alive for that matter. I hope you "
+				+ "understand the risk that you are taking. Are you sure you want to do this?\n", txtSpd);
+		
+		isResponding = true;
+		while (isResponding) {
+			Dialogue.infoDialogue("How do you respond? \n"
+					+ "1) I have not come this far to give up now!\n"
+					+ "2) If that is the case, I might need to think this over.\n", txtSpd);
+			pChoice = keyboard.next().charAt(0);
+			switch (pChoice) {
+			case '1':
+				Dialogue.characterDialogue(player.getName(), "I have not come this far to give up now!\n", txtSpd);
+				isResponding = false;
+				break;
+			case '2':
+				Dialogue.characterDialogue(player.getName(), "If that is the case, I might need to think this over.\n", txtSpd);
+				Dialogue.characterDialogue(wizName, "That is a wise decision. If you decide you would like to persue the "
+						+ "dragon in the future, you can always come back and speak to me.\n", txtSpd);
+				return false;
+			default:
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+			
+		}
+		
+		Dialogue.characterDialogue(wizName, "Well if you are confident, I can't stop you. The best I can do to aid you "
+				+ "is tell you everything I know about the dragon so you can be as prepared as possible. Gilgemesh is a ferocious "
+				+ "beast with skin thick enough to take multiple blasts from the most powerful of magic weapons. I would advise keeping "
+				+ "your guard up too. His claws aren't just for show. They can do serious damage if you let your guard down. He is "
+				+ "also known to rain fire down upon the battlefield. The best you can hope for if he does is that you have a place to "
+				+ "hide in time. Gilgemesh isn't the only dragon you have to worry about either. Gilgemesh is the father of multiple "
+				+ "juvinile dragons that, if in the area, might run into the battle to aid their father. They, like their father, are "
+				+ "powerful on their own and can cause some serious trouble. You won't have time to recover once you defeat them either. "
+				+ "Before you reach Gilgemesh, you also might encounter a troll or two along the path. If you are attempting to take on "
+				+ "Gilgemesh though, I assume you can handle the likes of them. \n", txtSpd);
+		
+		isResponding = true;
+		while (isResponding) {
+			Dialogue.infoDialogue("How do you respond? \n"
+					+ "1) I appreciate the advice. I am as prepared as I will ever be. How do I get to the dragon?\n"
+					+ "2) This sounds like more than I am ready for. Let me think about this for a bit.\n", txtSpd);
+			pChoice = keyboard.next().charAt(0);
+			switch (pChoice) {
+			case '1':
+				Dialogue.characterDialogue(player.getName(), "I appreciate the advice. I am as prepared as I will ever be. How do I get to the dragon?\n", txtSpd);
+				isResponding = false;
+				break;
+			case '2':
+				Dialogue.characterDialogue(player.getName(), "This sounds like more than I am ready for. Let me think about this for a bit.\n", txtSpd);
+				Dialogue.characterDialogue(wizName, "That is a wise decision. If you decide you would like to persue the "
+						+ "dragon in the future, you can always come back and speak to me.\n", txtSpd);
+				return false;
+			default:
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+		
+		Dialogue.characterDialogue(wizName, "To get to Gilgemesh, you will need to assend Mount Doom. Gilgemesh lies "
+				+ "at the top of the mountain, but along the path up to the top is trecherous and riddled with trolls. "
+				+ "To reach Mount Doom, go to the main gate and turn west. The only mountain to the west is Mount doom. "
+				+ "On the east side of the mountain, you should see the start of the path. Simply follow that path and it "
+				+ "will lead you to Gilgemesh. I wish you luck brave adventurer. Only time will tell whether this journey is "
+				+ "bravery or stupidity.\n", txtSpd);
+		
+		isResponding = true;
+		while (isResponding) {
+			Dialogue.infoDialogue("How do you respond? \n"
+					+ "1) I assure you it is bravery. I will not fail! \n"
+					+ "2) Thank you for the advice! I hope to see you soon.\n", txtSpd);
+			pChoice = keyboard.next().charAt(0);
+			switch (pChoice) {
+			case '1':
+				Dialogue.characterDialogue(player.getName(), "I assure you it is bravery. I will not fail! \n", txtSpd);
+				isResponding = false;
+
+				break;
+			case '2':
+				Dialogue.characterDialogue(player.getName(), "2) Thank you for the advice! I hope to see you soon.\n", txtSpd);
+				isResponding = false;
+
+				break;
+			default:
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+		}
+			
+			Dialogue.infoDialogue("*You venture to the main gate and turn west. That is when you see it. Mount Doom "
+					+ "is in sight. The wizard's words ring in your ears. All the warnings he gave you and you can't "
+					+ "help but feel a small amount of fear. Despite this, you venture onward, reaching the base "
+					+ "of Mount Doom by mid-day. You begin up the path, climbing higher and higher. That is when "
+					+ "you see it. One of the trolls the Wizard spoke of. You ready your weapon, prepared to take "
+					+ "out any enemy that stands between you and the dragon!\n", txtSpd);
+			
+			if (!trollFight.startBattle(keyboard, true)) {
+				return false;
+			}
+			
+			Dialogue.infoDialogue("*With the troll at your feet, you venture on, climbing higher and higher. From "
+					+ "the cliffsides of the mountain, you can see the entire kingdom and can't help but admire how "
+					+ "small it looks from this distance. As you admire the view, you hear a ferocious roar as another "
+					+ "troll comes barelling toward you. You prepare for yet another battle! \n", txtSpd);
+			
+			if (!trollFight.startBattle(keyboard, true)) {
+				return false;
+			}
+			
+			Dialogue.infoDialogue("*With another foe defeated, you climb higher. You can see the summit as you continue "
+					+ "following the path. You hear Gilgemesh before you see him. The ground rumbles. You hear snarles coming from "
+					+ "around the corner. You jump out and come face to face with the ferocious face of Gilgemesh. Flames passively "
+					+ "escape his mouth and his claws break rock under each step. Gilgemesh snarles preparing to attack. You raise your "
+					+ "weapon. This is it. The climax of your adventure. You prepare for the toughest battle yet!*", txtSpd);
+			
 		return true;
 	}
 

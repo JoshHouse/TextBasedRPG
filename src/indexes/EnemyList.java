@@ -168,6 +168,9 @@ public class EnemyList {
 
 	public Enemy dWar = new Enemy("Dragon Warrior", new Inventory(), 2000, 2000, 25, 1200, 150, 1, spAtkList.none,
 			"The dragon warrior slashes with its the warped glaive in its hands!");
+	
+	public Enemy troll = new Enemy("Troll", new Inventory(), 850, 1500, 18, 425, 350, 1, spAtkList.boulderToss,
+			" swings his club with brutal force.");
 
 	// ----------------------------------------------------------------------------------------------------------------
 

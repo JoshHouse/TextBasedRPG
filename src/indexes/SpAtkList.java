@@ -206,8 +206,8 @@ public class SpAtkList {
 
 	/** Special Attack - Power Beam */
 	public SpecialAttack pBeam = new SpecialAttack("Power Beam",
-			"Shoots a deadly beam of charged up mana capable of putting a hole straight through whatever it's pointed at",
-			"Beams of light converge on your weapon, firing a blast of charged up energy",
+			"Shoots a deadly beam of charged up mana capable of putting a hole straight through whatever it's pointed at!",
+			"Beams of light converge on your weapon, firing a blast of charged up energy!",
 			"Beams of light converge on the weapon but quickly fizzle out. The power beam failed to fire!", 1.5);
 
 	public SpecialAttack naturesGift = new SpecialAttack("Nature's Gift",
@@ -407,6 +407,12 @@ public class SpAtkList {
 			"The ground begins to tremble as cracks begin to form! The earth splits open covering "
 					+ "the battlefield with blazing pillars from the deapths of the earth!",
 			"The ground begins to rumble and cracks begin to form but quickly slam shut! The erruption fails to occur!",
+			2.5);
+	
+	public SpecialAttack boulderToss = new SpecialAttack("Boulder Toss",
+			"The troll picks up a nearby boulder and hurls it toward you!",
+			"The troll lifts a nearby boulder, hoisting it on its back and in one swift motion, sends the boulder flying toward you! ",
+			"The troll lifts up a nearby boulder but quickly loses it's grip! The troll failed to use Boulder Toss!",
 			2.5);
 
 	/** Special Attack - Rampaging Tusks. */

@@ -182,13 +182,11 @@ public class Battle {
 				if (player.getCurrHP() <= 0) { // Check if battle continues after each turn
 					Dialogue.infoDialogue("You have been defeated!\n", txtSpd);
 					Dialogue.infoDialogue("Leaving the Battle Arena.\n", txtSpd);
-					player.setCurrHP(player.getHealth());
 					enemy.setCurrHP(enemy.getHealth());
 					player.setCurrMana(player.getMana());
 					return false;
 				} else if (enemy.getCurrHP() <= 0) {
 					Dialogue.infoDialogue("You defeated the enemy!\n", txtSpd);
-					player.setCurrHP(player.getHealth());
 					enemy.setCurrHP(enemy.getHealth());
 					player.setCurrMana(player.getMana());
 
