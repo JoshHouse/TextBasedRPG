@@ -248,9 +248,11 @@ public class GameThread extends Throwable {
 					// Progressing with the main story
 				} else {
 					breakLine();
-					Dialogue.infoDialogue("Which of the king's high council would you like to speak to?\n"
-							+ "1) (Melee) \n" + "2) Elaris the Ranger (Ranger) \n"
-							+ "3) Magnus the King's wizard (Mage) \n" + "4) (Rogue) \n", txtSpd);
+					Dialogue.infoDialogue("Which of the king's high council would you like to speak to?\n"+ 
+							"1) Paris, King's Left Hand (Melee) \n" + 
+							"2) Elaris the Ranger (Ranger) \n"+ 
+							"3) Magnus the King's wizard (Mage) \n" + 
+							"4) (Rogue) \n", txtSpd);
 					pChoice = keyboard.next().charAt(0);
 					switch (pChoice) {
 					case '1':
@@ -305,9 +307,11 @@ public class GameThread extends Throwable {
 					KingsFinalMission(player);
 					breakLine();
 					Dialogue.infoDialogue("Which of the king's high council would you like to speak to for advice "
-							+ "about the dangerous path you are about to walk?\n" + "1) (Melee) \n"
-							+ "2) Elaris the Ranger (Ranger) \n" + "3) Magnus the King's wizard (Mage) \n"
-							+ "4) (Rogue) \n", txtSpd);
+							+ "about the dangerous path you are about to walk?\n" + 
+							"1) Paris, King's Left Hand(Melee) \n" + 
+							"2) Elaris the Ranger (Ranger) \n" + 
+							"3) Magnus the King's wizard (Mage) \n" + 
+							"4) (Rogue) \n", txtSpd);
 					pChoice = keyboard.next().charAt(0);
 					switch (pChoice) {
 					case '1':
@@ -2494,6 +2498,7 @@ public class GameThread extends Throwable {
 	 */
 
 	public static boolean mageDragonApproach(Player player, Scanner keyboard) {
+		
 		return true;
 	}
 
