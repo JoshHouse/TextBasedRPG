@@ -2440,6 +2440,7 @@ public class GameThread extends Throwable {
 				Lootable chest = new Lootable("Fire Wizard's Chest", new Inventory(), 1000);
 				Item[] chestInv = {cList.chapter4Health, cList.chapter4Mana, cList.chapter4Poison, 
 						cList.speed, cList.damageBoost, wList.floodStaff};
+				chest.getInventory().addMulti(chestInv);
 				breakLine();
 				player.loot(chest, keyboard);
 				makingChoice = false;
