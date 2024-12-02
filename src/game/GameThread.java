@@ -2875,6 +2875,56 @@ public class GameThread extends Throwable {
 	}
 
 	public static Hub instantiateHub(Player player, String location) {
+		// There is no consumable index so I am putting them here
+		// Health 
+		Consumable chapter1Health = new Consumable( "f700", "Lesser Healing Potion", 
+				"A magical potion that heals 50 health when consumed!", 1, 50,
+				50, 1, true, 1, true, 'h');
+		Consumable chapter2Health = new Consumable("f701", "Healing Potion", 
+				"A magical potion that heals 100 health when consumed!", 2, 200,
+				100, 1, true, 1, true, 'h');
+		Consumable chapter3Health = new Consumable("f702", "Greater Healing Potion", 
+				"A magical potion that heals 150 health when consumed!", 3, 1000,
+				150, 1, true, 1, true, 'h');
+		Consumable chapter4Health = new Consumable("f703", "Massive Healing Potion", 
+				"A magical potion that heals 200 health when consumed!", 4, 5000,
+				200, 1, true, 1, true, 'h');
+		// Mana
+		Consumable chapter1Mana = new Consumable("f710", "Lesser Mana Potion", 
+				"A magical potion that regenerates 50 mana when consumed!", 1, 50, 
+				50, 1, true, 1, true, 'm');
+		Consumable chapter2Mana = new Consumable("f711", "Mana Potion", 
+				"A magical potion that regenerates 125 mana when consumed!", 2, 200, 
+				125, 1, true, 1, true, 'm');
+		Consumable chapter3Mana = new Consumable("f712", "Greater Mana Potion", 
+				"A magical potion that regenerates 200 mana when consumed!", 3, 1000, 
+				200, 1, true, 1, true, 'm');
+		Consumable chapter4Mana = new Consumable("f713", "Massive Mana Potion", 
+				"A magical potion that regenerates 275 mana when consumed!", 4, 5000, 
+				275, 1, true, 1, true, 'm');
+		// Poison
+		Consumable chapter1Poison = new Consumable("f720", "Splash Potion of Poison",
+				"Throw this powerful potion at enemies to make them take 30 damage over its next 3 turns!", 
+				1, 100, 30, 1, true, 1, true, 'p');
+		Consumable chapter2Poison = new Consumable("f721", "Splash Potion of Deadly Toxin",
+				"Throw this powerful potion at enemies to make them take 50 damage over its next 3 turns!", 
+				2, 400, 50, 1, true, 1, true, 'p');
+		Consumable chapter3Poison = new Consumable("f722", "Splash Potion of Snake Venom",
+				"Throw this powerful potion at enemies to make them take 100 damage over its next 3 turns!", 
+				3, 1500, 100, 1, true, 1, true, 'p');
+		Consumable chapter4Poison = new Consumable("f723", "Splash Potion of Toxic Waste",
+				"Throw this powerful potion at enemies to make them take 500 damage over its next 3 turns!", 
+				4, 7000, 500, 1, true, 1, true, 'p');
+		// Speed
+		Consumable speed = new Consumable("f730", "Potion of Swiftness",
+				"Drink this potion to dramatically increase your speed! This will allow you to get 2 turns in battle!",
+				2, 500, 0, 1, true, 1, true, 's');
+		// DamageBoost
+		Consumable damageBoost = new Consumable("f740", "Potion of Swiftness",
+				"Drink this potion to dramatically increase your striking power! This will make you do 1.5x damage for the next 3 turns in battle!",
+				2, 1000, 0, 1, true, 1, true, 's');
+
+		
 		// Chapter 1
 		if (player.getChapter() == 1) {
 
@@ -2892,7 +2942,8 @@ public class GameThread extends Throwable {
 			// Add weapons to the shopkeeper's inventory
 			Item[] items = { wList.bow2, wList.ironAxe, wList.rapier, wList.curveSword, wList.bow3, wList.bow4,
 					wList.natureWand, wList.windTome, wList.waterTome, wList.fireTome, wList.fist1, wList.warScythe,
-					wList.lightningWand, wList.bigAxe, wList.shortSpear, wList.longSpear, wList.ironSword };
+					wList.lightningWand, wList.bigAxe, wList.shortSpear, wList.longSpear, wList.ironSword, 
+					chapter1Health, chapter1Mana, chapter1Poison, speed, damageBoost };
 			shopkeeperCh1.getInventory().addMulti(items);
 
 			// Create the shop
@@ -2941,7 +2992,8 @@ public class GameThread extends Throwable {
 
 			Item[] shopItems = { wList.ironSword, wList.waterTome, wList.bow5, wList.bow6, wList.bigSword, wList.bigAxe,
 					wList.knightSpear, wList.elecAxe, wList.bDragAxe, wList.spikeFist, wList.strVirt, wList.bloodClaws,
-					wList.ironHeartAmulet, wList.titansGauntlet, wList.colossusRing, wList.forceWand };
+					wList.ironHeartAmulet, wList.titansGauntlet, wList.colossusRing, wList.forceWand, 
+					chapter2Health, chapter2Mana, chapter2Poison, speed, damageBoost};
 			shopkeeperCh2.getInventory().addMulti(shopItems);
 
 			// Create the shop
@@ -3012,7 +3064,7 @@ public class GameThread extends Throwable {
 
 			Item[] shopItems = { wList.cloudburst, wList.stalSpear, wList.onyxSword, wList.floatingSword,
 					wList.lionFist, wList.coffinClub, wList.flashpoint, wList.rubyCatalyst, wList.celestialRing,
-					wList.crimsonPrism, wList.eqStaff };
+					wList.crimsonPrism, wList.eqStaff, chapter3Health, chapter3Mana, chapter3Poison, speed, damageBoost };
 			shopkeeperCh3.getInventory().addMulti(shopItems);
 
 			String shopNameCh3 = "Kingsly, the Town's 3rd Shop";
@@ -3062,7 +3114,7 @@ public class GameThread extends Throwable {
 
 			Item[] shopItems = { wList.requiem, wList.severance, wList.trickBlade, wList.graceGlory, wList.luBuSpear,
 					wList.kingOath, wList.hellsFuryRing, wList.celestialCurseShard, wList.abyssalAmethest,
-					wList.tsunamiScroll, wList.bow10 };
+					wList.tsunamiScroll, wList.bow10, chapter4Health, chapter4Mana, chapter4Poison, speed, damageBoost};
 			shopkeeperCh4.getInventory().addMulti(shopItems);
 			Shop ch4Shop = new Shop(player, shopkeeperCh4, shopNameCh4);
 
