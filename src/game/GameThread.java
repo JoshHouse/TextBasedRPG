@@ -398,7 +398,7 @@ public class GameThread extends Throwable {
 		int txtSpd = 25;
 		int wait = 1000;
 		char choice;
-		boolean validChoice = false;
+		boolean makingChoice = false;
 
 		Dialogue.infoDialogue(
 				"You are led through the grand halls of the castle, every step echoing off the polished marble floors. "
@@ -421,39 +421,49 @@ public class GameThread extends Throwable {
 						+ ", and let me see the face of this promising adventurer.\n",
 				txtSpd);
 		Pause.pause(wait);
-
-		// Player response choices
-		Dialogue.characterDialogue("King Mightus",
-				"How do you respond?\n" + "1) (Nervously) Y-Your Majesty… I… It’s an honor… I mean… I’m speechless!\n"
-						+ "2) (Confidently) Your Majesty, I’m honored to stand before you.\n"
-						+ "3) (Awkwardly) Uh… Hi? This is all a bit overwhelming...\n",
-				txtSpd);
-
-		choice = keyboard.next().charAt(0);
-		breakLine();
-
-		if (choice == '1') { // Nervous Response
-			Dialogue.characterDialogue(player.getName(),
-					"(Nervously) Y-Your Majesty… I… It’s an honor… I mean… I’m speechless!\n", txtSpd);
+		makingChoice = true;
+		while(makingChoice) {
+			// Player response choices
 			Dialogue.characterDialogue("King Mightus",
-					"Your nervousness speaks to your humility. It is not every day one stands before royalty, I understand.\n",
+					"How do you respond?\n" + "1) (Nervously) Y-Your Majesty… I… It’s an honor… I mean… I’m speechless!\n"
+							+ "2) (Confidently) Your Majesty, I’m honored to stand before you.\n"
+							+ "3) (Awkwardly) Uh… Hi? This is all a bit overwhelming...\n",
 					txtSpd);
-		} else if (choice == '2') { // Confident Response
-			Dialogue.characterDialogue(player.getName(), "(Confidently) Your Majesty, I’m honored to stand before you.\n",
-					txtSpd);
-			Dialogue.characterDialogue("King Mightus",
-					"A confident reply—good. Confidence, tempered with humility, will serve you well in this mission.\n",
-					txtSpd);
-		} else if (choice == '3') { // Awkward Response
-			Dialogue.characterDialogue(player.getName(), "(Awkwardly) Uh… Hi? This is all a bit overwhelming...\n",
-					txtSpd);
-			Dialogue.characterDialogue("King Mightus",
-					"An honest reaction. Overwhelming, perhaps, but clarity of purpose will guide you forward.\n",
-					txtSpd);
-		} else {
-			Dialogue.infoDialogue("Invalid response. The King awaits your proper reply.\n", txtSpd);
-			return false; // Exit if invalid choice
+
+			choice = keyboard.next().charAt(0);
+			breakLine();
+			
+			switch (choice) {
+			case '1':// Nervous Response
+				Dialogue.characterDialogue(player.getName(),
+						"(Nervously) Y-Your Majesty… I… It’s an honor… I mean… I’m speechless!\n", txtSpd);
+				Dialogue.characterDialogue("King Mightus",
+						"Your nervousness speaks to your humility. It is not every day one stands before royalty, I understand.\n",
+						txtSpd);
+				makingChoice = false;
+				break;
+			case '2': // Confident Response
+				Dialogue.characterDialogue(player.getName(), "(Confidently) Your Majesty, I’m honored to stand before you.\n",
+						txtSpd);
+				Dialogue.characterDialogue("King Mightus",
+						"A confident reply—good. Confidence, tempered with humility, will serve you well in this mission.\n",
+						txtSpd);
+				makingChoice = false;
+				break;
+			case '3': // Awkward Response
+				Dialogue.characterDialogue(player.getName(), "(Awkwardly) Uh… Hi? This is all a bit overwhelming...\n",
+						txtSpd);
+				Dialogue.characterDialogue("King Mightus",
+						"An honest reaction. Overwhelming, perhaps, but clarity of purpose will guide you forward.\n",
+						txtSpd);
+				makingChoice = false;
+				break;
+			default:
+				Dialogue.infoDialogue("Invalid response. The King awaits your proper reply.\n", txtSpd);
+				break;
+			}
 		}
+		
 
 		Dialogue.characterDialogue("King Mightus",
 				"I have summoned you for a mission that requires great courage and skill.\n", txtSpd);
