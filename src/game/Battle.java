@@ -17,6 +17,7 @@ public class Battle {
 	private int playerWeaponDamage;
 	private double playerSpAtkMulti;
 	private int txtSpd = 15;
+	private int calculatedLuckLvlEffect;
 
 	// ----------------------------------Constructor---------------------------------
 
@@ -86,6 +87,10 @@ public class Battle {
 	public double getPlayerSpAtkMulti() {
 		return this.playerSpAtkMulti;
 	}
+	
+	public int getCalculatedLuckLvlEffect() {
+		return this.calculatedLuckLvlEffect;
+	}
 
 	// ----------------------------------Setters---------------------------------
 
@@ -131,6 +136,10 @@ public class Battle {
 
 	public void setPlayerSpAtkMulti(double inputPlayerSpAtkMulti) {
 		this.playerSpAtkMulti = inputPlayerSpAtkMulti;
+	}
+	
+	public void setCalculatedLuckLvlEffect(int inputCalculatedLuckLvlEffect) {
+		this.calculatedLuckLvlEffect = inputCalculatedLuckLvlEffect;
 	}
 
 //----------------------------------Functions---------------------------------
@@ -211,9 +220,9 @@ public class Battle {
 			Dialogue.infoDialogue("Enemy health:" + enemy.getCurrHP() + "\n", txtSpd);
 		}
 
-		if (enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(40)) {
+		if (enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(40 - this.getCalculatedLuckLvlEffect())) {
 			// Special Attack Functionality
-			if (enemy.getSpecialAttack().useSpAtk(70)) {
+			if (enemy.getSpecialAttack().useSpAtk(70 - this.getCalculatedLuckLvlEffect())) {
 				if (guardedTurn > 0) {
 					player.setCurrHP((int) (player.getCurrHP()
 							- ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2)));
@@ -328,16 +337,16 @@ public class Battle {
 			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
 		}
 
-		if (Luck.luckEvent(20)) {
+		if (Luck.luckEvent(20 - this.getCalculatedLuckLvlEffect())) {
 			Battle minionBattle = new Battle(this.getPlayer(), this.getMinion());
 			Dialogue.infoDialogue("One of Gilgemesh's children rushes into the battle aiming to protect it's father!",
 					txtSpd);
 			if (!minionBattle.startBattle(keyboard, false)) {
 				return false;
 			}
-		} else if (enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(30)) {
+		} else if (enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(30 - this.getCalculatedLuckLvlEffect())) {
 			// Special Attack Functionality
-			if (enemy.getSpecialAttack().useSpAtk(70)) {
+			if (enemy.getSpecialAttack().useSpAtk(70 - this.getCalculatedLuckLvlEffect())) {
 				if (guardedTurn > 0) {
 					player.setCurrHP((int) (player.getCurrHP()
 							- ((enemy.getDamage() * enemy.getSpecialAttack().getAtkMultiplier()) / 2)));
@@ -562,7 +571,7 @@ public class Battle {
 
 		Dialogue.infoDialogue("You chose a Special Attack!\n", txtSpd);
 		if (player.getInventory().getSpecialArrows() > 0) {
-			if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
+			if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80 + this.getCalculatedLuckLvlEffect())) {
 				enemy.setCurrHP((int) (enemy.getCurrHP()
 						- (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5)));
 				Dialogue.infoDialogue("You did "
@@ -638,7 +647,7 @@ public class Battle {
 		Dialogue.infoDialogue("You chose a special attack!\n", txtSpd);
 
 		if (player.getCurrMana() > player.getInventory().getEquipped().getManaUsage() * 1.2) {
-			if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
+			if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80 + this.getCalculatedLuckLvlEffect())) {
 				if (dbTurn > 0) {
 					enemy.setCurrHP((int) (enemy.getCurrHP()
 							- (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5)));
@@ -706,7 +715,7 @@ public class Battle {
 
 	private void defaultSpecialAttack() {
 		Dialogue.infoDialogue("You chose a special attack!\n", txtSpd);
-		if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80)) {
+		if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80 + this.getCalculatedLuckLvlEffect())) {
 			if (dbTurn > 0) {
 				enemy.setCurrHP((int) (enemy.getCurrHP()
 						- ((this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) * 1.5)));
@@ -881,6 +890,8 @@ public class Battle {
 		this.setPoisonDamage(0);
 		this.setPlayerWeaponDamage((int) this.getPlayer().getInventory().getEquipped().getDamage());
 		this.setPlayerSpAtkMulti(this.getPlayer().getInventory().getEquipped().getSpecialAttack().getAtkMultiplier());
+		this.setCalculatedLuckLvlEffect((this.getPlayer().getlvlLuck() - 1) * 2);
+		
 	}
 
 	private static boolean isNumeric(String str) {
