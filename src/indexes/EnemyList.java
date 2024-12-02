@@ -169,6 +169,9 @@ public class EnemyList {
 
 	// ---------------------ROGUE--------------------
 
+	public Enemy ravenBlade = new Enemy("Crazed Maniac", new Inventory(), 1000, 8000, 13, 2500, 400, 1, spAtkList.none,
+			"The man calling himself the \"Raven Blade\" lurches towards you awkwardly and unpredictably...");
+
 	// --------------------Chapter 4 Special Enemies--------------------
 
 	public Enemy dWar = new Enemy("Dragon Warrior", new Inventory(), 2000, 2000, 25, 1200, 150, 1, spAtkList.none,

@@ -540,6 +540,12 @@ public class SpAtkList {
 			"From the slits in its visor, the flame knights breathes forth a pale colored fire to burn you to cinders!",
 			"From the slits in its visor, the flame knights breathes forth nothing but smoke...", 2.35);
 
+	/** Special Attack - Night Slash */
+	public SpecialAttack nightSlash = new SpecialAttack("Night Slash",
+			"Allows the user to harness darkness itself to lash out in a deadly arc.",
+			"Darkness lunges forth slicing everything in it's path.",
+			"Darkness slashes outwards from the blade but was ineffective.", 2.5);
+
 	// --------------------Dragon Special Attacks--------------------
 	public SpecialAttack flameBreath = new SpecialAttack("Flame Breath",
 			"The dragon conjures the flames from deep within its throat and in one powerful blast covers a large area with rampaging flames!",

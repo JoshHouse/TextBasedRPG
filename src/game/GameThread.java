@@ -255,7 +255,7 @@ public class GameThread extends Throwable {
 							"1) Paris, King's Left Hand (Melee) \n" + 
 							"2) Elaris the Ranger (Ranger) \n"+ 
 							"3) Magnus the King's wizard (Mage) \n" + 
-							"4) (Rogue) \n", txtSpd);
+							"4) Fenric the advisor (Rogue) \n", txtSpd);
 					pChoice = keyboard.next().charAt(0);
 					switch (pChoice) {
 					case '1':
@@ -2663,150 +2663,150 @@ public class GameThread extends Throwable {
 	 */
 
 	public static boolean rogueChapter1(Player player, Scanner keyboard) {
-    boolean makingChoice = true;
-    boolean playerWon = false;
-    int txtSpd = 10, wait = 1000;
+		boolean makingChoice = true;
+		boolean playerWon = false;
+		int txtSpd = 10, wait = 1000;
 
-    breakLine();
-	Dialogue.infoDialogue(
-		"You step into the 'Black Veil Tavern,' the door creaking loudly as you push it open. Inside, the air is heavy with the smell of spilled beer and musky patrons. "
-		+ "The place is dimly lit, just a few candles flickering here and there. Groups of shady-looking people are scattered around, hunched over their drinks or arguing over a game of dice. "
-		+ "In the corner, a man strums an out of tune fiddle but no one seems to pay him any mind. Every so often, the room bursts into laughter at someone’s drunken antics.\n",
-		txtSpd
-	);
-	Pause.pause(wait);
-
-	Dialogue.infoDialogue(
-		"You make your way to the bar. Behind it, a big, gruff-looking bartender is polishing a glass, though it’s hard to tell if the rag he’s using is actually making it any cleaner. "
-		+ "He glances at you, his one good eye sizing you up. Nearby, a drunk guy wobbles dangerously on his stool, mumbling to himself about something no one can understand.\n",
-		txtSpd
-	);
-
-    Pause.pause(wait);
-
-    Dialogue.characterDialogue("Bartender",
-        "Ah, a fresh face. You’ve got the look of someone who’s seen their share of shadows. I hope you can back that up."
-        + "We don’t get many fools here who can hold their own. You’ll need this if you want to survive in these parts.\n",
-        txtSpd
-    );
-    Pause.pause(wait);
-
-    Dialogue.infoDialogue(
-        "The bartender reaches under the counter and pulls out a sleek dagger, its blade gleaming even in the dim tavern light.\n",
+		breakLine();
+		Dialogue.infoDialogue(
+			"You step into the 'Black Veil Tavern', the door creaking loudly as you push it open. Inside, the air is heavy with the smell of spilled beer and musky patrons. "
+			+ "The place is dimly lit, just a few candles flickering here and there. Groups of shady-looking people are scattered around, hunched over their drinks or arguing over a game of dice. "
+			+ "In the corner, a man strums an out of tune fiddle but no one seems to pay him any mind. Every so often, the room bursts into laughter at someone’s drunken antics.\n",
 			txtSpd
-    );
-    Pause.pause(wait);
+		);
+		Pause.pause(wait);
 
-    player.getInventory().add(wList.starterDagger);
-    Dialogue.infoDialogue("A starter dagger has been added to your inventory!\n", txtSpd);
-    player.getInventory().getWeaponOnKey(wList.starterDagger.getKey()).displayInfo();
+		Dialogue.infoDialogue(
+			"You make your way to the bar. Behind it, a big, gruff-looking bartender is polishing a glass, though it’s hard to tell if the rag he’s using is actually making it any cleaner. "
+			+ "He glances at you, his one good eye sizing you up. Nearby, a drunk guy wobbles dangerously on his stool, mumbling to himself about something no one can understand.\n",
+			txtSpd
+		);
 
-    Dialogue.characterDialogue("Bartender",
-        "Now, keep your wits about you. This place has its share of trouble, and not everyone knows when to leave well enough alone.\n",
-        txtSpd
-    );
-    Pause.pause(wait);
+		Pause.pause(wait);
 
-    Dialogue.infoDialogue(
-        "As the bartender finishes his sentence, the drunkard nearby lurches to his feet. His glass tumbles to the floor, shattering. "
-        + "He stumbles toward you, his bloodshot eyes narrowing as he sways unsteadily.\n",
-        txtSpd
-    );
-    Pause.pause(wait);
+		Dialogue.characterDialogue("Barkeep",
+			"Ah, a fresh face. You’ve got the look of someone who’s seen their share of shadows. I hope you can back that up."
+			+ "We don’t get many fools here who can hold their own. You’ll need this if you want to survive in these parts.\n",
+			txtSpd
+		);
+		Pause.pause(wait);
 
-    Dialogue.characterDialogue("Drunkard",
-        "You! Fancy-lookin’ rogue! You think you’re better than me? Hah! Let’s see how tough you really are!\n",
-        txtSpd
-    );
-    Pause.pause(wait);
+		Dialogue.infoDialogue(
+			"The bartender reaches under the counter and pulls out a sleek dagger, its blade gleaming even in the dim tavern light.\n",
+				txtSpd
+		);
+		Pause.pause(wait);
 
-    Dialogue.infoDialogue(
-        "The drunkard swings wildly at you, his fists clenched. The bartender sighs and steps back, clearly unimpressed.\n",
-        txtSpd
-    );
-    Pause.pause(wait);
+		player.getInventory().add(wList.starterDagger);
+		Dialogue.infoDialogue("A starter dagger has been added to your inventory!\n", txtSpd);
+		player.getInventory().getWeaponOnKey(wList.starterDagger.getKey()).displayInfo();
 
-    Dialogue.characterDialogue("Bartender",
-        "Well, don’t just stand there. Deal with him before he wrecks more of my place. Consider it your first test.\n",
-        txtSpd
-    );
+		Dialogue.characterDialogue("Barkeep",
+			"Now, keep your wits about you. This place has its share of trouble, and not everyone knows when to leave well enough alone.\n",
+			txtSpd
+		);
+		Pause.pause(wait);
 
-    Battle tutorialBattle = new Battle(player, eList.drunkard);
+		Dialogue.infoDialogue(
+			"As the bartender finishes his sentence, the drunkard nearby lurches to his feet. His glass tumbles to the floor, shattering. "
+			+ "He stumbles toward you, his bloodshot eyes narrowing as he sways unsteadily.\n",
+			txtSpd
+		);
+		Pause.pause(wait);
 
-    while (!playerWon) {
-        playerWon = tutorialBattle.startBattle(keyboard, true);
-        if (!playerWon) {
-            player.setCurrHP(player.getHealth());
-            tutorialBattle.getEnemy().setCurrHP(tutorialBattle.getEnemy().getHealth());
-            tutorialBattle.setTurn(0);
-            Dialogue.characterDialogue("Bartender",
-                "Come on, kid. I gave you the tools; now show me you know how to use them.",
-                txtSpd
-            );
-        }
-    }
+		Dialogue.characterDialogue("Drunkard",
+			"You! Fancy-lookin’ rogue! You think you’re better than me? Hah! Let’s see how tough you really are!\n",
+			txtSpd
+		);
+		Pause.pause(wait);
 
-    breakLine();
-    Dialogue.characterDialogue("Bartender",
-        "Not bad, kid. You’ve got some potential. That idiot won’t be bothering anyone for a while. Now listen closely.\n",
-        txtSpd
-    );
-    Pause.pause(wait);
+		Dialogue.infoDialogue(
+			"The drunkard swings wildly at you, his fists clenched. The bartender sighs and steps back, clearly unimpressed.\n",
+			txtSpd
+		);
+		Pause.pause(wait);
 
-    Dialogue.characterDialogue("Bartender",
-        "If you’re serious about making a name for yourself, head to the castle. The King’s always looking for skilled adventurers. "
-        + "You might even pick up some decent coin. And if you live to tell the tale, come back here. There’s always work for a rogue who knows their way around trouble.\n",
-        txtSpd
-    );
-    Pause.pause(wait);
+		Dialogue.characterDialogue("Barkeep",
+			"Well, don’t just stand there. Deal with him before he wrecks more of my place. Consider it your first test.\n",
+			txtSpd
+		);
 
-    Dialogue.infoDialogue(
-        "(As you battle enemies during your adventure, you will earn EXP after defeating them, the amount varying "
-        + "from enemy to enemy. Once you gain enough EXP, you will level up. Your stats will increase, "
-        + "and you will receive a skill point to spend on one of the class stats, or your luck stat. "
-        + "You can view your overall level, the level of each stat, how much EXP you need to level up again, "
-        + "and how many skill points you have available to spend all from your profile after the tutorial.)\n\n",
-        txtSpd
-    );
+		Battle tutorialBattle = new Battle(player, eList.drunkard);
 
-    while (makingChoice) {
-        breakLine();
-        Dialogue.characterDialogue("Bartender",
-            "1) Thanks for the advice. I’ll head to the castle.\n"
-            + "2) I’ll stick around. Might be more opportunities here.\n",
-            txtSpd
-        );
-        char pChoice = keyboard.next().charAt(0);
+		while (!playerWon) {
+			playerWon = tutorialBattle.startBattle(keyboard, true);
+			if (!playerWon) {
+				player.setCurrHP(player.getHealth());
+				tutorialBattle.getEnemy().setCurrHP(tutorialBattle.getEnemy().getHealth());
+				tutorialBattle.setTurn(0);
+				Dialogue.characterDialogue("Bartender",
+					"Come on, kid. I gave you the tools; now show me you know how to use them.",
+					txtSpd
+				);
+			}
+		}
 
-        switch (pChoice) {
-            case '1':
-                breakLine();
-                Dialogue.characterDialogue(player.getName(),
-                    "Thanks for the advice. I’ll head to the castle.\n",
-                    txtSpd
-                );
-                Pause.pause(wait);
-                makingChoice = false;
-                break;
+		breakLine();
+		Dialogue.characterDialogue("Barkeep",
+			"Not bad, kid. You’ve got some potential. That idiot won’t be bothering anyone for a while. Now listen closely.\n",
+			txtSpd
+		);
+		Pause.pause(wait);
 
-            case '2':
-                breakLine();
-                Dialogue.characterDialogue(player.getName(),
-                    "I’ll stick around. Might be more opportunities here.\n",
-                    txtSpd
-                );
-                Pause.pause(wait);
-                makingChoice = false;
-                break;
+		Dialogue.characterDialogue("Barkeep",
+			"If you’re serious about making a name for yourself, head to the castle. The King’s always looking for skilled adventurers. "
+			+ "You might even pick up some decent coin. And if you live to tell the tale, come back here. There’s always work for a rogue who knows their way around trouble.\n",
+			txtSpd
+		);
+		Pause.pause(wait);
 
-            default:
-                Dialogue.infoDialogue("(Invalid choice. Please try again)\n", txtSpd);
-                break;
-        }
-    }
+		Dialogue.infoDialogue(
+			"(As you battle enemies during your adventure, you will earn EXP after defeating them, the amount varying "
+			+ "from enemy to enemy. Once you gain enough EXP, you will level up. Your stats will increase, "
+			+ "and you will receive a skill point to spend on one of the class stats, or your luck stat. "
+			+ "You can view your overall level, the level of each stat, how much EXP you need to level up again, "
+			+ "and how many skill points you have available to spend all from your profile after the tutorial.)\n\n",
+			txtSpd
+		);
 
-    return true;
-}
+		while (makingChoice) {
+			breakLine();
+			Dialogue.characterDialogue("Barkeep",
+				"1) Thanks for the advice. I’ll head to the castle.\n"
+				+ "2) I’ll stick around. Might be more opportunities here.\n",
+				txtSpd
+			);
+			char pChoice = keyboard.next().charAt(0);
+
+			switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(player.getName(),
+						"Thanks for the advice. I’ll head to the castle.\n",
+						txtSpd
+					);
+					Pause.pause(wait);
+					makingChoice = false;
+					break;
+
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(player.getName(),
+						"I’ll stick around. Might be more opportunities here.\n",
+						txtSpd
+					);
+					Pause.pause(wait);
+					makingChoice = false;
+					break;
+
+				default:
+					Dialogue.infoDialogue("(Invalid choice. Please try again)\n", txtSpd);
+					break;
+			}
+		}
+
+    	return true;
+	}
 
 
 	/*
@@ -2814,8 +2814,146 @@ public class GameThread extends Throwable {
 	 */
 
 	public static boolean rogueSpecialMission(Player player, Scanner keyboard) {
+		boolean makingChoice = true;
+		boolean playerSucceeded;
+		int txtSpd = 10, wait = 1000;
+		String pName = player.getName();
+
+		breakLine();
+		Dialogue.infoDialogue(
+				"As you approach, confusion sets in, your eyes must be deceiving you, right...? "
+						+ "The bartender from the 'Black Veil Tavern' greets you with a beaming smile.\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue("Barkeep?",
+				"Well come on now, don't look so surprised! A guy like me can't be on the king's court?. "
+						+ "The name's Fenric and I AM the king's advisor, there are no laws against owning a bar, in case you were wondering. HAHAHA"
+						+ "Besides, I like like keeping my ear close to the ground.\n",
+				txtSpd);
+		Pause.pause(wait);
+
+		Dialogue.characterDialogue("Fenric, King's Advisor and Barkeep",
+				"There’s a guy down in the undercity tunnels, calls himself the ‘Ravenblade'. "
+						+ "He’s been stealing from guild shipments and had quite a few run-ins the king's guard. Word is, he’s hiding out in the old sewer tunnels. "
+						+ "Everyone wants him gone, but no one wants to handle it. That's where you come in. I told them you might be the type to take care of business. What do you say?\n",
+				txtSpd);
+
+		while (makingChoice) {
+			Dialogue.characterDialogue("Fenric, King's Advisor and Barkeep",
+					"1) I’m in. Where do I find him?\n"
+							+ "2) What’s in it for me?\n",
+					txtSpd);
+			char pChoice = keyboard.next().charAt(0);
+
+			switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.characterDialogue(pName,
+							"I’m in. Where do I find him?\n",
+							txtSpd);
+					Pause.pause(wait);
+					makingChoice = false;
+					break;
+
+				case '2':
+					breakLine();
+					Dialogue.characterDialogue(pName,
+							"What’s in it for me?\n",
+							txtSpd);
+					Pause.pause(wait);
+					Dialogue.characterDialogue("Fenric, King's Advisor and Barkeep",
+							"Aside from the coin lining the fools pockets? I heard he may have a rare weapon that I'm sure no one would be missing if you catch my drift. "
+									+ "People will think twice before crossing you. So, you in or not?\n",
+							txtSpd);
+					break;
+
+				default:
+					Dialogue.infoDialogue("(Invalid choice. Try again.)\n", txtSpd);
+					break;
+			}
+		}
+
+		Dialogue.characterDialogue("Fenric, King's Advisor and Barkeep",
+				"He’s holed up in the sewer tunnels. You’ll find the entrance near the old market district. Be careful, this one's no joke. "
+						+ "I heard that the guy’s completely lost it... Good luck. Oh, and if you survive, your next drink’s on me.\n",
+				txtSpd);
+
+		Dialogue.infoDialogue(
+				"You make your way to the undercity, the air gets damp and foul as you near the sewer entrance. "
+						+ "The sound of dripping water echoes around you as you step inside. It’s dark, and the smell is awful, but you’ve dealt with worse.\n",
+				txtSpd);
+
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.infoDialogue(
+					"You see two paths ahead:\n"
+							+ "1) Sneak through the shadows and avoid detection.\n"
+							+ "2) Set off a diversion to draw out some of his lackeys.\n",
+					txtSpd);
+			char pChoice = keyboard.next().charAt(0);
+
+			switch (pChoice) {
+				case '1':
+					breakLine();
+					Dialogue.infoDialogue(
+							"You stick to the shadows, moving silently. The flicker of torchlight gives you just enough visibility to dodge patrols. "
+									+ "You make it deeper into the tunnels without raising the alarm.\n",
+							txtSpd);
+					makingChoice = false;
+					break;
+
+				case '2':
+					breakLine();
+					Dialogue.infoDialogue(
+							"You knock over a stack of crates, sending them crashing to the ground. The noise draws a few guards away from the main area, leaving their posts unguarded. "
+									+ "You slip past while they investigate.\n",
+							txtSpd);
+					makingChoice = false;
+					break;
+
+				default:
+					Dialogue.infoDialogue("(Invalid choice. Try again.)\n", txtSpd);
+					break;
+			}
+		}
+
+		Dialogue.infoDialogue(
+				"You reach the main chamber. The \"Ravenblade\" stands at the center, sharpening his weapon. He looks up, his eyes narrowing as he spots you.\n",
+				txtSpd);
+
+		Dialogue.characterDialogue("Crazed Maniac",
+				"Who dares approach darkness?! I will show you the way! The truth of it all! Ahaha heeehehehehe\n",
+				txtSpd);
+
+		Dialogue.infoDialogue(
+				"He brandishes his black, curved blade with a toothy grin.\n",
+				txtSpd);
+
+		Battle ravenbladeFight = new Battle(player, eList.ravenBlade);
+		playerSucceeded = ravenbladeFight.startBattle(keyboard, true);
+
+		if (!playerSucceeded) {
+			Dialogue.infoDialogue("The lunatic was too much for you. Better luck next time.\n", txtSpd);
+			return false;
+		}
+
+		Dialogue.infoDialogue(
+				"The maniac collapses, his weapon falling to the ground. You feel a sense of triumph wash over you. "
+						+ "You take a moment to catch your breath before grabbing his weapon and coin purse.\n",
+				txtSpd);
+
+		player.getInventory().add(wList.ravenBlade);
+		Dialogue.infoDialogue("You’ve received the Raven Blade!\n", txtSpd);
+
+		Dialogue.characterDialogue("Fenric, King's Advisor and Barkeep",
+				"You’re back, and alive. That’s more than I expected, honestly. The king's happy and the guild’s happy, well done. "
+						+ "Word of what happened is already spreading across town. Drinks are on me, at least for tonight.\n",
+				txtSpd);
+
 		return true;
 	}
+
 
 	/*
 	 * --------------------Chapter 4--------------------
@@ -2831,10 +2969,6 @@ public class GameThread extends Throwable {
 	 * Functionality------------------------------
 	 * 
 	 */
-
-	public static void BeginningGame(Player player, Scanner keyboard) {
-
-	}
 
 	/**
 	 * Takes and serializes Player object and stores it in a file to be reloaded

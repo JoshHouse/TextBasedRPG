@@ -152,7 +152,7 @@ public class WeaponList {
 
 	public Weapon starterDagger = new Weapon("r101", "Starter Dagger",
 			"A simple dagger, perfect for quick strikes and fending off wildlife.",
-			1, 20, 100, 4, false, 0, spAtk.basicSlash);
+			1, 20, 10000, 4, false, 0, spAtk.basicSlash);
 
 	public Weapon shurikenSet = new Weapon("r102", "Shuriken Set",
 			"Lightweight bladed stars designed for swift, ranged strikes from the shadows.",
@@ -528,6 +528,10 @@ public class WeaponList {
 	// ---------------------MAGE---------------------
 
 	// ---------------------ROGUE--------------------
+
+	public Weapon ravenBlade = new Weapon("r460", "Raven Blade",
+			"A shiny curved black blade appearing to made of Onyx or Obsidian, perhaps. It has an unsettling feel to it.", 3, 1666,
+			200, 4, true, spAtk.nightSlash);
 
 	// ----------------------------------------------------------------------------------------------------------------
 
