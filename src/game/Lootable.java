@@ -109,12 +109,12 @@ public class Lootable implements Serializable {
 	 * @param enemy
 	 * @param scn
 	 */
-	public void loot(Enemy enemy, Scanner scn) {
+	public void loot(Lootable lootable, Scanner scn) {
 
 		int speed = 10, // Dialogue box speed
 				arrlen; // array length
 		String printStr; // For dialogue function
-		Inventory items = enemy.getInventory(); // Inventory
+		Inventory items = lootable.getInventory(); // Inventory
 		Weapon selWep; // Selected weapon
 		Consumable selCon; // Selected consumable
 
@@ -134,7 +134,7 @@ public class Lootable implements Serializable {
 			}
 
 			// Choose what sub-menu to access
-			Dialogue.infoDialogue("Choose what to take from " + enemy.getName() + "\n", speed);
+			Dialogue.infoDialogue("Choose what to take from " + lootable.getName() + "\n", speed);
 			Dialogue.infoDialogue("1) Weapons\n2) Consumables\n3) Special Arrows\n4) Take All\n5) FinishSelect: ", speed);
 			menuInput = scn.next().charAt(0);
 			System.out.println();
@@ -148,10 +148,10 @@ public class Lootable implements Serializable {
 				lootConsumables = true;
 				break;
 			case '3': // Loot Special arrows
-				if (enemy.getInventory().getSpecialArrows() > 0) {
-					this.getInventory().setSpecialArrows(this.getInventory().getSpecialArrows() + enemy.getInventory().getSpecialArrows());
-					Dialogue.infoDialogue("You looted " + enemy.getInventory().getSpecialArrows() + " Special Arrows!\n", speed);
-					enemy.getInventory().setSpecialArrows(0);
+				if (lootable.getInventory().getSpecialArrows() > 0) {
+					this.getInventory().setSpecialArrows(this.getInventory().getSpecialArrows() + lootable.getInventory().getSpecialArrows());
+					Dialogue.infoDialogue("You looted " + lootable.getInventory().getSpecialArrows() + " Special Arrows!\n", speed);
+					lootable.getInventory().setSpecialArrows(0);
 					Dialogue.infoDialogue("Your new Special Arrow count is: " + this.getInventory().getSpecialArrows() + "\n", speed);
 				}
 				break;
@@ -179,7 +179,7 @@ public class Lootable implements Serializable {
 				}
 
 				// Print all the weapons the enemy has in their inventory
-				Dialogue.infoDialogue(enemy.getName() + "'s Weapons\n------------------------------\n\n", speed);
+				Dialogue.infoDialogue(lootable.getName() + "'s Weapons\n------------------------------\n\n", speed);
 
 				for (int i = 0; i < arrlen; i++) {
 
@@ -255,7 +255,7 @@ public class Lootable implements Serializable {
 				}
 
 				// Print all the consumables the enemy has in their inventory
-				Dialogue.infoDialogue(enemy.getName() + "'s Consumables\n------------------------------\n\n", speed);
+				Dialogue.infoDialogue(lootable.getName() + "'s Consumables\n------------------------------\n\n", speed);
 
 				for (int i = 0; i < arrlen; i++) {
 
@@ -347,9 +347,9 @@ public class Lootable implements Serializable {
 
 				}
 				
-				if (enemy.getInventory().getSpecialArrows() > 0) {
-					this.getInventory().setSpecialArrows(this.getInventory().getSpecialArrows() + enemy.getInventory().getSpecialArrows());
-					enemy.getInventory().setSpecialArrows(0);
+				if (lootable.getInventory().getSpecialArrows() > 0) {
+					this.getInventory().setSpecialArrows(this.getInventory().getSpecialArrows() + lootable.getInventory().getSpecialArrows());
+					lootable.getInventory().setSpecialArrows(0);
 				}
 				// There's no more items left to take, so these are set to false to exit the
 				// loot function

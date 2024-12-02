@@ -2314,10 +2314,12 @@ public class GameThread extends Throwable {
 
 			switch (pChoice) {
 			case '1':
+				Lootable body = new Lootable("Gerald the Fallen Wizard", new Inventory(), 500);
+				Item[] bodyItems = {wList.tornadoStaff, cList.speed, cList.chapter3Mana};
+				body.getInventory().addMulti(bodyItems);
+				
 				breakLine();
-				/*
-				 * Loot functionality
-				 */
+				player.loot(body, keyboard);
 				makingChoice = false;
 				break;
 
@@ -2398,9 +2400,7 @@ public class GameThread extends Throwable {
 
 			case '2':
 				breakLine();
-				/*
-				 * Inventory Management functionality
-				 */
+				player.selectMainhandWeapon(keyboard);
 				Dialogue.infoDialogue("*Having prepared for the fight, you appear from behind the boulder, ready "
 						+ "for your toughest fight yet!*\n", txtSpd);
 				makingChoice = false;
@@ -2432,15 +2432,16 @@ public class GameThread extends Throwable {
 
 		makingChoice = true;
 		while (makingChoice) {
-			Dialogue.infoDialogue("What do you do?\\n\n" + "1) Loot the chest\\n\n" + "2) Leave\n", txtSpd);
+			Dialogue.infoDialogue("What do you do?\n" + "1) Loot the chest\n" + "2) Leave\n", txtSpd);
 			pChoice = keyboard.next().charAt(0);
 
 			switch (pChoice) {
 			case '1':
+				Lootable chest = new Lootable("Fire Wizard's Chest", new Inventory(), 1000);
+				Item[] chestInv = {cList.chapter4Health, cList.chapter4Mana, cList.chapter4Poison, 
+						cList.speed, cList.damageBoost, wList.floodStaff};
 				breakLine();
-				/*
-				 * Loot functionality
-				 */
+				player.loot(chest, keyboard);
 				makingChoice = false;
 				break;
 

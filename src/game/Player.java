@@ -453,7 +453,7 @@ public class Player extends GameChar {
 				break;
 			case '4':
 				this.lvlMage++;
-				this.setMana(this.getMana() + 30);
+				this.setMana(this.getMana() + 20);
 				this.sklPt--;
 				break;
 			case '5':
