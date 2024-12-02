@@ -918,19 +918,20 @@ public class Battle {
 	 *               menu.
 	 */
 	private void playerWins(Player player, Enemy enemy, Scanner scn) {
-
+		boolean didLoot;
 		player.setExp(player.getExp() + enemy.getExp());
-		player.setCurrency(player.getCurrency() + enemy.getCurrency());
 		Dialogue.infoDialogue("Received " + enemy.getExp() + " EXP!\n", 30);
 		Pause.pause(1000);
-		Dialogue.infoDialogue("Received " + enemy.getCurrency() + " Money!\n\n", 30);
-		Pause.pause(1000);
-
 		player.lvlUp();
 		Pause.pause(1000);
+		didLoot = player.loot(enemy, scn);
+		if (!didLoot) {
+			player.setCurrency(player.getCurrency() + enemy.getCurrency());
+			Dialogue.infoDialogue("Received " + enemy.getCurrency() + " currency!\n\n", 30);
+			Pause.pause(1000);
 
-		player.loot(enemy, scn);
-
+		}
+		
 	}
 
 }

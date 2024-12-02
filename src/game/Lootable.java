@@ -109,7 +109,7 @@ public class Lootable implements Serializable {
 	 * @param enemy
 	 * @param scn
 	 */
-	public void loot(Lootable lootable, Scanner scn) {
+	public boolean loot(Lootable lootable, Scanner scn) {
 
 		int speed = 10, // Dialogue box speed
 				arrlen; // array length
@@ -130,12 +130,12 @@ public class Lootable implements Serializable {
 
 			if (items.getWeapons().size() == 0 && items.getConsumables().size() == 0) {
 				isLooting = false;
-				return; // The enemy has no items to loot, so the function is exited
+				return false; // The enemy has no items to loot, so the function is exited
 			}
 
 			// Choose what sub-menu to access
 			Dialogue.infoDialogue("Choose what to take from " + lootable.getName() + "\n", speed);
-			Dialogue.infoDialogue("1) Weapons\n2) Consumables\n3) Special Arrows\n4) Take All\n5) FinishSelect: ", speed);
+			Dialogue.infoDialogue("1) Weapons\n2) Consumables\n3) Special Arrows\n4) Currency\n5) Take All\n6) Finish\nSelect: ", speed);
 			menuInput = scn.next().charAt(0);
 			System.out.println();
 
@@ -155,10 +155,19 @@ public class Lootable implements Serializable {
 					Dialogue.infoDialogue("Your new Special Arrow count is: " + this.getInventory().getSpecialArrows() + "\n", speed);
 				}
 				break;
-			case '4': // Loot everything
+			case '4':
+				if(lootable.getCurrency() != 0) {
+					this.setCurrency(this.getCurrency() + lootable.getCurrency());
+					Dialogue.infoDialogue("You looted: " + lootable.getCurrency() + " Currency!\n"
+							+ "Your updated Currency is: " + this.getCurrency() + "\n", speed);
+					lootable.setCurrency(0);
+				} else {
+					Dialogue.infoDialogue("There is no currency to loot!", speed);
+				}
+			case '5': // Loot everything
 				lootAll = true;
 				break;
-			case '5': // Leave loot function
+			case '6': // Leave loot function
 				isLooting = false;
 				break;
 			default: // Invalid input
@@ -351,6 +360,10 @@ public class Lootable implements Serializable {
 					this.getInventory().setSpecialArrows(this.getInventory().getSpecialArrows() + lootable.getInventory().getSpecialArrows());
 					lootable.getInventory().setSpecialArrows(0);
 				}
+				
+				if(lootable.getCurrency() != 0) {
+					this.setCurrency(this.getCurrency() + lootable.getCurrency());
+				}
 				// There's no more items left to take, so these are set to false to exit the
 				// loot function
 				lootAll = false;
@@ -359,6 +372,8 @@ public class Lootable implements Serializable {
 			}
 
 		}
+		
+		return true;
 
 	}
 
