@@ -119,7 +119,14 @@ public class Inventory implements Serializable {
 			this.getWeapons().add((Weapon) item);
 			break;
 		case 'c':
-			this.getConsumables().add((Consumable) item);
+			Consumable consItem = (Consumable) item;
+			for(int x = 0; x < this.getConsumables().size(); x++) {
+				if (this.getConsumables().get(x).equals(consItem)) {
+					this.getConsumables().get(x).setCount(this.getConsumables().get(x).getCount() + consItem.getCount());
+					return;
+				}
+			}
+			this.getConsumables().add(consItem);
 			break;
 		default:
 			System.err.println("Error: Item is corrupted. Cannot be added.");

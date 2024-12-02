@@ -198,7 +198,7 @@ public class Shop implements Serializable {
 			Dialogue.characterDialogue(this.getShopkeeper().getName(), "What are you in the market for today?\n" + 
 					"1) Weapons\n" + 
 					"2) Consumables\n" + 
-					"3) Special Arrows\n " +
+					"3) Special Arrows\n" +
 					"4) Cancel" + "\n", txtSpd);
 			pMainMenuChoice = scn.next().charAt(0);
 			

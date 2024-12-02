@@ -3065,7 +3065,7 @@ public class GameThread extends Throwable {
 
 			// Shopkeeper's text when you're in the shop
 			ArrayList<String> s2txt = new ArrayList<String>();
-			s2txt.add("New around here? That's fine, take yuor time having a good look around.");
+			s2txt.add("New around here? That's fine, take your time having a good look around.");
 			s2txt.add(
 					"Queensly's been around for a long time, you know. So we've got quite the vast collection of items.");
 			s2txt.add(
