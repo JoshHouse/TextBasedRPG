@@ -2920,9 +2920,9 @@ public class GameThread extends Throwable {
 				"Drink this potion to dramatically increase your speed! This will allow you to get 2 turns in battle!",
 				2, 500, 0, 1, true, 1, true, 's');
 		// DamageBoost
-		Consumable damageBoost = new Consumable("f740", "Potion of Swiftness",
+		Consumable damageBoost = new Consumable("f740", "Potion of Focused Strength",
 				"Drink this potion to dramatically increase your striking power! This will make you do 1.5x damage for the next 3 turns in battle!",
-				2, 1000, 0, 1, true, 1, true, 's');
+				2, 1000, 0, 1, true, 1, true, 'd');
 
 		
 		// Chapter 1
