@@ -737,6 +737,7 @@ public class Shop implements Serializable {
 			Dialogue.characterDialogue(this.getShopkeeper().getName(), "How many Special Arrows would you like to buy? They "
 					+ "are worth 10 currency a piece. \n", txtSpd);
 			Dialogue.infoDialogue("You currently have " + player.getCurrency() + " currency.\n", txtSpd);
+			Dialogue.infoDialogue("*Tip: Enter 0 to cancel*\n", txtSpd);
 			spArrowCount = scn.next();
 			if (isNumeric(spArrowCount)) {
 				selection = Integer.parseInt(spArrowCount);
@@ -757,6 +758,10 @@ public class Shop implements Serializable {
 					Dialogue.infoDialogue("Your Currency is: " + player.getCurrency() + "\n", txtSpd);
 					Dialogue.infoDialogue("It would cost " + (selection * 10) + " currency to buy that many arrows.\n", txtSpd);
 				}
+			} else if (selection == 0) {
+				buyingSpecialArrows = false;
+			} else {
+				System.err.println("(Invalid choice. Please try again)");
 			}
 		}
 		
