@@ -1861,8 +1861,133 @@ public class GameThread extends Throwable {
 	 */
 
 	public static boolean rangedDragonApproach(Player player, Scanner keyboard) {
-		return true;
+	    String npcName = "Elaris the Ranger";
+	    int txtSpd = 25, wait = 1000;
+	    Battle trollFight = new Battle(player, eList.troll);
+	    boolean isResponding;
+	    int pChoice;
+
+	    // Elaris Introduction
+	    Dialogue.characterDialogue(npcName,
+	            "So, you wish to face Gilgemesh, the dragon who has terrorized our kingdom for decades? Few have dared, and none\n"
+	                    + "have returned alive. Are you certain this is the path you wish to take?", txtSpd);
+	    breakLine();
+
+	    // 1st Player Response
+	    isResponding = true;
+	    while (isResponding) {
+	        Dialogue.characterDialogue(npcName,
+	                "How do you respond?\n" + "1) I’ve come too far to turn back now.\n"
+	                        + "2) I need more time to think this over.",
+	                txtSpd);
+	        pChoice = keyboard.next().charAt(0);
+	        switch (pChoice) {
+	            case '1':
+	                Dialogue.characterDialogue(player.getName(), "I’ve come too far to turn back now.", txtSpd);
+	                Dialogue.characterDialogue(npcName, "Brave words. You’ll need that courage where you’re headed.", txtSpd);
+	                isResponding = false;
+	                break;
+	            case '2':
+	                Dialogue.characterDialogue(player.getName(), "I need more time to think this over.", txtSpd);
+	                Dialogue.characterDialogue(npcName,
+	                        "A wise decision. If you change your mind, return to me. The path will not change, but your resolve might.",
+	                        txtSpd);
+	                return false;
+	            default:
+	                Dialogue.infoDialogue("(Invalid choice. Please try again)", txtSpd);
+	                break;
+	        }
+	        breakLine();
+	    }
+
+	    Pause.pause(wait);
+
+	    // Information About Gilgemesh
+	    Dialogue.characterDialogue(npcName,
+	            "Listen closely, for you’ll need every advantage you can muster. Gilgemesh is no ordinary dragon. His scales\n"
+	                    + "are harder than steel, deflecting all but the most precise arrows. His claws cleave through shields, and his\n"
+	                    + "fire engulfs everything in its path.", txtSpd);
+	    Pause.pause(wait);
+	    Dialogue.characterDialogue(npcName,
+	            "What’s worse, his offspring—smaller dragons, though no less dangerous—might join the fight if they sense his distress.\n"
+	                    + "And the path itself is no less treacherous, riddled with trolls eager to stop you before you even see Gilgemesh.",
+	            txtSpd);
+	    breakLine();
+
+	    // 2nd Player Response
+	    isResponding = true;
+	    while (isResponding) {
+	        Dialogue.characterDialogue(npcName,
+	                "How do you respond?\n" + "1) I’m ready. How do I reach Gilgemesh?\n"
+	                        + "2) This sounds overwhelming. I need time to prepare.",
+	                txtSpd);
+	        pChoice = keyboard.next().charAt(0);
+	        switch (pChoice) {
+	            case '1':
+	                Dialogue.characterDialogue(player.getName(), "I’m ready. How do I reach Gilgemesh?", txtSpd);
+	                Dialogue.characterDialogue(npcName, "Very well. Let me guide you to your destiny.", txtSpd);
+	                isResponding = false;
+	                break;
+	            case '2':
+	                Dialogue.characterDialogue(player.getName(), "This sounds overwhelming. I need time to prepare.", txtSpd);
+	                Dialogue.characterDialogue(npcName,
+	                        "Take all the time you need. A rushed mission leads only to ruin.", txtSpd);
+	                return false;
+	            default:
+	                Dialogue.infoDialogue("(Invalid choice. Please try again)", txtSpd);
+	                break;
+	        }
+	        breakLine();
+	    }
+
+	    Pause.pause(wait);
+
+	    // Directions to Mount Doom
+	    Dialogue.characterDialogue(npcName,
+	            "To reach Gilgemesh, head west from the main gate of the castle. Mount Doom will dominate the horizon.", txtSpd);
+	    Dialogue.characterDialogue(npcName,
+	            "Follow the path at the mountain’s base—it will lead you through troll territory and, eventually, to the dragon’s lair.",
+	            txtSpd);
+	    Dialogue.characterDialogue(npcName,
+	            "Be vigilant, " + player.getName() + ". Your skill with the bow will determine not just your success but your survival.",
+	            txtSpd);
+	    breakLine();
+
+	    Pause.pause(wait);
+
+	    // Begin Journey
+	    Dialogue.infoDialogue("*With Elaris’s guidance, you set out toward Mount Doom. The mountain looms ahead, its jagged cliffs a stark reminder of the dangers awaiting you.*", txtSpd);
+	    Pause.pause(wait);
+
+	    // Troll Battle 1
+	    Dialogue.infoDialogue("*As you ascend, the first troll appears, blocking your path. It lets out a guttural roar and charges at you. You nock an arrow, preparing for battle!*", txtSpd);
+	    breakLine();
+	    if (!trollFight.startBattle(keyboard, true)) {
+	        return false; // Player lost the battle
+	    }
+
+	    Pause.pause(wait);
+
+	    // Troll Battle 2
+	    Dialogue.infoDialogue("*With the first troll defeated, you press on. The path becomes steeper, and the air grows colder. Suddenly, another troll ambushes you. You ready your bow once more!*", txtSpd);
+	    breakLine();
+	    if (!trollFight.startBattle(keyboard, true)) {
+	        return false; // Player lost the battle
+	    }
+
+	    Pause.pause(wait);
+
+	    // Encounter with Gilgemesh
+	    Dialogue.infoDialogue("*Finally, you reach the summit of Mount Doom. The ground trembles beneath your feet as a deafening roar echoes across the peak.*", txtSpd);
+	    Dialogue.infoDialogue("*Gilgemesh emerges from his lair, his massive wings spreading wide as flames escape his maw with every breath.*", txtSpd);
+	    Dialogue.infoDialogue("*The dragon’s piercing gaze locks onto you, and you feel the full weight of his presence. This is it. The battle of your life begins.*", txtSpd);
+
+	    breakLine();
+
+	    return true;
 	}
+
+
 
 	/*
 	 * 
