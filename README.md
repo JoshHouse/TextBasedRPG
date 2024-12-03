@@ -2,35 +2,39 @@
 Text-Based RPG
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Our Text-Based RPG is an offline singleplayer experience where you play as an adventurer exploring a medieval world with magical beasts, warriors, and dragons to defeat! You can choose to follow different class paths to visit different locations and retrieve different class-specific items. You can follow the melee class and learn the ways of warriors, the ranged class and learn the ways of archers, the mage class and learn the ways of wizards, or the rogue class and learn the ways of thieves. Once complied into a runnable .jar file, it can be played in the terminal using number inputs to choose paths to go down. All data is saved locally on your computer so no internet is needed. 
 
 ## Visuals
-![Class Structure Graph](https://gitlab.com/cs-department-ecu/csci-3030-softeware-engineering-i-fall-2024/text-based-adventure-video-game/textrpg/-/blob/main/TextBasedRPG_Graph.png?ref_type=heads)
+![Class Structure Graph](https://gitlab.com/cs-department-ecu/csci-3030-softeware-engineering-i-fall-2024/text-based-adventure-video-game/textrpg/-/raw/main/TextBasedRPG_Graph.png?ref_type=heads)
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Create a clone of this repository and open it in an IDE. Then export the src folder as a Runnable jar file. Set GameThread as the Launch configuration. Then navigate to the terminal and cd into the directory in which the .jar file is located. Then input the command "java -jar (your-file-name).jar"
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+All inputs for the textbased RPG will be number inputs to choose options and diverge into different paths witht he exception of starting a new game in which you will enter your name.
 
 ## Support
 Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+If you have recommendations or would like to contribute to this project, see LICENCES.md file for contact information of the owners of the project.
 
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Contributors:
+Joshua House:
+* Helped planning class structure, coding the Mage class path, Battle Class, Shop Class, GameThread, final boss battle, consumables index, and edits across the project
+
+Hunter Kelly:
+* Helped planning class structure, coding of the Ranged class path, kings mission at the end of chapter 2, and helped in the coding of the Battle class
+
+Quinton Ross:
+* Helped planning class structure, coding of the Rogue class path, and development of save and load functionality
+
+Cameron Nickerson:
+* Helped planning of class structure, coding of the Melee class path, Hub class, enemy, specialAttack, and weapons indexes, dialogue class, luck class, and edits across the project. 
 
 ## License
-For open source projects, say how it is licensed.
+Our project has a proprietary license. See LICENSE.md for more details
 
 ## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+The project is complete. The game is fully working and playable.
