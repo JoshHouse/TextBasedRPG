@@ -87,7 +87,7 @@ public class Battle {
 	public double getPlayerSpAtkMulti() {
 		return this.playerSpAtkMulti;
 	}
-	
+
 	public int getCalculatedLuckLvlEffect() {
 		return this.calculatedLuckLvlEffect;
 	}
@@ -137,7 +137,7 @@ public class Battle {
 	public void setPlayerSpAtkMulti(double inputPlayerSpAtkMulti) {
 		this.playerSpAtkMulti = inputPlayerSpAtkMulti;
 	}
-	
+
 	public void setCalculatedLuckLvlEffect(int inputCalculatedLuckLvlEffect) {
 		this.calculatedLuckLvlEffect = inputCalculatedLuckLvlEffect;
 	}
@@ -344,7 +344,8 @@ public class Battle {
 			if (!minionBattle.startBattle(keyboard, false)) {
 				return false;
 			}
-		} else if (enemy.getSpecialAttack().getName() != "None" && Luck.luckEvent(30 - this.getCalculatedLuckLvlEffect())) {
+		} else if (enemy.getSpecialAttack().getName() != "None"
+				&& Luck.luckEvent(30 - this.getCalculatedLuckLvlEffect())) {
 			// Special Attack Functionality
 			if (enemy.getSpecialAttack().useSpAtk(70 - this.getCalculatedLuckLvlEffect())) {
 				if (guardedTurn > 0) {
@@ -470,7 +471,7 @@ public class Battle {
 			case '1': // Standard Attack
 				switch (player.getInventory().getEquipped().getDamageType()) {
 				case "Melee":
-					this.defaultStandardAttack();
+					this.meleeStandardAttack();
 					break;
 				case "Ranged":
 					this.rangedStandardAttack();
@@ -481,7 +482,7 @@ public class Battle {
 					}
 					break;
 				case "Rogue":
-					this.defaultStandardAttack();
+					this.rogueStandardAttack();
 					break;
 				default:
 					this.defaultStandardAttack();
@@ -494,7 +495,7 @@ public class Battle {
 			case '2': // Special Attack
 				switch (player.getInventory().getEquipped().getDamageType()) {
 				case "Melee":
-					this.defaultSpecialAttack();
+					this.meleeSpecialAttack();
 					break;
 				case "Ranged":
 					this.rangedSpecialAttack();
@@ -505,7 +506,7 @@ public class Battle {
 					}
 					break;
 				case "Rogue":
-					this.defaultSpecialAttack();
+					this.rogueSpecialAttack();
 					break;
 				default:
 					this.defaultSpecialAttack();
@@ -530,9 +531,52 @@ public class Battle {
 
 	private void meleeStandardAttack() {
 
+		double lvlDamageBoost = 1;
+		for (int x = 1; x < player.getlvlMelee(); x++) {
+			lvlDamageBoost = lvlDamageBoost + 0.2;
+		}
+
+		// Double damage turn (e.g., a buff or special condition)
+		if (dbTurn > 0) {
+			enemy.setCurrHP((int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5));
+			Dialogue.infoDialogue("Critical precision! Your attack is enhanced.\n", txtSpd);
+			Dialogue.infoDialogue(
+					"You did " + (int) ((this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5) + " damage!\n", txtSpd);
+			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+		} else {
+			enemy.setCurrHP((int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * lvlDamageBoost)));
+			Dialogue.infoDialogue("You did " + (int) (this.getPlayerWeaponDamage() * lvlDamageBoost) + " damage!\n",
+					txtSpd);
+			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+		}
+
 	}
 
 	private void meleeSpecialAttack() {
+
+		double lvlDamageBoost = 1;
+		for (int x = 1; x < player.getlvlMelee(); x++) {
+			lvlDamageBoost = lvlDamageBoost + 0.2;
+		}
+
+		Dialogue.infoDialogue("You chose a special attack!\n", txtSpd);
+		if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80 + this.getCalculatedLuckLvlEffect())) {
+			if (dbTurn > 0) {
+				enemy.setCurrHP((int) (enemy.getCurrHP()
+						- ((this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) * lvlDamageBoost * 1.5)));
+				Dialogue.infoDialogue("You did "
+						+ ((this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) * lvlDamageBoost * 1.5)
+						+ " damage!\n", txtSpd);
+			} else {
+				enemy.setCurrHP(
+						(int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
+				Dialogue.infoDialogue(
+						"You did " + (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) + " damage!\n",
+						txtSpd);
+			}
+		} else {
+			Dialogue.infoDialogue("You did 0 damage!\n", txtSpd);
+		}
 
 	}
 
@@ -571,7 +615,8 @@ public class Battle {
 
 		Dialogue.infoDialogue("You chose a Special Attack!\n", txtSpd);
 		if (player.getInventory().getSpecialArrows() > 0) {
-			if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80 + this.getCalculatedLuckLvlEffect())) {
+			if (player.getInventory().getEquipped().getSpecialAttack()
+					.useSpAtk(80 + this.getCalculatedLuckLvlEffect())) {
 				enemy.setCurrHP((int) (enemy.getCurrHP()
 						- (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5)));
 				Dialogue.infoDialogue("You did "
@@ -647,7 +692,8 @@ public class Battle {
 		Dialogue.infoDialogue("You chose a special attack!\n", txtSpd);
 
 		if (player.getCurrMana() > player.getInventory().getEquipped().getManaUsage() * 1.2) {
-			if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80 + this.getCalculatedLuckLvlEffect())) {
+			if (player.getInventory().getEquipped().getSpecialAttack()
+					.useSpAtk(80 + this.getCalculatedLuckLvlEffect())) {
 				if (dbTurn > 0) {
 					enemy.setCurrHP((int) (enemy.getCurrHP()
 							- (((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti()) * 1.5)));
@@ -662,18 +708,17 @@ public class Battle {
 							+ " damage!\n", txtSpd);
 					return true;
 				} else {
-					enemy.setCurrHP(
-							(int) (enemy.getCurrHP() - ((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti())));
+					enemy.setCurrHP((int) (enemy.getCurrHP()
+							- ((this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti())));
 					player.setCurrMana(
 							(int) (player.getCurrMana() - (player.getInventory().getEquipped().getManaUsage() * 1.2)));
 					Dialogue.infoDialogue(
 							"You expended " + (int) (player.getInventory().getEquipped().getManaUsage() * 1.2)
 									+ " mana!\n" + "You have " + player.getCurrMana() + " mana remaining! \n",
 							txtSpd);
-					Dialogue.infoDialogue(
-							"You did " + ((int) (this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti())
-									+ " damage!\n",
-							txtSpd);
+					Dialogue.infoDialogue("You did "
+							+ ((int) (this.getPlayerWeaponDamage() * lvlDamageBoost) * this.getPlayerSpAtkMulti())
+							+ " damage!\n", txtSpd);
 					return true;
 				}
 			} else {
@@ -695,10 +740,53 @@ public class Battle {
 	}
 
 	private void rogueStandardAttack() {
+		
+		double lvlDamageBoost = 1;
+		for (int x = 1; x < player.getlvlRogue(); x++) {
+			lvlDamageBoost = lvlDamageBoost + 0.2;
+		}
+
+		// Double damage turn (e.g., a buff or special condition)
+		if (dbTurn > 0) {
+			enemy.setCurrHP((int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5));
+			Dialogue.infoDialogue("Critical precision! Your attack is enhanced.\n", txtSpd);
+			Dialogue.infoDialogue(
+					"You did " + (int) ((this.getPlayerWeaponDamage() * lvlDamageBoost) * 1.5) + " damage!\n", txtSpd);
+			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+		} else {
+			enemy.setCurrHP((int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * lvlDamageBoost)));
+			Dialogue.infoDialogue("You did " + (int) (this.getPlayerWeaponDamage() * lvlDamageBoost) + " damage!\n",
+					txtSpd);
+			Dialogue.infoDialogue("Enemy health: " + enemy.getCurrHP() + "\n", txtSpd);
+		}
 
 	}
 
 	private void rogueSpecialAttack() {
+		
+		double lvlDamageBoost = 1;
+		for (int x = 1; x < player.getlvlRogue(); x++) {
+			lvlDamageBoost = lvlDamageBoost + 0.2;
+		}
+
+		Dialogue.infoDialogue("You chose a special attack!\n", txtSpd);
+		if (player.getInventory().getEquipped().getSpecialAttack().useSpAtk(80 + this.getCalculatedLuckLvlEffect())) {
+			if (dbTurn > 0) {
+				enemy.setCurrHP((int) (enemy.getCurrHP()
+						- ((this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) * lvlDamageBoost * 1.5)));
+				Dialogue.infoDialogue("You did "
+						+ ((this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) * lvlDamageBoost * 1.5)
+						+ " damage!\n", txtSpd);
+			} else {
+				enemy.setCurrHP(
+						(int) (enemy.getCurrHP() - (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti())));
+				Dialogue.infoDialogue(
+						"You did " + (this.getPlayerWeaponDamage() * this.getPlayerSpAtkMulti()) + " damage!\n",
+						txtSpd);
+			}
+		} else {
+			Dialogue.infoDialogue("You did 0 damage!\n", txtSpd);
+		}
 
 	}
 
@@ -891,7 +979,7 @@ public class Battle {
 		this.setPlayerWeaponDamage((int) this.getPlayer().getInventory().getEquipped().getDamage());
 		this.setPlayerSpAtkMulti(this.getPlayer().getInventory().getEquipped().getSpecialAttack().getAtkMultiplier());
 		this.setCalculatedLuckLvlEffect((this.getPlayer().getlvlLuck() - 1) * 2);
-		
+
 	}
 
 	private static boolean isNumeric(String str) {
@@ -931,7 +1019,7 @@ public class Battle {
 			Pause.pause(1000);
 
 		}
-		
+
 	}
 
 }
