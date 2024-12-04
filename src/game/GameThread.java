@@ -1750,6 +1750,8 @@ public class GameThread extends Throwable {
 				System.err.println("(Invalid choice. Please try again)");
 				break;
 			}
+			
+			
 		}
 
 		Dialogue.characterDialogue(rangerName,
@@ -1829,20 +1831,56 @@ public class GameThread extends Throwable {
 				System.err.println("(Invalid choice. Please try again)");
 				break;
 			}
+			
+			
+			
+			
+			
+			
+			
 		}
 
-		/*
-		 * Nightfang Boss Fight
-		 * 
-		 * lose: return false;
-		 * 
-		 * win:
-		 */
+		Battle Nightfang = new Battle(player, eList.nightfang);
 
+		if (!Nightfang.startBattle(keyboard, true)) {
+			return false;
+		}
+		
+		
 		Dialogue.infoDialogue(
 				"*As the battle concludes, Nightfang collapses with a final, ear-splitting howl. The oppressive atmosphere of the woods begins to lift, and the shadows that clung to the trees slowly recede. "
 						+ "The forest is quiet once more, save for the rustling of leaves in a gentle breeze. You take a moment to catch your breath, the adrenaline of the fight still coursing through your veins.*\n",
 				txtSpd);
+		
+		
+		makingChoice = true;
+		while (makingChoice) {
+			Dialogue.infoDialogue("What will you do? \n" + "1) *Loot the body*\n" + "2) *Continue onward\n", txtSpd);
+			pChoice = keyboard.next().charAt(0);
+
+			switch (pChoice) {
+			case '1':
+				Lootable body = new Lootable("Nightfang the Fallen ", new Inventory(), 500);
+				Item[] bodyItems = {wList.bow7, cList.speed, cList.chapter3Poison, cList.chapter3Health};
+				body.getInventory().addMulti(bodyItems);
+				
+				breakLine();
+				player.loot(body, keyboard);
+				makingChoice = false;
+				break;
+
+			case '2':
+				breakLine();
+				makingChoice = false;
+				break;
+
+			default:
+				breakLine();
+				System.err.println("(Invalid choice. Please try again)");
+				break;
+			}
+
+		}
 
 		Dialogue.infoDialogue(
 				"*You begin your journey back to Elaris, the weight of your victory etched in every step you take.*\n",

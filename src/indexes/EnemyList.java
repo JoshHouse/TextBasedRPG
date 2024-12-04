@@ -142,6 +142,9 @@ public class EnemyList {
 
 	// --------------------Chapter 3 Special Enemies--------------------
 
+	
+	
+	
 	// --------------------MELEE---------------------
 
 	/** Encountered during melee's special mission */
@@ -158,6 +161,10 @@ public class EnemyList {
 			"Kioq roars and swings one of his axes down viciously, the ground cracking from the weapon just passing over it!");
 
 	// --------------------RANGED--------------------
+	
+	public Enemy nightfang = new Enemy("Nightfang the Phantom Wolf", new Inventory(), 500, 10000, 15, 200, 200, 1, spAtkList.none, 
+			"\"Nightfang flickers into view, its ghostly fangs glinting as it lunges./n"
+			+ "The chill of its claws cuts deep, leaving an unnatural cold behind.");
 
 	// ---------------------MAGE---------------------
 
