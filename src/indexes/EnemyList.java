@@ -148,15 +148,15 @@ public class EnemyList {
 	// --------------------MELEE---------------------
 
 	/** Encountered during melee's special mission */
-	public Enemy goblin1 = new Enemy("Goblin Grunt", new Inventory(), 328, 460, 11, 70, 80, 1, spAtkList.none,
+	public Enemy goblin1 = new Enemy("Goblin Grunt", new Inventory(), 328, 4460, 11, 70, 180, 1, spAtkList.none,
 			"The goblin takes a stab at you with its dagger.");
 
 	/** Encountered during melee's special mission */
-	public Enemy goblin2 = new Enemy("Hobgoblin", new Inventory(), 555, 900, 15, 125, 115, 1, spAtkList.none,
+	public Enemy goblin2 = new Enemy("Hobgoblin", new Inventory(), 555, 7900, 15, 125, 195, 1, spAtkList.none,
 			"The hobgoblin slashes with the sharpened bone it calls a sword.");
 
 	/** Melee Chapter 3 Boss */
-	public Enemy goblinBoss = new Enemy("Champion Kioq", new Inventory(), 1200, 2200, 20, 5100, 200, 1,
+	public Enemy goblinBoss = new Enemy("Champion Kioq", new Inventory(), 1200, 12500, 20, 5100, 200, 1,
 			spAtkList.kioqSpAtk,
 			"Kioq roars and swings one of his axes down viciously, the ground cracking from the weapon just passing over it!");
 
