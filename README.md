@@ -13,9 +13,6 @@ Create a clone of this repository and open it in an IDE. Then export the src fol
 ## Usage
 All inputs for the textbased RPG will be number inputs to choose options and diverge into different paths witht he exception of starting a new game in which you will enter your name.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
 ## Contributing
 If you have recommendations or would like to contribute to this project, see LICENCES.md file for contact information of the owners of the project.
 
