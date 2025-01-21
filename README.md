@@ -5,7 +5,7 @@ Text-Based RPG
 Our Text-Based RPG is an offline singleplayer experience where you play as an adventurer exploring a medieval world with magical beasts, warriors, and dragons to defeat! You can choose to follow different class paths to visit different locations and retrieve different class-specific items. You can follow the melee class and learn the ways of warriors, the ranged class and learn the ways of archers, the mage class and learn the ways of wizards, or the rogue class and learn the ways of thieves. Once complied into a runnable .jar file, it can be played in the terminal using number inputs to choose paths to go down. All data is saved locally on your computer so no internet is needed. 
 
 ## Visuals
-![Class Structure Graph]([https://gitlab.com/cs-department-ecu/csci-3030-softeware-engineering-i-fall-2024/text-based-adventure-video-game/textrpg/-/raw/main/TextBasedRPG_Graph.png?ref_type=heads](https://github.com/JoshHouse/TextBasedRPG/blob/main/TextBasedRPG_Graph.png))
+![Class Structure Graph](https://github.com/JoshHouse/TextBasedRPG/blob/main/TextBasedRPG_Graph.png)
 
 ## Installation
 Create a clone of this repository and open it in an IDE. Then export the src folder as a Runnable jar file. Set GameThread as the Launch configuration. Then navigate to the terminal and cd into the directory in which the .jar file is located. Then input the command "java -jar (your-file-name).jar"
